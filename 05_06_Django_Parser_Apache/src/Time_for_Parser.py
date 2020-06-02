@@ -22,7 +22,7 @@ def translate_f_t_time(list_date):
     return dtime_object_set
 
 
-def print_date_info(date_dict, count_info, string_info):
+def print_date_info(date_dict, count_info, string_info, save_logs):
     print(f'------------------------------------------------',
           f'Информация о дате и {string_info}',
           f'------------------------------------------------')
@@ -33,11 +33,14 @@ def print_date_info(date_dict, count_info, string_info):
         for k2 in date_dict[k].keys():
             count += date_dict[k][k2]
 
-    save_reports(name_save, 'Было зафиксированно запросов от ', dict(date_dict), string_info)
+    if save_logs:
+        save_reports(name_save, 'Было зафиксированно запросов от ', dict(date_dict), string_info)
     print(f'Общее кол-во запросов от {string_info} = {count}')
-    save_reports(name_save, 'Общее кол-во запросов от ', str(count), string_info)
+    if save_logs:
+        save_reports(name_save, 'Общее кол-во запросов от ', str(count), string_info)
     print(f'Общее кол-во запросов от {string_info} по дням {dict(count_info)}')
-    save_reports(name_save, 'Общее кол-во запросов по дням от ', dict(count_info), string_info)
+    if save_logs:
+        save_reports(name_save, 'Общее кол-во запросов по дням от ', dict(count_info), string_info)
 
 
 def save_reports(file_name, strings, list_date, var=''):
@@ -77,7 +80,7 @@ time = time.replace(':', '_')
 name_save = time[0: 19] + '_' + Parser.f + '.txt'
 
 
-def main(save_logs=True):
+def main(*, save_logs=True):
     Parser.main(debug_msg=False, debug_save=False)
     print('------------------------------------------------'\
         'Информация о дате и IP-адресах'\
@@ -86,7 +89,8 @@ def main(save_logs=True):
     translate_f_t_time(Parser.set_date)
     counter_date = collections.Counter()
     print(f'Список уникальных дат: {dtime_object_set}')
-    save_reports(name_save, 'Список уникальных дат', dtime_object_set)
+    if save_logs:
+        save_reports(name_save, 'Список уникальных дат', dtime_object_set)
     for date in Parser.list_date:
         counter_date[date] += 1
 
@@ -106,17 +110,20 @@ def main(save_logs=True):
     #
     
     print(f'Количество упоминаний даты: {dict(counter_date)}')
-    save_reports(name_save, 'Количество упоминаний даты', dict(counter_date))
+    if save_logs:
+        save_reports(name_save, 'Количество упоминаний даты', dict(counter_date))
     counter_value_date = 0
     for value in counter_date.values():
         counter_value_date += value
         
     print(f'Общее кол-во дат: {counter_value_date}')
-    save_reports(name_save, 'Общее кол-во дат', str(counter_value_date))
+    if save_logs:
+        save_reports(name_save, 'Общее кол-во дат', str(counter_value_date))
         
     #print(len(list_ip_date))
     print(f'Кол-во уникальных пар дата-время {len(Parser.set_ip_date)}')
-    save_reports(name_save, 'Кол-во уникальных пар дата-время', str(len(Parser.set_ip_date)))
+    if save_logs:
+        save_reports(name_save, 'Кол-во уникальных пар дата-время', str(len(Parser.set_ip_date)))
 
     counter_date.clear()
 
@@ -126,25 +133,28 @@ def main(save_logs=True):
                 counter_date[d] += 1
 
     print(f'Количество уникальных запросов по датам: {dict(counter_date)}')
-    save_reports(name_save, 'Количество уникальных запросов по датам', dict(counter_date))
+    if save_logs:
+        save_reports(name_save, 'Количество уникальных запросов по датам', dict(counter_date))
     if save_logs:
         Parser.save_data('unic_ip_date.txt', Parser.set_ip_date, 'Список уникальных пар IP-дата')
 
     #print(date_brousers)
-    print_date_info(Parser.date_brousers, Parser.counter_dbrousers, 'десктопных браузерах')
+    print_date_info(Parser.date_brousers, Parser.counter_dbrousers, 'десктопных браузерах', save_logs)
 
-    print_date_info(Parser.date_mobale_brousers, Parser.counter_mbrousers, 'мобильных браузерах')
+    print_date_info(Parser.date_mobale_brousers, Parser.counter_mbrousers, 'мобильных браузерах', save_logs)
 
-    print_date_info(Parser.date_searche_system, Parser.counter_ssystem, 'поисковых систем')
+    print_date_info(Parser.date_searche_system, Parser.counter_ssystem, 'поисковых систем', save_logs)
 
-    print_date_info(Parser.date_bots, Parser.counter_bots, 'ботов')
+    print_date_info(Parser.date_bots, Parser.counter_bots, 'ботов', save_logs)
 
-    folder_logs = os.path.abspath('.\\reports\\' + name_save)
-    size_bytes = os.path.getsize(folder_logs)
-    folder_logs = os.path.split(folder_logs)
-    if size_bytes != 0:
-        print(f'Отчет по статистике сохранен сохранен в файл {name_save} размером '
-              f'{size_bytes} байт в папку {folder_logs[0]}')
+    
+    if save_logs:
+        folder_logs = os.path.abspath('.\\reports\\' + name_save)
+        size_bytes = os.path.getsize(folder_logs)
+        folder_logs = os.path.split(folder_logs)
+        if size_bytes != 0:
+            print(f'Отчет по статистике сохранен сохранен в файл {name_save} размером '
+                f'{size_bytes} байт в папку {folder_logs[0]}')
     return time
 
 

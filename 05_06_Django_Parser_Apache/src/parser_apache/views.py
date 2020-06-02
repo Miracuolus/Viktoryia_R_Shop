@@ -17,13 +17,13 @@ def parser_apache(request):
         r_datetime = t[i][:19]
         date = datetime.strptime(r_datetime, '%Y-%m-%d %H:%M:%S')
         l_date.append(date)
-    with open('apache_logs/apache_logs_small.txt', 'r') as fp:
+    with open('apache_logs/apache_logs.txt', 'r') as fp:
         count = 0
       
         for line in fp.readlines():
             count += 1
-            l = Parser.objects.create(pk=count,log=line,brouser=P_A.k_key.get(count), time=l_date[count-1])
-            l.save()
+            #l = Parser.objects.create(pk=count,log=line,brouser=P_A.k_key.get(count), time=l_date[count-1])
+            #l.save()
     context = {'count':count, 'line': l_date}
     
     return render(request, template_name='parser_apache/index.html', context=context)

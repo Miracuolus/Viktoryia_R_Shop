@@ -8,10 +8,10 @@ class Parser(models.Model):
     )
 
     time = models.DateTimeField(
-        verbose_name='Дата и время записи',
+        verbose_name='Дата и время запроса',
     )
     brouser = models.CharField(
-        verbose_name='Браузеры',
+        verbose_name='Браузеры, боты',
         max_length=300,
         null=True,
         blank=True,
