@@ -155,6 +155,8 @@ list_agent = []
 list_bots_research = []
 count_true = 0
 
+k_key = {}
+
 
 def agents(line):
     global list_agent
@@ -168,7 +170,7 @@ def agents(line):
                 agen = re.split(r'\s\(.+\)\"\n', agents[0])
                 list_agent = agen[0].split(' ')
             else:
-                list_agent = agents[0].split(' ')
+                list_agent = agents[0].split(' ')   
         if re.findall(r'\w+\:\/+\w+\.\w+.+\n', agent[1]):
             agents = re.findall(r'\w+\:\/+\w+\.\w+.+\n', agent[1])
             list_bots_research.append(agents[0])
@@ -194,6 +196,7 @@ date_bots = dict()
 counter_bots = collections.Counter()
 
 
+
 def count_date_brousers(line, set_date, key, diction_f, count_f):
     for date in set_date:
         if line.find(date) != -1:
@@ -204,8 +207,6 @@ def count_date_brousers(line, set_date, key, diction_f, count_f):
             diction_f[date][key] = diction_f.get(date).get(key) + 1
             count_f[date] += 1
             break
-
-
 
 
 def analysis(brousers, request_agents, line):
@@ -220,7 +221,7 @@ def analysis(brousers, request_agents, line):
         if is_find:
             count_brousers[key] = count_brousers.get(key) + 1
             count_date_brousers(line, set_date, key, date_brousers, counter_dbrousers)
-            
+            k_key[all_request_count] = key
 
 
 def analysis_mobile(brousers, line):
@@ -235,6 +236,7 @@ def analysis_mobile(brousers, line):
             count_brousers[key] = count_brousers.get(key) + 1
             count_true += 1
             count_date_brousers(line, set_date, key, date_mobale_brousers, counter_mbrousers)
+            k_key[all_request_count] = key
             
 
 
@@ -247,6 +249,7 @@ def analysis_systems_bots(count, brousers, line, date_info, counter_info):
         if is_find:
             count[key] = count.get(key) + 1
             count_date_brousers(line, set_date, key, date_info, counter_info)
+            k_key[all_request_count] = key
 
 
 def find_agent(agents, value):
@@ -283,6 +286,8 @@ def save_data(file_name, list_values, strings):
 
 def main(*, debug_msg=True, debug_save=True):
     l_count_del = 0
+    global k_key
+    k_key = {}
     with open(folder_apache_logs, 'r') as fp:
         for line in fp.readlines():
             global all_request_count
@@ -357,7 +362,6 @@ def main(*, debug_msg=True, debug_save=True):
             save_data('referers.txt', list_referers, 'Список запросов')
             save_data('information_system.txt', list_system,
                             'Список информации от систем')
-    
 
 if __name__ == "__main__":
     main()
