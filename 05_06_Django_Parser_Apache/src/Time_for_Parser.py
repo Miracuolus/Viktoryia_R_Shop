@@ -145,6 +145,7 @@ def main(save_logs=True):
     if size_bytes != 0:
         print(f'Отчет по статистике сохранен сохранен в файл {name_save} размером '
               f'{size_bytes} байт в папку {folder_logs[0]}')
+    return time
 
 
 
