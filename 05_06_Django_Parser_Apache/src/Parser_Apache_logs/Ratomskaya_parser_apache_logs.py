@@ -156,6 +156,7 @@ list_bots_research = []
 count_true = 0
 
 k_key = {}
+b_bot = {}
 
 
 def agents(line):
@@ -249,7 +250,7 @@ def analysis_systems_bots(count, brousers, line, date_info, counter_info):
         if is_find:
             count[key] = count.get(key) + 1
             count_date_brousers(line, set_date, key, date_info, counter_info)
-            #k_key[all_request_count] = key
+            b_bot[all_request_count] = key
 
 
 def find_agent(agents, value):
@@ -288,6 +289,7 @@ def main(*, debug_msg=True, debug_save=True):
     l_count_del = 0
     global k_key
     k_key = {}
+    b_bot = {}
     with open(folder_apache_logs, 'r') as fp:
         for line in fp.readlines():
             global all_request_count

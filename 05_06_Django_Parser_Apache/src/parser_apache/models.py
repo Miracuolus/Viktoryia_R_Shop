@@ -16,6 +16,12 @@ class Parser(models.Model):
         null=True,
         blank=True,
     )
+    bot = models.CharField(
+        verbose_name='Боты',
+        max_length=300,
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         return f'Строка {self.pk}'

@@ -82,13 +82,15 @@ name_save = time[0: 19] + '_' + Parser.f + '.txt'
 
 def main(*, save_logs=True):
     Parser.main(debug_msg=False, debug_save=False)
-    print('------------------------------------------------'\
+    if save_logs:
+        print('------------------------------------------------'\
         'Информация о дате и IP-адресах'\
         '------------------------------------------------')
 
     translate_f_t_time(Parser.set_date)
     counter_date = collections.Counter()
-    print(f'Список уникальных дат: {dtime_object_set}')
+    if save_logs:
+        print(f'Список уникальных дат: {dtime_object_set}')
     if save_logs:
         save_reports(name_save, 'Список уникальных дат', dtime_object_set)
     for date in Parser.list_date:
@@ -106,22 +108,24 @@ def main(*, save_logs=True):
         
     if save_logs:
         Parser.save_data('date-time_not_string.txt', time, 'Список даты и времени (альтернативная запись)')
-    print(f'Дата выводится в формате {tz}. {tz} = {utc}')
+        print(f'Дата выводится в формате {tz}. {tz} = {utc}')
     #
     
-    print(f'Количество упоминаний даты: {dict(counter_date)}')
+        print(f'Количество упоминаний даты: {dict(counter_date)}')
     if save_logs:
         save_reports(name_save, 'Количество упоминаний даты', dict(counter_date))
     counter_value_date = 0
     for value in counter_date.values():
         counter_value_date += value
         
-    print(f'Общее кол-во дат: {counter_value_date}')
+    if save_logs:
+        print(f'Общее кол-во дат: {counter_value_date}')
     if save_logs:
         save_reports(name_save, 'Общее кол-во дат', str(counter_value_date))
         
     #print(len(list_ip_date))
-    print(f'Кол-во уникальных пар дата-время {len(Parser.set_ip_date)}')
+    if save_logs:
+        print(f'Кол-во уникальных пар дата-время {len(Parser.set_ip_date)}')
     if save_logs:
         save_reports(name_save, 'Кол-во уникальных пар дата-время', str(len(Parser.set_ip_date)))
 
@@ -132,20 +136,22 @@ def main(*, save_logs=True):
             if ip.find(d) != -1:
                 counter_date[d] += 1
 
-    print(f'Количество уникальных запросов по датам: {dict(counter_date)}')
+    if save_logs:
+        print(f'Количество уникальных запросов по датам: {dict(counter_date)}')
     if save_logs:
         save_reports(name_save, 'Количество уникальных запросов по датам', dict(counter_date))
     if save_logs:
         Parser.save_data('unic_ip_date.txt', Parser.set_ip_date, 'Список уникальных пар IP-дата')
 
     #print(date_brousers)
-    print_date_info(Parser.date_brousers, Parser.counter_dbrousers, 'десктопных браузерах', save_logs)
+    if save_logs:
+        print_date_info(Parser.date_brousers, Parser.counter_dbrousers, 'десктопных браузерах', save_logs)
 
-    print_date_info(Parser.date_mobale_brousers, Parser.counter_mbrousers, 'мобильных браузерах', save_logs)
+        print_date_info(Parser.date_mobale_brousers, Parser.counter_mbrousers, 'мобильных браузерах', save_logs)
 
-    print_date_info(Parser.date_searche_system, Parser.counter_ssystem, 'поисковых систем', save_logs)
+        print_date_info(Parser.date_searche_system, Parser.counter_ssystem, 'поисковых систем', save_logs)
 
-    print_date_info(Parser.date_bots, Parser.counter_bots, 'ботов', save_logs)
+        print_date_info(Parser.date_bots, Parser.counter_bots, 'ботов', save_logs)
 
     
     if save_logs:
