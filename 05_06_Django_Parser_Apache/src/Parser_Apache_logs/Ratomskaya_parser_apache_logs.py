@@ -124,7 +124,7 @@ def protocol(line):
 
 list_referers = []
 not_url = 0
-
+r_ref = {}
 
 def referer(line):
     protocol = pattern_protocols(line)
@@ -134,10 +134,11 @@ def referer(line):
     else:
         list_referer = re.findall(r'\w+.+\"\s\"', protocol[1])
         list_referers.append(list_referer[0])
+        r_ref[all_request_count] = list_referer[0]
 
 list_system = []
 no_inform_syst = 0
-
+s_sys = {}
 
 def system(line):
     sys = pattern_system(line)
@@ -150,6 +151,7 @@ def system(line):
         no_inform_syst += 1
     else:
         list_system.append(system[0])
+        s_sys[all_request_count] = system[0]
 
 list_agent = []
 list_bots_research = []
@@ -290,6 +292,8 @@ def main(*, debug_msg=True, debug_save=True):
     global k_key
     k_key = {}
     b_bot = {}
+    r_ref = {}
+    s_sys = {}
     with open(folder_apache_logs, 'r') as fp:
         for line in fp.readlines():
             global all_request_count

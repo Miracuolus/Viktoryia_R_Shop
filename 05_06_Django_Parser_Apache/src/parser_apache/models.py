@@ -11,14 +11,29 @@ class Parser(models.Model):
         verbose_name='Дата и время запроса',
     )
     brouser = models.CharField(
-        verbose_name='Браузеры',
+        verbose_name='Браузер',
         max_length=300,
         null=True,
         blank=True,
     )
     bot = models.CharField(
-        verbose_name='Боты',
+        verbose_name='Бот',
         max_length=300,
+        null=True,
+        blank=True,
+    )
+    protocol = models.TextField(
+        verbose_name='Протокол',
+        null=True,
+        blank=True,
+    )
+    referer = models.TextField(
+        verbose_name='URL-запроса',
+        null=True,
+        blank=True,
+    )
+    system = models.TextField(
+        verbose_name='Информация о системе',
         null=True,
         blank=True,
     )
