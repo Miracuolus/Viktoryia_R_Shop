@@ -11,11 +11,11 @@ class Parser(models.Model):
         verbose_name='Дата и время запроса',
     )
     brouser = models.CharField(
-        verbose_name='Браузеры, боты',
+        verbose_name='Браузеры',
         max_length=300,
         null=True,
         blank=True,
     )
 
     #def __str__(self):
-    #    return self.time
+    #    return self.pk

@@ -249,7 +249,7 @@ def analysis_systems_bots(count, brousers, line, date_info, counter_info):
         if is_find:
             count[key] = count.get(key) + 1
             count_date_brousers(line, set_date, key, date_info, counter_info)
-            k_key[all_request_count] = key
+            #k_key[all_request_count] = key
 
 
 def find_agent(agents, value):
