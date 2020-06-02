@@ -17,5 +17,5 @@ class Parser(models.Model):
         blank=True,
     )
 
-    #def __str__(self):
-    #    return self.pk
+    def __str__(self):
+        return f'Строка {self.pk}'
