@@ -38,9 +38,7 @@ bots = {'Ahrefs': 'http://ahrefs.com/robot/',
         'Majestic': 'http://www.majestic12.co.uk/bot.php?+',
         'Exabot': 'http://www.exabot.com/go/robot',
         'Heritrix': 'http://www.archive.org/details/archive.org_bot)',
-        'Exabot': 'http://www.exabot.com/go/robot',
-        'Exabot': 'http://www.exabot.com/go/robot',
-        'Sogou': 'Sogou web spider',
+        'Sogou': 'http://www.sogou.com/docs/help/webmasters.htm#07',
         'Baiduspider': 'http://www.baidu.com/search/spider.html'}
 
 count_brousers = {}

@@ -73,7 +73,7 @@ class Bot(models.Model):
         verbose_name='Бот/поисковая система',
         max_length=300,
     )
-    user_agents = models.TextField(
+    user_agents = models.URLField(
         verbose_name='Соответ. user_agents',
         null=True,
         blank=True,

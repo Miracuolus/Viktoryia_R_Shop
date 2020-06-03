@@ -41,6 +41,25 @@ def update_bd_brousers(b_count=17):
             b.user_agents = format_v_b[i-1] # изменение списка агентов
             b.save()
 
+def create_bd_bots(dict_bots):
+    global b_count
+    for i in range(0, len(dict_bots)):
+        b_count += 1
+        if dict_bots == P_A.bots:
+            j = i + len(P_A.search_systems)
+            b = Bot.objects.create(pk=b_count,bots=k_b[j], user_agents=v_b[j]) # создание БД
+        else:
+            b = Bot.objects.create(pk=b_count,bots=k_b[i], user_agents=v_b[i]) # создание БД
+        b.save()
+
+def update_bd_bots(b_count=11):
+    for i in range(0, b_count):
+        i += 1
+        for b in Bot.objects.filter(pk=i): # изменение БД
+            print(i)
+            b.user_agents = v_b[i-1] # изменение списка агентов
+            b.save()
+
 
 def brousers():
     global b_count
@@ -82,7 +101,13 @@ def parser_apache(request):
     #brousers() # создание БД браузеры
     #parser_brousers(P_A.brousers)
     #parser_brousers(P_A.mobile_brousers)
-    #update_bd_brousers(b_count=17)     
+    #update_bd_brousers(b_count=17)
+
+    parser_brousers(P_A.search_systems)
+    parser_brousers(P_A.bots)
+    #create_bd_bots(P_A.search_systems)
+    #create_bd_bots(P_A.bots)
+    update_bd_bots()
         
     context = {'count': b_count, 'line': len(format_v_b)}
     
