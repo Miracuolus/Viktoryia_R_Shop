@@ -112,8 +112,9 @@ def parser_apache(request):
     #create_bd_bots(P_A.search_systems)
     #create_bd_bots(P_A.bots)
     #update_bd_bots()
-        
-    context = {'lines': [1, 2, 3], 'pk': 0, 'row_line': 0, 'ip': 0, 'date_time': 0, 'brouser': 0, 'bot': 0, 'protocol': 0, 'status': 0, 'byte': 0, 'referer': 0, 'system': 0}
+    P = Parser.objects.get(pk=1)    
+    #B = Bot.objects.get(bots=p.bot)
+    context = {'lines': [1, 2, 3], 'pk': Parser.objects.get(pk=1), 'row_line': P.log, 'ip': P.ip, 'date_time': P.time, 'brouser': P.brou, 'bot': 0, 'protocol': P.protocol, 'status': P.status, 'byte': P.byte, 'referer': P.referer, 'system': P.system}
     #context = {'lines': P_A.all_request_count, 'pk': 0, 'row_line': 0, 'ip': 0, 'date_time': 0, 'brouser': 0, 'bot': 0, 'protocol': 0, 'status': 0, 'byte': 0, 'referer': 0, 'system': 0}
 
     return render(request, template_name='parser_apache/index.html', context=context)
