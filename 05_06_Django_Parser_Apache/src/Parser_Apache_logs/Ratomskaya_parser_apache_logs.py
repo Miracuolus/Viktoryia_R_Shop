@@ -37,7 +37,11 @@ search_systems = {'Яндекс': 'http://yandex.com/bots',
 bots = {'Ahrefs': 'http://ahrefs.com/robot/',
         'Majestic': 'http://www.majestic12.co.uk/bot.php?+',
         'Exabot': 'http://www.exabot.com/go/robot',
-        'Heritrix': 'http://www.archive.org/details/archive.org_bot)'}
+        'Heritrix': 'http://www.archive.org/details/archive.org_bot)',
+        'Exabot': 'http://www.exabot.com/go/robot',
+        'Exabot': 'http://www.exabot.com/go/robot',
+        'Sogou': 'Sogou web spider',
+        'Baiduspider': 'http://www.baidu.com/search/spider.html'}
 
 count_brousers = {}
 for i in brousers.keys():
@@ -133,8 +137,9 @@ def referer(line):
         not_url += 1
     else:
         list_referer = re.findall(r'\w+.+\"\s\"', protocol[1])
-        list_referers.append(list_referer[0])
-        r_ref[all_request_count] = list_referer[0]
+        l_ref = list_referer[0].split('" "')
+        list_referers.append(l_ref[0])
+        r_ref[all_request_count] = l_ref[0]
 
 list_system = []
 no_inform_syst = 0

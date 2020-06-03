@@ -24,11 +24,11 @@ def parser_apache(request):
             #l = Parser.objects.create(pk=count,log=line,brouser=P_A.k_key.get(count), time=l_date[count-1]) # создание БД
             #l.save() # создание БД
         for p in Parser.objects.filter(pk=count): # изменение БД
+            #p.bot = P_A.b_bot.get(count) # изменение БД
             p.referer = P_A.r_ref.get(count) # изменение БД
-            p.system = P_A.s_sys.get(count) # изменение БД
             p.save() # создание БД
         
-    context = {'count':count, 'line': len(P_A.r_ref)}
+    context = {'count':count, 'line': P_A.b_bot}
     
     return render(request, template_name='parser_apache/index.html', context=context)
 

@@ -27,7 +27,7 @@ class Parser(models.Model):
         null=True,
         blank=True,
     )
-    referer = models.TextField(
+    referer = models.URLField(
         verbose_name='URL-запроса',
         null=True,
         blank=True,
