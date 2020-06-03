@@ -2,13 +2,31 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <!--<meta http-equiv='X-UA-Compatible' content='IE=edge'>-->
+    <title>Statistics Apache Log</title>
+    <!--<meta name='viewport' content='width=device-width, initial-scale=1'>-->
+    <!--<link rel='stylesheet' type='text/css' media='screen' href='main.css'>-->
+    <!--<script src='main.js'></script>-->
 </head>
 <body>
+    <table border='2'>
+    <th colspan='11'>Структура Apache Log</th>
+        {% for i in lines %}
+            <tr>
+                <td>{{pk}}</td>
+                <td>{{row_line}}</td>
+                <td>{{ip}}</td>
+                <td>{{date_time}}</td>
+                <td>{{brouser}}</td>
+                <td>{{bot}}</td>
+                <td>{{protocol}}</td>
+                <td>{{status}}</td>
+                <td>{{byte}}</td>
+                <td>{{referer}}</td>
+                <td>{{system}}</td>
+            </tr>
+        {% endfor %}
+    </table>
     {{count}} : {{line}}<br>
 </body>
 </html>

@@ -96,10 +96,11 @@ def parser_apache(request):
             ##    p.byte = e_list_protocol[2]
             #for b in Brouser.objects.filter(brouser=p.brouser): # FK_brouser
             #    p.brou = b #P_A.k_key.get(count)
-            for b in Bot.objects.filter(bots=p.bot): # FK_bot
-                p.bо = b #P_A.k_key.get(count)
+            #for b in Bot.objects.filter(bots=p.bot): # FK_bot
+                #p.bо = b #P_A.k_key.get(count)
             #p.bо = Bot.bots(P_A.b_bot.get(count)) # изменение БД
-            p.save() # создание БД
+            #p.save() # создание БД
+            pass
 
     #brousers() # создание БД браузеры
     #parser_brousers(P_A.brousers)
@@ -112,8 +113,9 @@ def parser_apache(request):
     #create_bd_bots(P_A.bots)
     #update_bd_bots()
         
-    context = {'count': 0, 'line': count}
-    
+    context = {'lines': [1, 2, 3], 'pk': 0, 'row_line': 0, 'ip': 0, 'date_time': 0, 'brouser': 0, 'bot': 0, 'protocol': 0, 'status': 0, 'byte': 0, 'referer': 0, 'system': 0}
+    #context = {'lines': P_A.all_request_count, 'pk': 0, 'row_line': 0, 'ip': 0, 'date_time': 0, 'brouser': 0, 'bot': 0, 'protocol': 0, 'status': 0, 'byte': 0, 'referer': 0, 'system': 0}
+
     return render(request, template_name='parser_apache/index.html', context=context)
 
 
