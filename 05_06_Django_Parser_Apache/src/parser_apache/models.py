@@ -6,7 +6,11 @@ class Parser(models.Model):
     log = models.TextField(
         verbose_name='Лог',
     )
-
+    ip = models.GenericIPAddressField(
+        verbose_name='IP',
+        protocol='both',
+        unpack_ipv4=False,
+    )
     time = models.DateTimeField(
         verbose_name='Дата и время запроса',
     )
@@ -24,6 +28,16 @@ class Parser(models.Model):
     )
     protocol = models.TextField(
         verbose_name='Протокол',
+        null=True,
+        blank=True,
+    )
+    status = models.IntegerField(
+        verbose_name='Статус ответа сервера',
+        null=True,
+        blank=True,
+    )
+    byte = models.IntegerField(
+        verbose_name='Кол-во отправленных байтов клиенту',
         null=True,
         blank=True,
     )

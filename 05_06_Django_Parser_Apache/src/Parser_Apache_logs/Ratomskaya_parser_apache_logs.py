@@ -90,10 +90,12 @@ def pattern_agents(line):
 
 
 unic_ip_addresses = set()
+ip_address = []
 
 
 def unic_address(line):
     ip = pattern_unic_address.split(line)
+    ip_address.append(ip[0])
     unic_ip_addresses.add(ip[0])
     return unic_ip_addresses
 
@@ -294,7 +296,8 @@ def save_data(file_name, list_values, strings):
 
 def main(*, debug_msg=True, debug_save=True):
     l_count_del = 0
-    global k_key
+    #global k_key
+    ip_address = []
     k_key = {}
     b_bot = {}
     r_ref = {}

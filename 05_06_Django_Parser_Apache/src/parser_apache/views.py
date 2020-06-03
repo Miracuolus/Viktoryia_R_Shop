@@ -24,11 +24,20 @@ def parser_apache(request):
             #l = Parser.objects.create(pk=count,log=line,brouser=P_A.k_key.get(count), time=l_date[count-1]) # создание БД
             #l.save() # создание БД
         for p in Parser.objects.filter(pk=count): # изменение БД
-            #p.bot = P_A.b_bot.get(count) # изменение БД
-            p.referer = P_A.r_ref.get(count) # изменение БД
+            #p.ip = P_A.ip_address[count-1]
+            end_list_protocol = P_A.list_protocol[count-1].split('"')
+            #p.protocol = end_list_protocol[0]
+            e_list_protocol = end_list_protocol[1].split(' ')
+            if e_list_protocol[1] != '-':
+                p.status = e_list_protocol[1]
+            if e_list_protocol[2] != '-':
+                p.byte = e_list_protocol[2]
+            ##p.bot = P_A.b_bot.get(count) # изменение БД
+            ##p.referer = P_A.r_ref.get(count) # изменение БД
             p.save() # создание БД
+            
         
-    context = {'count':count, 'line': P_A.b_bot}
+    context = {'count':count, 'line': len(P_A.ip_address)}
     
     return render(request, template_name='parser_apache/index.html', context=context)
 
