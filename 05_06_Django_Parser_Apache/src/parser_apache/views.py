@@ -69,17 +69,17 @@ def brousers():
     create_bd_brousers(P_A.brousers)
     create_bd_brousers(P_A.mobile_brousers)
 
-
-def parser_apache(request):
-    
-    #P_A.main(debug_msg=False, debug_save=False)
-    t = Time_for_Parser.main(save_logs=False)
-    l_date = []
+l_date = []
+def d_time(t):
     for i in range(0, len(t)):
         r_datetime = t[i][:19]
         date = datetime.strptime(r_datetime, '%Y-%m-%d %H:%M:%S')
         l_date.append(date)
-    
+
+def parser_apache(request):
+    #P_A.main(debug_msg=False, debug_save=False)
+    t = Time_for_Parser.main(save_logs=False)
+    #d_time(t)
     count = 0
     for _ in range(0, P_A.all_request_count):
         count += 1
@@ -94,8 +94,10 @@ def parser_apache(request):
             ##    p.status = e_list_protocol[1]
             ##if e_list_protocol[2] != '-':
             ##    p.byte = e_list_protocol[2]
-            for b in Brouser.objects.filter(brouser=p.brouser):
-                p.brou = b #P_A.k_key.get(count)
+            #for b in Brouser.objects.filter(brouser=p.brouser): # FK_brouser
+            #    p.brou = b #P_A.k_key.get(count)
+            for b in Bot.objects.filter(bots=p.bot): # FK_bot
+                p.bо = b #P_A.k_key.get(count)
             #p.bо = Bot.bots(P_A.b_bot.get(count)) # изменение БД
             p.save() # создание БД
 
@@ -110,7 +112,7 @@ def parser_apache(request):
     #create_bd_bots(P_A.bots)
     #update_bd_bots()
         
-    context = {'count': b_count, 'line': p}
+    context = {'count': 0, 'line': count}
     
     return render(request, template_name='parser_apache/index.html', context=context)
 
