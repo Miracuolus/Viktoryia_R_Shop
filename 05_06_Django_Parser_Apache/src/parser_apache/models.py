@@ -2,6 +2,33 @@ from django.db import models
 
 
 # Create your models here.
+
+class Brouser(models.Model):
+    brouser = models.CharField(
+        verbose_name='Браузеры',
+        max_length=300,
+    )
+    user_agents = models.TextField(
+        verbose_name='Соответ. user_agents',
+        null=True,
+        blank=True,
+    )
+    def __str__(self):
+        return f'{self.brouser}'
+
+class Bot(models.Model):
+    bots = models.CharField(
+        verbose_name='Бот/поисковая система',
+        max_length=300,
+    )
+    user_agents = models.URLField(
+        verbose_name='Соответ. user_agents',
+        null=True,
+        blank=True,
+    )
+    def __str__(self):
+        return f'{self.bots}'
+
 class Parser(models.Model):
     log = models.TextField(
         verbose_name='Лог',
@@ -20,12 +47,30 @@ class Parser(models.Model):
         null=True,
         blank=True,
     )
+
+    brou = models.ForeignKey(
+        Brouser,
+        on_delete=models.CASCADE,
+        verbose_name = 'Браузер лога',
+        null=True,
+        blank=True,
+    )
+
     bot = models.CharField(
         verbose_name='Бот',
         max_length=300,
         null=True,
         blank=True,
     )
+
+    bо = models.ForeignKey(
+        Bot,
+        on_delete=models.CASCADE,
+        verbose_name = 'Бот лога',
+        null=True,
+        blank=True,
+    )
+
     protocol = models.TextField(
         verbose_name='Протокол',
         null=True,
@@ -54,29 +99,3 @@ class Parser(models.Model):
 
     def __str__(self):
         return f'Строка {self.pk}'
-
-class Brouser(models.Model):
-    brouser = models.CharField(
-        verbose_name='Браузеры',
-        max_length=300,
-    )
-    user_agents = models.TextField(
-        verbose_name='Соответ. user_agents',
-        null=True,
-        blank=True,
-    )
-    def __str__(self):
-        return f'{self.brouser}'
-
-class Bot(models.Model):
-    bots = models.CharField(
-        verbose_name='Бот/поисковая система',
-        max_length=300,
-    )
-    user_agents = models.URLField(
-        verbose_name='Соответ. user_agents',
-        null=True,
-        blank=True,
-    )
-    def __str__(self):
-        return f'{self.bots}'
