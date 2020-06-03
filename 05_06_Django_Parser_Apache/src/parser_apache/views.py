@@ -94,22 +94,23 @@ def parser_apache(request):
             ##    p.status = e_list_protocol[1]
             ##if e_list_protocol[2] != '-':
             ##    p.byte = e_list_protocol[2]
-            ##p.bot = P_A.b_bot.get(count) # изменение БД
-            ##p.referer = P_A.r_ref.get(count) # изменение БД
-            ##p.save() # создание БД
-            pass
+            for b in Brouser.objects.filter(brouser=p.brouser):
+                p.brou = b #P_A.k_key.get(count)
+            #p.bо = Bot.bots(P_A.b_bot.get(count)) # изменение БД
+            p.save() # создание БД
+
     #brousers() # создание БД браузеры
     #parser_brousers(P_A.brousers)
     #parser_brousers(P_A.mobile_brousers)
     #update_bd_brousers(b_count=17)
 
-    parser_brousers(P_A.search_systems)
-    parser_brousers(P_A.bots)
+    #parser_brousers(P_A.search_systems)
+    #parser_brousers(P_A.bots)
     #create_bd_bots(P_A.search_systems)
     #create_bd_bots(P_A.bots)
-    update_bd_bots()
+    #update_bd_bots()
         
-    context = {'count': b_count, 'line': len(format_v_b)}
+    context = {'count': b_count, 'line': p}
     
     return render(request, template_name='parser_apache/index.html', context=context)
 
