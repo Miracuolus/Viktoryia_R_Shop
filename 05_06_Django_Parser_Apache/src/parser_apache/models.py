@@ -50,62 +50,71 @@ class Parser(models.Model):
     time = models.DateTimeField(
         verbose_name='Дата и время запроса',
     )
+    """
     brouser = models.CharField(
         verbose_name='Браузер',
         max_length=300,
         null=True,
         blank=True,
         help_text='Поле браузера'
-    )
+    )"""
 
     brou = models.ForeignKey(
         Brouser,
         on_delete=models.CASCADE,
-        verbose_name = 'Браузер лога',
+        verbose_name = 'Браузер',
         null=True,
         blank=True,
+        help_text='Поле браузера, с которого был сделан запрос (может быть пустым)'
     )
-
+    """
     bot = models.CharField(
         verbose_name='Бот',
         max_length=300,
         null=True,
         blank=True,
-    )
+    )"""
 
     bо = models.ForeignKey(
         Bot,
         on_delete=models.CASCADE,
-        verbose_name = 'Бот лога',
+        verbose_name = 'Бот',
         null=True,
         blank=True,
+        help_text='Название бота/поисковой системы, который сделали запрос (может быть пустым)'
     )
 
     protocol = models.TextField(
         verbose_name='Протокол',
         null=True,
         blank=True,
+        help_text='Поле может быть пустым'
+
     )
     status = models.IntegerField(
         verbose_name='Статус ответа сервера',
         null=True,
         blank=True,
+        help_text='Поле может быть пустым'
+
     )
     byte = models.IntegerField(
         verbose_name='Кол-во отправленных байтов клиенту',
         null=True,
         blank=True,
+        help_text='Поле может быть пустым'
     )
     referer = models.URLField(
         verbose_name='URL-запроса',
         null=True,
         blank=True,
+        help_text='Поле может быть пустым'
     )
     system = models.TextField(
         verbose_name='Информация о системе',
         null=True,
         blank=True,
-        help_text='Информация о системе пользователя'
+        help_text='Информация о системе пользователя (может быть пустым)'
     )
 
     def __str__(self):
