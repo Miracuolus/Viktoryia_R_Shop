@@ -9,7 +9,7 @@ from . forms import GenreForm
 
 # Create your views here.
 
-def test(request):
+def func_request_work(request):
     """s = requests.get('https://www.nbrb.by/api/exrates/rates?periodicity=0')
     result = s.json()
     rate = {}

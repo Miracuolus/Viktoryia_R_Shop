@@ -7,4 +7,3 @@ class GenreForm(forms.ModelForm):
         fields = ('name',
                   'description',
         )
-
