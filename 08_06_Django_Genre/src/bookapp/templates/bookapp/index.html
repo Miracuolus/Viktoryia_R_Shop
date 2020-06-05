@@ -12,6 +12,12 @@
             {% block h1 %}
                 <h1 align="center"><i>Hello World!</i></h1>
             {% endblock%}
+            {{ context }}
+            <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" name="send">
+            </form>
             <!--
             {{genre2.0}}<br>
             {{books}}<br>

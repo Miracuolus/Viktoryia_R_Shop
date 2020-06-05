@@ -4,6 +4,7 @@ import random
 import datetime
 #import requests
 from . models import Genre
+from . forms import GenreForm
 
 
 # Create your views here.
@@ -29,4 +30,5 @@ def test(request):
     #genre2 = Genre.objects.filter(name='ужасы')
     #books = Genre.objects.all()
     #context = {'genre': genre, 'genre2': genre2, 'books':books}
-    return render(request, template_name='bookapp/index.html', context={})
+    form = GenreForm()
+    return render(request, template_name='bookapp/index.html', context={'form':form})
