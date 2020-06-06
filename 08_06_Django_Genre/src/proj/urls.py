@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls), # БД
     #path('func/', func_request_work), # работа с БД через функцию
     #path('func/<int:pk>', func_request_work),
-    path('create/', CreateGenre.as_view()), # создание жанров
-    path('update/<int:pk>', UpdateGenre.as_view()), # обновление жанров
+    path('create/', CreateGenre.as_view()), # добавление элементов в таблицу Жанры
+    path('update/<int:pk>', UpdateGenre.as_view()), # обновление таблицы Жанры
 
 ]
