@@ -3,6 +3,7 @@
 from . models import Genre, Book
 from . forms import GenreForm
 from django.views.generic import TemplateView
+from django.views.generic import CreateView
 
 
 # Create your views here.
@@ -16,8 +17,21 @@ class Test(TemplateView):
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
 
+class CreateGenre(CreateView):
+    model = Genre
+    form_class = GenreForm
+    template_name = 'bookapp/create_genre.html'
+    success_url = '/admin'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        context['mycontext'] = GenreForm()
+
+        return context
+    
+
 """def func_request_work(request, pk):
-    f request.method == 'POST':
+    if request.method == 'POST':
         form = GenreForm(request.POST)
         if form.is_valid():
             #pass
