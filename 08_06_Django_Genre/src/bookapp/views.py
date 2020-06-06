@@ -1,34 +1,32 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-import random
-import datetime
-#import requests
-from . models import Genre
+#from django.shortcuts import render
+#from django.http import HttpResponse
+from . models import Genre, Book
 from . forms import GenreForm
+from django.views.generic import TemplateView
 
 
 # Create your views here.
+class Test(TemplateView):
+    template_name = 'bookapp/index.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
-def func_request_work(request):
-    """s = requests.get('https://www.nbrb.by/api/exrates/rates?periodicity=0')
-    result = s.json()
-    rate = {}
-    for d in result:
-        if d.get('Cur_Abbreviation') == 'USD':
-            rate['USD'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
-        elif d.get('Cur_Abbreviation') == 'EUR':
-            rate['EUR'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
-        elif d.get('Cur_Abbreviation') == 'RUB':
-            rate['RUB'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
-    r = random.randint(0, 100)
-    l = [1, 2, 3, 4, 5]
-    date = datetime.datetime.now()
-    context = {'some_value': l, 'time': date, 'happy_number': r, 'USD': rate.get('USD'), 'EUR': rate.get('EUR'), 'RUB': rate.get('RUB'), 'rate': rate}
-    """
-    # get one obj from Genre
-    #genre = Genre.objects.get(pk=1)
-    #genre2 = Genre.objects.filter(name='ужасы')
-    #books = Genre.objects.all()
-    #context = {'genre': genre, 'genre2': genre2, 'books':books}
-    form = GenreForm()
-    return render(request, template_name='bookapp/index.html', context={'form':form})
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
+
+"""def func_request_work(request, pk):
+    f request.method == 'POST':
+        form = GenreForm(request.POST)
+        if form.is_valid():
+            #pass
+            for g in Genre.objects.get(pk=pk):
+                g.name = form.name
+                g.description = form.description 
+    elif request.method == 'GET':
+        g = Genre.objects.get(pk=pk)
+        #g.name = request.name
+        #g.description = request.description
+        form = GenreForm(g)
+    return render(request, template_name='bookapp/index.html', context={'form':form})"""
