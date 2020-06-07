@@ -15,11 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from bookapp.views import CreateGenre, UpdateGenre, GenreView #, Test 
+from bookapp.views import CreateGenre, UpdateGenre, GenreView
 
 urlpatterns = [
     path('admin/', admin.site.urls), # БД
-    #path('func/<int:pk>', Test.as_view()),
     path('create/', CreateGenre.as_view()), # добавление элементов в таблицу Жанры
     path('update/<int:pk>', UpdateGenre.as_view()), # обновление таблицы Жанры
     path('listgenre/', GenreView.as_view()), # список жанров

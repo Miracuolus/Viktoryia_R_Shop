@@ -41,7 +41,7 @@ class CreateGenre(CreateView):
     model = Genre
     form_class = GenreForm
     template_name = 'bookapp/create_genre.html'
-    success_url = '/admin/'
+    success_url = '/admin/bookapp/genre/'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['creategenre'] = GenreForm()
@@ -61,10 +61,8 @@ class UpdateGenre(UpdateView):
         return context
 
 
-class GenreView(generic.ListView):
+class GenreView(ListView):
     template_name = 'bookapp/index.html'
     context_object_name = 'genre_list'
     model = Genre
-    #form_class = SearchForm
-    #queryset = Genre.objects.all()
-    #print(queryset)
+
