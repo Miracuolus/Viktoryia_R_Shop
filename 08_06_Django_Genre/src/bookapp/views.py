@@ -3,10 +3,8 @@ from . forms import GenreForm
 from django.views.generic import TemplateView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
-
-from django.views.generic.edit import FormMixin #
 from django.views.generic import ListView
-from django.views import generic #
+from django.views.generic import DeleteView
 
 
 # Create your views here.
@@ -66,3 +64,8 @@ class GenreView(ListView):
     context_object_name = 'genre_list'
     model = Genre
 
+class DeleteGenre(DeleteView):
+    model = Genre
+    template_name = 'bookapp/delete_genre.html'
+    context_object_name = 'genre'
+    success_url = '/admin/bookapp/genre/'
