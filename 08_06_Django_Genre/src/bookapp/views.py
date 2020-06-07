@@ -1,22 +1,41 @@
-#from django.shortcuts import render
-#from django.http import HttpResponse
 from . models import Genre, Book
 from . forms import GenreForm
 from django.views.generic import TemplateView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 
+from django.views.generic.edit import FormMixin #
+from django.views.generic import ListView
+from django.views import generic #
+
 
 # Create your views here.
+"""
 class Test(TemplateView):
     template_name = 'bookapp/index.html'
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+        kwargs.setdefault('view', self)
+        if self.extra_context is not None:
+            kwargs.update(self.extra_context)
+        return kwargs
+    
+    def setup(self, request, *args, **kwargs):
+        self.request = request
+        self.args = args
+        self.kwargs = kwargs
 
     def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
+        pk=self.kwargs['pk']
+        g = Genre.objects.get(pk=self.kwargs['pk'])
+        #context['testgenre'] = GenreForm(instance=Genre.objects.get(pk=self.kwargs['pk']))
+        if self.request.method == 'GET':
+            context['testgenre'] = GenreForm(instance=Genre.objects.get(pk=self.kwargs['pk']))
+            context['t'] = 0
+        elif self.request.method == 'POST':
+            context['testgenre'] = GenreForm(instance=Genre.objects.get(pk=self.kwargs['pk']))
         return self.render_to_response(context)
+"""
 
 class CreateGenre(CreateView):
     model = Genre
@@ -40,20 +59,12 @@ class UpdateGenre(UpdateView):
         context['updategenre'] = GenreForm(instance=Genre.objects.get(pk=self.kwargs['pk']))
         UpdateGenre.success_url = '/update/' + str(self.kwargs['pk'])
         return context
-    
 
 
-"""def func_request_work(request, pk):
-    if request.method == 'POST':
-        form = GenreForm(request.POST)
-        if form.is_valid():
-            #pass
-            for g in Genre.objects.get(pk=pk):
-                g.name = form.name
-                g.description = form.description 
-    elif request.method == 'GET':
-        g = Genre.objects.get(pk=pk)
-        #g.name = request.name
-        #g.description = request.description
-        form = GenreForm(g)
-    return render(request, template_name='bookapp/index.html', context={'form':form})"""
+class GenreView(generic.ListView):
+    template_name = 'bookapp/index.html'
+    context_object_name = 'genre_list'
+    model = Genre
+    #form_class = SearchForm
+    #queryset = Genre.objects.all()
+    #print(queryset)

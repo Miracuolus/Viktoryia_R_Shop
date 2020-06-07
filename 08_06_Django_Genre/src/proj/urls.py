@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from bookapp.views import Test, CreateGenre, UpdateGenre
+from bookapp.views import CreateGenre, UpdateGenre, GenreView #, Test 
 
 urlpatterns = [
     path('admin/', admin.site.urls), # БД
-    #path('func/', func_request_work), # работа с БД через функцию
-    #path('func/<int:pk>', func_request_work),
+    #path('func/<int:pk>', Test.as_view()),
     path('create/', CreateGenre.as_view()), # добавление элементов в таблицу Жанры
     path('update/<int:pk>', UpdateGenre.as_view()), # обновление таблицы Жанры
+    path('listgenre/', GenreView.as_view()), # обновление таблицы Жанры
 
 ]

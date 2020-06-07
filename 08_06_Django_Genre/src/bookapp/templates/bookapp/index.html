@@ -7,11 +7,11 @@
     </head>
     <body>
         <h2 align="center">БД "Жанры"</h2>
-        <form action="" method="POST">
-            {% csrf_token %}
-            {{ context }}
-            <input type="submit" name="send">
-        </form>
+        <ol>
+            {% for genre in genre_list %}
+                <li>{{ genre.name }}- {{ genre.description }}</li>
+            {% endfor %}
+        </ol>
     </body>
 </html>
 
