@@ -22,6 +22,6 @@ urlpatterns = [
     #path('func/<int:pk>', Test.as_view()),
     path('create/', CreateGenre.as_view()), # добавление элементов в таблицу Жанры
     path('update/<int:pk>', UpdateGenre.as_view()), # обновление таблицы Жанры
-    path('listgenre/', GenreView.as_view()), # обновление таблицы Жанры
+    path('listgenre/', GenreView.as_view()), # список жанров
 
 ]
