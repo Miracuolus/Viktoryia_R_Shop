@@ -6,10 +6,10 @@
         <title>Document</title>
     </head>
     <body>
-        <h2 align="center">БД "Жанры"</h2>
+        <h2 align="center">Список жанров</h2>
         <ol>
             {% for genre in genre_list %}
-                <li>{{ genre.name }}- {{ genre.description }}</li>
+                <li>{{ genre.name }} : {{ genre.description }}</li>
             {% endfor %}
         </ol>
     </body>
