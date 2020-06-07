@@ -41,7 +41,7 @@ class CreateGenre(CreateView):
     model = Genre
     form_class = GenreForm
     template_name = 'bookapp/create_genre.html'
-    success_url = '/create/'
+    success_url = '/admin/'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['creategenre'] = GenreForm()
