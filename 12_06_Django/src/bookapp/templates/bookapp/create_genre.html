@@ -11,17 +11,17 @@
     <title>Create</title>
   </head>
   <body>
-    <h2 align="center">Добавление в таблицу "Жанры"</h2>
+    <h3 align="center">Добавление в таблицу "Жанры"</h3>
     <form action="" method="POST">
             {% csrf_token %}
             <div class="form-group">
             <label for="name">Название жанра: </label>
-            <input class="form-control" name ="name" value="{{ name }}" type="text" placeholder="Введите жанр" style="width:300px">
+            <input class="form-control" name ="name" type="text" placeholder="Введите жанр" style="width:300px">
             <label for="description">Описание жанра: </label>
-            <textarea class="form-control" name ="description" value="{{ description }}" rows="3" placeholder="Введите описание жанра" style="width:500px"></textarea>
+            <textarea class="form-control" name ="description" rows="3" placeholder="Введите описание жанра" style="width:500px"></textarea>
             <!--{{ creategenre.as_p }}-->
             </div>
-            <input type="submit" name="send">
+            <input type="submit" class="btn btn-success" value="Добавить">
     </form>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

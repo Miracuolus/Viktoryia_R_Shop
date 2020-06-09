@@ -11,11 +11,16 @@
     <title>Update</title>
   </head>
   <body>
-    <h2 align="center">Обновление таблицы "Жанры"</h2>
+    <h3 align="center">Обновление таблицы "Жанры"</h3>
     <form action="" method="POST">
             {% csrf_token %}
-            {{ updategenre.as_p }}
-            <input type="submit" name="send">
+            <div class="form-group">
+            <label for="name">Название жанра: </label>
+            <input class="form-control" name ="name" type="text" style="width:300px" value="{{ object.name }}">
+            <label for="description">Описание жанра: </label>
+            <textarea class="form-control" name ="description" rows="3" style="width:500px">{{ object.description }}</textarea>
+            </div>
+            <input type="submit" value="Обновить" class="btn btn-info">
     </form>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
