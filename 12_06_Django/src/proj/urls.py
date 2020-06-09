@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from bookapp.views import CreateGenre, UpdateGenre, GenreView, DeleteGenre
+from bookapp.views import CreateGenre, UpdateGenre, GenreView, DeleteGenre, Test
 
 urlpatterns = [
     path('admin/', admin.site.urls), # БД
@@ -23,4 +23,5 @@ urlpatterns = [
     path('update/<int:pk>', UpdateGenre.as_view()), # обновление таблицы Жанры
     path('listgenre/', GenreView.as_view()), # список жанров
     path('deletegenre/<int:pk>', DeleteGenre.as_view()), # удаление жанров
+    path('', Test.as_view()), # удаление жанров
 ]

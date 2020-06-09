@@ -69,3 +69,6 @@ class DeleteGenre(DeleteView):
     template_name = 'bookapp/delete_genre.html'
     context_object_name = 'genre'
     success_url = '/listgenre/'
+
+class Test(TemplateView):
+    template_name = 'bookapp/list_genre.html'
