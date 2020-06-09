@@ -50,16 +50,17 @@ class UpdateGenre(UpdateView):
     model = Genre
     form_class = GenreForm
     template_name = 'bookapp/update_genre.html'
-    success_url = '/update/'
+    #success_url = '/update/'
+    success_url = '/main/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['updategenre'] = GenreForm(instance=Genre.objects.get(pk=self.kwargs['pk']))
-        UpdateGenre.success_url = '/update/' + str(self.kwargs['pk'])
+        #UpdateGenre.success_url = '/update/' + str(self.kwargs['pk'])
         return context
 
 
-class GenreView(ListView):
+class Test(ListView):
     template_name = 'bookapp/index.html'
     context_object_name = 'genre_list'
     model = Genre
@@ -70,7 +71,7 @@ class DeleteGenre(DeleteView):
     context_object_name = 'genre'
     success_url = '/main/'
 
-class Test(ListView):
+class GenreView(ListView):
     template_name = 'bookapp/list_genre.html'
     context_object_name = 'genre_list'
     model = Genre

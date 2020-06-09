@@ -21,8 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls), # БД
     path('create/', CreateGenre.as_view()), # добавление элементов в таблицу Жанры
     path('update/<int:pk>', UpdateGenre.as_view()), # обновление таблицы Жанры
-    path('listgenre/', GenreView.as_view()), # список жанров
+    #path('listgenre/', Test.as_view()), # список жанров
     path('deletegenre/<int:pk>', DeleteGenre.as_view()), # удаление жанров
-    path('main/', Test.as_view()), # стартовая страница
-    path('', Test.as_view()), # стартовая страница
+    path('main/', GenreView.as_view()), # стартовая страница
+    path('', GenreView.as_view()), # стартовая страница
 ]
