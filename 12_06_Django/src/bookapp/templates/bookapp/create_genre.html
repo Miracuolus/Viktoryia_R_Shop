@@ -14,7 +14,13 @@
     <h2 align="center">Добавление в таблицу "Жанры"</h2>
     <form action="" method="POST">
             {% csrf_token %}
-            {{ creategenre.as_p }}
+            <div class="form-group">
+            <label for="name">Название жанра: </label>
+            <input class="form-control" name ="name" value="{{ name }}" type="text" placeholder="Введите жанр" style="width:300px">
+            <label for="description">Описание жанра: </label>
+            <textarea class="form-control" name ="description" value="{{ description }}" rows="3" placeholder="Введите описание жанра" style="width:500px"></textarea>
+            <!--{{ creategenre.as_p }}-->
+            </div>
             <input type="submit" name="send">
     </form>
     <!-- Optional JavaScript -->
