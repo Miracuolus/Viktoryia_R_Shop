@@ -48,7 +48,7 @@
     <body>
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <a class="navbar-brand" href="/main/">Главная страница</a>
+                <a class="navbar-brand" href="#update-genre">Редактирование жанра</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -125,7 +125,7 @@
         ================================================== -->
         <!-- Wrap the rest of the page in another container to center all the content. -->
         <div class="col-md-8 order-md-1">
-            <h4 class="mb-3">Редактирование жанра</h4>
+            <h4 class="mb-3" id="update-genre">Редактирование жанра</h4>
             <form class="needs-validation" novalidate action="" method="POST">
                 {% csrf_token %}
                 <div class="mb-3">

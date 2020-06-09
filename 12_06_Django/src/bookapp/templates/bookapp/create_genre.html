@@ -48,7 +48,7 @@
     <body>
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <a class="navbar-brand" href="/main/">Главная страница</a>
+                <a class="navbar-brand" href="#create-genre">Добавление жанра</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -57,9 +57,6 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                         <a class="nav-link" href="/main/">Список жанров<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="#create-genre">Добавление жанра</a>
                         </li>
                     </ul>
                     <form class="form-inline mt-2 mt-md-0">
@@ -125,7 +122,7 @@
         ================================================== -->
         <!-- Wrap the rest of the page in another container to center all the content. -->
         <div class="col-md-8 order-md-1">
-            <h4 class="mb-3">Добавление нового жанра</h4>
+            <h4 class="mb-3" id="create-genre">Добавление нового жанра</h4>
             <form class="needs-validation" novalidate action="" method="POST">
                 {% csrf_token %}
                 <div class="mb-3">
