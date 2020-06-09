@@ -23,5 +23,6 @@ urlpatterns = [
     path('update/<int:pk>', UpdateGenre.as_view()), # обновление таблицы Жанры
     path('listgenre/', GenreView.as_view()), # список жанров
     path('deletegenre/<int:pk>', DeleteGenre.as_view()), # удаление жанров
-    path('main/', Test.as_view()), # удаление жанров
+    path('main/', Test.as_view()), # стартовая страница
+    path('', Test.as_view()), # стартовая страница
 ]
