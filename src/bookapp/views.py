@@ -1,9 +1,12 @@
 from . models import Book
-from django.views.generic import TemplateView
-from django.views.generic import CreateView
-from django.views.generic import UpdateView
-from django.views.generic import ListView
-from django.views.generic import DeleteView
+from django.views.generic import (
+                                    TemplateView, 
+                                    CreateView, 
+                                    UpdateView, 
+                                    ListView, 
+                                    DeleteView,
+                                    DetailView
+                                )
 
 
 # Create your views here.

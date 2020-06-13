@@ -17,6 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls), # БД
+    path('admin/', admin.site.urls, name='admin'), # БД
     path('genre/', include('genre.urls', namespace='genre')), # genre app
 ]

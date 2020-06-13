@@ -13,7 +13,7 @@
                 <div class="carousel-caption text-left">
                     <h1 style="color:#383838">Переход к БД</h1>
                     <p style="color:#383838">Переход к БД с таблицами Книги и Жанры</p>
-                    <p><a class="btn btn-lg btn-primary" href="/admin/bookapp/" target=_blank role="button">Переход</a></p>
+                    <p><a class="btn btn-lg btn-primary" href="{% url 'admin' %}" target=_blank role="button">Переход</a></p>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <div class="carousel-caption text-left">
                     <h1 style="color:#383838">Переход к БД Жанры</h1>
                     <p style="color:#383838">Переход к БД с таблицей Жанры</p>
-                    <p><a class="btn btn-lg btn-primary" href="/admin/bookapp/genre/" target=_blank role="button">Переход</a></p>
+                    <p><a class="btn btn-lg btn-primary" href="{% url 'admin' 'genre' 'genre' %}" target=_blank role="button">Переход</a></p>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 <div class="carousel-caption text-left">
                     <h1 style="color:#383838">Переход к БД Книги</h1>
                     <p style="color:#383838">Переход к БД с таблицей Книги</p>
-                    <p><a class="btn btn-lg btn-primary" href="/admin/bookapp/book/" target=_blank role="button">Переход</a></p>
+                    <p><a class="btn btn-lg btn-primary" href="{% url 'admin' 'bookapp' 'book' %}" target=_blank role="button">Переход</a></p>
                 </div>
             </div>
         </div>
