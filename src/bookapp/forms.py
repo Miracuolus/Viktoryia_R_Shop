@@ -1,5 +1,5 @@
 from django import forms
-from . models import Genre
+from genre.models import Genre
 
 class GenreForm(forms.ModelForm):
     class Meta:

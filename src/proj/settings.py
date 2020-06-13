@@ -127,4 +127,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/home/Viktoryia/mysite/static' # куда перенести файлы
 
 MEDIA_URL = '/media/' # для пользователя
-MEDIA_ROOT = '	/home/Viktoryia/mysite/media'
+MEDIA_ROOT = '/home/Viktoryia/mysite/media'
