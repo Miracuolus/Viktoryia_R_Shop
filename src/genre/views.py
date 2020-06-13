@@ -10,8 +10,9 @@ from django.views.generic import DeleteView
 class CreateGenre(CreateView):
     model = Genre
     form_class = GenreForm
-    template_name = 'bookapp/create_genre.html'
+    template_name = 'genre/create_genre.html'
     success_url = '/main/'
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['creategenre'] = GenreForm()
@@ -21,7 +22,7 @@ class CreateGenre(CreateView):
 class UpdateGenre(UpdateView):
     model = Genre
     form_class = GenreForm
-    template_name = 'bookapp/update_genre.html'
+    template_name = 'genre/update_genre.html'
     #success_url = '/update/'
     success_url = '/main/'
 
@@ -31,19 +32,13 @@ class UpdateGenre(UpdateView):
         #UpdateGenre.success_url = '/update/' + str(self.kwargs['pk'])
         return context
 
-
-class Test(ListView):
-    template_name = 'bookapp/index.html'
-    context_object_name = 'genre_list'
-    model = Genre
-
 class DeleteGenre(DeleteView):
     model = Genre
-    template_name = 'bookapp/delete_genre.html'
+    template_name = 'genre/delete_genre.html'
     context_object_name = 'genre'
     success_url = '/main/'
 
 class GenreView(ListView):
-    template_name = 'bookapp/list_genre.html'
+    template_name = 'genre/list_genre.html'
     context_object_name = 'genre_list'
     model = Genre

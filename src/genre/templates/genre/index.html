@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <title>List Genre</title>
+    </head>
+        <h2 align="center">Список жанров</h2>
+        <a href="/create/" class="btn btn-success">Add <i class="fas fa-plus-circle"></i></a><br>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col"><i class="fas fa-user-edit"></i></th>
+            <th scope="col"><i class="fas fa-user-minus"></i></th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for genre in genre_list %}
+                <tr>
+                    <td>{{ genre.pk }}</td>
+                    <td>{{ genre.name }}</td>
+                    <td>{{ genre.description }}</td>
+                    <td><a href="/update/{{ genre.pk }}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
+                    <td><a href="/deletegenre/{{ genre.pk }}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody> 
+        </table>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/7ea2fe9c56.js" crossorigin="anonymous"></script>
+    </body>
+</html>
+
