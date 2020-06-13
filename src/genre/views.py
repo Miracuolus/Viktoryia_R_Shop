@@ -1,10 +1,13 @@
 from . forms import GenreForm
 from . models import Genre
-from django.views.generic import TemplateView
-from django.views.generic import CreateView
-from django.views.generic import UpdateView
-from django.views.generic import ListView
-from django.views.generic import DeleteView
+from django.views.generic import (
+                                    TemplateView, 
+                                    CreateView, 
+                                    UpdateView, 
+                                    ListView, 
+                                    DeleteView,
+                                    DetailView
+                                )
 
 # Create your views here.
 class CreateGenre(CreateView):
@@ -42,3 +45,8 @@ class GenreView(ListView):
     template_name = 'genre/list_genre.html'
     context_object_name = 'genre_list'
     model = Genre
+
+
+class DetailGenre(DetailView):
+    model = Genre
+    template_name = 'genre/index.html'
