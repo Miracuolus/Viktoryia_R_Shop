@@ -25,8 +25,8 @@ SECRET_KEY = 's!wbm69+s+@bpb=%!u5%p0#95^=&pup_+xd=cv@6a2z1ww$(g2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['viktoryia.pythonanywhere.com']
-#ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['viktoryia.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bookapp',
+    'genre',
 ]
 
 MIDDLEWARE = [
