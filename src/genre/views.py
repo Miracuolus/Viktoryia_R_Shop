@@ -49,7 +49,7 @@ class DeleteGenre(DeleteView):
 
 
 class GenreList(ListView):
-    template_name = 'genre/list_genre.html'
+    template_name = 'template/genre/list_genre.html'
     context_object_name = 'genre_list'
     model = Genre
 
