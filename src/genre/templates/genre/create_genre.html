@@ -1,20 +1,14 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block title %}Создание нового жанра{% endblock title %}
 
 {% block body %}
     <div class="col-md-8 order-md-1">
+        <br>
         <h4 class="mb-3" id="create-genre">Добавление нового жанра</h4>
         <form class="needs-validation" novalidate action="" method="POST">
             {% csrf_token %}
-            <div class="mb-3">
-                <label for="name">Название жанра:</label>
-                <input type="text" name ="name" class="form-control" id="address2" placeholder="Введите жанр">
-            </div>
-            <div class="mb-3">
-                <label for="description">Описание жанра: <span class="text-muted">(Не обязательно)</span></label>
-                <textarea type="text" name ="description" class="form-control" id="address2" placeholder="Введите описание жанра" rows="3"></textarea>
-            </div>
+            {{ form|crispy }}
             <input type="submit" class="btn btn-success" value="Добавить">
         </form>
     </div>     

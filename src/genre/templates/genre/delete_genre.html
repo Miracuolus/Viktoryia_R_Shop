@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-
 {% block title %}Создание нового жанра{% endblock title %}
 
 {% block body %}
     <div class="col-md-8 order-md-1">
+        <br>
         <h4 class="mb-3" id="#delete-genre">Удаление жанра</h4>
         <form method="post">{% csrf_token %}
             <div class="alert alert-danger" role="alert">

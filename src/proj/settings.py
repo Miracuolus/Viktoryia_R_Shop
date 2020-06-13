@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'bookapp',
     'genre',
 ]
@@ -128,3 +129,5 @@ STATIC_ROOT = '/home/Viktoryia/mysite/static' # куда перенести фа
 
 MEDIA_URL = '/media/' # для пользователя
 MEDIA_ROOT = '/home/Viktoryia/mysite/media'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
