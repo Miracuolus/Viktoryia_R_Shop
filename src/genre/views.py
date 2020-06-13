@@ -41,7 +41,7 @@ class DeleteGenre(DeleteView):
     context_object_name = 'genre'
     success_url = '/main/'
 
-class GenreView(ListView):
+class GenreList(ListView):
     template_name = 'genre/list_genre.html'
     context_object_name = 'genre_list'
     model = Genre
