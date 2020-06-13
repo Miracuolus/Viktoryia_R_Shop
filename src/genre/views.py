@@ -49,4 +49,4 @@ class GenreList(ListView):
 
 class DetailGenre(DetailView):
     model = Genre
-    template_name = 'genre/index.html'
+    template_name = 'genre/detail_genre.html'

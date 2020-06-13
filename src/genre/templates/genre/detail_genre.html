@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Информация по жанру {{ object }}{% endblock title %}
+
+{% block body %}
+    <div class="col-md-8 order-md-1">
+        <h4 class="mb-3" id="create-genre">Информация по жанру {{ object }}</h4>
+        {{ object }}
+    </div>     
+{% endblock body %}
