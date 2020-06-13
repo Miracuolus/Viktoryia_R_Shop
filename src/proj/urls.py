@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from bookapp.views import CreateGenre, UpdateGenre, GenreView, DeleteGenre, Test
+#from bookapp.views import CreateGenre, UpdateGenre, GenreView, DeleteGenre, Test
+from genre.views import CreateGenre, UpdateGenre, GenreView, DeleteGenre, Test
 
 urlpatterns = [
     path('admin/', admin.site.urls), # БД
-    path('create/', CreateGenre.as_view()), # добавление элементов в таблицу Жанры
-    path('update/<int:pk>', UpdateGenre.as_view()), # обновление таблицы Жанры
-    #path('listgenre/', Test.as_view()), # список жанров
-    path('deletegenre/<int:pk>', DeleteGenre.as_view()), # удаление жанров
-    path('main/', GenreView.as_view()), # стартовая страница
-    path('', GenreView.as_view()), # стартовая страница
+    path('create/', include('genre.urls',)), # добавление элементов в таблицу Жанры
+    path('update/<int:pk>', include('genre.urls',)), # обновление таблицы Жанры
+    path('deletegenre/<int:pk>', include('genre.urls',)), # удаление жанров
+    path('main/', include('genre.urls',)), # стартовая страница
+    path('', include('genre.urls',)), # стартовая страница
 ]

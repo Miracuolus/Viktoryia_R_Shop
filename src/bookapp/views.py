@@ -1,5 +1,4 @@
-from . models import Genre, Book
-from . forms import GenreForm
+from . models import Book
 from django.views.generic import TemplateView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
@@ -35,7 +34,7 @@ class Test(TemplateView):
         return self.render_to_response(context)
 """
 
-class CreateGenre(CreateView):
+"""class CreateGenre(CreateView):
     model = Genre
     form_class = GenreForm
     template_name = 'bookapp/create_genre.html'
@@ -74,4 +73,4 @@ class DeleteGenre(DeleteView):
 class GenreView(ListView):
     template_name = 'bookapp/list_genre.html'
     context_object_name = 'genre_list'
-    model = Genre
+    model = Genre"""
