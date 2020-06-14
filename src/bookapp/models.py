@@ -1,5 +1,6 @@
 from django.db import models
 from genre.models import Genre
+from decimal import Decimal
 
 # Create your models here.
 class Book(models.Model):
@@ -7,6 +8,12 @@ class Book(models.Model):
         verbose_name='Название книги',
         max_length= 200
     )
+    price = models.DecimalField(
+        verbose_name='Цена',
+        max_digits=6,
+        decimal_places=2,
+        default=Decimal('0.00')
+       )
     genre = models.ForeignKey(
         Genre,
         on_delete=models.PROTECT,
