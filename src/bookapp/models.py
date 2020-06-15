@@ -36,10 +36,10 @@ class Book(models.Model):
         Genre,
         verbose_name='Жанр книги',
     )
-    year = models.IntegerField(
+    year = models.PositiveSmallIntegerField(
         verbose_name='Год издания',
     )
-    pages = models.IntegerField(
+    pages = models.PositiveSmallIntegerField(
         verbose_name='Кол-во страниц',
     )
     bookbinding = models.CharField(
@@ -60,7 +60,7 @@ class Book(models.Model):
         null=True,
         blank=True,
     )
-    weight = models.IntegerField(
+    weight = models.PositiveSmallIntegerField(
         verbose_name='Вес (гр)',
         null=True,
         blank=True,
@@ -71,6 +71,11 @@ class Book(models.Model):
         null=True, # БД позволяет хранить поле пустым
         blank=True, # сигнал Djange, что поле мб пустым
         help_text='Поле может быть пустым'
+    )
+    age_limit = models.CharField(
+        verbose_name='Возрастные ограничения',
+        max_length= 100,
+        default='0+'
     )
     created = models.DateTimeField(
         verbose_name='Создано',
