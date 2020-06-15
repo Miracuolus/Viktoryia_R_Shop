@@ -14,5 +14,8 @@ class Genre(models.Model):
         help_text='Поле может быть пустым'
     )
 
+    class Meta: 
+        ordering = ['name']
+
     def __str__(self):
-        return self.name
+        return f'Жанр {self.name}'
