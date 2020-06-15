@@ -54,6 +54,12 @@ class Book(models.Model):
         null=True,
         blank=True,
     )
+    isbn = models.SlugField(
+        verbose_name='ISBN',
+        max_length= 100,
+        null=True,
+        blank=True,
+    )
     description = models.TextField(
         verbose_name='Описание книги',
         null=True, # БД позволяет хранить поле пустым
