@@ -16,6 +16,7 @@ class Genre(models.Model):
 
     class Meta: 
         ordering = ['name']
-
+    
     def __str__(self):
-        return f'Жанр {self.name}'
+        return f'{self.name}'
+

@@ -21,6 +21,6 @@ class Author(models.Model):
 
     class Meta: 
         ordering = ['name']
-
+    
     def __str__(self):
-        return f'Автор {self.name}'
+        return f'{self.name}'

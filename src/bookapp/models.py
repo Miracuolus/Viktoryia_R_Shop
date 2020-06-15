@@ -1,5 +1,6 @@
 from django.db import models
 from genre.models import Genre
+from author.models import Author
 from decimal import Decimal
 
 # Create your models here.
@@ -14,6 +15,10 @@ class Book(models.Model):
         decimal_places=2,
         default=Decimal('0.00')
        )
+    author = models.ManyToManyField(
+        Author,
+        verbose_name='Автор',
+    )
     genre = models.ForeignKey(
         Genre,
         on_delete=models.PROTECT,
@@ -36,4 +41,4 @@ class Book(models.Model):
         auto_now_add=False # автом ставить время добавления
     )
     def __str__(self):
-        return f'{self.name}: жанр - {self.genre}'
+        return f'{self.name}'
