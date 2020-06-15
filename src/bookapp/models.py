@@ -2,6 +2,7 @@ from django.db import models
 from genre.models import Genre
 from author.models import Author
 from series.models import Series
+from publisher.models import Publisher
 from decimal import Decimal
 
 # Create your models here.
@@ -77,9 +78,10 @@ class Book(models.Model):
         max_length= 100,
         default='0+'
     )
-    publisher = models.CharField(
+    publisher = models.ForeignKey(
+        Publisher,
+        on_delete=models.PROTECT,
         verbose_name='Издательство',
-        max_length= 100,
         null=True,
         blank=True,
     )
