@@ -38,11 +38,15 @@ class Book(models.Model):
     )
     year = models.IntegerField(
         verbose_name='Год издания',
-        max_length= 4
     )
     pages = models.IntegerField(
         verbose_name='Кол-во страниц',
-        max_length= 10
+    )
+    bookbinding = models.CharField(
+        verbose_name='Переплет',
+        max_length= 100,
+        null=True,
+        blank=True,
     )
     description = models.TextField(
         verbose_name='Описание книги',
