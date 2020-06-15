@@ -27,14 +27,18 @@ class Book(models.Model):
         Author,
         verbose_name='Автор',
     )
-    genre = models.ManyToManyField(
-        Genre,
-        verbose_name='Жанр книги',
-    )
     series = models.ForeignKey(
         Series,
         on_delete=models.PROTECT,
         verbose_name='Серия',
+    )
+    genre = models.ManyToManyField(
+        Genre,
+        verbose_name='Жанр книги',
+    )
+    year = models.IntegerField(
+        verbose_name='Год издания',
+        max_length= 4
     )
     description = models.TextField(
         verbose_name='Описание книги',
