@@ -9,6 +9,13 @@ class Book(models.Model):
         verbose_name='Название книги',
         max_length= 200
     )
+    photo = models.ImageField(
+        upload_to='static/book', 
+        height_field=None, 
+        width_field=None, 
+        max_length=100,
+        default = 'static/book/10912445_0.jpg'
+    )
     price = models.DecimalField(
         verbose_name='Цена',
         max_digits=6,
