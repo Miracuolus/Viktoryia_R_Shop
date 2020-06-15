@@ -60,6 +60,12 @@ class Book(models.Model):
         null=True,
         blank=True,
     )
+    weight = models.IntegerField(
+        verbose_name='Вес (гр)',
+        null=True,
+        blank=True,
+        help_text='Указывается в граммах'
+    )
     description = models.TextField(
         verbose_name='Описание книги',
         null=True, # БД позволяет хранить поле пустым
