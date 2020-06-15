@@ -93,6 +93,9 @@ class Book(models.Model):
         choices=((True, 'Да'),(False, 'Нет')),
         default=False
     )
+    rating = models.PositiveSmallIntegerField(
+        verbose_name='Рейтинг',
+    )
     created = models.DateTimeField(
         verbose_name='Создано',
         auto_now=False, # автом ставить тек время
