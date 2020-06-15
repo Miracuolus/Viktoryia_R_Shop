@@ -1,6 +1,7 @@
 from django.db import models
 from genre.models import Genre
 from author.models import Author
+from series.models import Series
 from decimal import Decimal
 
 # Create your models here.
@@ -30,6 +31,11 @@ class Book(models.Model):
         Genre,
         on_delete=models.PROTECT,
         verbose_name='Жанр книги',
+    )
+    series = models.ForeignKey(
+        Series,
+        on_delete=models.PROTECT,
+        verbose_name='Серия',
     )
     description = models.TextField(
         verbose_name='Описание книги',
