@@ -85,6 +85,9 @@ class Book(models.Model):
         null=True,
         blank=True,
     )
+    quantity = models.PositiveSmallIntegerField(
+        verbose_name='В наличии',
+    )
     created = models.DateTimeField(
         verbose_name='Создано',
         auto_now=False, # автом ставить тек время
