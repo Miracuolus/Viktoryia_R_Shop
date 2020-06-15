@@ -77,6 +77,12 @@ class Book(models.Model):
         max_length= 100,
         default='0+'
     )
+    publisher = models.CharField(
+        verbose_name='Издательство',
+        max_length= 100,
+        null=True,
+        blank=True,
+    )
     created = models.DateTimeField(
         verbose_name='Создано',
         auto_now=False, # автом ставить тек время
