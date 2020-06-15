@@ -9,7 +9,7 @@ class Author(models.Model):
     )
 
     date = models.DateField(
-        verbose_name='Дата рождения',
+        verbose_name='Год рождения',
     )
     image = models.ImageField(
         null=True,
