@@ -48,6 +48,12 @@ class Book(models.Model):
         null=True,
         blank=True,
     )
+    book_format = models.CharField(
+        verbose_name='Формат',
+        max_length= 300,
+        null=True,
+        blank=True,
+    )
     description = models.TextField(
         verbose_name='Описание книги',
         null=True, # БД позволяет хранить поле пустым
