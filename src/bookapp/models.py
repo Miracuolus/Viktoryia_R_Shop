@@ -40,6 +40,10 @@ class Book(models.Model):
         verbose_name='Год издания',
         max_length= 4
     )
+    pages = models.IntegerField(
+        verbose_name='Кол-во страниц',
+        max_length= 10
+    )
     description = models.TextField(
         verbose_name='Описание книги',
         null=True, # БД позволяет хранить поле пустым
