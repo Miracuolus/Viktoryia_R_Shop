@@ -4,6 +4,8 @@ from author.models import Author
 from series.models import Series
 from publisher.models import Publisher
 from decimal import Decimal
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 # Create your models here.
 class Book(models.Model):
@@ -105,6 +107,12 @@ class Book(models.Model):
         verbose_name='Изменено',
         auto_now=True, # автом ставить тек время
         auto_now_add=False # автом ставить время добавления
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
     )
     def __str__(self):
         return f'{self.name}'
