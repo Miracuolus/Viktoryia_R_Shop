@@ -7,8 +7,10 @@ class Publisher(models.Model):
         max_length= 100
     )
     image = models.ImageField(
-        null=True,
-        blank=True,
+        verbose_name='Изображение',
+        upload_to='publishers', 
+        height_field=None, 
+        width_field=None, 
     )
     description = models.TextField(
         verbose_name='Краткая информация об издательстве',

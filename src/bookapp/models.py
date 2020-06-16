@@ -19,9 +19,6 @@ class Book(models.Model):
         upload_to='books', 
         height_field=None, 
         width_field=None, 
-        max_length=100,
-        null=True,
-        blank=True,
     )
     price = models.DecimalField(
         verbose_name='Цена',
