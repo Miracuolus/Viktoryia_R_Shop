@@ -35,6 +35,8 @@ class Book(models.Model):
         Series,
         on_delete=models.PROTECT,
         verbose_name='Серия',
+        null=True,
+        blank=True,
     )
     genre = models.ManyToManyField(
         Genre,
@@ -42,9 +44,13 @@ class Book(models.Model):
     )
     year = models.PositiveSmallIntegerField(
         verbose_name='Год издания',
+        null=True,
+        blank=True,
     )
     pages = models.PositiveSmallIntegerField(
         verbose_name='Кол-во страниц',
+        null=True,
+        blank=True,
     )
     bookbinding = models.CharField(
         verbose_name='Переплет',
