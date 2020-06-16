@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title %}Создание нового автора{% endblock title %}
+{% block title %}Добавление нового издательства{% endblock title %}
 
 {% block body %}
-    {% include "top_menu_author.html" %}
+    {% include "top_menu_publisher.html" %}
     <div class="col-md-8 order-md-1">
         <br>
-        <h4 class="mb-3" id="create-author">Добавление нового автора</h4>
-        <form class="needs-validation" novalidate action="" method="POST">
+        <h4 class="mb-3">Добавление нового издательства</h4>
+        <form class="needs-validation" novalidate action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
             <input type="submit" class="btn btn-success" value="Добавить">

@@ -3,9 +3,9 @@ from  . views import CreateGenre, UpdateGenre, GenreList, DeleteGenre, DetailGen
 app_name = 'genre'
 
 urlpatterns = [
-    path('create/', CreateGenre.as_view(), name='create'), # добавление элементов в таблицу Жанры
-    path('update/<int:pk>', UpdateGenre.as_view(), name='update'), # обновление таблицы Жанры
-    path('deletegenre/<int:pk>', DeleteGenre.as_view(), name='delete'), # удаление жанров
-    path('list/', GenreList.as_view(), name='list'), # список жанров
-    path('detail/<int:pk>', DetailGenre.as_view(), name='detail'), # справочник жанра
+    path('create/', CreateGenre.as_view(), name='create'),
+    path('update/<int:pk>', UpdateGenre.as_view(), name='update'),
+    path('deletegenre/<int:pk>', DeleteGenre.as_view(), name='delete'),
+    path('list/', GenreList.as_view(), name='list'),
+    path('detail/<int:pk>', DetailGenre.as_view(), name='detail'),
 ]

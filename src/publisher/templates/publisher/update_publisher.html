@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title %}Редактирование автора{% endblock title %}
+{% block title %}Редактирование издательства{% endblock title %}
 
 {% block body %}
-    {% include "top_menu_author.html" %}
+    {% include "top_menu_publisher.html" %}
     <div class="col-md-8 order-md-1">
         <br>
-        <h4 class="mb-3" id="update-author">Редактирование информации об авторе</h4>
-        <form class="needs-validation" novalidate action="" method="POST">
+        <h4 class="mb-3">Редактирование информации об издательстве</h4>
+        <form class="needs-validation" novalidate action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
             <input type="submit" value="Обновить" class="btn btn-info">

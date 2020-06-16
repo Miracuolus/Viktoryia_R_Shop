@@ -23,4 +23,5 @@ urlpatterns = [
     path('book/', include('bookapp.urls', namespace='book')), # book app
     path('author/', include('author.urls', namespace='author')), # author app
     path('genre/', include('genre.urls', namespace='genre')), # genre app
+    path('publisher/', include('publisher.urls', namespace='publisher')), # genre app
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки

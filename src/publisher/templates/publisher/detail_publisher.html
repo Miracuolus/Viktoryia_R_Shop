@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}Информация по автору {{ object }}{% endblock title %}
+{% block title %}Информация по издательству {{ object }}{% endblock title %}
 
 {% block body %}
-    {% include "top_menu_author.html" %}
+    {% include "top_menu_publisher.html" %}
     <div class="col-md-8 order-md-1">
         <br>
-        <h4 class="mb-3" id="create-author">Информация по автору {{ object }}</h4>
+        <h4 class="mb-3">Информация по издательству {{ object }}</h4>
         {{ object.name }}
-        {{ object.date }}
-        {{ object.image }}
+        <p><img src="{{ object.image.url }}" alt="Изображение автора" height="120px" width="100px"></p>
         {{ object.description }}
     </div>     
 {% endblock body %}

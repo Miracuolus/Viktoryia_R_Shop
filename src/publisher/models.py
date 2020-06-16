@@ -14,8 +14,8 @@ class Publisher(models.Model):
     )
     description = models.TextField(
         verbose_name='Краткая информация об издательстве',
-        null=True, # БД позволяет хранить поле пустым
-        blank=True, # сигнал Djange, что поле мб пустым
+        null=True,
+        blank=True,
         help_text='Поле может быть пустым'
     )
 
