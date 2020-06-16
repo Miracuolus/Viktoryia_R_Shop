@@ -10,9 +10,12 @@ class Author(models.Model):
 
     date = models.DateField(
         verbose_name='Дата рождения',
-        default=datetime.date.today
+        null=True,
+        blank=True,
     )
     image = models.ImageField(
+        verbose_name='Изображение',
+        upload_to='authors',
         null=True,
         blank=True,
     )

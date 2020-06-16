@@ -7,7 +7,7 @@
     <div class="col-md-8 order-md-1">
         <br>
         <h4 class="mb-3" id="update-author">Редактирование информации об авторе</h4>
-        <form class="needs-validation" novalidate action="" method="POST" enctype="multipart/form-data">
+        <form class="needs-validation" novalidate action="" method="POST">
             {% csrf_token %}
             {{ form|crispy }}
             <input type="submit" value="Обновить" class="btn btn-info">

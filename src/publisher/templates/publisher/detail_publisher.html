@@ -9,7 +9,7 @@
         <h4 class="mb-3" id="create-author">Информация по автору {{ object }}</h4>
         {{ object.name }}
         {{ object.date }}
-        <p><img src="{{ object.image.url }}" alt="Изображение автора"></p>
+        {{ object.image }}
         {{ object.description }}
     </div>     
 {% endblock body %}

@@ -1,5 +1,7 @@
 from django.urls import path, include
 from  . views import CreateAuthor, UpdateAuthor, AuthorList, DeleteAuthor, DetailAuthor
+
+
 app_name = 'author'
 
 urlpatterns = [
