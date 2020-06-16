@@ -1,4 +1,5 @@
 from . models import Book
+from . forms import BookForm
 from django.views.generic import (
                                     TemplateView, 
                                     CreateView, 

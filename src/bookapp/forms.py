@@ -1,14 +1,26 @@
 from django import forms
 from . models import Book
 
-class GenreForm(forms.ModelForm):
+class BookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = ('name',
                   'photo',
                   'price',
                   'author',
-                  'genre',
                   'series',
+                  'genre',
+                  'year',
+                  'pages',
+                  'bookbinding',
+                  'book_format',
+                  'isbn',
+                  'weight',
                   'description',
+                  'age_limit',
+                  'publisher',
+                  'quantity',
+                  'active',
+                  'rating',
+                  'user',
         )

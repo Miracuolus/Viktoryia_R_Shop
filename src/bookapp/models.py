@@ -5,6 +5,7 @@ from series.models import Series
 from publisher.models import Publisher
 from decimal import Decimal
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
 
 # Create your models here.
@@ -14,11 +15,11 @@ class Book(models.Model):
         max_length= 200
     )
     photo = models.ImageField(
-        upload_to='static/book', 
+        upload_to='books', 
         height_field=None, 
         width_field=None, 
         max_length=100,
-        default = 'static/book/10912445_0.jpg'
+        default = 'static/books/incognito.png'
     )
     price = models.DecimalField(
         verbose_name='Цена',
