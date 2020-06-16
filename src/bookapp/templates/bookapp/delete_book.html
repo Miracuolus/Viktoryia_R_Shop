@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
-{% block title %}Создание нового жанра{% endblock title %}
+{% block title %}Удаление книги {{ object }}{% endblock title %}
 
 {% block body %}
+    {% include "top_menu_book.html" %}
     <div class="col-md-8 order-md-1">
         <br>
-        <h4 class="mb-3" id="#delete-genre">Удаление жанра</h4>
+        <h4 class="mb-3" id="#delete-book">Удаление книги {{ object }}</h4>
         <form method="post">{% csrf_token %}
             <div class="alert alert-danger" role="alert">
-                Вы уверены, что хотите удалить жанр - {{ genre }}"?
+                Вы уверены, что хотите удалить книгу - {{ object }}"?
             </div>
             <input type="submit" value="Подтвердить" class="btn btn-danger">
         </form>

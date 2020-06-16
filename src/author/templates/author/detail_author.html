@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Информация по автору {{ object }}{% endblock title %}
+
+{% block body %}
+    {% include "top_menu_author.html" %}
+    <div class="col-md-8 order-md-1">
+        <br>
+        <h4 class="mb-3" id="create-author">Информация по автору {{ object }}</h4>
+        {{ object.name }}
+        {{ object.date }}
+        {{ object.image }}
+        {{ object.description }}
+    </div>     
+{% endblock body %}

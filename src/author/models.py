@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+import datetime
 
 # Create your models here.
 class Author(models.Model):
@@ -9,7 +9,8 @@ class Author(models.Model):
     )
 
     date = models.DateField(
-        verbose_name='Год рождения',
+        verbose_name='Дата рождения',
+        default=datetime.date.today
     )
     image = models.ImageField(
         null=True,

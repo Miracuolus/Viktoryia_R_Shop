@@ -19,5 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls), # БД
     path('book/', include('bookapp.urls', namespace='book')), # book app
+    path('author/', include('author.urls', namespace='author')), # author app
     path('genre/', include('genre.urls', namespace='genre')), # genre app
 ]
