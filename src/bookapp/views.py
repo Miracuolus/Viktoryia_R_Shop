@@ -19,3 +19,17 @@ class CreateBook(CreateView):
      
     def get_success_url(self):
         return reverse_lazy('book:list')
+
+class BookList(ListView):
+    template_name = 'bookapp/list_book.html'
+    context_object_name = 'book_list'
+    model = Book
+    field = ('name',
+             'photo',
+             'price',
+             'author',
+             'description',
+             'quantity',
+             'active',
+             'user',
+    )

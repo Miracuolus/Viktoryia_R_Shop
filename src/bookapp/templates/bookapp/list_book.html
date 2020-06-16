@@ -1,29 +1,42 @@
 {% extends 'base.html' %}
 
-{% block title %}Список Жанров{% endblock title %}
+{% block title %}Список Книг{% endblock title %}
 
 {% block body %}
-    {% include "carousel_genre.html" %}
+    {% include "top_menu_book.html" %}
+    <br>
     <div class="container marketing">
-        <h2 id="list-genre">Список жанров</h2>
+        <h2 id="list-book">Список книг</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>
                     <th>id</th>
-                    <th>Имя жанра</th>
+                    <th>Название книги</th>
+                    <th>Фото</th>
+                    <th>Цена</th>
+                    <th>Автор</th>
                     <th>Описание</th>
+                    <th>Кол-во</th>
+                    <th>Доступен для заказа</th>
+                    <th>Пользователь</th>
                     <th><i class="fas fa-info-circle"></i></th>
                     <th><i class="fas fa-user-edit"></i></th>
                     <th><i class="fas fa-user-minus"></i></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for genre in genre_list %}
+                    {% for book in book_list %}
                         <tr>
-                            <td>{{ genre.pk }}</td>
-                            <td>{{ genre.name }}</td>
-                            <td>{{ genre.description }}</td>
+                            <td>{{ book.pk }}</td>
+                            <td>{{ book.name }}</td>
+                            <td>{{ book.photo }}</td>
+                            <td>{{ book.price }}</td>
+                            <td>{{ book.author }}</td>
+                            <td>{{ book.description }}</td>
+                            <td>{{ book.quantity }}</td>
+                            <td>{{ book.active }}</td>
+                            <td>{{ book.user }}</td>
                             <td><a href="{% url 'genre:detail' genre.pk %}" title="подробнее"><i style="color:#696969" class="fas fa-info"></i></a></td>
                             <td><a href="{% url 'genre:update' genre.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
                             <td><a href="{% url 'genre:delete' genre.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>

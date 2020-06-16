@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title %}Создание нового жанра{% endblock title %}
+{% block title %}Добавление новой книги{% endblock title %}
 
 {% block body %}
+    {% include "top_menu_book.html" %}
     <div class="col-md-8 order-md-1">
         <br>
         <h4 class="mb-3" id="create-book">Добавление новой книги</h4>
