@@ -8,5 +8,4 @@ urlpatterns = [
     path('deletegenre/<int:pk>', DeleteGenre.as_view(), name='delete'), # удаление жанров
     path('list/', GenreList.as_view(), name='list'), # список жанров
     path('detail/<int:pk>', DetailGenre.as_view(), name='detail'), # справочник жанра
-    path('', GenreList.as_view()), # список жанров
 ]
