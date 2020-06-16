@@ -6,8 +6,12 @@
     {% include "top_menu_book.html" %}
     <div class="col-md-8 order-md-1">
         <br>
-        <h4 class="mb-3" id="create-genre">Информация по книге {{ object }}</h4>
+        <h4 class="mb-3">Информация по книге {{ object }}</h4>
         {{ object.name }}
+        {% for author in object.author.all %}
+            {{ author.name }}
+        {% endfor %}
+        <p><img src="{{ object.photo.url }}" alt="Изображение книги" height="120px" width="100px"></p>
         {{ object.description }}
     </div>     
 {% endblock body %}

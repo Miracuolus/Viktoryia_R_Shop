@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block title %}Список Книг{% endblock title %}
 
 {% block body %}
@@ -30,16 +30,20 @@
                         <tr>
                             <td>{{ book.pk }}</td>
                             <td>{{ book.name }}</td>
-                            <td>{{ book.photo }}</td>
+                            <td><img src="{{ book.photo.url }}" alt="Изображение книги" height="120px" width="100px"></td>
                             <td>{{ book.price }}</td>
-                            <td>{{ book.author }}</td>
+                            <td>
+                                {% for author in book.author.all %}
+                                    {{ author.name }}
+                                {% endfor %}
+                            </td>
                             <td>{{ book.description }}</td>
                             <td>{{ book.quantity }}</td>
-                            <td>{{ book.active }}</td>
-                            <td>{{ book.user }}</td>
-                            <td><a href="{% url 'genre:detail' genre.pk %}" title="подробнее"><i style="color:#696969" class="fas fa-info"></i></a></td>
-                            <td><a href="{% url 'genre:update' genre.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
-                            <td><a href="{% url 'genre:delete' genre.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
+                            <td>{% if book.active == True %}Да{% elif book.active == False %}Нет{% endif %}</td>
+                            <td>{% if book.user == None %}-{% else %}{{ book.user }}{% endif %}</td>
+                            <td><a href="{% url 'book:detail' book.pk %}" title="подробнее"><i style="color:#696969" class="fas fa-info"></i></a></td>
+                            <td><a href="{% url 'book:update' book.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
+                            <td><a href="{% url 'book:delete' book.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

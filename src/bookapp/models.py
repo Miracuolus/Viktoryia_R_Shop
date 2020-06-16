@@ -15,11 +15,13 @@ class Book(models.Model):
         max_length= 200
     )
     photo = models.ImageField(
+        verbose_name='Изображение',
         upload_to='books', 
         height_field=None, 
         width_field=None, 
         max_length=100,
-        default = 'static/books/incognito.png'
+        null=True,
+        blank=True,
     )
     price = models.DecimalField(
         verbose_name='Цена',

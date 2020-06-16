@@ -7,7 +7,7 @@
     <div class="col-md-8 order-md-1">
         <br>
         <h4 class="mb-3" id="create-book">Добавление новой книги</h4>
-        <form class="needs-validation" novalidate action="" method="POST">
+        <form class="needs-validation" novalidate action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
             <input type="submit" class="btn btn-success" value="Добавить">

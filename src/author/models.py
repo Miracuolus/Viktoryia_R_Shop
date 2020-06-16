@@ -16,8 +16,6 @@ class Author(models.Model):
     image = models.ImageField(
         verbose_name='Изображение',
         upload_to='authors',
-        null=True,
-        blank=True,
     )
     description = models.TextField(
         verbose_name='Биография',
