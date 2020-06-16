@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls), # БД
     path('book/', include('bookapp.urls', namespace='book')), # book app
     path('author/', include('author.urls', namespace='author')), # author app
+    path('series/', include('series.urls', namespace='series')), # series app
     path('genre/', include('genre.urls', namespace='genre')), # genre app
-    path('publisher/', include('publisher.urls', namespace='publisher')), # genre app
+    path('publisher/', include('publisher.urls', namespace='publisher')), # publisher app
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки

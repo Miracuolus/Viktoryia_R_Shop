@@ -1,19 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}Список Издательств{% endblock title %}
+{% block title %}Список серий{% endblock title %}
 
 {% block body %}
-    {% include "top_menu_publisher.html" %}
+    {% include "top_menu_series.html" %}
     <br>
     <div class="container marketing">
-        <h2 id="list-publishe">Список издательств</h2>
+        <h2 id="list-series">Список серий</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>
                     <th>id</th>
-                    <th>Название издательства</th>
-                    <th>Изображение</th>
+                    <th>Серия</th>
                     <th>Описание</th>
                     <th><i class="fas fa-info-circle"></i></th>
                     <th><i class="fas fa-user-edit"></i></th>
@@ -25,11 +24,10 @@
                         <tr>
                             <td>{{ p.pk }}</td>
                             <td>{{ p.name }}</td>
-                            <td><img src="{{ p.image.url }}" alt="Изображение издательства" height="120px" width="100px"></td>
                             <td>{{ p.description }}</td>
-                            <td><a href="{% url 'publisher:detail' p.pk %}" title="подробнее"><i style="color:#696969" class="fas fa-info"></i></a></td>
-                            <td><a href="{% url 'publisher:update' p.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
-                            <td><a href="{% url 'publisher:delete' p.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
+                            <td><a href="{% url 'series:detail' p.pk %}" title="подробнее"><i style="color:#696969" class="fas fa-info"></i></a></td>
+                            <td><a href="{% url 'series:update' p.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
+                            <td><a href="{% url 'series:delete' p.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
