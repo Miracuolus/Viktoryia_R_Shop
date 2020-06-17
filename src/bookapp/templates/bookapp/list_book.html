@@ -16,7 +16,6 @@
                     <th>Фото</th>
                     <th>Цена</th>
                     <th>Автор</th>
-                    <th>Описание</th>
                     <th>Кол-во</th>
                     <th>Доступен для заказа</th>
                     <th>Пользователь</th>
@@ -37,7 +36,6 @@
                                     {{ author.name }}
                                 {% endfor %}
                             </td>
-                            <td>{{ book.description }}</td>
                             <td>{{ book.quantity }}</td>
                             <td>{% if book.active == True %}Да{% elif book.active == False %}Нет{% endif %}</td>
                             <td>{% if book.user == None %}-{% else %}{{ book.user }}{% endif %}</td>
