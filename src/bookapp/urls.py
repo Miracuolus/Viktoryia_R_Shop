@@ -1,5 +1,14 @@
 from django.urls import path, include
-from bookapp.views import CreateBook, BookList, UpdateBook, DeleteBook, DetailBook, ListContextBook
+from bookapp.views import (CreateBook, 
+                           BookList, 
+                           UpdateBook, 
+                           DeleteBook, 
+                           DetailBook, 
+                           ListNewBook,
+                           ListPopularBook,
+                           ListSaleBook,
+)
+
 
 app_name = 'book'
 
@@ -9,8 +18,8 @@ urlpatterns = [
     path('deletegenre/<int:pk>', DeleteBook.as_view(), name='delete'),
     path('list/', BookList.as_view(), name='list'),
     path('detail/<int:pk>', DetailBook.as_view(), name='detail'),
-    path('list_new/', ListContextBook.as_view(), name='list_new'),
-    path('list_popular/', ListContextBook.as_view(), name='list_popular'),
-    path('list_sale/', ListContextBook.as_view(), name='list_sale'),
+    path('list_new/', ListNewBook.as_view(), name='list_new'),
+    path('list_popular/', ListPopularBook.as_view(), name='list_popular'),
+    path('list_sale/', ListSaleBook.as_view(), name='list_sale'),
 ]
 
