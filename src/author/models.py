@@ -10,6 +10,7 @@ class Author(models.Model):
 
     date = models.DateField(
         verbose_name='Дата рождения',
+        help_text='ДД.ММ.ГГГГ'
     )
     image = models.ImageField(
         verbose_name='Изображение',

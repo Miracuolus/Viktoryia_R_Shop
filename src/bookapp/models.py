@@ -45,6 +45,7 @@ class Book(models.Model):
         verbose_name='Год издания',
         null=True,
         blank=True,
+        help_text='ГГГГ'
     )
     pages = models.PositiveSmallIntegerField(
         verbose_name='Кол-во страниц',
@@ -107,6 +108,7 @@ class Book(models.Model):
     )
     rating = models.PositiveSmallIntegerField(
         verbose_name='Рейтинг',
+        help_text='от 0 до 9'
     )
     created = models.DateTimeField(
         verbose_name='Создано',
