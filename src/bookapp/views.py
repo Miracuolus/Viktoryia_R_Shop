@@ -9,6 +9,7 @@ from django.views.generic import (
                                     DetailView
                                 )
 from django.urls import reverse_lazy
+import datetime
 
 
 # Create your views here.
@@ -59,3 +60,27 @@ class DetailBook(DetailView):
 class ListContextBook(ListView):
     template_name = 'bookapp/list_home_book.html'
     model = Book
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        B = Book.objects.all()
+        count_b = 0
+        new_book = []
+        popular_book = []
+        sale_book = []
+        for _ in range(0, len(B)):
+            count_b += 1
+            for b in Book.objects.filter(pk=count_b):
+                if b.rating >= 9:
+                    popular_book.append(b)
+                if b.price <= 10:
+                    sale_book.append(b)
+                date_now = datetime.date.today()
+                date_created = b.created.date()
+                if date_now.year == date_created.year:
+                    if date_now.month - date_created.month <= 3:
+                        new_book.append(b)
+        context['new'] = new_book
+        context['popular'] = popular_book
+        context['sale'] = sale_book
+        return context
