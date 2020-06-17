@@ -81,6 +81,10 @@ class Book(models.Model):
         blank=True, # сигнал Djange, что поле мб пустым
         help_text='Поле может быть пустым'
     )
+    short_description = models.TextField(
+        verbose_name='Аннотация',
+        help_text='Поле может быть пустым'
+    )
     age_limit = models.CharField(
         verbose_name='Возрастные ограничения',
         max_length= 100,

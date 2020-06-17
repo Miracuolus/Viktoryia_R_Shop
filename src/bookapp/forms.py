@@ -17,6 +17,7 @@ class BookForm(forms.ModelForm):
                   'isbn',
                   'weight',
                   'description',
+                  'short_description',
                   'age_limit',
                   'publisher',
                   'quantity',

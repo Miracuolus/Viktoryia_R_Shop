@@ -1,7 +1,32 @@
-{% extends 'main.html' %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block title %}Домашняя страница магазина{% endblock title %}
 
 {% block body %}
-    {{ popular }}
+
+    <div class="album py-5 bg-light">
+        {% include "carousel.html" %}
+        <div class="container">
+            <div class="row">
+                {% for book in context %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="{{ book.photo.url }}" alt="Изображение книги" height="407px" width="350px"> 
+                            <div class="card-body">
+                                <h5 class="card-title">{{ book.name }}</h5>
+                                <p class="card-text">{{ book.short_description }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="#" title="Добавить товар в корзину"><button type="button" class="btn btn-sm btn-outline-secondary">В корзину</button></a>
+                                        <a href="{% url 'book:detail' book.pk %}" title="Подробнее"><button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button></a>
+                                    </div>
+                                    <big class="text-muted">{{ book.price }}</big>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock body %}   

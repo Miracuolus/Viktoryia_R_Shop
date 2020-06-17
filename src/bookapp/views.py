@@ -64,6 +64,15 @@ class ListContextBook(ListView):
 class ListNewBook(ListView):
     template_name = 'bookapp/list_home_book.html'
     model = Book
+    field = ('name',
+             'photo',
+             'price',
+             'author',
+             'description',
+             'quantity',
+             'active',
+             'user',
+    )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -84,6 +93,15 @@ class ListNewBook(ListView):
 class ListPopularBook(ListView):
     template_name = 'bookapp/list_home_book.html'
     model = Book
+    field = ('name',
+             'photo',
+             'price',
+             'author',
+             'description',
+             'quantity',
+             'active',
+             'user',
+    )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -101,6 +119,15 @@ class ListPopularBook(ListView):
 class ListSaleBook(ListView):
     template_name = 'bookapp/list_home_book.html'
     model = Book
+    field = ('name',
+             'photo',
+             'price',
+             'author',
+             'description',
+             'quantity',
+             'active',
+             'user',
+    )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
