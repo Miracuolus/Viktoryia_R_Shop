@@ -4,10 +4,16 @@
 
 {% block body %}
     {% include "top_menu_genre.html" %}
-    <div class="col-md-8 order-md-1">
+    <!-- START THE FEATURETTES -->
+    <div class="container marketing">
         <br>
-        <h4 class="mb-3" id="create-genre">Информация по жанру {{ object }}</h4>
-        {{ object.name }}
-        {{ object.description }}
-    </div>     
+        <h4 class="mb-3">Информация по жанру {{ object }}</h4>
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                {{ object.name }}
+                {{ object.description }}
+            </div>
+        </div>
+    <!-- /END THE FEATURETTES -->
+    </div><!-- /.container -->
 {% endblock body %}

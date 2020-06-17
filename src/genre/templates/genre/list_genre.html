@@ -25,7 +25,7 @@
                             <td>{{ genre.pk }}</td>
                             <td>{{ genre.name }}</td>
                             <td>{{ genre.description }}</td>
-                            <td><a href="{% url 'genre:detail' genre.pk %}" title="подробнее"><i style="color:#696969" class="fas fa-info"></i></a></td>
+                            <td><a href="{% url 'genre:detail' genre.pk %}" title="подробнее">Подробнее</a></td>
                             <td><a href="{% url 'genre:update' genre.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
                             <td><a href="{% url 'genre:delete' genre.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
                         </tr>

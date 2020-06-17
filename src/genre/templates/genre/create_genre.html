@@ -4,13 +4,15 @@
 
 {% block body %}
     {% include "top_menu_genre.html" %}
-    <div class="col-md-8 order-md-1">
-        <br>
-        <h4 class="mb-3" id="create-genre">Добавление нового жанра</h4>
-        <form class="needs-validation" novalidate action="" method="POST">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <input type="submit" class="btn btn-success" value="Добавить">
-        </form>
-    </div>     
+    <div class="container marketing">
+        <div class="col-md-8 order-md-1">
+            <br>
+            <h4 class="mb-3" id="create-genre">Добавление нового жанра</h4>
+            <form class="needs-validation" novalidate action="" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" class="btn btn-success" value="Добавить">
+            </form>
+        </div>
+    </div>
 {% endblock body %}   
