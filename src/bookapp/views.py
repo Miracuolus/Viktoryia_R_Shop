@@ -60,7 +60,7 @@ class DetailBook(DetailView):
         return reverse_lazy('book:detail', kwargs={'pk':self.object.pk})
 
 class ListContextBook(ListView):
-    template_name = 'bookapp/different_listbooks.html'
+    template_name = 'bookapp/list_home_book.html'
     model = Book
 
 class ListNewBook(ListView):

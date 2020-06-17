@@ -8,6 +8,7 @@ from bookapp.views import (CreateBook,
                            ListPopularBook,
                            ListSaleBook,
                            HomePage,
+                           ListContextBook,
 )
 
 
@@ -22,6 +23,6 @@ urlpatterns = [
     path('list_new/', ListNewBook.as_view(), name='list_new'),
     path('list_popular/', ListPopularBook.as_view(), name='list_popular'),
     path('list_sale/', ListSaleBook.as_view(), name='list_sale'),
-    path('list_all_book/', ListSaleBook.as_view(), name='list_all_book'),
+    path('list_all_book/', ListContextBook.as_view(), name='list_all_book'),
 ]
 
