@@ -4,11 +4,19 @@
 
 {% block body %}
     {% include "top_menu_publisher.html" %}
-    <div class="col-md-8 order-md-1">
+    <!-- START THE FEATURETTES -->
+    <div class="container marketing">
         <br>
         <h4 class="mb-3">Информация по издательству {{ object }}</h4>
-        {{ object.name }}
-        <p><img src="{{ object.image.url }}" alt="Изображение автора" height="120px" width="100px"></p>
-        {{ object.description }}
-    </div>     
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                {{ object.name }}
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img src="{{ object.image.url }}" alt="Изображение автора" height="500px" width="430px">
+            </div>
+            {{ object.description }}
+        </div>
+    <!-- /END THE FEATURETTES -->
+    </div><!-- /.container -->
 {% endblock body %}

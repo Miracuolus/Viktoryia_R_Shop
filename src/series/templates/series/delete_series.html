@@ -3,14 +3,16 @@
 
 {% block body %}
     {% include "top_menu_series.html" %}
-    <div class="col-md-8 order-md-1">
-        <br>
-        <h4 class="mb-3" >Удаление серии {{ object }}</h4>
-        <form method="post">{% csrf_token %}
-            <div class="alert alert-danger" role="alert">
-                Вы уверены, что хотите удалить серию - {{ object }}"?
-            </div>
-            <input type="submit" value="Подтвердить" class="btn btn-danger">
-        </form>
+    <div class="container marketing">
+        <div class="col-md-8 order-md-1">
+            <br>
+            <h4 class="mb-3" >Удаление серии {{ object }}</h4>
+            <form method="post">{% csrf_token %}
+                <div class="alert alert-danger" role="alert">
+                    Вы уверены, что хотите удалить серию - {{ object }}"?
+                </div>
+                <input type="submit" value="Подтвердить" class="btn btn-danger">
+            </form>
+        </div>
     </div>
 {% endblock body %}   
