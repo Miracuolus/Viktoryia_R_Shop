@@ -17,15 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from bookapp.views import ListContextBook
+from bookapp.views import HomePage
 
 urlpatterns = [
     path('admin/', admin.site.urls), # БД
-    path('main/', ListContextBook.as_view(), name='main'), # home page
+    path('main/', HomePage.as_view(), name='main'), # home page
     path('book/', include('bookapp.urls', namespace='book')), # book app
     path('author/', include('author.urls', namespace='author')), # author app
     path('series/', include('series.urls', namespace='series')), # series app
     path('genre/', include('genre.urls', namespace='genre')), # genre app
     path('publisher/', include('publisher.urls', namespace='publisher')), # publisher app
-    path('', ListContextBook.as_view()), # home page
+    path('', HomePage.as_view()), # home page
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки

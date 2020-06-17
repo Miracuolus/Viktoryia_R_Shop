@@ -11,8 +11,10 @@ from django.views.generic import (
 from django.urls import reverse_lazy
 import datetime
 
-
 # Create your views here.
+class HomePage(TemplateView):
+    template_name = 'bookapp/home_page.html'
+
 class CreateBook(CreateView):
     model = Book
     form_class = BookForm
@@ -73,7 +75,6 @@ class ListNewBook(ListView):
              'active',
              'user',
     )
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         B = Book.objects.all()
