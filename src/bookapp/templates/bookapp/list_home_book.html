@@ -3,12 +3,12 @@
 {% block title %}Домашняя страница магазина{% endblock title %}
 
 {% block body %}
-
+    
     <div class="album py-5 bg-light">
         {% include "carousel.html" %}
         <div class="container">
             <div class="row">
-                {% for book in context %}
+                {% for book in object_list %}
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
                             <img src="{{ book.photo.url }}" alt="Изображение книги" height="407px" width="350px"> 

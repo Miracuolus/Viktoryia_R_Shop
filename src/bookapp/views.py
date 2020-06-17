@@ -58,7 +58,7 @@ class DetailBook(DetailView):
         return reverse_lazy('book:detail', kwargs={'pk':self.object.pk})
 
 class ListContextBook(ListView):
-    template_name = 'main.html'
+    template_name = 'bookapp/different_listbooks.html'
     model = Book
 
 class ListNewBook(ListView):
@@ -68,7 +68,7 @@ class ListNewBook(ListView):
              'photo',
              'price',
              'author',
-             'description',
+             'short_description',
              'quantity',
              'active',
              'user',
@@ -87,7 +87,7 @@ class ListNewBook(ListView):
                 if date_now.year == date_created.year:
                     if date_now.month - date_created.month <= 3:
                         new_book.append(b)
-        context['context'] = new_book
+        context['object_list'] = new_book
         return context
 
 class ListPopularBook(ListView):
@@ -97,7 +97,7 @@ class ListPopularBook(ListView):
              'photo',
              'price',
              'author',
-             'description',
+             'short_description',
              'quantity',
              'active',
              'user',
@@ -113,7 +113,7 @@ class ListPopularBook(ListView):
             for b in Book.objects.filter(pk=count_b):
                 if b.rating >= 9:
                     popular_book.append(b)
-        context['context'] = popular_book
+        context['object_list'] = popular_book
         return context
 
 class ListSaleBook(ListView):
@@ -123,7 +123,7 @@ class ListSaleBook(ListView):
              'photo',
              'price',
              'author',
-             'description',
+             'short_description',
              'quantity',
              'active',
              'user',
@@ -139,5 +139,5 @@ class ListSaleBook(ListView):
             for b in Book.objects.filter(pk=count_b):
                 if b.price <= 10:
                     sale_book.append(b)
-        context['context'] = sale_book
+        context['object_list'] = sale_book
         return context

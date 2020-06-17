@@ -11,9 +11,9 @@
             <img src="{% static 'img/favicons/books-table.jpg' %}" alt="">
             <div class="container">
                 <div class="carousel-caption text-left">
-                    <h1 style="color:#383838">Переход к БД</h1>
-                    <p style="color:#383838">Переход к БД с таблицами Книги и Жанры</p>
-                    <p><a class="btn btn-lg btn-primary" href="/admin/" target=_blank role="button">Переход</a></p>
+                    <h1 style="color:#383838">Переход к Книгам</h1>
+                    <p style="color:#383838">Создание/редактирование книг</p>
+                    <p><a class="btn btn-lg btn-primary" href="{% url 'book:list' %}" target=_blank role="button">Переход</a></p>
                 </div>
             </div>
         </div>
@@ -22,9 +22,9 @@
             <img src="{% static 'img/favicons/58690.jpg' %}" alt="">
             <div class="container">
                 <div class="carousel-caption text-left">
-                    <h1 style="color:#383838">Переход к БД Жанры</h1>
-                    <p style="color:#383838">Переход к БД с таблицей Жанры</p>
-                    <p><a class="btn btn-lg btn-primary" href="/admin/genre/genre/" target=_blank role="button">Переход</a></p>
+                    <h1 style="color:#383838">Переход к Авторам</h1>
+                    <p style="color:#383838">Создание/редактирование авторов</p>
+                    <p><a class="btn btn-lg btn-primary" href="{% url 'author:list' %}" target=_blank role="button">Переход</a></p>
                 </div>
             </div>
         </div>
@@ -33,9 +33,9 @@
             <img src="{% static 'img/favicons/knigi-biblioteka-mnogo.jpg' %}" alt="">
             <div class="container">
                 <div class="carousel-caption text-left">
-                    <h1 style="color:#383838">Переход к БД Книги</h1>
-                    <p style="color:#383838">Переход к БД с таблицей Книги</p>
-                    <p><a class="btn btn-lg btn-primary" href="/admin/bookapp/book/" target=_blank role="button">Переход</a></p>
+                    <h1 style="color:#383838">Переход к Жанрам</h1>
+                    <p style="color:#383838">Создание/редактирование жанров</p>
+                    <p><a class="btn btn-lg btn-primary" href="{% url 'genre:list' %}" target=_blank role="button">Переход</a></p>
                 </div>
             </div>
         </div>

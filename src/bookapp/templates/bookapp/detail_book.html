@@ -4,14 +4,22 @@
 
 {% block body %}
     {% include "top_menu_book.html" %}
-    <div class="col-md-8 order-md-1">
+    <!-- START THE FEATURETTES -->
+    <div class="container marketing">
         <br>
         <h4 class="mb-3">Информация по книге {{ object }}</h4>
-        {{ object.name }}
-        {% for author in object.author.all %}
-            {{ author.name }}
-        {% endfor %}
-        <p><img src="{{ object.photo.url }}" alt="Изображение книги" height="120px" width="100px"></p>
-        {{ object.description }}
-    </div>     
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                {% for author in object.author.all %}
+                    <h2 class="featurette-heading">{{ author.name }}</h2>
+                {% endfor %}
+                <p class="lead">{{ object.description }}</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img src="{{ object.photo.url }}" alt="Изображение книги" height="500px" width="430px">
+            </div>
+        </div>
+        <hr class="featurette-divider">
+    <!-- /END THE FEATURETTES -->
+    </div><!-- /.container -->
 {% endblock body %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Добавление новой книги{% endblock title %}
+{% block body %}
+    {% include "top_menu_book.html" %}
+    {% include "carousel.html" %}
+    <div class="container marketing">
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+            <div class="col-lg-4">
+                <img src="{% static 'img/favicons/867_oooo.plus.png' %}" alt="" width="140" height="140">
+                <h2>Новинки</h2>
+                <p>Для любителей чтения, поклонников знаменитых писателей, а также тех, кто следит за событиями и тенденциями мира литературы, 
+                    в суперсерии собраны книги-новинки месяца. Вы точно не пропустите самые громкие издания года, сможете заполучить в личную 
+                    библиотеку произведения популярных авторов или подобрать в подарок знакомому книголюбу нашумевшее творение сезона.</p>
+                <p><a class="btn btn-secondary" href="{% url 'book:list_new' %}" role="button">Перейти к списку &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img src="{% static 'img/favicons/1392_oooo.plus.png' %}" alt="" width="140" height="140">
+                <h2>Самые популярные</h2>
+                <p>Книги, которые не нуждаются в дополнительном представлении. Популярные блогеры и влогеры, психологи и бизнесмены делятся 
+                    практическими советами и историями из жизни. Правдивость и популярность подтверждается многочисленными «лайками» в сети.</p>
+                <p><a class="btn btn-secondary" href="{% url 'book:list_popular' %}" role="button">Перейти к списку &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img src="{% static 'img/favicons/547_oooo.plus.png' %}" alt="" width="140" height="140">
+                <h2>Распродажа</h2>
+                <p>Вы можете купить нужные книги дешевле! Все эти книги ничуть не хуже тех, что продаются без скидок, просто мы разгружаем склад от 
+                    излишков. Учтите, что количество экземпляров для каждого товара серии очень небольшое — 1-2 штуки. Поэтому не раздумывайте долго 
+                    над покупками, чтобы кто-нибудь не оказался быстрее вас!</p>
+                <p><a class="btn btn-secondary" href="{% url 'book:list_sale' %}" role="button">Перейти к списку &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->  
+    </div><!-- /.container -->
+{% endblock body %}   
