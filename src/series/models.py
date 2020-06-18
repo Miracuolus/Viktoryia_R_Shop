@@ -6,7 +6,12 @@ class Series(models.Model):
         verbose_name='Серия',
         max_length= 200
     )
-
+    image = models.ImageField(
+        verbose_name='Изображение',
+        upload_to='publishers', 
+        height_field=None, 
+        width_field=None,
+    )
     description = models.TextField(
         verbose_name='Описание',
         null=True,

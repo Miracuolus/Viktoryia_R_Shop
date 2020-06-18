@@ -9,8 +9,8 @@ class Publisher(models.Model):
     image = models.ImageField(
         verbose_name='Изображение',
         upload_to='publishers', 
-        height_field=None, 
-        width_field=None, 
+        height_field=None,
+        width_field=None,
     )
     description = models.TextField(
         verbose_name='Краткая информация об издательстве',

@@ -14,7 +14,6 @@
                     <th>id</th>
                     <th>Название издательства</th>
                     <th>Изображение</th>
-                    <th>Описание</th>
                     <th><i class="fas fa-info-circle"></i></th>
                     <th><i class="fas fa-user-edit"></i></th>
                     <th><i class="fas fa-user-minus"></i></th>
@@ -26,8 +25,7 @@
                             <td>{{ p.pk }}</td>
                             <td>{{ p.name }}</td>
                             <td><img src="{{ p.image.url }}" alt="Изображение издательства" height="120px" width="100px"></td>
-                            <td>{{ p.description }}</td>
-                            <td><a href="{% url 'publisher:detail' p.pk %}" title="подробнее"><i style="color:#696969" class="fas fa-info"></i></a></td>
+                            <td><a href="{% url 'publisher:detail' p.pk %}" title="подробнее">Подробнее</a></td>
                             <td><a href="{% url 'publisher:update' p.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
                             <td><a href="{% url 'publisher:delete' p.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
                         </tr>
