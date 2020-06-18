@@ -27,7 +27,7 @@
                             <td>{{ a.name }}</td>
                             <td>{{ a.date }}</td>
                             <td><img src="{{ a.image.url }}" alt="Изображение автора" height="120px" width="100px"></td>
-                            <td><a href="{% url 'author:detail' a.pk %}" title="подробнее"><i style="color:#696969" class="fas fa-info"></i></a></td>
+                            <td><a href="{% url 'author:detail' a.pk %}" title="подробнее">Подробнее</a></td>
                             <td><a href="{% url 'author:update' a.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
                             <td><a href="{% url 'author:delete' a.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
                         </tr>

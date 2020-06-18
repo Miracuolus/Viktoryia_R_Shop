@@ -10,14 +10,12 @@
         <h4 class="mb-3">Информация по автору {{ object }}</h4>
         <div class="row featurette">
             <div class="col-md-7 order-md-2">
-                {{ object.name }}
-                {{ object.date }}
-                
+                <h2 class="featurette-heading">{{ object.name }}<span class="text-muted"> {{ object.date }}</span></h2>
+                <p class="lead">{{ object.description }}</p>
             </div>
             <div class="col-md-5 order-md-1">
                 <img src="{{ object.image.url }}" alt="Изображение автора" height="500px" width="430px">
             </div>
-            {{ object.description }}
         </div>
     <!-- /END THE FEATURETTES -->
     </div><!-- /.container -->
