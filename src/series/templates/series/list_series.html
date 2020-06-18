@@ -24,7 +24,7 @@
                         <tr>
                             <td>{{ p.pk }}</td>
                             <td>{{ p.name }}</td>
-                            <td><img src="{{ p.image.url }}" alt="Изображение издательства" height="120px" width="100px"></td>
+                            <td><img src="{{ p.image.url }}" alt="Изображение издательства" height="100px" width="100px"></td>
                             <td><a href="{% url 'series:detail' p.pk %}" title="подробнее">Подробнее</a></td>
                             <td><a href="{% url 'series:update' p.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
                             <td><a href="{% url 'series:delete' p.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
