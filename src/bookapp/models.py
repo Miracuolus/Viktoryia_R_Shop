@@ -108,7 +108,7 @@ class Book(models.Model):
     )
     rating = models.PositiveSmallIntegerField(
         verbose_name='Рейтинг',
-        help_text='от 0 до 9'
+        help_text='от 0 до 10'
     )
     created = models.DateTimeField(
         verbose_name='Создано',

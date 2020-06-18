@@ -18,7 +18,7 @@
                     <th>Автор</th>
                     <th>Кол-во</th>
                     <th>Доступен для заказа</th>
-                    <th>Пользователь</th>
+                    <th>Рейтинг</th>
                     <th><i class="fas fa-info-circle"></i></th>
                     <th><i class="fas fa-user-edit"></i></th>
                     <th><i class="fas fa-user-minus"></i></th>
@@ -38,8 +38,8 @@
                             </td>
                             <td>{{ book.quantity }}</td>
                             <td>{% if book.active == True %}Да{% elif book.active == False %}Нет{% endif %}</td>
-                            <td>{% if book.user == None %}-{% else %}{{ book.user }}{% endif %}</td>
-                            <td><a href="{% url 'book:detail' book.pk %}" title="подробнее"><i style="color:#696969" class="fas fa-info"></i></a></td>
+                            <td>{{ book.rating }}</td>
+                            <td><a href="{% url 'book:detail' book.pk %}" title="подробнее">Подробнее</a></td>
                             <td><a href="{% url 'book:update' book.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
                             <td><a href="{% url 'book:delete' book.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
                         </tr>
