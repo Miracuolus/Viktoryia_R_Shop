@@ -29,7 +29,7 @@
                         <tr>
                             <td>{{ book.pk }}</td>
                             <td>{{ book.name }}</td>
-                            <td><img src="{{ book.photo.url }}" alt="Изображение книги" height="120px" width="100px"></td>
+                            <td><img src="{{ book.photo.url }}" alt="Изображение книги" height="120px" width="80px"></td>
                             <td>{{ book.price }}</td>
                             <td>
                                 {% for author in book.author.all %}

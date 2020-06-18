@@ -3,7 +3,7 @@
 {% block title %}Информация по книге {{ object }}{% endblock title %}
 
 {% block body %}
-    {% include "top_menu_book.html" %}
+    {% include "top_menu_main_book.html" %}
     <!-- START THE FEATURETTES -->
     <div class="container marketing">
         <br>
@@ -16,10 +16,9 @@
                 <p class="lead">{{ object.description }}</p>
             </div>
             <div class="col-md-5 order-md-1">
-                <img src="{{ object.photo.url }}" alt="Изображение книги" height="500px" width="430px">
+                <img src="{{ object.photo.url }}" alt="Изображение книги" height="600px" width="400px">
             </div>
         </div>
-        <hr class="featurette-divider">
     <!-- /END THE FEATURETTES -->
     </div><!-- /.container -->
 {% endblock body %}
