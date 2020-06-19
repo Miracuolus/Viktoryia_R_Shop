@@ -14,12 +14,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'customer:list' %}">Список пользователей<span class="sr-only">(current)</span></a>
                     </li>
-                    {% if object_list %}
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'customer:create' %}">Добавление пользователей</a>
-                        </li>
-                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'customer:create' %}">Создание/редактирование пользователей</a>
+                    </li>
                 </ul>
                 <form class="form-inline mt-2 mt-md-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Поиск" aria-label="Search">
@@ -37,7 +34,9 @@
                     <tr>
                     <th>id</th>
                     <th>Пользователь</th>
+                    <th><i class="fas fa-info-circle"></i></th>
                     <th><i class="fas fa-user-edit"></i></th>
+                    <th><i class="fas fa-user-minus"></i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,7 +44,9 @@
                         <tr>
                             <td>{{ customer.pk }}</td>
                             <td>{{ customer.user }}</td>
+                            <td><a href="{% url 'customer:detail' customer.pk %}" title="подробнее">Подробнее</a></td>
                             <td><a href="{% url 'customer:update' customer.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
+                            <td><a href="{% url 'customer:delete' customer.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

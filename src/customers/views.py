@@ -38,3 +38,16 @@ class UpdateCustomer(UpdateView):
         )
         return obj
 
+class DeleteCustomer(DeleteView):
+    model = Customer
+    template_name = 'customer/delete_customer.html'
+
+    def get_success_url(self):
+        return reverse_lazy('customer:list')
+
+class DetailCustomer(DetailView):
+    model = Customer
+    template_name = 'customer/detail_customer.html'
+
+    def get_success_url(self):
+        return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})

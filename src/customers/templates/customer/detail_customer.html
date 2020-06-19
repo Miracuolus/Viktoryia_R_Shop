@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Информация по пользователю {{ object }}{% endblock title %}
+
+{% block body %}
+    {% include "top_menu_customer.html" %}
+    <!-- START THE FEATURETTES -->
+    <div class="container marketing">
+        <br>
+        <h4 class="mb-3">Информация по пользователю {{ object }}</h4>
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                {{ object.user }}
+            </div>
+        </div>
+    <!-- /END THE FEATURETTES -->
+    </div><!-- /.container -->
+{% endblock body %}
