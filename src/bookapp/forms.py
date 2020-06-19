@@ -23,5 +23,4 @@ class BookForm(forms.ModelForm):
                   'quantity',
                   'active',
                   'rating',
-                  'user',
         )

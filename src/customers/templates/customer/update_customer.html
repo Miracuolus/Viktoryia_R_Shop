@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Создание/редактирование пользователя{% endblock title %}
+
+{% block body %}
+    {% include "top_menu_customer.html" %}
+    <div class="container marketing">
+        <div class="col-md-8 order-md-1">
+            <br>
+            <h4 class="mb-3">Создание/редактирование пользователя</h4>
+            <form class="needs-validation" novalidate action="" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" value="Обновить" class="btn btn-info">
+            </form>
+        </div>
+    </div>
+{% endblock body %}

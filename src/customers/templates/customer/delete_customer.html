@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Удаление пользователя {{ object }}{% endblock title %}
+
+{% block body %}
+    {% include "top_menu_customer.html" %}
+    <div class="container marketing">
+        <div class="col-md-8 order-md-1">
+            <br>
+            <h4 class="mb-3">Удаление пользователя - {{ object }}</h4>
+            <form method="post">{% csrf_token %}
+                <div class="alert alert-danger" role="alert">
+                    Вы уверены, что хотите удалить пользователя - {{ object }}"?
+                </div>
+                <input type="submit" value="Подтвердить" class="btn btn-danger">
+            </form>
+        </div>
+    </div>
+{% endblock body %}   

@@ -27,5 +27,6 @@ urlpatterns = [
     path('series/', include('series.urls', namespace='series')), # series app
     path('genre/', include('genre.urls', namespace='genre')), # genre app
     path('publisher/', include('publisher.urls', namespace='publisher')), # publisher app
+    path('customer/', include('customers.urls', namespace='customer')), # customers app
     path('', HomePage.as_view()), # home page
-] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки

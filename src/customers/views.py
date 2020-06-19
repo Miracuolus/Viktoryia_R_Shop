@@ -1,3 +1,40 @@
-from django.shortcuts import render
+from . models import Customer
+from . forms import CustomerForm
+from django.views.generic import (
+                                    TemplateView, 
+                                    CreateView, 
+                                    UpdateView, 
+                                    ListView, 
+                                    DeleteView,
+                                    DetailView
+                                )
+from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
-# Create your views here.
+class CreateCustomer(CreateView):
+    model = Customer
+    form_class = CustomerForm
+    template_name = 'customer/create_customer.html'
+     
+    def get_success_url(self):
+        return reverse_lazy('customer:list')
+
+class CustomerList(ListView):
+    template_name = 'customer/list_customer.html'
+    model = Customer
+    form_class = CustomerForm
+
+class UpdateCustomer(UpdateView):
+    model = Customer
+    fields = ('user',)
+    template_name = 'customer/update_customer.html'
+    
+    def get_object(self):
+        user_pk = self.kwargs.get('user_pk')
+        obj, created = self.model.objects.get_or_create(
+            user = User.objects.get(pk=user_pk),
+            defaults = {}
+        )
+        return obj
+

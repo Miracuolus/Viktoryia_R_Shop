@@ -49,7 +49,6 @@ class BookList(ListView):
              'description',
              'quantity',
              'active',
-             'user',
     )
 
 class DetailBook(DetailView):
@@ -62,6 +61,12 @@ class DetailBook(DetailView):
 class ListContextBook(ListView):
     template_name = 'bookapp/list_home_book.html'
     model = Book
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        print(user)
+        print(user.user_permissions.all())
+        print(user.has_perm('bookapp.view_active'))
+        return super().get_context_data(**kwargs)
 
 class ListNewBook(ListView):
     template_name = 'bookapp/list_home_book.html'
@@ -73,7 +78,6 @@ class ListNewBook(ListView):
              'short_description',
              'quantity',
              'active',
-             'user',
     )
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -101,7 +105,6 @@ class ListPopularBook(ListView):
              'short_description',
              'quantity',
              'active',
-             'user',
     )
 
     def get_context_data(self, **kwargs):
@@ -127,7 +130,6 @@ class ListSaleBook(ListView):
              'short_description',
              'quantity',
              'active',
-             'user',
     )
 
     def get_context_data(self, **kwargs):
