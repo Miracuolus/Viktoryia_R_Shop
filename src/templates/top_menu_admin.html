@@ -4,7 +4,7 @@
                     <div class="sidebar-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">
+                                <a class="nav-link" href="#">
                                     <span data-feather="home"></span>Таблица заказов<span class="sr-only">(current)</span>
                                 </a>
                             </li>
@@ -18,7 +18,6 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'book:list' %}">Список книг</a>
                                     <a class="dropdown-item" href="{% url 'book:create' %}">Добавление книги</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -26,7 +25,6 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'customer:list' %}">Список пользователей</a>
                                     <a class="dropdown-item" href="{% url 'customer:create' %}">Добавление пользователя</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -34,7 +32,6 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'author:list' %}">Список авторов</a>
                                     <a class="dropdown-item" href="{% url 'author:create' %}">Добавление автора</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -42,7 +39,6 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'genre:list' %}">Список жанров</a>
                                     <a class="dropdown-item" href="{% url 'genre:create' %}">Добавление жанра</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -50,7 +46,6 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'publisher:list' %}">Список издательств</a>
                                     <a class="dropdown-item" href="{% url 'publisher:create' %}">Добавление издательства</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -58,7 +53,6 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'series:list' %}">Список серий</a>
                                     <a class="dropdown-item" href="{% url 'series:create' %}">Добавление серии</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </li>
                         </ul>
