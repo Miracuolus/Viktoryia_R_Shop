@@ -73,32 +73,32 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{% url 'book:list' %}">
                                     <span data-feather="shopping-cart"></span>Книги
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{% url 'customer:list' %}">
                                 <span data-feather="users"></span>Пользователи
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{% url 'author:list' %}">
                                 <span data-feather="bar-chart-2"></span>Авторы
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{% url 'genre:list' %}">
                                 <span data-feather="layers"></span>Жанры
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{% url 'publisher:list' %}">
                                 <span data-feather="layers"></span>Издательства
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{% url 'series:list' %}">
                                 <span data-feather="layers"></span>Серии
                                 </a>
                             </li>
@@ -112,7 +112,7 @@
                         </h6>
                         <ul class="nav flex-column mb-2">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/admin/">
                                     <span data-feather="file-text"></span>Переход к БД
                                 </a>
                             </li>
