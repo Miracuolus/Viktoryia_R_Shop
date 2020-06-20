@@ -7,8 +7,6 @@ class Customer(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.PROTECT,
-        null=True,
-        blank=True,
     )
     class Meta: 
         ordering = ['user']

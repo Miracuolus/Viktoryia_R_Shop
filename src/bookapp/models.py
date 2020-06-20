@@ -4,6 +4,7 @@ from author.models import Author
 from series.models import Series
 from publisher.models import Publisher
 from decimal import Decimal
+from django.contrib.auth.decorators import permission_required
 
 # Create your models here.
 class Book(models.Model):
@@ -118,7 +119,7 @@ class Book(models.Model):
         auto_now_add=False # автом ставить время добавления
     )
     class Meta: 
-        permissions=(('view_active', 'Can view active books'),)
+        permissions=[('view_active_book', 'Can view active books')]
 
     def __str__(self):
         return f'{self.name}'

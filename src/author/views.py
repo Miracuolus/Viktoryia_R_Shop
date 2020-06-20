@@ -8,10 +8,11 @@ from django.views.generic import (  TemplateView,
                                     DetailView
                                 )
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 
 
 # Create your views here.
-class CreateAuthor(CreateView):
+class CreateAuthor(LoginRequiredMixin, CreateView):
     model = Author
     form_class = AuthorForm
     template_name = 'author/create_author.html'
@@ -19,7 +20,7 @@ class CreateAuthor(CreateView):
     def get_success_url(self):
         return reverse_lazy('author:list')
 
-class UpdateAuthor(UpdateView):
+class UpdateAuthor(LoginRequiredMixin, UpdateView):
     model = Author
     form_class = AuthorForm
     template_name = 'author/update_author.html'
@@ -27,7 +28,7 @@ class UpdateAuthor(UpdateView):
     def get_success_url(self):
         return reverse_lazy('author:list')
 
-class DeleteAuthor(DeleteView):
+class DeleteAuthor(LoginRequiredMixin, DeleteView):
     model = Author
     template_name = 'author/delete_author.html'
     context_object_name = 'author'
@@ -36,7 +37,7 @@ class DeleteAuthor(DeleteView):
         return reverse_lazy('author:list')
 
 
-class AuthorList(ListView):
+class AuthorList(LoginRequiredMixin, ListView):
     template_name = 'author/list_author.html'
     model = Author
     form_class = AuthorForm

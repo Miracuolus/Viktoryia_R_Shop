@@ -9,9 +9,10 @@ from django.views.generic import (
                                     DetailView
                                 )
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 
 # Create your views here.
-class CreatePublisher(CreateView):
+class CreatePublisher(LoginRequiredMixin, CreateView):
     model = Publisher
     form_class = PublisherForm
     template_name = 'publisher/create_publisher.html'
@@ -20,7 +21,7 @@ class CreatePublisher(CreateView):
         return reverse_lazy('publisher:list')
 
 
-class UpdatePublisher(UpdateView):
+class UpdatePublisher(LoginRequiredMixin, UpdateView):
     model = Publisher
     form_class = PublisherForm
     template_name = 'publisher/update_publisher.html'
@@ -28,7 +29,7 @@ class UpdatePublisher(UpdateView):
     def get_success_url(self):
         return reverse_lazy('publisher:list')
 
-class DeletePublisher(DeleteView):
+class DeletePublisher(LoginRequiredMixin, DeleteView):
     model = Publisher
     template_name = 'publisher/delete_publisher.html'
 
@@ -36,7 +37,7 @@ class DeletePublisher(DeleteView):
         return reverse_lazy('publisher:list')
 
 
-class PublisherList(ListView):
+class PublisherList(LoginRequiredMixin, ListView):
     template_name = 'publisher/list_publisher.html'
     model = Publisher
 

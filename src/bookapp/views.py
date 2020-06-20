@@ -10,12 +10,13 @@ from django.views.generic import (
                                 )
 from django.urls import reverse_lazy
 import datetime
+from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 
 # Create your views here.
 class HomePage(TemplateView):
     template_name = 'bookapp/home_page.html'
 
-class CreateBook(CreateView):
+class CreateBook(LoginRequiredMixin, CreateView):
     model = Book
     form_class = BookForm
     template_name = 'bookapp/create_book.html'
@@ -23,7 +24,7 @@ class CreateBook(CreateView):
     def get_success_url(self):
         return reverse_lazy('book:list')
 
-class UpdateBook(UpdateView):
+class UpdateBook(LoginRequiredMixin, UpdateView):
     model = Book
     form_class = BookForm
     template_name = 'bookapp/update_book.html'
@@ -31,14 +32,14 @@ class UpdateBook(UpdateView):
     def get_success_url(self):
         return reverse_lazy('book:list')
 
-class DeleteBook(DeleteView):
+class DeleteBook(LoginRequiredMixin, DeleteView):
     model = Book
     template_name = 'bookapp/delete_book.html'
 
     def get_success_url(self):
         return reverse_lazy('book:list')
 
-class BookList(ListView):
+class BookList(LoginRequiredMixin, ListView):
     template_name = 'bookapp/list_book.html'
     context_object_name = 'book_list'
     model = Book
@@ -65,7 +66,7 @@ class ListContextBook(ListView):
         user = self.request.user
         print(user)
         print(user.user_permissions.all())
-        print(user.has_perm('bookapp.view_active'))
+        print(user.has_perm('bookapp.view_active_book'))
         return super().get_context_data(**kwargs)
 
 class ListNewBook(ListView):
