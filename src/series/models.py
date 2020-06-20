@@ -8,7 +8,7 @@ class Series(models.Model):
     )
     image = models.ImageField(
         verbose_name='Изображение',
-        upload_to='publishers',
+        upload_to='series',
     )
     description = models.TextField(
         verbose_name='Описание',
