@@ -8,7 +8,7 @@
         <div class="container marketing">
             <div class="row">
                 {% if object_list %}
-                    {% if perms.bookapp.view_active_book %}
+                    <!--{% if perms.bookapp.view_active_book %}-->
                         {% for book in object_list %}
                             <div class="col-md-4">
                                 <div class="card mb-4 shadow-sm">
@@ -27,9 +27,9 @@
                                 </div>
                             </div>
                         {% endfor %}
-                    {% else %}
+                   <!-- {% else %}
                         <p>В данный момент книги отсутсвуют</p>
-                    {% endif %}
+                    {% endif %}-->
                 {% else %}
                     <p>В данный момент книги отсутсвуют</p>
                 {% endif %}

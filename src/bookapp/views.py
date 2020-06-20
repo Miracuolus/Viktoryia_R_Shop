@@ -72,7 +72,7 @@ class ListContextBook(ListView):
     
     def get_queryset(self):
         """
-        Показывает книги доступные для заказа всем
+        Показывает только доступные для заказа книги
         """
         user = self.request.user
         if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
@@ -93,20 +93,23 @@ class ListNewBook(ListView):
              'active',
     )
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        B = Book.objects.all()
-        count_b = 0
-        new_book = []
-        for _ in range(0, len(B)):
-            count_b += 1
-            for b in Book.objects.filter(pk=count_b):
-                date_now = datetime.date.today()
-                date_created = b.created.date()
-                if date_now.year == date_created.year:
-                    if date_now.month - date_created.month <= 3:
-                        new_book.append(b)
-        context['object_list'] = new_book
-        return context
+        user = self.request.user
+        if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
+            context = super().get_context_data(**kwargs)
+            B = Book.objects.all().filter(active=True)
+            count_b = 0
+            new_book = []
+            for _ in range(0, len(B)):
+                count_b += 1
+                for b in B.objects.filter(pk=count_b):
+                    date_now = datetime.date.today()
+                    date_created = b.created.date()
+                    if date_now.year == date_created.year:
+                        if date_now.month - date_created.month <= 3:
+                            new_book.append(b)
+            context['object_list'] = new_book
+            return context
+
 
 
 class ListPopularBook(ListView):
@@ -122,17 +125,19 @@ class ListPopularBook(ListView):
     )
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        B = Book.objects.all()
-        count_b = 0
-        popular_book = []
-        for _ in range(0, len(B)):
-            count_b += 1
-            for b in Book.objects.filter(pk=count_b):
-                if b.rating >= 9:
-                    popular_book.append(b)
-        context['object_list'] = popular_book
-        return context
+        user = self.request.user
+        if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
+            context = super().get_context_data(**kwargs)
+            B = Book.objects.all().filter(active=True)
+            count_b = 0
+            popular_book = []
+            for _ in range(0, len(B)):
+                count_b += 1
+                for b in B.objects.filter(pk=count_b):
+                    if b.rating >= 9:
+                        popular_book.append(b)
+            context['object_list'] = popular_book
+            return context
 
 
 class ListSaleBook(ListView):
@@ -148,14 +153,16 @@ class ListSaleBook(ListView):
     )
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        B = Book.objects.all()
-        count_b = 0
-        sale_book = []
-        for _ in range(0, len(B)):
-            count_b += 1
-            for b in Book.objects.filter(pk=count_b):
-                if b.price <= 10:
-                    sale_book.append(b)
-        context['object_list'] = sale_book
-        return context
+        user = self.request.user
+        if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
+            context = super().get_context_data(**kwargs)
+            B = Book.objects.all().filter(active=True)
+            count_b = 0
+            sale_book = []
+            for _ in range(0, len(B)):
+                count_b += 1
+                for b in B.objects.filter(pk=count_b):
+                    if b.price <= 10:
+                        sale_book.append(b)
+            context['object_list'] = sale_book
+            return context
