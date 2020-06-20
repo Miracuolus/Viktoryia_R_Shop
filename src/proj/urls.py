@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from bookapp.views import HomePage
+from bookapp.views import HomePage, AdminHomePage
 
 urlpatterns = [
     path('admin/', admin.site.urls), # БД
@@ -28,5 +28,6 @@ urlpatterns = [
     path('genre/', include('genre.urls', namespace='genre')), # genre app
     path('publisher/', include('publisher.urls', namespace='publisher')), # publisher app
     path('customer/', include('customers.urls', namespace='customer')), # customers app
+    path('manager/', AdminHomePage.as_view(), name='main_admin'), # admin home page
     path('', HomePage.as_view()), # home page
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки
