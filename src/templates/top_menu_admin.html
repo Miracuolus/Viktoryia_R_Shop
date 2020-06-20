@@ -13,35 +13,53 @@
                                     <span data-feather="file"></span>Заказы
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'book:list' %}">
-                                    <span data-feather="shopping-cart"></span>Книги
-                                </a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{% url 'book:list' %}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Книги</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'customer:list' %}">
-                                <span data-feather="users"></span>Пользователи
-                                </a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{% url 'customer:list' %}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Пользователи</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'author:list' %}">
-                                <span data-feather="bar-chart-2"></span>Авторы
-                                </a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{% url 'author:list' %}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторы</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'genre:list' %}">
-                                <span data-feather="layers"></span>Жанры
-                                </a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{% url 'genre:list' %}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Жанры</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'publisher:list' %}">
-                                <span data-feather="layers"></span>Издательства
-                                </a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{% url 'publisher:list' %}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Издательства</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'series:list' %}">
-                                <span data-feather="layers"></span>Серии
-                                </a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{% url 'series:list' %}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Серии</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
                             </li>
                         </ul>
 
