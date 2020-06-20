@@ -72,13 +72,10 @@ class ListContextBook(ListView):
     
     def get_queryset(self):
         """
-        Показывает книги доступные для заказа всем, кроме admin и manager
+        Показывает книги доступные для заказа всем
         """
         user = self.request.user
-        print(user.is_anonymous)
         if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
-            if user.is_superuser:
-                return super().get_queryset()
             return self.model.objects.all().filter(active=True)
         else:
             return super().get_queryset()
@@ -111,6 +108,7 @@ class ListNewBook(ListView):
         context['object_list'] = new_book
         return context
 
+
 class ListPopularBook(ListView):
     template_name = 'bookapp/list_home_book.html'
     model = Book
@@ -135,6 +133,7 @@ class ListPopularBook(ListView):
                     popular_book.append(b)
         context['object_list'] = popular_book
         return context
+
 
 class ListSaleBook(ListView):
     template_name = 'bookapp/list_home_book.html'

@@ -8,24 +8,28 @@
         <div class="container marketing">
             <div class="row">
                 {% if object_list %}
-                    {% for book in object_list %}
-                        <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                                <img src="{{ book.photo.url }}" alt="Изображение книги" height="525px" width="350px"> 
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ book.name }}</h5>
-                                    <p class="card-text">{{ book.short_description }}</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a href="#" title="Добавить товар в корзину"><button type="button" class="btn btn-sm btn-outline-secondary">В корзину</button></a>
-                                            <a href="{% url 'book:detail' book.pk %}" title="Подробнее"><button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button></a>
+                    {% if perms.bookapp.view_active_book %}
+                        {% for book in object_list %}
+                            <div class="col-md-4">
+                                <div class="card mb-4 shadow-sm">
+                                    <img src="{{ book.photo.url }}" alt="Изображение книги" height="525px" width="350px"> 
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ book.name }}</h5>
+                                        <p class="card-text">{{ book.short_description }}</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <a href="#" title="Добавить товар в корзину"><button type="button" class="btn btn-sm btn-outline-secondary">В корзину</button></a>
+                                                <a href="{% url 'book:detail' book.pk %}" title="Подробнее"><button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button></a>
+                                            </div>
+                                            <big class="text-muted">{{ book.price }}</big>
                                         </div>
-                                        <big class="text-muted">{{ book.price }}</big>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <p>В данный момент книги отсутсвуют</p>
+                    {% endif %}
                 {% else %}
                     <p>В данный момент книги отсутсвуют</p>
                 {% endif %}

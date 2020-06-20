@@ -119,7 +119,9 @@ class Book(models.Model):
         auto_now_add=False # автом ставить время добавления
     )
     class Meta: 
-        permissions=[('view_active_book', 'Can view active books')]
+        permissions=[('view_active_book', 'Can view active books'),
+                     ('view_admin_db', 'Can view admin db'),
+        ]
 
     def __str__(self):
         return f'{self.name}'

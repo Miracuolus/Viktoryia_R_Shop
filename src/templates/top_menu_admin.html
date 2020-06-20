@@ -64,11 +64,13 @@
                             </a>
                         </h6>
                         <ul class="nav flex-column mb-2">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin/">
-                                    <span data-feather="file-text"></span>Переход к БД
-                                </a>
-                            </li>
+                            {% if perms.bookapp.view_admin_db %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/">
+                                        <span data-feather="file-text"></span>Переход к БД
+                                    </a>
+                                </li>
+                            {% endif %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'main' %}">
                                     <span data-feather="file-text"></span>Домашняя страница
