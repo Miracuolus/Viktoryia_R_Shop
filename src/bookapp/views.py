@@ -67,10 +67,17 @@ class ListContextBook(ListView):
     model = Book
     def get_context_data(self, **kwargs):
         user = self.request.user
-        print(user)
-        print(user.user_permissions.all())
-        print(user.has_perm('bookapp.view_active_book'))
+        user.has_perm('bookapp.view_active_book')
         return super().get_context_data(**kwargs)
+    
+    def get_queryset(self):
+        user = self.request.user
+        print(user.is_anonymous)
+        if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
+            return self.model.objects.all().filter(active=True)
+        else:
+            return super().get_queryset()
+    
 
 class ListNewBook(ListView):
     template_name = 'bookapp/list_home_book.html'
