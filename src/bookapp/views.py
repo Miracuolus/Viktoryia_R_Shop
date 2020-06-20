@@ -71,9 +71,14 @@ class ListContextBook(ListView):
         return super().get_context_data(**kwargs)
     
     def get_queryset(self):
+        """
+        Показывает книги доступные для заказа всем, кроме admin и manager
+        """
         user = self.request.user
         print(user.is_anonymous)
         if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
+            if user.is_superuser:
+                return super().get_queryset()
             return self.model.objects.all().filter(active=True)
         else:
             return super().get_queryset()
