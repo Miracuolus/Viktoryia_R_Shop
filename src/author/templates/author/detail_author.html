@@ -3,7 +3,7 @@
 {% block title %}Информация по автору {{ object }}{% endblock title %}
 
 {% block body %}
-    {% include "top_menu_author.html" %}
+    {% include "top_menu_main_book.html" %}
     <!-- START THE FEATURETTES -->
     <div class="container marketing">
         <br>
@@ -17,6 +17,5 @@
                 <img src="{{ object.image.url }}" alt="Изображение автора" height="570px" width="430px">
             </div>
         </div>
-    <!-- /END THE FEATURETTES -->
     </div><!-- /.container -->
 {% endblock body %}
