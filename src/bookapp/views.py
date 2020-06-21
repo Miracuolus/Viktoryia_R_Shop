@@ -109,6 +109,8 @@ class ListNewBook(ListView):
                             new_book.append(b)
             context['object_list'] = new_book
             return context
+        else:
+            return super().get_context_data(**kwargs)
 
 
 
@@ -138,6 +140,8 @@ class ListPopularBook(ListView):
                         popular_book.append(b)
             context['object_list'] = popular_book
             return context
+        else:
+            return super().get_context_data(**kwargs)
 
 
 class ListSaleBook(ListView):
@@ -166,3 +170,5 @@ class ListSaleBook(ListView):
                         sale_book.append(b)
             context['object_list'] = sale_book
             return context
+        else:
+            return super().get_context_data(**kwargs)
