@@ -44,7 +44,7 @@
                                                     <td>Жанр</td>
                                                     <td>
                                                         {% for genre in object.genre.all %}
-                                                            <a href="#" title="Подробнее об жанре &laquo;{{ genre.name }}&raquo;">{{ genre.name }}</a>
+                                                            <a href="{% url 'genre:detail' genre.pk %}" title="Подробнее об жанре &laquo;{{ genre.name }}&raquo;">{{ genre.name }}</a>
                                                         {% endfor %}
                                                     </td>
                                                 </tr>
@@ -53,7 +53,7 @@
                                                 <tr class="">
                                                     <td>Серия</td>
                                                     <td>
-                                                        <a href="#" title="Подробнее об серии &laquo;{{ object.series.name }}&raquo;">{{ object.series.name }}</a>
+                                                        <a href="{% url 'series:detail' series.pk %}" title="Подробнее об серии &laquo;{{ object.series.name }}&raquo;">{{ object.series.name }}</a>
                                                     </td>
                                                 </tr>
                                             {% endif %}
@@ -61,7 +61,7 @@
                                                 <tr class="">
                                                     <td>Издательство</td>
                                                     <td>
-                                                        <a href="#" title="Подробнее об издательстве &laquo;{{ object.publisher.name }}&raquo;">{{ object.publisher.name }}</a>
+                                                        <a href="{% url 'publisher:detail' publisher.pk %}" title="Подробнее об издательстве &laquo;{{ object.publisher.name }}&raquo;">{{ object.publisher.name }}</a>
                                                     </td>
                                                 </tr>
                                             {% endif %}
