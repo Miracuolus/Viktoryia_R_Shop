@@ -53,7 +53,7 @@
                                                 <tr class="">
                                                     <td>Серия</td>
                                                     <td>
-                                                        <a href="{% url 'series:detail' series.pk %}" title="Подробнее об серии &laquo;{{ object.series.name }}&raquo;">{{ object.series.name }}</a>
+                                                        <a href="{% url 'series:detail' object.series.pk %}" title="Подробнее об серии &laquo;{{ object.series.name }}&raquo;">{{ object.series.name }}</a>
                                                     </td>
                                                 </tr>
                                             {% endif %}
@@ -61,7 +61,7 @@
                                                 <tr class="">
                                                     <td>Издательство</td>
                                                     <td>
-                                                        <a href="{% url 'publisher:detail' publisher.pk %}" title="Подробнее об издательстве &laquo;{{ object.publisher.name }}&raquo;">{{ object.publisher.name }}</a>
+                                                        <a href="{% url 'publisher:detail' object.publisher.pk %}" title="Подробнее об издательстве &laquo;{{ object.publisher.name }}&raquo;">{{ object.publisher.name }}</a>
                                                     </td>
                                                 </tr>
                                             {% endif %}
