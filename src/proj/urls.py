@@ -30,4 +30,4 @@ urlpatterns = [
     path('customer/', include('customers.urls', namespace='customer')), # customers app
     path('manager/', AdminHomePage.as_view(), name='main_admin'), # admin home page
     path('', HomePage.as_view()), # home page
-]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки
+] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки
