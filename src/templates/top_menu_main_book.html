@@ -20,6 +20,11 @@
                         <a class="nav-link" href="{% url 'main_admin' %}">Административный портал</a>
                     </li>
                 {% endif %}
+                {% if user.is_anonymous %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sign_in' %}">Войти</a>
+                    </li>
+                {% endif %}
             </ul>
             <form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Поиск" aria-label="Search">
