@@ -23,8 +23,6 @@ class Customer(models.Model):
     first_name = models.CharField(
         verbose_name='Имя',
         max_length= 200,
-        null=True,
-        blank=True,
     )
     last_name = models.CharField(
         verbose_name='Фамилия',

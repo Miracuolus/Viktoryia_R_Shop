@@ -36,11 +36,10 @@
                                                     <a href="#" title="Отправить письмо пользователю &laquo;{{ object }}&raquo;">{{ object.mail }}</a>
                                                 </td>
                                             </tr>
-                                            {% if object.first_name %}
-                                                <tr class="">
-                                                    <td>Имя</td>
-                                                    <td>{{ object.first_name }}</td>
-                                                </tr>
+                                            <tr class="">
+                                                <td>Имя</td>
+                                                <td>{{ object.first_name }}</td>
+                                            </tr>
                                             {% endif %}
                                             {% if object.last_name %}
                                                 <tr class="">
