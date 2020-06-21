@@ -13,6 +13,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin # залогиненн
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+class SignIn(TemplateView):
+    template_name = 'customer/sign_in.html'
+
+class LogIn(TemplateView):
+    template_name = 'customer/log_in.html'
+
 class CreateCustomer(LoginRequiredMixin, CreateView):
     model = Customer
     form_class = CustomerForm
@@ -28,7 +34,7 @@ class CustomerList(LoginRequiredMixin, ListView):
 
 class UpdateCustomer(LoginRequiredMixin, UpdateView):
     model = Customer
-    fields = ('user',)
+    form_class = CustomerForm
     template_name = 'customer/update_customer.html'
     
     def get_object(self):

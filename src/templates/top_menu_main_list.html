@@ -9,7 +9,12 @@
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <ul class="list-unstyled">
-          <li><a href="#" class="text-white"><h4 class="text-white">Корзина</h4></a></li>
+            {% if user.is_anonymous %}
+              <li>
+                <a href="{% url 'sign_in' %}"><h4 class="text-white">Войти</h4></a>
+              </li>
+            {% endif %}
+            <li><a href="#" class="text-white"><h4 class="text-white">Корзина</h4></a></li>
             <li><a href="#" class="text-white">Помощь</a></li>
             <li><a href="#" class="text-white">Достака</a></li>
             <li><a href="#" class="text-white">Оплата</a></li>

@@ -1,0 +1,26 @@
+{% extends 'sign_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Вход{% endblock title %}
+
+{% block body %}
+  <form class="form-signin">
+    <img class="mb-4" src="{% static 'img/favicons/2_65.png' %}" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
+    <label for="inputEmail" class="sr-only">Логин</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Имя пользователя" required autofocus>
+    <label for="inputPassword" class="sr-only">Пароль</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Запомнить меня
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
+    <br>
+    <div class="i-popup__line">
+      <a id="loginFormRegisterLink" href="{% url 'log_in' %}" data-button-state="second">Я заказываю впервые</a>
+    </div>
+    <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+  </form>
+{% endblock body %}

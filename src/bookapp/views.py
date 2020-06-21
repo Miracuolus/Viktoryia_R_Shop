@@ -19,9 +19,6 @@ class HomePage(TemplateView):
 class AdminHomePage(LoginRequiredMixin, TemplateView):
     template_name = 'bookapp/admin_home_page.html'
 
-class SignIn(TemplateView):
-    template_name = 'bookapp/sign_in.html'
-
 class CreateBook(LoginRequiredMixin, CreateView):
     model = Book
     form_class = BookForm
