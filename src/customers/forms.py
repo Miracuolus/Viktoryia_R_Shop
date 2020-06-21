@@ -10,6 +10,7 @@ class CustomerForm(forms.ModelForm):
                   'mail',
                   'first_name',
                   'last_name',
+                  'code_phone',
                   'phone',
                   'country',
                   'city',

@@ -30,8 +30,13 @@ class Customer(models.Model):
         null=True,
         blank=True,
     )
+    code_phone = models.SmallIntegerField(
+        verbose_name='Код номера',
+        choices=((8029, '(029)'),(8033, '(033)'),(8044, '(044)')),
+    )
     phone = models.PositiveIntegerField(
         verbose_name='Телефон',
+        help_text='7 цифр'
     )
     country = models.CharField(
         verbose_name='Страна',

@@ -25,7 +25,7 @@
                         <td>{{ customer.log }}</td>
                         <td>{{ customer.first_name }}</td>
                         <td>{{ customer.mail }}</td>
-                        <td>{{ customer.phone }}</td>
+                        <td>{{ customer.code_phone }}{{ customer.phone }}</td>
                         <td><a href="{% url 'customer:detail' customer.pk %}" title="подробнее">Подробнее</a></td>
                         <td><a href="{% url 'customer:update' customer.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
                         <td><a href="{% url 'customer:delete' customer.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
