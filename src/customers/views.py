@@ -10,7 +10,7 @@ from django.views.generic import (
                                 )
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
-from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth import get_user_model, authenticate, login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
@@ -29,6 +29,12 @@ class LogIn(FormView):
     def form_valid(self, form):
         new_user = form.save()
         new_user.groups.add(Group.objects.get(name='1'))
+        username = self.request.POST['username']
+        password = self.request.POST['password2']
+        new_user = authenticate(self.request,username=username,password=password)
+        if new_user is not None:
+             if new_user.is_active:
+                 login(self.request, new_user)
         return super(LogIn, self).form_valid(form)
 
     def form_invalid(self, form):
