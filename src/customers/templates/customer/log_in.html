@@ -4,19 +4,16 @@
 {% block title %}Регистрация{% endblock title %}
 
 {% block body %}
-  <form class="form-signin">
-    <img class="mb-4" src="{% static 'img/favicons/2_65.png' %}" alt="" width="72" height="72">
+  <form action="{% url 'log_in' %}" method="post" class="form-signin">
+  <img class="mb-4" src="{% static 'img/favicons/2_65.png' %}" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
-    <label for="inputLog" class="sr-only">Логин</label>
-    <input type="text" id="inputLog" class="form-control" placeholder="Имя пользователя" required autofocus>
-    <label for="inputPassword" class="sr-only">Пароль</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Запомнить меня
-      </label>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Зарегистрировать" class="btn btn-lg btn-primary btn-block">
+    <br>
+    <div class="i-popup__line">
+      <a id="loginFormRegisterLink" href="{% url 'main' %}" data-button-state="second">Вернуться на главную</a>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
-  </form>
+    <br>
+</form>
 {% endblock body %}

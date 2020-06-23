@@ -1,5 +1,5 @@
 from . models import Customer
-from . forms import CustomerForm
+from . forms import CustomerForm, LogInForm
 from django.views.generic import (
                                     TemplateView, 
                                     CreateView, 
@@ -12,13 +12,26 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic.edit import FormView
+from django.contrib.auth.forms import UserCreationForm
 User = get_user_model()
 
 class SignIn(LoginView):
     template_name = 'customer/sign_in.html'
 
-class LogIn(LoginView):
+class LogIn(FormView):
     template_name = 'customer/log_in.html'
+    form_class = LogInForm
+    def get_success_url(self):
+        return reverse_lazy('main')
+
+    def form_valid(self, form):
+        form.save()
+        return super(LogIn, self).form_valid(form)
+
+    def form_invalid(self, form):
+        return super(LogIn, self).form_invalid(form)
+    
 
 class LogOut(LogoutView):
     template_name = 'customer/log_out.html'

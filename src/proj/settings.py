@@ -129,7 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 LOGIN_REDIRECT_URL = reverse_lazy('main')
-LOGIN_URL = reverse_lazy('sign_in')
+LOGIN_URL = reverse_lazy('sign_in', 'log_in')
 LOGOUT_URL = reverse_lazy('log_out')
 
 
