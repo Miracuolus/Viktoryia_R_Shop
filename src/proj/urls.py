@@ -21,7 +21,7 @@ from bookapp.views import HomePage, AdminHomePage
 from customers.views import SignIn, LogIn
 
 urlpatterns = [
-    path('admin/', admin.site.urls), # БД
+    path('admin/', admin.site.urls, name ='admin'), # БД
     path('main/', HomePage.as_view(), name='main'), # home page
     path('book/', include('bookapp.urls', namespace='book')), # book app
     path('author/', include('author.urls', namespace='author')), # author app
@@ -33,4 +33,4 @@ urlpatterns = [
     path('sign_in/', SignIn.as_view(), name='sign_in'), # sign_in page
     path('log_in/', LogIn.as_view(), name='log_in'), # log_in page
     path('', HomePage.as_view()), # home page
-] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки

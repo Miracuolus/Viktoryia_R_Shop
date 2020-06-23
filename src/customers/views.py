@@ -10,13 +10,14 @@ from django.views.generic import (
                                 )
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth.views import LoginView
 User = get_user_model()
 
-class SignIn(TemplateView):
+class SignIn(LoginView):
     template_name = 'customer/sign_in.html'
 
-class LogIn(TemplateView):
+class LogIn(LoginView):
     template_name = 'customer/log_in.html'
 
 class CreateCustomer(LoginRequiredMixin, CreateView):
