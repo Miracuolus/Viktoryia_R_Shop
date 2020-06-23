@@ -14,6 +14,7 @@ from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
 User = get_user_model()
 
 class SignIn(LoginView):
@@ -26,7 +27,8 @@ class LogIn(FormView):
         return reverse_lazy('main')
 
     def form_valid(self, form):
-        form.save()
+        new_user = form.save()
+        new_user.groups.add(Group.objects.get(name='1'))
         return super(LogIn, self).form_valid(form)
 
     def form_invalid(self, form):
