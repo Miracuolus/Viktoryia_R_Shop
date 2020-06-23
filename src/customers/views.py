@@ -11,7 +11,7 @@ from django.views.generic import (
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 from django.contrib.auth import get_user_model, authenticate
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 User = get_user_model()
 
 class SignIn(LoginView):
@@ -19,6 +19,9 @@ class SignIn(LoginView):
 
 class LogIn(LoginView):
     template_name = 'customer/log_in.html'
+
+class LogOut(LogoutView):
+    template_name = 'customer/log_out.html'
 
 class CreateCustomer(LoginRequiredMixin, CreateView):
     model = Customer

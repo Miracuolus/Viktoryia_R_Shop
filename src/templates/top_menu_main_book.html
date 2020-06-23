@@ -24,6 +24,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'sign_in' %}">Войти</a>
                     </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'log_out' %}">Выйти</a>
+                    </li>
                 {% endif %}
             </ul>
             <form class="form-inline mt-2 mt-md-0">

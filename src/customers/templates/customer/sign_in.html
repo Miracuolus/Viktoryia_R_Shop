@@ -4,20 +4,15 @@
 {% block title %}Вход{% endblock title %}
 
 {% block body %}
-  {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
-  {% endif %}
+  
 
-  {% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
+  <form method="post" class="form-signin" action="{% url 'sign_in' %}">
+    {% if next %}
+      {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+          please login with an account that has access.</p>
+      {% endif %}
     {% endif %}
-  {% endif %}
-
-  <form method="post" class="form-signin">
     {% csrf_token %}
     <img class="mb-4" src="{% static 'img/favicons/2_65.png' %}" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
@@ -35,7 +30,6 @@
 
   {# Assumes you setup the password_reset view in your URLconf #}
   {% comment '' %}<p><a href="{% url 'password_reset' %}">Lost password?</a></p> {% endcomment %}
-
 
 
 

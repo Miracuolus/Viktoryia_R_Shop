@@ -18,6 +18,9 @@
             <li><a href="#" class="text-white">Помощь</a></li>
             <li><a href="#" class="text-white">Достака</a></li>
             <li><a href="#" class="text-white">Оплата</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'log_out' %}" class="text-white">Выход</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>

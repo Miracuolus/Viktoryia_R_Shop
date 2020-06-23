@@ -1,0 +1,16 @@
+{% extends 'sign_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Выход{% endblock title %}
+
+{% block body %}
+  
+<div class="form-signin">
+  <h1>Выход</h1>
+    <p>Вы успешно вышли. Вы можете <a href="{% url "sign_in" %}">войти снова</a> или вернуться на <a href="{% url "main" %}">главную</a>.</p>
+    </div>
+
+
+
+
+{% endblock body %}
