@@ -27,12 +27,21 @@ class LogInForm(UserCreationForm):
     )
     email = forms.EmailField(
         max_length=200, 
-        label='E-mail'
+        label='E-mail',
+    )
+    code_type = forms.TypedChoiceField(
+        choices=((8029, '(029)'),(8033, '(033)'),(8044, '(044)'),(8017, '(017)')),
+        label='Код номера',
+    )
+    phone = forms.RegexField(
+        regex=r'\d{7}',
+        label='Телефон',
+        help_text='7 цифр без пробелов и дефисов',
     )
     password1 = forms.CharField(
         label='Пароль',
         max_length=100,
-        widget=forms.PasswordInput()
+        widget=forms.PasswordInput(),
     )
     password2 = forms.CharField(
         label='Подтверждение пароля',
@@ -41,4 +50,4 @@ class LogInForm(UserCreationForm):
     )
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'code_type', 'phone','password1', 'password2')
