@@ -15,6 +15,7 @@
                 <th>Фамилия</th>
                 <th>E-mail</th>
                 <th>Телефон</th>
+                <th>Группа</th>
                 <th><i class="fas fa-info-circle"></i></th>
                 <th><i class="fas fa-user-edit"></i></th>
                 <th><i class="fas fa-user-minus"></i></th>
@@ -28,6 +29,15 @@
                         <td>{{ customer.user.last_name }}</td>
                         <td>{{ customer.user.email }}</td>
                         <td>{{ customer.code_phone }}{{ customer.phone }}</td>
+                        <td>
+                            {% if customer.user.groups.all|length == 1 %}
+                                {{ customer.user.groups.all.0.name }}
+                            {% else %}
+                                {% for group in customer.user.groups.all %}
+                                    {{ group.name }}
+                                {% endfor %}
+                            {% endif %}
+                        </td>
                         <td><a href="{% url 'customer:detail' customer.pk %}" title="подробнее">Подробнее</a></td>
                         <td><a href="{% url 'customer:update' customer.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
                         <td><a href="{% url 'customer:delete' customer.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>

@@ -28,13 +28,13 @@ class LogIn(FormView):
 
     def form_valid(self, form):
         new_user = form.save()
-        new_user.groups.add(Group.objects.get(name='1'))
+        group = new_user.groups.add(Group.objects.get(name='manager'))
         username = self.request.POST['username']
         password = self.request.POST['password2']
         email = self.request.POST['email']
         code_type = self.request.POST['code_type']
         phone = self.request.POST['phone']
-        Customer.objects.create(user=new_user, code_phone=code_type, phone=phone)
+        Customer.objects.create(user=new_user, code_phone=code_type, phone=phone, group=group)
         new_user = authenticate(self.request,username=username,password=password)
         if new_user is not None:
              if new_user.is_active:
@@ -63,7 +63,14 @@ class CustomerList(LoginRequiredMixin, ListView):
 
 class UpdateCustomer(LoginRequiredMixin, UpdateView):
     model = Customer
-    form_class = CustomerForm
+    fields = ('code_phone',
+              'phone',
+              'country',
+              'city',
+              'index',
+              'address_1',
+              'address_2',
+        )
     template_name = 'customer/update_customer.html'
     
     def get_success_url(self):
