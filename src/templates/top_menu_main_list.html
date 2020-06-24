@@ -15,6 +15,11 @@
               </li>
             {% endif %}
             <li><a href="#" class="text-white"><h4 class="text-white">Корзина</h4></a></li>
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="text-white" href="#">Профиль</a>
+              </li>
+            {% endif %}
             <li><a href="#" class="text-white">Помощь</a></li>
             <li><a href="#" class="text-white">Достака</a></li>
             <li><a href="#" class="text-white">Оплата</a></li>
