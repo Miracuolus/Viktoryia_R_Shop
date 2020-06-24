@@ -28,32 +28,32 @@
                                         <tbody>
                                             <tr class="">
                                                 <td>Логин</td>
-                                                <td>{{ object.log }}</td>
-                                            </tr>
-                                            <tr class="">
-                                                <td>E-mail</td>
-                                                <td>
-                                                    <a href="#" title="Отправить письмо пользователю &laquo;{{ object }}&raquo;">{{ object.mail }}</a>
-                                                </td>
+                                                <td>{{ object.user.username }}</td>
                                             </tr>
                                             <tr class="">
                                                 <td>Имя</td>
-                                                <td>{{ object.first_name }}</td>
+                                                <td>{{ object.user.first_name }}</td>
                                             </tr>
                                             {% if object.last_name %}
                                                 <tr class="">
                                                     <td>Фамилия</td>
-                                                    <td>{{ object.last_name }}</td>
+                                                    <td>{{ object.user.last_name }}</td>
                                                 </tr>
                                             {% endif %}
                                             <tr class="">
-                                                <td>Код телефона</td>
-                                                <td>{{ object.code_phone }}</td>
+                                                <td>E-mail</td>
+                                                <td>
+                                                    <a href="#" title="Отправить письмо пользователю &laquo;{{ object }}&raquo;">{{ object.user.email }}</a>
+                                                </td>
                                             </tr>
-                                            <tr class="">
-                                                <td>Телефон</td>
-                                                <td>{{ object.phone }}</td>
-                                            </tr>
+                                            {% if object.code_phone %}
+                                                {% if object.phone %}
+                                                    <tr class="">
+                                                        <td>Телефон</td>
+                                                            <td>({{ object.code_phone }}){{ object.phone }}</td>
+                                                        </tr>
+                                                {% endif %}
+                                            {% endif %}
                                             {% if object.country %}
                                                 <tr class="">
                                                     <td>Страна</td>
