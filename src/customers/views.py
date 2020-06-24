@@ -1,5 +1,5 @@
 from . models import Customer
-from . forms import CustomerForm, LogInForm 
+from . forms import CustomerForm, LogInForm
 from django.views.generic import (
                                     TemplateView, 
                                     CreateView, 
@@ -11,7 +11,7 @@ from django.views.generic import (
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 from django.contrib.auth import get_user_model, authenticate, login
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
@@ -57,6 +57,14 @@ class CreateCustomer(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse_lazy('customer:list')
 
+class ChangePasswordViewCustomer(LoginRequiredMixin, PasswordChangeView):
+    template_name = 'customer/password_change_view.html'
+
+    def get_success_url(self):
+        return reverse_lazy('customer:password_change_done')
+
+class ChangePasswordDoneCustomer(TemplateView):
+    template_name = 'customer/password_change_done.html'
 class CustomerList(LoginRequiredMixin, ListView):
     template_name = 'customer/list_customer.html'
     model = Customer

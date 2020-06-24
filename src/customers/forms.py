@@ -50,3 +50,4 @@ class LogInForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'code_type', 'phone','password1', 'password2')
+
