@@ -6,7 +6,7 @@
     {% include "top_menu_admin.html" %}
     <div class="col-md-8 order-md-1">
         <br>
-        <h4 class="mb-3">Создание/редактирование пользователя</h4>
+        <h4 class="mb-3">Редактирование пользователя</h4>
         <form class="needs-validation" novalidate action="" method="POST">
             {% csrf_token %}
             {{ form|crispy }}

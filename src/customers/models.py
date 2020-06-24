@@ -3,36 +3,15 @@ from django.db import models
 from django.contrib.auth import get_user_model
 # Create your models here.
 User = get_user_model()
+
 class Customer(models.Model):
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         User,
         on_delete=models.PROTECT,
     )
-    log = models.CharField(
-        verbose_name='Логин',
-        max_length= 200
-    )
-    password = models.SlugField(
-        verbose_name='Пароль',
-        max_length= 10
-    )
-    mail = models.EmailField(
-        verbose_name='E-mail',
-        max_length= 100
-    )
-    first_name = models.CharField(
-        verbose_name='Имя',
-        max_length= 200,
-    )
-    last_name = models.CharField(
-        verbose_name='Фамилия',
-        max_length= 200,
-        null=True,
-        blank=True,
-    )
     code_phone = models.SmallIntegerField(
         verbose_name='Код номера',
-        choices=((8029, '(029)'),(8033, '(033)'),(8044, '(044)')),
+        choices=((8029, '(029)'),(8033, '(033)'),(8044, '(044)'),(8017, '(017)')),
     )
     phone = models.PositiveIntegerField(
         verbose_name='Телефон',
@@ -68,7 +47,7 @@ class Customer(models.Model):
         blank=True,
     )
 
-    class Meta: 
+    class Meta:
         ordering = ['user']
     
     def __str__(self):

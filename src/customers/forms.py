@@ -7,11 +7,6 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ('user',
-                  'log',
-                  'password',
-                  'mail',
-                  'first_name',
-                  'last_name',
                   'code_phone',
                   'phone',
                   'country',
@@ -21,6 +16,9 @@ class CustomerForm(forms.ModelForm):
                   'address_2',
         )
 class LogInForm(UserCreationForm):
+    error_messages = {
+        'password_mismatch': "Введенные пароли не совпадают"
+    }
     username = forms.CharField(
         label='Имя пользователя',
         max_length=100, 
