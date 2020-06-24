@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
+
 # Create your models here.
 User = get_user_model()
 
@@ -58,6 +59,7 @@ class Customer(models.Model):
     )
     class Meta:
         ordering = ['user']
+
     
     def __str__(self):
         #return f'{self.user.first_name}{self.user.last_name}'

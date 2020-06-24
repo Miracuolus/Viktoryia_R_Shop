@@ -1,5 +1,5 @@
 from . models import Customer
-from . forms import CustomerForm, LogInForm
+from . forms import CustomerForm, LogInForm 
 from django.views.generic import (
                                     TemplateView, 
                                     CreateView, 
@@ -15,6 +15,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
+from django.views.generic.edit import ModelFormMixin
 User = get_user_model()
 
 class SignIn(LoginView):
@@ -70,11 +71,14 @@ class UpdateCustomer(LoginRequiredMixin, UpdateView):
               'index',
               'address_1',
               'address_2',
-        )
+    )
     template_name = 'customer/update_customer.html'
     
     def get_success_url(self):
         return reverse_lazy('customer:list')
+
+
+
 
 class DeleteCustomer(LoginRequiredMixin, DeleteView):
     model = Customer

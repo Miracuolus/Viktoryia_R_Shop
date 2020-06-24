@@ -15,6 +15,7 @@ class CustomerForm(forms.ModelForm):
                   'address_1',
                   'address_2',
         )
+
 class LogInForm(UserCreationForm):
     error_messages = {
         'password_mismatch': "Введенные пароли не совпадают"
