@@ -4,24 +4,24 @@
                     <div class="sidebar-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="page-link" href="#">
-                                    <span data-feather="home"></span>Таблица заказов<span class="sr-only">(current)</span>
+                                <a class="nav-link" href="#">
+                                    Таблица заказов<span class="sr-only">(current)</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="page-link" href="#">
-                                    <span data-feather="file"></span>Заказы
+                                <a class="nav-link" href="#">
+                                    </span>Заказы
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="page-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Книги</a>
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Книги</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'book:list' %}">Список книг</a>
                                     <a class="dropdown-item" href="{% url 'book:create' %}"><i class="fas fa-plus-circle"></i> книги</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="page-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Пользователи</a>
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Пользователи</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'customer:list' %}">Список пользователей</a>
                                     {% if user.is_superuser %}
@@ -30,28 +30,28 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="page-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторы</a>
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторы</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'author:list' %}">Список авторов</a>
                                     <a class="dropdown-item" href="{% url 'author:create' %}"><i class="fas fa-plus-circle"></i> автора</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="page-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Жанры</a>
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Жанры</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'genre:list' %}">Список жанров</a>
                                     <a class="dropdown-item" href="{% url 'genre:create' %}"><i class="fas fa-plus-circle"></i> жанра</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="page-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Издательства</a>
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Издательства</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'publisher:list' %}">Список издательств</a>
                                     <a class="dropdown-item" href="{% url 'publisher:create' %}"><i class="fas fa-plus-circle"></i> издательства</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="page-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Серии</a>
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Серии</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'series:list' %}">Список серий</a>
                                     <a class="dropdown-item" href="{% url 'series:create' %}"><i class="fas fa-plus-circle"></i> серии</a>
@@ -68,18 +68,18 @@
                         <ul class="nav flex-column mb-2">
                             {% if perms.bookapp.view_admin_db %}
                                 <li class="nav-item">
-                                    <a class="page-link" href="/admin/">
+                                    <a class="nav-link" href="/admin/">
                                         <span data-feather="file-text"></span>Переход к БД
                                     </a>
                                 </li>
                             {% endif %}
                             <li class="nav-item">
-                                <a class="page-link" href="{% url 'main' %}">
+                                <a class="nav-link" href="{% url 'main' %}">
                                     <span data-feather="file-text"></span>Домашняя страница
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="page-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">О магазине</a>
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">О магазине</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'appinfo:detail' 1 %}">О магазине</a>
                                     <a class="dropdown-item" href="{% url 'appinfo:update' 1 %}"><i class="fas fa-edit"></i> информации</a>
