@@ -9,8 +9,7 @@
   <form method="post" class="form-signin" action="{% url 'sign_in' %}">
     {% if next %}
       {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed,
-          please login with an account that has access.</p>
+        <p>Ваша учетная запись не имеет доступа к этой странице. Пожалуйста, войдите в систему с учетной записью, которая имеет доступ.</p>
       {% endif %}
     {% endif %}
     {% csrf_token %}

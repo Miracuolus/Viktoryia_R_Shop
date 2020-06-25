@@ -138,6 +138,21 @@
                             </div>
                         </td>
                     </tr>
+                    <tr class="b-description__more">
+                        <td colspan="2">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h2 class="mb-0">
+                                            <a href="{% url 'customer:delete' object.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Удалить профиль {{ user }}
+                                            </button></a>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
                 </div>
         {% endif %}
                         </div>
