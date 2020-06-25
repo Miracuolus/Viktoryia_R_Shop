@@ -11,7 +11,7 @@ from django.views.generic import (
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 from django.contrib.auth import get_user_model, authenticate, login
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
@@ -63,7 +63,7 @@ class ChangePasswordViewCustomer(LoginRequiredMixin, PasswordChangeView):
     def get_success_url(self):
         return reverse_lazy('customer:password_change_done')
 
-class ChangePasswordDoneCustomer(TemplateView):
+class ChangePasswordDoneCustomer(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'customer/password_change_done.html'
 class CustomerList(LoginRequiredMixin, ListView):
     template_name = 'customer/list_customer.html'
@@ -84,8 +84,14 @@ class UpdateCustomer(LoginRequiredMixin, UpdateView):
     
     def get_success_url(self):
         return reverse_lazy('customer:list')
-
-
+    
+    """def get_object(self):
+        user_pk = self.kwargs.get('user_pk')
+        obj, created = User.objects.get_or_create(
+            username = User.objects.get(pk=user_pk),
+            defaults = {}
+        )
+        return obj"""
 
 
 class DeleteCustomer(LoginRequiredMixin, DeleteView):

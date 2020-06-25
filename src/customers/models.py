@@ -13,14 +13,10 @@ class Customer(models.Model):
     code_phone = models.SmallIntegerField(
         verbose_name='Код номера',
         choices=((8029, '(029)'),(8033, '(033)'),(8044, '(044)'),(8017, '(017)')),
-        null=True,
-        blank=True,
     )
     phone = models.PositiveIntegerField(
         verbose_name='Телефон',
         help_text='7 цифр',
-        null=True,
-        blank=True,
     )
     country = models.CharField(
         verbose_name='Страна',
@@ -51,8 +47,9 @@ class Customer(models.Model):
         null=True,
         blank=True,
     )
-    group = models.ForeignKey(
+    group = models.OneToOneField(
         Group,
+        verbose_name='Группа',
         on_delete=models.PROTECT,
         null=True,
         blank=True,

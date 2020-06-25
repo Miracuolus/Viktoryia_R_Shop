@@ -16,6 +16,6 @@ urlpatterns = [
     path('delete/<int:pk>', DeleteCustomer.as_view(), name='delete'),
     path('detail/<int:pk>', DetailCustomer.as_view(), name='detail'),
     path('list/', CustomerList.as_view(), name='list'),
-    path('change_password_view/<int:pk>', ChangePasswordViewCustomer.as_view(), name='change_password_view'),
+    path('change_password_view/', ChangePasswordViewCustomer.as_view(), name='change_password_view'),
     path('change_password_done/', ChangePasswordDoneCustomer.as_view(), name='password_change_done'),
 ]
