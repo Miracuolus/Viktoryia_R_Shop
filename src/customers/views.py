@@ -69,11 +69,11 @@ class CustomerList(LoginRequiredMixin, ListView):
     template_name = 'customer/list_customer.html'
     model = Customer
     form_class = CustomerForm
-class UpdateCustomer(LoginRequiredMixin, UpdateView):
-    model = User
+class UpdateMainCustomer(LoginRequiredMixin, UpdateView):
+    model = Customer
     form_class = Form
               
-    template_name = 'customer/update_customer.html'
+    template_name = 'customer/update_main_customer.html'
     
     def get_success_url(self):
         return reverse_lazy('customer:list')
@@ -85,7 +85,7 @@ class UpdateCustomer(LoginRequiredMixin, UpdateView):
             defaults = {}
         )
         return obj
-"""class UpdateCustomer(LoginRequiredMixin, UpdateView):
+class UpdateCustomer(LoginRequiredMixin, UpdateView):
     model = Customer
     fields = ('code_phone',
               'phone',
@@ -99,15 +99,9 @@ class UpdateCustomer(LoginRequiredMixin, UpdateView):
     
     def get_success_url(self):
         return reverse_lazy('customer:list')
+    
+    
 
-
-    def get_object(self):
-        user_pk = self.kwargs.get('user_pk')
-        obj, created = User.objects.get_or_create(
-            username = User.objects.get(pk=user_pk),
-            defaults = {}
-        )
-        return obj"""
 
 
 class DeleteCustomer(LoginRequiredMixin, DeleteView):
