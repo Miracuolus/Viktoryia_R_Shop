@@ -3,7 +3,11 @@
 {% block title %}Редактирование пользователя {{ object }}{% endblock title %}
 
 {% block body %}
-    {% include "top_menu_admin.html" %}
+    {% if user.is_staff or user.is_superuser %}
+        {% include "top_menu_admin.html" %}
+    {% else %}
+        {% include "top_menu_main_book.html" %}
+    {% endif %}
     <div class="col-md-8 order-md-1">
         <br>
         <h4 class="mb-3">Редактирование пользователя {{ object }}</h4>

@@ -76,7 +76,7 @@ class UpdateMainCustomer(LoginRequiredMixin, UpdateView):
     template_name = 'customer/update_main_customer.html'
     
     def get_success_url(self):
-        return reverse_lazy('customer:list')
+        return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
     
     def get_object(self):
         user_pk = self.kwargs.get('user_pk')
@@ -98,7 +98,7 @@ class UpdateCustomer(LoginRequiredMixin, UpdateView):
     template_name = 'customer/update_customer.html'
     
     def get_success_url(self):
-        return reverse_lazy('customer:list')
+        return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
     
     
 
