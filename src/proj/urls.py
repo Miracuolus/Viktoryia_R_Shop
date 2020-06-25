@@ -35,4 +35,4 @@ urlpatterns = [
     path('log_out/', LogOut.as_view(), name='log_out'), # log_out page
     path('', HomePage.as_view()), # home page
     
-] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки

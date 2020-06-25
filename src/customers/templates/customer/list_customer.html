@@ -16,6 +16,7 @@
                 <th>E-mail</th>
                 <th>Телефон</th>
                 <th>Группа</th>
+                <th><i class="fas fa-smile"></i></th>
                 <th><i class="fas fa-info-circle"></i></th>
                 <th><i class="fas fa-user-edit"></i></th>
                 <th><i class="fas fa-user-minus"></i></th>
@@ -36,6 +37,13 @@
                                 {% for group in customer.user.groups.all %}
                                     {{ group.name }}
                                 {% endfor %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if customer.user.is_active %}
+                                Активный
+                            {% else %}
+                                Неактивный
                             {% endif %}
                         </td>
                         <td><a href="{% url 'customer:detail' customer.pk %}" title="подробнее">Подробнее</a></td>
