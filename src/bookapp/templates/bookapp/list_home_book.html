@@ -1,6 +1,7 @@
 {% extends 'base_list.html' %}
 {% load crispy_forms_tags %}
-{% block title %}on-line магазин{% endblock title %}
+{% load app_tags %}
+{% block title %}{% print_app_name %}{% endblock title %}
 
 {% block body %}
     {% include "top_menu_main_list.html" %}

@@ -10,9 +10,10 @@ class AppInfo(models.Model):
         verbose_name='Логотип магазина',
         upload_to='logo',
     )
-    year = models.PositiveSmallIntegerField(
+    year = models.CharField(
         verbose_name='Год разработки сайта',
-        help_text='ГГГГ'
+        help_text='ГГГГ',
+        max_length= 200
     )
     description = models.TextField(
         verbose_name='О магазине',

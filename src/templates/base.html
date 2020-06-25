@@ -1,4 +1,5 @@
 {% load static %}
+{% load app_tags %}
 <!doctype html>
 <html lang="ru">
     <head>
@@ -60,7 +61,7 @@
                     <p class="float-right">
                         <a href="#">К началу страницы</a>
                     </p>
-                    <p>&copy; 2020</p>
+                    <p>&copy; {% print_app_year %}</p>
                     <p>Впервые на сайте? <a href="{% url 'main' %}">Посетите домашнюю страницу</a> или можете перейти сразу к <a href="{% url 'book:list_all_book' %}">заказу книг</a>.</p>
                 </div>
             </footer>
