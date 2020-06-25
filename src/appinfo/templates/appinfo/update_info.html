@@ -1,0 +1,17 @@
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Редактирование информации по магазину{% endblock title %}
+
+{% block body %}
+    {% include "top_menu_admin.html" %}
+    <div class="col-md-8 order-md-1">
+        <br>
+        <h4 class="mb-3" id="update-author">Редактирование информации по магазину</h4>
+        <form class="needs-validation" novalidate action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Обновить" class="btn btn-info">
+        </form>
+        <br>
+    </div>
+{% endblock body %}

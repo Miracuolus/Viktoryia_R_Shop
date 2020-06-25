@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'series',
     'publisher',
     'customers',
+    'appinfo',
 ]
 
 MIDDLEWARE = [

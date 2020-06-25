@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Информация по магазину {{ object }}{% endblock title %}
+
+{% block body %}
+    {% include "top_menu_main_book.html" %}
+    <!-- START THE FEATURETTES -->
+    <div class="container marketing">
+        <br>
+        <h4 class="mb-3">Информация по магазину {{ object }}</h4>
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                <h2 class="featurette-heading">{{ object.name }}<span class="text-muted"> {{ object.date }}</span></h2>
+                <p class="lead">{{ object.description }}</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img src="{{ object.image.url }}" alt="Изображение автора" height="570px" width="430px">
+            </div>
+        </div>
+    </div><!-- /.container -->
+{% endblock body %}
