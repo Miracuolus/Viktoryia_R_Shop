@@ -13,7 +13,7 @@ class UpdateAppInfo(LoginRequiredMixin, UpdateView):
     template_name = 'appinfo/update_info.html'
     
     def get_success_url(self):
-        return reverse_lazy('appinfo:detail')
+        return reverse_lazy('appinfo:detail', kwargs={'pk':self.object.pk})
 
 
 class DetailAppInfo(DetailView):
@@ -21,4 +21,18 @@ class DetailAppInfo(DetailView):
     template_name = 'appinfo/detail_info.html'
 
     def get_success_url(self):
-        return reverse_lazy('appinfo:detail')
+        return reverse_lazy('appinfo:detail', kwargs={'pk':self.object.pk})
+
+class DetailAppInfoPayment(DetailView):
+    model = AppInfo
+    template_name = 'appinfo/detail_info_payment.html'
+
+    def get_success_url(self):
+        return reverse_lazy('appinfo:detail', kwargs={'pk':self.object.pk})
+
+class DetailAppInfoDelivery(DetailView):
+    model = AppInfo
+    template_name = 'appinfo/detail_info_delivery.html'
+
+    def get_success_url(self):
+        return reverse_lazy('appinfo:detail', kwargs={'pk':self.object.pk})
