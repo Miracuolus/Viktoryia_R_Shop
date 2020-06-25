@@ -1,5 +1,5 @@
 from . models import Customer
-from . forms import CustomerForm, LogInForm
+from . forms import CustomerForm, LogInForm, Form
 from django.views.generic import (
                                     TemplateView, 
                                     CreateView, 
@@ -29,7 +29,7 @@ class LogIn(FormView):
 
     def form_valid(self, form):
         new_user = form.save()
-        group = new_user.groups.add(Group.objects.get(name='manager'))
+        group = new_user.groups.add(Group.objects.get(name='Customers'))
         username = self.request.POST['username']
         password = self.request.POST['password2']
         email = self.request.POST['email']
@@ -69,8 +69,23 @@ class CustomerList(LoginRequiredMixin, ListView):
     template_name = 'customer/list_customer.html'
     model = Customer
     form_class = CustomerForm
-
 class UpdateCustomer(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = Form
+              
+    template_name = 'customer/update_customer.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('customer:list')
+    
+    def get_object(self):
+        user_pk = self.kwargs.get('user_pk')
+        obj, created = User.objects.get_or_create(
+            username = User.objects.get(pk=user_pk),
+            defaults = {}
+        )
+        return obj
+"""class UpdateCustomer(LoginRequiredMixin, UpdateView):
     model = Customer
     fields = ('code_phone',
               'phone',
@@ -84,8 +99,9 @@ class UpdateCustomer(LoginRequiredMixin, UpdateView):
     
     def get_success_url(self):
         return reverse_lazy('customer:list')
-    
-    """def get_object(self):
+
+
+    def get_object(self):
         user_pk = self.kwargs.get('user_pk')
         obj, created = User.objects.get_or_create(
             username = User.objects.get(pk=user_pk),

@@ -9,36 +9,6 @@
         <h4 class="mb-3">Редактирование пользователя {{ object }}</h4>
         <form class="needs-validation" novalidate action="" method="POST">
             {% csrf_token %}
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="firstName">Имя <span class="text-muted">(Опционально)</span></label>
-                    <input type="text" class="form-control" id="firstName" placeholder="" value="{{ object.user.first_name }}" required>
-                    <div class="invalid-feedback">Введите правильное имя</div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="lastName">Фамилия <span class="text-muted">(Опционально)</span></label>
-                    <input type="text" class="form-control" id="lastName" placeholder="" value="{{ object.user.last_name }}" required>
-                    <div class="invalid-feedback">Введите правильное имя</div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="username">Логин</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">@</span>
-                    </div>
-                    <input type="text" class="form-control" id="username" placeholder="Логин" value="{{ object.user.username }}" required>
-                    <div class="invalid-feedback" style="width: 100%;">Логин обязателен</div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="you@example.com" value="{{ object.user.email }}">
-                <div class="invalid-feedback">Введите правильный почтовый адрес</div>
-            </div>
-
             <div class="mb-3">   
                 {{ form|crispy }}
             </div>

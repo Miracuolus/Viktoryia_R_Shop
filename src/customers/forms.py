@@ -1,6 +1,6 @@
 from django import forms
 from . models import Customer
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User, Group
 
 class CustomerForm(forms.ModelForm):
@@ -50,4 +50,11 @@ class LogInForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'code_type', 'phone','password1', 'password2')
+
+
+class Form(UserChangeForm):
+    
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name')
 
