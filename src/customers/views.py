@@ -111,7 +111,7 @@ class DeleteCustomer(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         return reverse_lazy('customer:list')
 
-class DetailCustomer(DetailView):
+class DetailCustomer(LoginRequiredMixin, DetailView):
     model = Customer
     template_name = 'customer/detail_customer.html'
 
