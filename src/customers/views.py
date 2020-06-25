@@ -11,7 +11,15 @@ from django.views.generic import (
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 from django.contrib.auth import get_user_model, authenticate, login
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import (LoginView, 
+                                       LogoutView, 
+                                       PasswordChangeView, 
+                                       PasswordChangeDoneView,
+                                       PasswordResetView,
+                                       PasswordResetDoneView,
+                                       PasswordResetCompleteView,
+                                       PasswordResetConfirmView,
+)
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
@@ -65,6 +73,19 @@ class ChangePasswordViewCustomer(LoginRequiredMixin, PasswordChangeView):
 
 class ChangePasswordDoneCustomer(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'customer/password_change_done.html'
+
+
+class ResetPasswordViewCustomer(LoginRequiredMixin, PasswordResetView):
+    template_name = 'customer/password_reset_view.html'
+
+    def get_success_url(self):
+        return reverse_lazy('customer:password_change_done')
+
+
+class ResetPasswordDoneCustomer(LoginRequiredMixin, PasswordResetDoneView):
+    template_name = 'customer/password_change_done.html'
+
+
 class CustomerList(LoginRequiredMixin, ListView):
     template_name = 'customer/list_customer.html'
     model = Customer
@@ -100,10 +121,6 @@ class UpdateCustomer(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
     
-    
-
-
-
 class DeleteCustomer(LoginRequiredMixin, DeleteView):
     model = Customer
     template_name = 'customer/delete_customer.html'
