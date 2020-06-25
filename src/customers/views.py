@@ -74,7 +74,7 @@ class ChangePasswordViewCustomer(LoginRequiredMixin, PasswordChangeView):
 class ChangePasswordDoneCustomer(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'customer/password_change_done.html'
 
-
+"""
 class ResetPasswordViewCustomer(LoginRequiredMixin, PasswordResetView):
     template_name = 'customer/password_reset_view.html'
 
@@ -84,12 +84,14 @@ class ResetPasswordViewCustomer(LoginRequiredMixin, PasswordResetView):
 
 class ResetPasswordDoneCustomer(LoginRequiredMixin, PasswordResetDoneView):
     template_name = 'customer/password_change_done.html'
-
+"""
 
 class CustomerList(LoginRequiredMixin, ListView):
     template_name = 'customer/list_customer.html'
     model = Customer
     form_class = CustomerForm
+
+
 class UpdateMainCustomer(LoginRequiredMixin, UpdateView):
     model = Customer
     form_class = Form
@@ -121,12 +123,28 @@ class UpdateCustomer(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
     
-class DeleteCustomer(LoginRequiredMixin, DeleteView):
+"""class DeleteCustomer(LoginRequiredMixin, DeleteView):
     model = Customer
     template_name = 'customer/delete_customer.html'
 
     def get_success_url(self):
-        return reverse_lazy('customer:list')
+        return reverse_lazy('customer:list')"""
+
+class DeleteCustomer(LoginRequiredMixin, UpdateView):
+    model = User
+    fields = ('is_active',)
+              
+    template_name = 'customer/delete_customer.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
+    
+    def get_object(self):
+        user_pk = self.kwargs.get('user_pk')
+        user =  User.objects.get(pk=user_pk)
+        user.is_active = False
+        user.save()
+        return user
 
 class DetailCustomer(LoginRequiredMixin, DetailView):
     model = Customer
