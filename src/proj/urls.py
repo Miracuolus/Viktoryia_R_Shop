@@ -41,4 +41,4 @@ urlpatterns = [
     path('reset_password_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
     path('reset_password_complite/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
     
-] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для локальной разработки

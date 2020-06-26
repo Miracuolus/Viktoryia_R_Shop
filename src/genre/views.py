@@ -53,6 +53,7 @@ class GenreList(LoginRequiredMixin, ListView):
     template_name = 'genre/list_genre.html'
     context_object_name = 'genre_list'
     model = Genre
+    paginate_by = 14
 
 
 class DetailGenre(DetailView):
