@@ -7,6 +7,7 @@ from django.views.generic import (  TemplateView,
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 
+
 class UpdateAppInfo(LoginRequiredMixin, UpdateView):
     model = AppInfo
     form_class = AppInfoForm
