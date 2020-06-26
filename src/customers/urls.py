@@ -20,4 +20,5 @@ urlpatterns = [
     path('list/', CustomerList.as_view(), name='list'),
     path('change_password_view/', ChangePasswordViewCustomer.as_view(), name='change_password_view'),
     path('change_password_done/', ChangePasswordDoneCustomer.as_view(), name='password_change_done'),
+    
 ]
