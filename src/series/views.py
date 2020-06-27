@@ -40,6 +40,7 @@ class DeleteSeries(LoginRequiredMixin, DeleteView):
 class SeriesList(LoginRequiredMixin, ListView):
     template_name = 'series/list_series.html'
     model = Series
+    paginate_by = 20
 
 
 class DetailSeries(DetailView):

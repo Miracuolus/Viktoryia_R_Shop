@@ -40,6 +40,7 @@ class DeletePublisher(LoginRequiredMixin, DeleteView):
 class PublisherList(LoginRequiredMixin, ListView):
     template_name = 'publisher/list_publisher.html'
     model = Publisher
+    paginate_by = 20
 
 
 class DetailPublisher(DetailView):
