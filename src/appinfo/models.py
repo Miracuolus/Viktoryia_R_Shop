@@ -10,20 +10,30 @@ class AppInfo(models.Model):
     image = models.ImageField(
         verbose_name='Логотип магазина',
         upload_to='logo',
+        null=True,
+        blank=True,
     )
     year = models.CharField(
         verbose_name='Год разработки сайта',
         help_text='ГГГГ',
-        max_length= 200
+        max_length= 200,
+        null=True,
+        blank=True,
     )
     description = models.TextField(
         verbose_name='О магазине',
+        null=True,
+        blank=True,
     )
     payment = models.TextField(
         verbose_name='Оплата',
+        null=True,
+        blank=True,
     )
     delivery = models.TextField(
         verbose_name='Доставка',
+        null=True,
+        blank=True,
     )
 
     class Meta: 

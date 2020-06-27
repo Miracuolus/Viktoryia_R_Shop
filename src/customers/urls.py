@@ -7,6 +7,7 @@ from  . views import (CustomerList,
                       DetailCustomer,
                       ChangePasswordViewCustomer,
                       ChangePasswordDoneCustomer,
+                      DeleteCustomerDone,
 )
 
 app_name = 'customer'
@@ -15,7 +16,8 @@ urlpatterns = [
     path('create/', CreateCustomer.as_view(), name='create'),
     path('updatemain/<int:user_pk>', UpdateMainCustomer.as_view(), name='updatemain'),
     path('update/<int:pk>', UpdateCustomer.as_view(), name='update'),
-    path('delete/<int:user_pk>', DeleteCustomer.as_view(), name='delete'),
+    path('delete/<int:pk>', DeleteCustomer.as_view(), name='delete'),
+    path('delete_done/<int:user_pk>', DeleteCustomerDone.as_view(), name='done'),
     path('detail/<int:pk>', DetailCustomer.as_view(), name='detail'),
     path('list/', CustomerList.as_view(), name='list'),
     path('change_password_view/', ChangePasswordViewCustomer.as_view(), name='change_password_view'),

@@ -74,17 +74,6 @@ class ChangePasswordViewCustomer(LoginRequiredMixin, PasswordChangeView):
 class ChangePasswordDoneCustomer(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'customer/password_change_done.html'
 
-"""
-class ResetPasswordViewCustomer(LoginRequiredMixin, PasswordResetView):
-    template_name = 'customer/password_reset_view.html'
-
-    def get_success_url(self):
-        return reverse_lazy('customer:password_change_done')
-
-
-class ResetPasswordDoneCustomer(LoginRequiredMixin, PasswordResetDoneView):
-    template_name = 'customer/password_change_done.html'
-"""
 
 class CustomerList(LoginRequiredMixin, ListView):
     template_name = 'customer/list_customer.html'
@@ -112,6 +101,8 @@ class UpdateMainCustomer(LoginRequiredMixin, UpdateView):
             defaults = {}
         )
         return obj
+
+
 class UpdateCustomer(LoginRequiredMixin, UpdateView):
     model = Customer
     fields = ('code_phone',
@@ -138,15 +129,29 @@ class UpdateCustomer(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('customer:list')"""
 
-class DeleteCustomer(LoginRequiredMixin, UpdateView):
-    model = User
-    fields = ('is_active',)
-              
+class DeleteCustomer(LoginRequiredMixin, DetailView):
+    model = Customer
     template_name = 'customer/delete_customer.html'
     
     def get_success_url(self):
-        return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
+        return reverse_lazy('customer:done', kwargs={'pk':self.object.pk})
     
+    """def get_object(self):
+        user_pk = self.kwargs.get('user_pk')
+        user =  User.objects.get(pk=user_pk)
+        return user"""
+
+
+class DeleteCustomerDone(LoginRequiredMixin, UpdateView):
+    model = Customer
+    #fields = ('is_active',)
+    form_class = CustomerForm
+              
+    template_name = 'customer/delete_customer_done.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
+
     def get_object(self):
         user_pk = self.kwargs.get('user_pk')
         user =  User.objects.get(pk=user_pk)
