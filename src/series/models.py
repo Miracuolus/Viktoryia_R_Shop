@@ -4,7 +4,8 @@ from django.db import models
 class Series(models.Model):
     name = models.CharField(
         verbose_name='Серия',
-        max_length= 200
+        max_length= 200,
+        unique=True,
     )
     image = models.ImageField(
         verbose_name='Изображение',
@@ -19,6 +20,8 @@ class Series(models.Model):
 
     class Meta: 
         ordering = ['name']
+        verbose_name = 'Серия'
+        verbose_name_plural = 'Серии'
     
     def __str__(self):
         return f'{self.name}'

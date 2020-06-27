@@ -14,7 +14,11 @@
                 {% for author in object.author.all %}
                     <h2>{{ author.name }}</h2>
                 {% endfor %}
-                <p class="lead">{{ object.description }}</p>
+                {% if {{ object.description }} %}
+                    <p class="lead">{{ object.description }}</p>
+                {% else %}
+                    <p class="lead">{{ object.short_description }}</p>
+                {% endif %}
             </div>
             <div class="col-md-5 order-md-1">
                 <img src="{{ object.photo.url }}" alt="Изображение книги" height="600px" width="400px">

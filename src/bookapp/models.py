@@ -11,6 +11,7 @@ class Book(models.Model):
     name = models.CharField(
         verbose_name='Название книги',
         max_length= 200,
+        unique=True,
     )
     photo = models.ImageField(
         verbose_name='Изображение',
@@ -122,6 +123,8 @@ class Book(models.Model):
         permissions=[('view_active_book', 'Can view active books'),
                      ('view_admin_db', 'Can view admin db'),
         ]
+        verbose_name = 'Книга'
+        verbose_name_plural = 'Книги'
 
     def __str__(self):
         return f'{self.name}'

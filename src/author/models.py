@@ -6,6 +6,7 @@ class Author(models.Model):
     name = models.CharField(
         verbose_name='Автор',
         max_length= 200,
+        unique=True,
     )
 
     date = models.DateField(
@@ -25,6 +26,8 @@ class Author(models.Model):
 
     class Meta: 
         ordering = ['name']
+        verbose_name = 'Автор'
+        verbose_name_plural = 'Авторы'
     
     def __str__(self):
         return f'{self.name}'

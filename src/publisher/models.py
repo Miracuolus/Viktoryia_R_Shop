@@ -5,6 +5,7 @@ class Publisher(models.Model):
     name = models.CharField(
         verbose_name='Издательство',
         max_length= 100,
+        unique=True,
     )
     image = models.ImageField(
         verbose_name='Изображение',
@@ -21,6 +22,8 @@ class Publisher(models.Model):
 
     class Meta: 
         ordering = ['name']
+        verbose_name = 'Издательство'
+        verbose_name_plural = 'Издательства'
     
     def __str__(self):
         return f'{self.name}'

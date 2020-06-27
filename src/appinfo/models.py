@@ -4,7 +4,8 @@ from django.db import models
 class AppInfo(models.Model):
     name = models.CharField(
         verbose_name='Название магазина',
-        max_length= 200
+        max_length= 200,
+        unique=True
     )
     image = models.ImageField(
         verbose_name='Логотип магазина',
@@ -24,6 +25,11 @@ class AppInfo(models.Model):
     delivery = models.TextField(
         verbose_name='Доставка',
     )
+
+    class Meta: 
+        ordering = ['name']
+        verbose_name = 'О магазине'
+        verbose_name_plural = 'О магазине'
 
     def __str__(self):
         return f'{self.name}'
