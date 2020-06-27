@@ -11,6 +11,7 @@ from django.views.generic import (
 from django.urls import reverse_lazy
 import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
+from django.core.paginator import Paginator
 
 # Create your views here.
 class HomePage(TemplateView):
@@ -46,6 +47,7 @@ class BookList(LoginRequiredMixin, ListView):
     template_name = 'bookapp/list_book.html'
     context_object_name = 'book_list'
     model = Book
+    paginate_by = 20
     field = ('name',
              'photo',
              'price',
@@ -54,6 +56,7 @@ class BookList(LoginRequiredMixin, ListView):
              'quantity',
              'active',
     )
+    
 
 class DetailBook(DetailView):
     model = Book
@@ -65,10 +68,13 @@ class DetailBook(DetailView):
 class ListContextBook(ListView):
     template_name = 'bookapp/list_home_book.html'
     model = Book
+    paginate_by = 15
+
     def get_context_data(self, **kwargs):
         user = self.request.user
         user.has_perm('bookapp.view_active_book')
-        return super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
+        return context
     
     def get_queryset(self):
         """
@@ -84,6 +90,7 @@ class ListContextBook(ListView):
 class ListNewBook(ListView):
     template_name = 'bookapp/list_home_book.html'
     model = Book
+    paginate_by = 15
     field = ('name',
              'photo',
              'price',
@@ -92,7 +99,15 @@ class ListNewBook(ListView):
              'quantity',
              'active',
     )
-    def get_context_data(self, **kwargs):
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
+            return self.model.objects.all().filter(active=True).order_by('created')
+        else:
+            return super().get_queryset()
+
+    """def get_context_data(self, **kwargs):
         user = self.request.user
         if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
             context = super().get_context_data(**kwargs)
@@ -110,13 +125,14 @@ class ListNewBook(ListView):
             context['object_list'] = new_book
             return context
         else:
-            return super().get_context_data(**kwargs)
+            return super().get_context_data(**kwargs)"""
 
 
 
 class ListPopularBook(ListView):
     template_name = 'bookapp/list_home_book.html'
     model = Book
+    paginate_by = 15
     field = ('name',
              'photo',
              'price',
@@ -126,7 +142,14 @@ class ListPopularBook(ListView):
              'active',
     )
 
-    def get_context_data(self, **kwargs):
+    def get_queryset(self):
+        user = self.request.user
+        if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
+            return self.model.objects.all().filter(rating__gte=9).filter(active=True).order_by('rating')
+        else:
+            return super().get_queryset()
+
+    """def get_context_data(self, **kwargs):
         user = self.request.user
         if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
             context = super().get_context_data(**kwargs)
@@ -141,12 +164,13 @@ class ListPopularBook(ListView):
             context['object_list'] = popular_book
             return context
         else:
-            return super().get_context_data(**kwargs)
+            return super().get_context_data(**kwargs)"""
 
 
 class ListSaleBook(ListView):
     template_name = 'bookapp/list_home_book.html'
     model = Book
+    paginate_by = 15
     field = ('name',
              'photo',
              'price',
@@ -155,8 +179,15 @@ class ListSaleBook(ListView):
              'quantity',
              'active',
     )
-
-    def get_context_data(self, **kwargs):
+    
+    def get_queryset(self):
+        user = self.request.user
+        if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
+            return self.model.objects.all().filter(price__lte = 9.99).filter(active=True).order_by('price')
+        else:
+            return super().get_queryset()
+    
+    """def get_context_data(self, **kwargs):
         user = self.request.user
         if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
             context = super().get_context_data(**kwargs)
@@ -171,4 +202,4 @@ class ListSaleBook(ListView):
             context['object_list'] = sale_book
             return context
         else:
-            return super().get_context_data(**kwargs)
+            return super().get_context_data(**kwargs)"""
