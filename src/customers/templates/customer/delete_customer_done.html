@@ -1,20 +1,13 @@
-{% extends 'base_admin.html' %}
+{% extends 'base.html' %}
 {% block title %}Удаление пользователя {{ object.customer }}{% endblock title %}
 
 {% block body %}
-    {% if user.is_staff or user.is_superuser %}
-        {% include "top_menu_admin.html" %}
-    {% else %}
-        {% include "top_menu_main_book.html" %}
-    {% endif %}
-    <div class="col-md-8 order-md-1">
+    <div class="col-md-8 order-md-1" align="center">
         <br>
         <h4 class="mb-3">Пользователь - {{ object.customer }} успешно удален</h4>
         <br>
-        {% if user.is_superuser or user.is_staff %}
-            <div class="i-popup__line">
-                <a id="loginFormRegisterLink" href="{% url 'customer:list ' %}" data-button-state="second">Вернуться к списку пользователей</a>
-            </div>
-        {% endif %}
+        <div class="i-popup__line">
+        <a id="loginFormRegisterLink" href="{% url 'customer:list' %}" data-button-state="second">Назад</a>
+        </div>
     </div>
-{% endblock body %}   
+{% endblock body %}

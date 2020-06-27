@@ -1,6 +1,7 @@
 from django.urls import path, include
 from  . views import (CustomerList,
-                      UpdateMainCustomer, 
+                      UpdateMainCustomerAdmin,
+                      UpdateMainCustomerUser,
                       UpdateCustomer, 
                       CreateCustomer, 
                       DeleteCustomer, 
@@ -14,7 +15,8 @@ app_name = 'customer'
 
 urlpatterns = [
     path('create/', CreateCustomer.as_view(), name='create'),
-    path('updatemain/<int:user_pk>', UpdateMainCustomer.as_view(), name='updatemain'),
+    path('updatemainadmin/<int:user_pk>', UpdateMainCustomerAdmin.as_view(), name='updatemainadmin'),
+    path('updatemainuser/<int:user_pk>', UpdateMainCustomerUser.as_view(), name='updatemainuser'),
     path('update/<int:pk>', UpdateCustomer.as_view(), name='update'),
     path('delete/<int:pk>', DeleteCustomer.as_view(), name='delete'),
     path('delete_done/<int:user_pk>', DeleteCustomerDone.as_view(), name='done'),

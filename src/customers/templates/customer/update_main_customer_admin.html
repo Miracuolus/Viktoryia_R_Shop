@@ -1,0 +1,35 @@
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Редактирование пользователя {{ object }}{% endblock title %}
+
+{% block body %}
+    {% include "top_menu_admin.html" %}
+    <div class="col-md-8 order-md-1">
+        <br>
+        <h4 class="mb-3">Редактирование пользователя {{ object }}</h4>
+        <form class="needs-validation" novalidate action="" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form|crispy }}
+                <div class="b-description__sub">
+            <tr class="b-description__more">
+                <td colspan="2">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="mb-0">
+                                    <a href="{% url 'customer:update' object.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Редактировать дополнительные данные пользователя {{ object }}
+                                    </button></a>
+                                </h2>
+                            </div>
+                    </div>
+                </td>
+            </tr>
+        </div>
+            </div>
+            <input type="submit" value="Обновить" class="btn btn-info">
+        </form>
+        <br>
+    </div>
+{% endblock body %}
