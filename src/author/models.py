@@ -5,7 +5,7 @@ import datetime
 class Author(models.Model):
     name = models.CharField(
         verbose_name='Автор',
-        max_length= 200
+        max_length= 200,
     )
 
     date = models.DateField(

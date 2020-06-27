@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import permission_required
 class Book(models.Model):
     name = models.CharField(
         verbose_name='Название книги',
-        max_length= 200
+        max_length= 200,
     )
     photo = models.ImageField(
         verbose_name='Изображение',

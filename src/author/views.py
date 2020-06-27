@@ -41,6 +41,7 @@ class AuthorList(LoginRequiredMixin, ListView):
     template_name = 'author/list_author.html'
     model = Author
     form_class = AuthorForm
+    paginate_by = 10
 
 
 class DetailAuthor(DetailView):

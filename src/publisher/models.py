@@ -4,7 +4,7 @@ from django.db import models
 class Publisher(models.Model):
     name = models.CharField(
         verbose_name='Издательство',
-        max_length= 100
+        max_length= 100,
     )
     image = models.ImageField(
         verbose_name='Изображение',
