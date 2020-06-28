@@ -30,12 +30,17 @@ urlpatterns = [
     path('genre/', include('genre.urls', namespace='genre')), # genre app
     path('publisher/', include('publisher.urls', namespace='publisher')), # publisher app
     path('customer/', include('customers.urls', namespace='customer')), # customers app
+    path('cart/', include('cart.urls', namespace='cart')), # cart app
+
     path('manager/', AdminHomePage.as_view(), name='main_admin'), # admin home page
+
     path('sign_in/', SignIn.as_view(), name='sign_in'), # sign_in page
     path('log_in/', LogIn.as_view(), name='log_in'), # log_in page
     path('log_out/', LogOut.as_view(), name='log_out'), # log_out page
     path('appinfo/', include('appinfo.urls', namespace='appinfo')), # log_out page
+
     path('', HomePage.as_view()), # home page
+
     path('reset_password_view/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_view.html'), name='reset_password'),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
     path('reset_password_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
