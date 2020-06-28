@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'publisher',
     'customers',
     'appinfo',
+    'cart',
 ]
 
 MIDDLEWARE = [

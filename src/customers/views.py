@@ -79,6 +79,7 @@ class CustomerList(LoginRequiredMixin, ListView):
     template_name = 'customer/list_customer.html'
     model = Customer
     form_class = CustomerForm
+    paginate_by = 20
 
 
 class UpdateMainCustomerAdmin(LoginRequiredMixin, UpdateView):
@@ -178,6 +179,7 @@ class DeleteCustomerDone(LoginRequiredMixin, UpdateView):
         user.is_active = False
         user.save()
         return user
+
 
 class DetailCustomer(LoginRequiredMixin, DetailView):
     model = Customer

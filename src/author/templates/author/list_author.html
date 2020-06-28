@@ -34,6 +34,7 @@
              </tbody>
         </table>
         <br>
+        {% if page_obj.paginator.page_range|length == 2%}
         <nav aria-label="...">
             <ul class="pagination">
                 <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
@@ -67,5 +68,6 @@
             </ul>
         </nav>
         <br>
+        {% endif %}
     </div>
 {% endblock body %}   
