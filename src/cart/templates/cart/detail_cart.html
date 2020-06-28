@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}Информация по книге {{ object }}{% endblock title %}
+
+{% block body %}
+    {% include "top_menu_main_book.html" %}
+    <!-- START THE FEATURETTES -->
+    <div class="container marketing">
+        <br>
+        <h4 class="mb-3">Информация по книге {{ object }}</h4>
+        <h4 class="mb-3">{{ object.price }} руб.</span></h4>
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                {% for author in object.author.all %}
+                    <h2>{{ author.name }}</h2>
+                {% endfor %}
+                {% if {{ object.description }} %}
+                    <p class="lead">{{ object.description }}</p>
+                {% else %}
+                    <p class="lead">{{ object.short_description }}</p>
+                {% endif %}
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img src="{{ object.photo.url }}" alt="Изображение книги" height="600px" width="400px">
+            </div>
+        </div>
+
+        <!-- Parametres-->
+        <div class="b-description__sub">
+            <tr class="b-description__more">
+                <td colspan="2">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Параметры книги
+                                    </button>
+                                </h2>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <table>
+                                        <tbody>
+                                            {% if object.genre.all %}
+                                                <tr class="">
+                                                    <td>Жанр</td>
+                                                    <td>
+                                                        {% for genre in object.genre.all %}
+                                                            <a href="{% url 'genre:detail' genre.pk %}" title="Подробнее об жанре &laquo;{{ genre.name }}&raquo;">{{ genre.name }}</a>
+                                                        {% endfor %}
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                            {% if object.series.name %}
+                                                <tr class="">
+                                                    <td>Серия</td>
+                                                    <td>
+                                                        <a href="{% url 'series:detail' object.series.pk %}" title="Подробнее об серии &laquo;{{ object.series.name }}&raquo;">{{ object.series.name }}</a>
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                            {% if object.publisher.name %}
+                                                <tr class="">
+                                                    <td>Издательство</td>
+                                                    <td>
+                                                        <a href="{% url 'publisher:detail' object.publisher.pk %}" title="Подробнее об издательстве &laquo;{{ object.publisher.name }}&raquo;">{{ object.publisher.name }}</a>
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                            {% if object.year %}
+                                                <tr class="">
+                                                    <td>Год издания</td>
+                                                    <td>{{ object.year }}</td>
+                                                </tr>
+                                            {% endif %}
+                                            {% if object.pages %}
+                                                <tr class="">
+                                                    <td>Страниц</td>
+                                                    <td>{{ object.pages }}</td>
+                                                </tr>
+                                            {% endif %}
+                                            {% if object.bookbinding %}
+                                                <tr class="">
+                                                    <td>Переплет</td>
+                                                    <td>{{ object.bookbinding }}</td>
+                                                </tr>
+                                            {% endif %}
+                                            {% if object.book_format %}
+                                                <tr class="">
+                                                    <td>Формат</td>
+                                                    <td>{{ object.book_format }}</td>
+                                                </tr>
+                                            {% endif %}
+                                            {% if object.isbn %}
+                                                <tr class="">
+                                                    <td>ISBN</td>
+                                                    <td>{{ object.isbn }}</td>
+                                                </tr>
+                                            {% endif %}
+                                            {% if object.weight %}
+                                                <tr class="">
+                                                    <td>Вес (гр)</td>
+                                                    <td>{{ object.weight }}</td>
+                                                </tr>
+                                            {% endif %}
+                                            {% if object.age_limit %}
+                                                <tr class="">
+                                                    <td>Возрастные ограничения</td>
+                                                    <td>{{ object.age_limit }}</td>
+                                                </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </div>
+    </div><!-- /.container -->
+{% endblock body %}
