@@ -14,7 +14,7 @@
                 {% for author in object.author.all %}
                     <h2>{{ author.name }}</h2>
                 {% endfor %}
-                {% if {{ object.description }} %}
+                {% if object.description %}
                     <p class="lead">{{ object.description }}</p>
                 {% else %}
                     <p class="lead">{{ object.short_description }}</p>
