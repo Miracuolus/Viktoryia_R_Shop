@@ -11,12 +11,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'book:list_all_book' %}">Список книг<span class="sr-only">(current)</span></a>
                 </li>
-                {% if user.is_staff or user.is_superuser %}
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Корзина</a>
-                    </li>
-                {% endif %}
                 {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Профиль</a>
@@ -26,6 +20,12 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'log_out' %}">Выйти</a>
                         </div>
+                    </li>
+                {% endif %}
+                {% if user.is_staff or user.is_superuser %}
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cart:detail' user.pk %}"><i class="fas fa-shopping-cart"></i></a>
                     </li>
                 {% endif %}
                 {% if user.is_staff %}
