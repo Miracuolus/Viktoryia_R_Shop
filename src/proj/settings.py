@@ -142,9 +142,9 @@ LOGOUT_URL = reverse_lazy('log_out')
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/Viktoryia/mysite/static' # куда перенести файлы
 
-#MEDIA_URL = '/media/' # для пользователя
+MEDIA_URL = '/media/' # для пользователя
 MEDIA_ROOT = '/home/Viktoryia/mysite/media' # для боевого сервера
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # для локальной разработки
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # для локальной разработки
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
