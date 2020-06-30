@@ -12,6 +12,7 @@ import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 from django.core.paginator import Paginator
 from bookapp.models import Book
+from decimal import Decimal
 
 # Create your views here.
 class CreateCart(LoginRequiredMixin, CreateView):
@@ -71,9 +72,12 @@ class AddBooktoCart(UpdateView):
     template_name = 'cart/add_cart.html'
     fields = ('quantity',)
 
+    def get_success_url(self):
+        return reverse_lazy('cart:add')
+
     def get_object(self):
-        cart_pk = self.request.session.get('cart_pk')
         book_pk = self.request.GET.get('book_pk')
+        cart_pk = self.request.session.get('cart_pk')
         book = Book.objects.get(pk=book_pk)
         user = self.request.user
         cart, created = Cart.objects.get_or_create(
