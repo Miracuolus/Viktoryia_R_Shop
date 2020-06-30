@@ -5,10 +5,8 @@
 {% block body %}
     {% if user.is_staff or user.is_superuser %}
         {% include "top_menu_admin.html" %}
-    {% else %}
-        {% include "top_menu_main_book.html" %}
     {% endif %}
-    <div class="col-md-8 order-md-1">
+        <div class="col-md-8 order-md-1">
         <br>
         <h4 class="mb-3">Редактирование дополнительных параметров пользователя {{ object }}</h4>
         <form class="needs-validation" novalidate action="" method="POST">

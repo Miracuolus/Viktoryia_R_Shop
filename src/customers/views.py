@@ -28,7 +28,7 @@ User = get_user_model()
 
 class SignIn(LoginView):
     template_name = 'customer/sign_in.html'
-    
+
     def get_context_data(self, **kwargs):
         self.request.session.flush()
         return super().get_context_data(**kwargs)
@@ -160,11 +160,7 @@ class DeleteCustomer(LoginRequiredMixin, DetailView):
     
     def get_success_url(self):
         return reverse_lazy('customer:done', kwargs={'pk':self.object.pk})
-    
-    """def get_object(self):
-        user_pk = self.kwargs.get('user_pk')
-        user =  User.objects.get(pk=user_pk)
-        return user"""
+
 
 
 class DeleteCustomerDone(LoginRequiredMixin, UpdateView):

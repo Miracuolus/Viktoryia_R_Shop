@@ -1,9 +1,10 @@
-{% extends 'base_admin.html' %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block title %}Редактирование пользователя {{ object }}{% endblock title %}
 
 {% block body %}
     {% include "top_menu_main_book.html" %}
+    <div class="container marketing">
     <div class="col-md-8 order-md-1">
         <br>
         <h4 class="mb-3">Редактирование пользователя {{ object }}</h4>
