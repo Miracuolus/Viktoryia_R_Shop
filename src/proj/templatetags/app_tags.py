@@ -2,7 +2,7 @@ from django import template
 
 register = template.Library()
 
-"""from appinfo.models import AppInfo
+from appinfo.models import AppInfo
 from decimal import Decimal
 
 
@@ -34,4 +34,4 @@ def sum_filter():
     global sum_price
     price = sum_price
     sum_price = 0
-    return price"""
+    return price
