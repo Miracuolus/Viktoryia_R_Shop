@@ -18,7 +18,7 @@
                 <a href="{% url 'sign_in' %}"><h4 class="text-white">Войти</h4></a>
               </li>
             {% endif %}
-            <li><a href="#" class="text-white"><h4 class="text-white"><i class="fas fa-shopping-cart"></i></h4></a></li>
+            <li><a href="{% url 'cart:list' %}" class="text-white"><h4 class="text-white"><i class="fas fa-shopping-cart"></i></h4></a></li>
             {% if user.is_authenticated %}
               <li class="nav-item">
                 <a class="text-white" href="{% url 'customer:detail' user.pk %}">Профиль</a>

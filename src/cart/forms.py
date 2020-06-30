@@ -7,5 +7,4 @@ class CartForm(forms.ModelForm):
         model = BooktoCart
         fields = ('book',
                   'quantity',
-                  'price',
         )

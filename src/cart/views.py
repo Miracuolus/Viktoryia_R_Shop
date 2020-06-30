@@ -48,32 +48,26 @@ class ListCart(ListView):
     form_class = CartForm
     template_name = 'cart/list_cart.html'
 
-    def get_success_url(self):
-        return reverse_lazy('book:detail', kwargs={'pk':self.object.pk})
-    
-
-    """def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['updategenre'] = CartForm(instance=Cart.objects.get(pk=self.kwargs['user_pk']))
-        #UpdateGenre.success_url = '/update/' + str(self.kwargs['pk'])
-        return context"""
-
-
     """def get_object(self):
-        user_pk = self.kwargs.get('user_pk')
-        obj, created = Cart.objects.get_or_create(
-            user = User.objects.get(pk=user_pk),
-
+        cart_pk = self.request.session['cart_pk']
+        user = self.request.user
+        obj, created = BooktoCart.objects.get(
+            pk = cart_pk,
+            user = user,
             defaults = {}
         )
         return obj"""
+
+    def get_success_url(self):    
+        return reverse_lazy('cart:list')
+
 class AddBooktoCart(UpdateView):
     model = BooktoCart
     template_name = 'cart/add_cart.html'
     fields = ('quantity',)
 
     def get_success_url(self):
-        return reverse_lazy('cart:add')
+        return reverse_lazy('cart:list')
 
     def get_object(self):
         book_pk = self.request.GET.get('book_pk')
