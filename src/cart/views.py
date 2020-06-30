@@ -52,11 +52,19 @@ class ListCart(ListView):
         context = super().get_context_data(**kwargs)
         cart_pk = self.request.session.get('cart_pk')
         user = self.request.user
-        cart = Cart.objects.filter(pk=cart_pk, user=user)
+        print(cart_pk)
+        print(user)
+        if user.is_authenticated:
+            cart = Cart.objects.filter(pk=cart_pk, user=user)
+            print(cart)
+        else:
+            cart = Cart.objects.filter(pk=cart_pk)
+            print(cart)
         if cart:
             book_in_cart = self.model.objects.all().filter(cart=cart[0])
             context['object_list'] = book_in_cart
             return context
+        
 
 
 
@@ -76,11 +84,18 @@ class AddBooktoCart(UpdateView):
         cart_pk = self.request.session.get('cart_pk')
         book = Book.objects.get(pk=book_pk)
         user = self.request.user
-        cart, created = Cart.objects.get_or_create(
-            pk = cart_pk,
-            user = user,
-            defaults = {}
-        )
+        print(user)
+        if user.is_authenticated:
+            cart, created = Cart.objects.get_or_create(
+                pk = cart_pk,
+                user = user,
+                defaults = {}
+            )
+        else:
+            cart, created = Cart.objects.get_or_create(
+                pk = cart_pk,
+                defaults = {}
+            )
         if created:
             self.request.session['cart_pk'] = cart.pk
         obj, created = self.model.objects.get_or_create(

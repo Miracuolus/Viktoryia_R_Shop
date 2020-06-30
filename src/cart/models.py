@@ -10,6 +10,8 @@ class Cart(models.Model):
         User,
         related_name='carts',
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
