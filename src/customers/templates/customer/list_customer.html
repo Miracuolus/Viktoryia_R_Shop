@@ -54,40 +54,6 @@
             </tbody>
         </table>
         <br>
-        {% if page_obj.paginator.page_range|length == 2%}
-        <nav aria-label="...">
-            <ul class="pagination">
-                <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
-                    <a class="page-link" href="{% if page_obj.has_previous %}?page=1{% else %}#{% endif %}" tabindex="-1" aria-disabled="true">Первая</a>
-                </li>
-                <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
-                    <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}" tabindex="-1" aria-disabled="true">Предыдущая</a>
-                </li>
-                {% for page in page_obj.paginator.page_range %}
-                    {% if page_obj.number == page %}
-                        {% if page_obj.number == 1 %}
-                            <li class="page-item {% if page_obj.number == page %}active{% endif %}"><a class="page-link" href="?page=1">1</a></li>
-                            {% if page_obj.paginator.page_range|length >= 2 %}<li class="page-item"><a class="page-link" href="?page=2">2</a></li>{% endif %}
-                            {% if page_obj.paginator.page_range|length >= 3 %}<li class="page-item"><a class="page-link" href="?page=3">3</a></li>{% endif %}
-                        {% elif page_obj.number == page_obj.paginator.page_range|length %}
-                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
-                            <li class="page-item {% if page_obj.number == page %}active{% endif %}"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a></li>
-                        {% else %}
-                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
-                            <li class="page-item {% if page_obj.number == page %}active{% endif %}"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
-                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-                <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
-                    <a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% else %}#{% endif %}" tabindex="-1" aria-disabled="true">Следующая</a>
-                </li>
-                <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
-                    <a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.paginator.num_pages }}{% else %}#{% endif %}" tabindex="-1" aria-disabled="true">Последняя</a>
-                </li>
-            </ul>
-        </nav>
-        <br>
-        {% endif %}
+        {% include "pagination.html" %}
     </div>
 {% endblock body %}   

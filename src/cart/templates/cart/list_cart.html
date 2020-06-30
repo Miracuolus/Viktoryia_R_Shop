@@ -18,6 +18,9 @@
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                         <div>
                             <h6 class="my-0">{{ obj.book.name }}</h6>
+                            {% for author in obj.book.author.all %}
+                                <h6><small class="text-muted">{{ author.name }}</small></h6>
+                            {% endfor %}
                             <small class="text-muted">{{ obj.quantity }} х {{ obj.book.price }} руб.</small>
                         </div>
                         <span class="text-muted">{% multiply obj.quantity obj.book.price %}</span>
