@@ -53,17 +53,16 @@ class ListCart(CreateView):
         #context['updategenre'] = GenreForm(instance=Genre.objects.get(pk=self.kwargs['pk']))
         cart_pk = self.request.session.get('cart_pk')
         user = self.request.user
-        cart = Cart.objects.filter(pk=cart_pk, user=user)
-        print(cart_pk)
         print(user)
-        print(cart[0])
-        #book_in_cart = self.model.objects.get(cart=cart[0])
-        book_in_cart = self.model.objects.all().filter(cart=cart[0])
-        print(book_in_cart)
-        print(type(book_in_cart))
-        print(len(book_in_cart))
-        context['object_list'] = book_in_cart
+        cart = Cart.objects.filter(pk=cart_pk, user=user)
+        if cart:
+            print(cart)
+            #book_in_cart = self.model.objects.get(cart=cart)
+            book_in_cart = self.model.objects.all().filter(cart=cart[0])
+            print(book_in_cart)
+            context['object_list'] = book_in_cart
         return context
+
 
 
     def get_success_url(self):    
