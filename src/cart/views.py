@@ -1,4 +1,4 @@
-from . models import BooktoCart
+from . models import BooktoCart, Cart
 from . forms import CartForm
 from django.views.generic import (TemplateView, 
                                   CreateView, 
@@ -11,6 +11,7 @@ from django.urls import reverse_lazy
 import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 from django.core.paginator import Paginator
+from bookapp.models import Book
 
 # Create your views here.
 class CreateCart(LoginRequiredMixin, CreateView):
@@ -70,10 +71,21 @@ class AddBooktoCart(UpdateView):
     template_name = 'cart/add_cart.html'
     fields = ('quantity',)
 
-    """def get_object(self):
-        obj, created = self.model.objects.get_or_create(
-            cart = 
-            phone = 
+    def get_object(self):
+        cart_pk = self.request.session.get('cart_pk')
+        book_pk = self.request.GET.get('book_pk')
+        book = Book.objects.get(pk=book_pk)
+        user = self.request.user
+        cart, created = Cart.objects.get_or_create(
+            pk = cart_pk,
+            user = user,
             defaults = {}
         )
-        return obj"""
+        if created:
+            self.request.session['cart_pk'] = cart.pk
+        obj, created = self.model.objects.get_or_create(
+            cart = cart,
+            book = book,
+            defaults = {}
+        )
+        return obj
