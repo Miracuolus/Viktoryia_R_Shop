@@ -43,25 +43,20 @@ class DeleteCart(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         return reverse_lazy('cart:detail', kwargs={'pk':self.object.pk})
 
-class ListCart(CreateView):
+class ListCart(ListView):
     model = BooktoCart
     form_class = CartForm
     template_name = 'cart/list_cart.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #context['updategenre'] = GenreForm(instance=Genre.objects.get(pk=self.kwargs['pk']))
         cart_pk = self.request.session.get('cart_pk')
         user = self.request.user
-        print(user)
         cart = Cart.objects.filter(pk=cart_pk, user=user)
         if cart:
-            print(cart)
-            #book_in_cart = self.model.objects.get(cart=cart)
             book_in_cart = self.model.objects.all().filter(cart=cart[0])
-            print(book_in_cart)
             context['object_list'] = book_in_cart
-        return context
+            return context
 
 
 

@@ -31,12 +31,6 @@ class BooktoCart(models.Model):
         verbose_name='Количество',
         default=1,
     )
-    price = models.DecimalField(
-        verbose_name='Цена',
-        max_digits=6,
-        decimal_places=2,
-        default=Decimal('0.00')
-    )
     created = models.DateTimeField(
         verbose_name='Создано',
         auto_now=False, # автом ставить тек время
