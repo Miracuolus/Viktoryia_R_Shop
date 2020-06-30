@@ -19,7 +19,7 @@
                         <div>
                             <h6 class="my-0">{{ obj.book.name }}</h6>
                             <h6>{% for author in obj.book.author.all %}
-                                <small class="text-muted">{{ author.name }}{% if obj.book.author.all|length > 1 %},{% endif %}</small>
+                                <small class="text-muted">{{ author.name }}{% if obj.book.author.all|length > 1 %};{% endif %}</small>
                             {% endfor %}</h6>
                             <small class="text-muted">{{ obj.quantity }} х {{ obj.book.price }} руб.</small>
                         </div>

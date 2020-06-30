@@ -28,6 +28,10 @@ User = get_user_model()
 
 class SignIn(LoginView):
     template_name = 'customer/sign_in.html'
+    
+    def get_context_data(self, **kwargs):
+        self.request.session.flush()
+        return super().get_context_data(**kwargs)
 
 class LogIn(FormView):
     template_name = 'customer/log_in.html'
