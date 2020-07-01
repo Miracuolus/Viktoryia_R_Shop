@@ -15,6 +15,9 @@
                                     <img src="{{ book.photo.url }}" alt="Изображение книги" height="525px" width="350px"> 
                                     <div class="card-body">
                                         <h5 class="card-title">{{ book.name }}</h5>
+                                        {% for author in book.author.all %}
+                                            <h6><small>{{ author.name }}</small></h6>
+                                        {% endfor %}
                                         <p class="card-text">{{ book.short_description }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
