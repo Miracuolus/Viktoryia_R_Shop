@@ -24,6 +24,7 @@ from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
 from django.views.generic.edit import ModelFormMixin
+from django.contrib.messages.views import SuccessMessageMixin
 User = get_user_model()
 
 class SignIn(LoginView):
@@ -107,10 +108,11 @@ class UpdateMainCustomerAdmin(LoginRequiredMixin, UpdateView):
         return obj
     
 
-class UpdateMainCustomerUser(LoginRequiredMixin, UpdateView):
+class UpdateMainCustomerUser(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
     template_name = 'customer/update_main_customer_user.html'
     fields = ('username', 'email', 'first_name', 'last_name')
+    success_message = "Данные пользователя были успешно изменены"
     
     def get_success_url(self):
         user = self.request.user

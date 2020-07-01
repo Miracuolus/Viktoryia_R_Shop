@@ -12,6 +12,7 @@ from django.urls import reverse_lazy
 import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 from django.core.paginator import Paginator
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 class HomePage(TemplateView):
