@@ -13,22 +13,28 @@ from django.contrib.auth.mixins import LoginRequiredMixin # залогиненн
 from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
-class CreateSeries(LoginRequiredMixin, CreateView):
+class CreateSeries(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Series
     form_class = SeriesForm
     template_name = 'series/create_series.html'
     
     def get_success_url(self):
         return reverse_lazy('series:list')
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Серия {self.object} была добавлена'
 
 
-class UpdateSeries(LoginRequiredMixin, UpdateView):
+class UpdateSeries(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Series
     form_class = SeriesForm
     template_name = 'series/update_series.html'
     
     def get_success_url(self):
         return reverse_lazy('series:list')
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Серия {self.object} была изменена'
 
 class DeleteSeries(LoginRequiredMixin, DeleteView):
     model = Series

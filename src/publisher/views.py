@@ -13,22 +13,28 @@ from django.contrib.auth.mixins import LoginRequiredMixin # залогиненн
 from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
-class CreatePublisher(LoginRequiredMixin, CreateView):
+class CreatePublisher(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Publisher
     form_class = PublisherForm
     template_name = 'publisher/create_publisher.html'
     
     def get_success_url(self):
         return reverse_lazy('publisher:list')
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Издательство {self.object} было добавлено'
 
 
-class UpdatePublisher(LoginRequiredMixin, UpdateView):
+class UpdatePublisher(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Publisher
     form_class = PublisherForm
     template_name = 'publisher/update_publisher.html'
     
     def get_success_url(self):
         return reverse_lazy('publisher:list')
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Издательство {self.object} было изменено'
 
 class DeletePublisher(LoginRequiredMixin, DeleteView):
     model = Publisher
