@@ -13,19 +13,28 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Create your views here.
-class CreateAuthor(LoginRequiredMixin, CreateView):
+class CreateAuthor(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Author
     form_class = AuthorForm
     template_name = 'author/create_author.html'
-     
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Автор {self.object} была успешно добавлен'
+
+
     def get_success_url(self):
         return reverse_lazy('author:list')
 
-class UpdateAuthor(LoginRequiredMixin, UpdateView):
+class UpdateAuthor(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Author
     form_class = AuthorForm
     template_name = 'author/update_author.html'
-    
+
+
+    def get_success_message(self, *args, **kwargs):
+        return f'Автор {self.object} была успешно изменен'
+
+
     def get_success_url(self):
         return reverse_lazy('author:list')
 
