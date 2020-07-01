@@ -5,6 +5,7 @@
 {% block body %}
     {% include "top_menu_admin.html" %}
     <div class="col-md-8 order-md-1">
+    {% include "messages.html" %}
         <br>
         <h4 class="mb-3">Редактирование пользователя {{ object }}</h4>
         <form class="needs-validation" novalidate action="" method="POST">

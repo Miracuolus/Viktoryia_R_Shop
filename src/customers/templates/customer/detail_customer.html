@@ -1,18 +1,12 @@
 {% extends 'base.html' %}
-
+{% load app_tags %}
 {% block title %}Информация по пользователю {{ object }}{% endblock title %}
 
 {% block body %}
     {% include "top_menu_main_book.html" %}
     <!-- START THE FEATURETTES -->
     <div class="container marketing">
-    {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+        {% include "messages.html" %}
         <br>
         <h4 class="mb-3">Информация по пользователю {{ object }}</h4>
         <!-- Parametres-->

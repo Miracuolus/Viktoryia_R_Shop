@@ -35,3 +35,18 @@ def sum_filter():
     price = sum_price
     sum_price = 0
     return price
+
+
+@register.simple_tag
+def status_messages(value):
+    if value == 'success':
+        return f'Успех!'
+    elif value == 'debug':
+        return f'Отладка.'
+    elif value == 'info':
+        return f'Информация!'
+    elif value == 'warning':
+        return f'Предупреждение!'
+    elif value == 'error':
+        return f'Ошибка!'
+    

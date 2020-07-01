@@ -87,10 +87,14 @@ class CustomerList(LoginRequiredMixin, ListView):
     paginate_by = 20
 
 
-class UpdateMainCustomerAdmin(LoginRequiredMixin, UpdateView):
+class UpdateMainCustomerAdmin(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
     template_name = 'customer/update_main_customer_admin.html'
     form_class = Form
+
+    def get_success_message(self, *args, **kwargs):
+        return f'Данные пользователя {self.object} были успешно изменены'
+
 
     def get_success_url(self):
         user = self.request.user
@@ -112,8 +116,11 @@ class UpdateMainCustomerUser(LoginRequiredMixin, SuccessMessageMixin, UpdateView
     model = User
     template_name = 'customer/update_main_customer_user.html'
     fields = ('username', 'email', 'first_name', 'last_name')
-    success_message = "Данные пользователя были успешно изменены"
     
+    def get_success_message(self, *args, **kwargs):
+        return f'Данные пользователя {self.object} были успешно изменены'
+
+
     def get_success_url(self):
         user = self.request.user
         if user.is_superuser or user.is_staff:
@@ -130,7 +137,7 @@ class UpdateMainCustomerUser(LoginRequiredMixin, SuccessMessageMixin, UpdateView
         return obj
 
 
-class UpdateCustomer(LoginRequiredMixin, UpdateView):
+class UpdateCustomer(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Customer
     fields = ('code_phone',
               'phone',
@@ -141,7 +148,12 @@ class UpdateCustomer(LoginRequiredMixin, UpdateView):
               'address_2',
     )
     template_name = 'customer/update_customer.html'
+
     
+    def get_success_message(self, *args, **kwargs):
+        return f'Данные пользователя {self.object} были успешно изменены'
+
+
     def get_success_url(self):
         user = self.request.user
         if user.is_superuser or user.is_staff:
