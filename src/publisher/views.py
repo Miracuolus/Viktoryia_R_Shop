@@ -10,6 +10,7 @@ from django.views.generic import (
                                 )
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 class CreatePublisher(LoginRequiredMixin, CreateView):

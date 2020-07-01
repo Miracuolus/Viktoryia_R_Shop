@@ -13,6 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin # залогиненн
 from django.core.paginator import Paginator
 from bookapp.models import Book
 from decimal import Decimal
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 class CreateCart(LoginRequiredMixin, CreateView):
