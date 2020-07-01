@@ -13,7 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin # залогиненн
 from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
-class CreateGenre(LoginRequiredMixin, CreateView):
+class CreateGenre(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Genre
     form_class = GenreForm
     template_name = 'genre/create_genre.html'
@@ -25,9 +25,12 @@ class CreateGenre(LoginRequiredMixin, CreateView):
     
     def get_success_url(self):
         return reverse_lazy('genre:list')
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Жанр {self.object} был добавлен'
 
 
-class UpdateGenre(LoginRequiredMixin, UpdateView):
+class UpdateGenre(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Genre
     form_class = GenreForm
     template_name = 'genre/update_genre.html'
@@ -40,6 +43,9 @@ class UpdateGenre(LoginRequiredMixin, UpdateView):
     
     def get_success_url(self):
         return reverse_lazy('genre:list')
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Жанр {self.object} был изменен'
 
 class DeleteGenre(LoginRequiredMixin, DeleteView):
     model = Genre

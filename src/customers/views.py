@@ -93,7 +93,7 @@ class UpdateMainCustomerAdmin(LoginRequiredMixin, SuccessMessageMixin, UpdateVie
     form_class = Form
 
     def get_success_message(self, *args, **kwargs):
-        return f'Данные пользователя {self.object} были успешно изменены'
+        return f'Данные пользователя {self.object} были изменены'
 
 
     def get_success_url(self):
@@ -118,7 +118,7 @@ class UpdateMainCustomerUser(LoginRequiredMixin, SuccessMessageMixin, UpdateView
     fields = ('username', 'email', 'first_name', 'last_name')
     
     def get_success_message(self, *args, **kwargs):
-        return f'Данные пользователя {self.object} были успешно изменены'
+        return f'Данные пользователя {self.object} были изменены'
 
 
     def get_success_url(self):
@@ -149,9 +149,9 @@ class UpdateCustomer(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     )
     template_name = 'customer/update_customer.html'
 
-    
+
     def get_success_message(self, *args, **kwargs):
-        return f'Данные пользователя {self.object} были успешно изменены'
+        return f'Данные пользователя {self.object} были изменены'
 
 
     def get_success_url(self):

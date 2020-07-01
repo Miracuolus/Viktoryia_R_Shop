@@ -16,7 +16,7 @@ class UpdateAppInfo(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
     def get_success_message(self, *args, **kwargs):
-        return f'Информация о приложении {self.object} была успешно изменена'
+        return f'Информация о приложении {self.object} была изменена'
 
 
     def get_success_url(self):

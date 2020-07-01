@@ -19,7 +19,7 @@ class CreateAuthor(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'author/create_author.html'
     
     def get_success_message(self, *args, **kwargs):
-        return f'Автор {self.object} был успешно добавлен'
+        return f'Автор {self.object} был добавлен'
 
 
     def get_success_url(self):
@@ -32,7 +32,7 @@ class UpdateAuthor(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
     def get_success_message(self, *args, **kwargs):
-        return f'Автор {self.object} была успешно изменен'
+        return f'Автор {self.object} была изменен'
 
 
     def get_success_url(self):
