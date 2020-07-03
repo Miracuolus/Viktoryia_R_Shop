@@ -16,17 +16,35 @@ from decimal import Decimal
 from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
-class UpdateCart(LoginRequiredMixin, UpdateView):
+class UpdateCart(UpdateView):
     model = BooktoCart
-    form_class = CartForm
+    template_name = 'cart/add_cart.html'
+    fields = ('quantity',)
     
-    def get_success_url(self):
-        return reverse_lazy('cart:detail', kwargs={'pk':self.object.pk})
+    def get_success_url(self):    
+        return reverse_lazy('cart:list')
     
     def get_object(self):
-        user_pk = self.kwargs.get('user_pk')
-        obj, created = User.objects.get_or_create(
-            username = User.objects.get(pk=user_pk),
+        book_pk = self.request.GET.get('book_pk')
+        cart_pk = self.request.session.get('cart_pk')
+        book = Book.objects.get(pk=book_pk)
+        user = self.request.user
+        if user.is_authenticated:
+            cart, created = Cart.objects.get_or_create(
+                pk = cart_pk,
+                user = user,
+                defaults = {}
+            )
+        else:
+            cart, created = Cart.objects.get_or_create(
+                pk = cart_pk,
+                defaults = {}
+            )
+        if created:
+            self.request.session['cart_pk'] = cart.pk
+        obj, created = self.model.objects.get_or_create(
+            cart = cart,
+            book = book,
             defaults = {}
         )
         return obj
@@ -54,8 +72,6 @@ class ListCart(ListView):
             book_in_cart = self.model.objects.all().filter(cart=cart[0])
             context['object_list'] = book_in_cart
             return context
-        
-
 
 
     def get_success_url(self):    
