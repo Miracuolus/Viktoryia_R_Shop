@@ -1,5 +1,6 @@
 from . models import BooktoCart, Cart
 from . forms import CartForm
+from django.shortcuts import redirect
 from django.views.generic import (TemplateView, 
                                   CreateView, 
                                   UpdateView, 
@@ -7,7 +8,7 @@ from django.views.generic import (TemplateView,
                                   DeleteView,
                                   DetailView
 )
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 from django.core.paginator import Paginator
@@ -16,7 +17,7 @@ from decimal import Decimal
 from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
-class UpdateCart(UpdateView):
+class UpdateBookCart(UpdateView):
     model = BooktoCart
     template_name = 'cart/add_cart.html'
     fields = ('quantity',)
@@ -49,11 +50,50 @@ class UpdateCart(UpdateView):
         )
         return obj
 
-class DeleteCart(LoginRequiredMixin, DeleteView):
+class DeleteBookCart(UpdateView):
     model = BooktoCart
+    form_class = CartForm
+    template_name = 'cart/list_cart.html'
 
-    def get_success_url(self):
-        return reverse_lazy('cart:detail', kwargs={'pk':self.object.pk})
+    def get_success_url(self):    
+        return reverse('cart:list')
+
+    def get_object(self):
+        book_pk = self.request.GET.get('book_pk')
+        cart_pk = self.request.session.get('cart_pk')
+        book = Book.objects.get(pk=book_pk)
+        #book.delete()
+        user = self.request.user
+        if user.is_authenticated:
+            cart, created = Cart.objects.get_or_create(
+                pk = cart_pk,
+                user = user,
+                defaults = {}
+            )
+        else:
+            cart, created = Cart.objects.get_or_create(
+                pk = cart_pk,
+                defaults = {}
+            )
+        if created:
+            self.request.session['cart_pk'] = cart.pk
+        obj = self.model.objects.get(cart = cart, book = book)
+        obj.delete()
+        return obj
+
+
+class DeleteCart(ListView):
+    model = BooktoCart
+    form_class = CartForm
+    template_name = 'cart/list_cart.html'
+
+    def get_success_url(self):    
+        return reverse_lazy('cart:list')
+
+    def get_queryset(self):
+        self.request.session.flush()
+        self.request.session.pop('cart_pk')
+        return super().get_queryset()
 
 class ListCart(ListView):
     model = BooktoCart

@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {% load app_tags %}
-
 {% block title %}Корзина {{user}}{% endblock title %}
 
 {% block body %}
     {% include "top_menu_main_book.html" %}
-    {% include "messages.html" %}
     <!-- START THE FEATURETTES -->
     <div class="container marketing">
         <br>
@@ -22,10 +20,12 @@
                             <h6>{% for author in obj.book.author.all %}
                                 <small class="text-muted">{{ author.name }}{% if obj.book.author.all|length > 1 %};{% endif %}</small>
                             {% endfor %}</h6>
-                            <small class="text-muted">{{ obj.quantity }} х {{ obj.book.price }} руб.</small> <a href="{% url 'cart:update' %}?book_pk={{ obj.book.pk }}" title="Добавить товар в корзину"><button type="button" class="btn btn-sm btn-outline-secondary" align=left>Изменить количество</button></a>
+                            <small class="text-muted">{{ obj.quantity }} х {{ obj.book.price }} руб.</small>
+                                <a href="{% url 'cart:update' %}?book_pk={{ obj.book.pk }}" title="Изменить количество"><button type="button" class="btn btn-sm btn-outline-secondary" align=left>Изменить количество</button></a>
                         </div>
                         <span class="text-muted">{% multiply obj.quantity obj.book.price %}</span>
                     </li>
+                    <a href="{% url 'cart:delete' %}?book_pk={{ obj.book.pk }}" title="Удалить товар из корзины"><button type="button" class="btn btn-sm btn-outline-secondary">Удалить из корзины</button></a>
                 {% endfor %}
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Сумма (бел.руб)</span>
@@ -35,7 +35,13 @@
             <form class="card p-2">
                 <button type="submit" class="btn btn-success">Заказать</button>
             </form>
+            <form class="card p-2">
+                <a href="{% url 'cart:deletecart' %}" title="Очистить корзину"><button type="submit" class="btn btn-info">Очистить корзину</button></a>
+            </form>
         {% else %}
+        <script>
+            setTimeout(function(){location.href="{% url 'cart:list' %}"}, 100);
+        </script>
         <p>Корзина пуста</p>
         {% endif %}
     </div>
