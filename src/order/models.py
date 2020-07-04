@@ -31,13 +31,13 @@ class Order(models.Model):
         verbose_name='Код номера',
         choices=((8029, '(029)'),(8033, '(033)'),(8044, '(044)'),(8017, '(017)')),
         null=True,
-        blank=True,
+        #blank=True,
     )
     phone = models.PositiveIntegerField(
         verbose_name='Телефон',
         help_text='7 цифр',
         null=True,
-        blank=True,
+        #blank=True,
     )
     country = models.CharField(
         verbose_name='Страна',
