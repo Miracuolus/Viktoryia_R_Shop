@@ -81,25 +81,6 @@ class DeleteBookCart(UpdateView):
         obj.delete()
         return obj
 
-
-class DeleteCart(UpdateView):
-    model = BooktoCart
-    form_class = CartForm
-    template_name = 'cart/list_cart.html'
-
-    def get_success_url(self):    
-        return reverse_lazy('cart:list')
-    
-    def get_object(self):
-        cart_pk = self.request.session.get('cart_pk')
-        user = self.request.user
-        if user.is_authenticated:
-            cart = Cart.objects.get(pk = cart_pk, user = user)
-        else:
-            cart = Cart.objects.get(pk = cart_pk)
-        cert.delete()
-        return cart
-
 class ListCart(ListView):
     model = BooktoCart
     form_class = CartForm

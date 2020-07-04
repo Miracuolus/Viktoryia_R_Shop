@@ -40,7 +40,9 @@
                     <strong> {% sum_filter %}</strong>
                 </li>
             </ul>
-            <a href="{% url 'order:update' %}?price={% sum_order %}" title="Заказать"><button type="submit" class="btn btn-success btn-lg btn-block">Заказать</button></a>
+            <form class="card p-2">
+                <a href="{% url 'cart:update' %}?book_pk={{ obj.book.pk }}" title="Заказать"><button type="submit" class="btn btn-success btn-lg btn-block">Заказать</button></a>
+            </form>
         {% else %}
         <script>
             setTimeout(function(){location.href="{% url 'cart:list' %}"}, 700);

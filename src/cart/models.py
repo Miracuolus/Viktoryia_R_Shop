@@ -12,7 +12,12 @@ class Cart(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
+        verbose_name='Пользователь',
     )
+
+    class Meta: 
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзины'
 
     def __str__(self):
         return f'Корзина #{self.pk}'
@@ -23,11 +28,13 @@ class BooktoCart(models.Model):
         Cart,
         related_name='books',
         on_delete=models.CASCADE,
+        verbose_name='Корзина',
     )
     book = models.ForeignKey(
         Book,
         on_delete=models.PROTECT,
         related_name='book_in_cart',
+        verbose_name='Книга',
     )
     quantity = models.PositiveSmallIntegerField(
         verbose_name='Количество',

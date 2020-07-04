@@ -31,6 +31,7 @@ urlpatterns = [
     path('publisher/', include('publisher.urls', namespace='publisher')), # publisher app
     path('customer/', include('customers.urls', namespace='customer')), # customers app
     path('cart/', include('cart.urls', namespace='cart')), # cart app
+    path('order/', include('order.urls', namespace='order')), # order app
 
     path('manager/', AdminHomePage.as_view(), name='main_admin'), # admin home page
 
