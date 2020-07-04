@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from cart.models import Cart
+from customers.models import Customer
 from decimal import Decimal
 
 # Create your models here.
@@ -31,13 +32,11 @@ class Order(models.Model):
         verbose_name='Код номера',
         choices=((8029, '(029)'),(8033, '(033)'),(8044, '(044)'),(8017, '(017)')),
         null=True,
-        #blank=True,
     )
     phone = models.PositiveIntegerField(
         verbose_name='Телефон',
         help_text='7 цифр',
         null=True,
-        #blank=True,
     )
     country = models.CharField(
         verbose_name='Страна',
@@ -80,10 +79,10 @@ class Order(models.Model):
     )
 
     class Meta: 
-        ordering = ['created']
+        ordering = ['status']
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
     
     def __str__(self):
-        return f'{self.user} {self.created}'
+        return f'{self.user} {self.created}, status {self.status}'
 
