@@ -65,8 +65,16 @@ class DetailOrder(LoginRequiredMixin, DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
         user = self.request.user
         cart_pk = self.request.session.get('cart_pk')
-        order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
-        print(order)
+        cart = Cart.objects.filter(pk = cart_pk, user=user)
+        context['cart'] = BooktoCart.objects.all().filter(cart = cart[0])
         return context
+
+
+class OrderList(LoginRequiredMixin, ListView):
+    template_name = 'order/order_list.html'
+    model = Order
+    paginate_by = 6
+    form_class = OrderForm
