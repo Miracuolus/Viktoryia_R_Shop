@@ -19,12 +19,12 @@ from django.contrib.messages.views import SuccessMessageMixin
 # Create your views here.
 class UpdateOrder(SuccessMessageMixin, UpdateView):
     model = Order
-    template_name = 'order/order_detail.html'
+    template_name = 'order/order_update.html'
     #fields = ('price',)
     form_class = OrderForm
     
     def get_success_url(self):    
-        return reverse_lazy('order:detail')
+        return reverse_lazy('order:detail', kwargs={'pk':self.object.pk})
 
     def get_success_message(self, *args, **kwargs):
         return 'Заказ оформлен'
@@ -53,7 +53,20 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
                         'city': customer[0].city,
                         'index': customer[0].index,
                         'address': customer[0].address_1,
-                        'status': 'in process',
             }
         )
         return obj
+
+
+
+class DetailOrder(LoginRequiredMixin, DetailView):
+    model = Order
+    template_name = 'order/order_detail.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        cart_pk = self.request.session.get('cart_pk')
+        order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
+        print(order)
+        return context
