@@ -11,7 +11,6 @@
         <br>
         <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Детали заказа </span>
-            <span class="badge badge-secondary badge-pill">{{ cart|length }}</span>
         </h4>
         <!-- Parametres-->
         <div class="b-description__sub">
@@ -86,6 +85,10 @@
                                                 </tr>
                                             {% endif %}
                                             <tr class="">
+                                                    <td>Сумма заказа</td>
+                                                    <td>{{ object.price }}</td>
+                                            </tr>
+                                            <tr class="">
                                                     <td>Статус заказа</td>
                                                     <td>{{ object.status }}</td>
                                                 </tr>
@@ -93,57 +96,7 @@
                                     </table>
                                 </div>
                             </div>
-            {% if user.is_anonymous %}
-            {% else %}
-                <div class="b-description__sub">
-                    <tr class="b-description__more">
-                        <td colspan="2">
-                            <div class="accordion" id="accordionExample">
-                                <div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <ul class="list-group mb-3">
-                                            {% for obj in cart %}
-                                                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                                    <div>
-                                                        <h6 class="my-0">{{ obj.book.name }}</h6>
-                                                        <h6>{% for author in obj.book.author.all %}
-                                                            <small class="text-muted">{{ author.name }}{% if obj.book.author.all|length > 1 %};{% endif %}</small>
-                                                            {% endfor %}</h6>
-                                                            <small class="text-muted">{{ obj.quantity }} х {{ obj.book.price }} руб.</small>
-                                                    </div>
-                                                    <span class="text-muted">{% multiply obj.quantity obj.book.price %}</span>
-                                                </li>
-                                                {% endfor %}
-                                                <li class="list-group-item d-flex justify-content-between">
-                                                    <span>Сумма (бел.руб)</span>
-                                                    <strong> {% sum_filter %}</strong>
-                                                </li>
-                                            </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    {% if object.status == 'Отменен' %}
-                    {% else %}
-                    <tr class="b-description__more">
-                        <td colspan="2">
-                            <div class="accordion" id="accordionExample">
-                                <div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <h2 class="mb-0">
-                                            <a href="{% url 'order:delete' object.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                Отменить заказ № {{ object.pk }}
-                                            </button></a>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    {% endif %}
-                </div>
-        {% endif %}
+            
                         </div>
                     </div>
                 </td>

@@ -6,17 +6,17 @@
 {% block body %}
     {% include "top_menu_main_book.html" %}
     <div class="container">
-    <div class="row">
-    
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div>
-      
-    </div>
-
-    <hr>
-
-  </div> <!-- /container -->
+        <br>
+        <div class="row">
+            {% for obj in object_list %}
+                <div class="col-md-4">
+                    <h2>Заказ № {{ obj.pk }}</h2>
+                    <p>Статус: {{ obj.status }}</p>
+                    <p>{{ obj.created }}</p>
+                    <p>Сумма: {{ obj.price }}</p>
+                    <p><a class="btn btn-secondary" href="{% url 'order:detail' obj.pk %}" role="button">Детали &raquo;</a></p>
+                </div>
+            {% endfor %} 
+        </div>
+    </div> <!-- /container -->
 {% endblock body %}

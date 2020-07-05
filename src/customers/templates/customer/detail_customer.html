@@ -138,6 +138,24 @@
                                     <div class="card">
                                         <div class="card-header" id="headingOne">
                                             <h2 class="mb-0">
+                                                <a href="{% url 'order:list' %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    История заказов
+                                                </button></a>
+                                                </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if user.is_staff or user.is_superuser %}
+                    {% else %}
+                        <tr class="b-description__more">
+                            <td colspan="2">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h2 class="mb-0">
                                                 <a href="{% url 'customer:change_password_view' %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                     Смена пароля
                                                 </button></a>
