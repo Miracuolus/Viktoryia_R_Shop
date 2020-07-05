@@ -17,6 +17,25 @@ from decimal import Decimal
 from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
+class UpdateOrder_continue(SuccessMessageMixin, UpdateView):
+    model = Order
+    template_name = 'order/order_update.html'
+    #fields = ('price',)
+    form_class = OrderForm
+
+    def get_success_url(self):
+        user = self.request.user
+        if Order.objects.filter(pk = self.object.pk, status = 'Открыт'):
+            order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
+        if user.is_authenticated:
+            return reverse_lazy('order:detail', kwargs={'pk':self.object.pk})
+        else:
+            self.request.session.flush()
+            return reverse_lazy('main')
+
+    def get_success_message(self, *args, **kwargs):
+        return 'Заказ оформлен'
+
 class UpdateOrder(SuccessMessageMixin, UpdateView):
     model = Order
     template_name = 'order/order_update.html'
@@ -25,7 +44,9 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
     
     def get_success_url(self):
         user = self.request.user
-        if user.is_authenticated:   
+        if Order.objects.filter(pk = self.object.pk, status = 'Открыт'):
+            order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
+        if user.is_authenticated:
             return reverse_lazy('order:detail', kwargs={'pk':self.object.pk})
         else:
             self.request.session.flush()
@@ -81,8 +102,7 @@ class DetailOrder(LoginRequiredMixin, DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if Order.objects.filter(pk = self.object.pk, status = 'Открыт'):
-            order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
+        
         user = self.request.user
         if self.request.session.get('cart_pk'):
             cart_pk = self.request.session.pop('cart_pk')

@@ -96,7 +96,64 @@
                                     </table>
                                 </div>
                             </div>
-            
+            {% if user.is_anonymous %}
+            {% else %}
+                <div class="b-description__sub">
+                    <tr class="b-description__more">
+                        <td colspan="2">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <ul class="list-group mb-3">
+                                            {% for obj in cart %}
+                                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                                    <div>
+                                                        <h6 class="my-0">{{ obj.book.name }}</h6>
+                                                        <h6>{% for author in obj.book.author.all %}
+                                                            <small class="text-muted">{{ author.name }}{% if obj.book.author.all|length > 1 %};{% endif %}</small>
+                                                            {% endfor %}</h6>
+                                                            <small class="text-muted">{{ obj.quantity }} х {{ obj.book.price }} руб.</small>
+                                                    </div>
+                                                    <span class="text-muted">{% multiply obj.quantity obj.book.price %}</span>
+                                                </li>
+                                                {% endfor %}
+                                                <li class="list-group-item d-flex justify-content-between">
+                                                    <span>Сумма (бел.руб)</span>
+                                                    <strong> {% sum_filter %}</strong>
+                                                </li>
+                                            </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% if object.status == 'Отменен' %}
+                    {% else %}
+                    <tr class="b-description__more">
+                        <td colspan="2">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h2 class="mb-0">
+                                        {% if object.status == 'В обработке' or 'Открыт' %}
+                                            <a href="{% url 'order:delete' object.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Отменить заказ № {{ object.pk }}
+                                            </button></a>
+                                        {% endif %}
+                                        {% if object.status == 'Открыт' %}
+                                            <a href="{% url 'order:update_order' object.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Продолжить оформление заказа № {{ object.pk }}
+                                            </button></a>
+                                        {% endif %}
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </div>
+        {% endif %}
                         </div>
                     </div>
                 </td>
