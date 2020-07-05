@@ -7,19 +7,23 @@
     {% include "top_menu_main_book.html" %}
     <div class="container">
         <br>
-        <div class="row">
+        <div class="row mb-2">
             {% for obj in object_list %}
-                <div class="col-md-4">
-                    <h2>Заказ № {{ obj.pk }}</h2>
-                    <p>Статус: {{ obj.status }}</p>
-                    <p>{{ obj.created }}</p>
-                    <p>Сумма: {{ obj.price }}</p>
-                    <p><a class="btn btn-secondary" href="{% url 'order:detail' obj.pk %}" role="button">Детали &raquo;</a></p>
-                </div>
+                <div class="col-md-6">
+                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-primary">{{ obj.status }}</strong>
+                            <h3 class="mb-0">Заказ № {{ obj.pk }}</h3>
+                            <div class="mb-1 text-muted">{{ obj.created }}</div>
+                                <p class="card-text mb-auto">Сумма: {{ obj.price }}</p>
+                                <a href="{% url 'order:detail' obj.pk %}" class="stretched-link">Детали &raquo;</a>
+                            </div>
+                        </div>
+                    </div>
+                
             {% endfor %} 
-    
         </div>
-    <br>
-    {% include "pagination.html" %}
+        <br>
+        {% include "pagination.html" %}
     </div> <!-- /container -->
 {% endblock body %}
