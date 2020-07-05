@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from bookapp.views import HomePage
-from order.views import OrderList
+from order.views import OrderListAdmin
 from customers.views import SignIn, LogIn, LogOut
 from django.contrib.auth import views as auth_views
 
@@ -34,7 +34,7 @@ urlpatterns = [
     path('cart/', include('cart.urls', namespace='cart')), # cart app
     path('order/', include('order.urls', namespace='order')), # order app
 
-    path('manager/', OrderList.as_view(template_name='order/order_list_admin.html'), name='main_admin'), # admin home page
+    path('manager/', OrderListAdmin.as_view(), name='main_admin'), # admin home page
 
     path('sign_in/', SignIn.as_view(), name='sign_in'), # sign_in page
     path('log_in/', LogIn.as_view(), name='log_in'), # log_in page
