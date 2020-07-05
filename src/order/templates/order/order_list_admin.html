@@ -13,7 +13,7 @@
             <thead>
                 <tr>
                     <th>№</th>
-                    <th>User</th>
+                    <th>Пользователь</th>
                     <th>Сумма</th>
                     <th>Статус</th>
                     <th><i class="fas fa-info-circle"></i></th>
@@ -25,7 +25,13 @@
                 {% for obj in object_list %}
                     <tr>
                         <td>{{ obj.pk }}</td>
-                        <td>{{ obj.user }}</td>
+                        <td>
+                            {% if obj.user %}
+                                {{ obj.user }}
+                            {% else %}
+                                Anonymous
+                            {% endif %}
+                        </td>
                         <td>{{ obj.price }}</td>
                         <td>{{ obj.status }} </td>
                         <td><a href="{% url 'order:detail' obj.pk %}" title="подробнее">Подробнее</a></td>

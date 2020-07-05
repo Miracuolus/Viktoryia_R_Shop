@@ -129,6 +129,8 @@
                     </tr>
                     {% if object.status == 'Отменен' %}
                     {% else %}
+                    {% if user.is_superuser or user.is_staff %}
+                    {% else %}
                     <tr class="b-description__more">
                         <td colspan="2">
                             <div class="accordion" id="accordionExample">
@@ -151,6 +153,7 @@
                             </div>
                         </td>
                     </tr>
+                    {% endif %}
                     {% endif %}
                 </div>
         {% endif %}
