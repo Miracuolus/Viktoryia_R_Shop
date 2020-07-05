@@ -106,8 +106,11 @@ class DetailOrder(LoginRequiredMixin, DetailView):
         user = self.request.user
         if self.request.session.get('cart_pk'):
             cart_pk = self.request.session.pop('cart_pk')
-        #cart = Cart.objects.filter(pk = cart_pk, user=user)
-        #context['cart'] = BooktoCart.objects.all().filter(cart = cart[0])
+        order = Order.objects.all().filter(pk = self.object.pk)
+        books = []
+        cart = order[0].cart
+        books = BooktoCart.objects.all().filter(cart=cart)
+        context['cart'] = books
         return context
 
 

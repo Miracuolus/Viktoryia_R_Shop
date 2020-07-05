@@ -17,6 +17,9 @@
                     <p><a class="btn btn-secondary" href="{% url 'order:detail' obj.pk %}" role="button">Детали &raquo;</a></p>
                 </div>
             {% endfor %} 
+    
         </div>
+    <br>
+    {% include "pagination.html" %}
     </div> <!-- /container -->
 {% endblock body %}
