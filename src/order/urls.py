@@ -4,6 +4,7 @@ from order.views import (UpdateOrder,
                          OrderList,
                          DeleteOrder,
                          UpdateOrder_continue,
+                         OrderListAdmin,
 )
 
 app_name = 'order'
@@ -14,4 +15,5 @@ urlpatterns = [
     path('update/', UpdateOrder.as_view(), name='update'),
     path('update/<int:pk>', UpdateOrder_continue.as_view(), name='update_order'),
     path('delete/<int:pk>', DeleteOrder.as_view(), name='delete'),
+    path('list_admin/', OrderListAdmin.as_view(), name='list_admin'),
 ]

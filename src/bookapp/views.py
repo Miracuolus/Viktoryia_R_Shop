@@ -18,9 +18,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 class HomePage(TemplateView):
     template_name = 'bookapp/home_page.html'
 
-class AdminHomePage(LoginRequiredMixin, TemplateView):
-    template_name = 'bookapp/admin_home_page.html'
-
 class CreateBook(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Book
     form_class = BookForm

@@ -120,6 +120,14 @@ class OrderList(LoginRequiredMixin, ListView):
     paginate_by = 6
     form_class = OrderForm
 
+
+class OrderListAdmin(LoginRequiredMixin, SuccessMessageMixin, ListView):
+    template_name = 'order/order_list_admin.html'
+    model = Order
+    paginate_by = 20
+    form_class = OrderForm
+
+
 class DeleteOrder(LoginRequiredMixin, UpdateView):
     model = Order
     form_class = OrderForm
