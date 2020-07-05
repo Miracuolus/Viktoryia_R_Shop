@@ -65,7 +65,7 @@ class Order(models.Model):
         verbose_name='Код номера',
         choices=(('open', 'Открыт'),('in process', 'В обработке'),('delivery', 'Доставка'), ('cancel', 'Отменен'),('close', 'Закрыт')),
         max_length= 100,
-        default = 'open',
+        default = 'Открыт',
     )
     created = models.DateTimeField(
         verbose_name='Создано',
