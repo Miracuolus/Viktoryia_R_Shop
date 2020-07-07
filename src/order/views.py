@@ -69,7 +69,10 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
         cart = Cart.objects.filter(pk = cart_pk)
         book = BooktoCart.objects.all().filter(cart = cart[0])
         for b in book:
-            Book.objects.filter(pk = b.book.pk).update(quantity = (b.book.quantity - b.quantity))
+            bb = Book.objects.filter(pk = b.book.pk)
+            bb.update(quantity = (b.book.quantity - b.quantity))
+            if bb[0].quantity == 0:
+                Book.objects.filter(pk = b.book.pk).update(active = False)
         if Order.objects.filter(pk = self.object.pk, status = 'Открыт'):
             order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
         if user.is_authenticated:
