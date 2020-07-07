@@ -7,14 +7,15 @@ User = get_user_model()
 
 @receiver(post_save, sender=User)
 def set_group(sender, instance, created, **kwargs):
-    print(instance)
-    if Group.objects.filter(name='Customers').exists():
-        obj = Group.objects.get(name='Customers')
+    if created:
+        if Group.objects.filter(name='Customers').exists():
+            obj = Group.objects.get(name='Customers')
+        else:
+            obj, created = Group.objects.create(name='Customers',
+            defaults={},
+            )
         instance.groups.add(obj)
-    else:
-        obj, created = Group.objects.create(name='Customers',
-        defaults={},
-        )
-        instance.groups.add(obj)
+        Customer.objects.filter(user=instance).update(group = obj)
+    
 
 #post_save.connect(set_group, sender=User)
