@@ -20,8 +20,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 class UpdateOrder_continue(SuccessMessageMixin, UpdateView):
     model = Order
     template_name = 'order/order_update.html'
-    #fields = ('price',)
     form_class = OrderForm
+    
 
     def get_success_url(self):
         user = self.request.user
@@ -36,10 +36,28 @@ class UpdateOrder_continue(SuccessMessageMixin, UpdateView):
     def get_success_message(self, *args, **kwargs):
         return 'Заказ оформлен'
 
+
+class UpdateOrder_continue_admin(SuccessMessageMixin, UpdateView):
+    model = Order
+    template_name = 'order/order_update.html'
+    fields = ('status',
+              'code_phone',
+              'phone',
+              'country',
+              'city',
+              'index',
+              'address',
+)
+
+    def get_success_url(self):
+        return reverse_lazy('main_admin')
+
+    def get_success_message(self, *args, **kwargs):
+        return 'Статус заказа изменен'
+
 class UpdateOrder(SuccessMessageMixin, UpdateView):
     model = Order
     template_name = 'order/order_update.html'
-    #fields = ('price',)
     form_class = OrderForm
     
     def get_success_url(self):

@@ -34,7 +34,7 @@
                         <td>{{ obj.price }}</td>
                         <td>{{ obj.status }} </td>
                         <td><a href="{% url 'order:detail' obj.pk %}" title="подробнее">Подробнее</a></td>
-                        <td><a href="{% url 'order:update' %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
+                        <td><a href="{% url 'order:update_admin' obj.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
                     </tr>
                 {% endfor %}
             </tbody>

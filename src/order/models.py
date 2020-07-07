@@ -62,7 +62,7 @@ class Order(models.Model):
         blank=True,
     )
     status = models.CharField(
-        verbose_name='Код номера',
+        verbose_name='Статус заказа',
         choices=(('open', 'Открыт'),('in process', 'В обработке'),('delivery', 'Доставка'), ('cancel', 'Отменен'),('close', 'Закрыт')),
         max_length= 100,
         default = 'Открыт',
