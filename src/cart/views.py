@@ -15,6 +15,9 @@ from django.core.paginator import Paginator
 from bookapp.models import Book
 from decimal import Decimal
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 # Create your views here.
 class UpdateBookCart(UpdateView):
@@ -25,6 +28,18 @@ class UpdateBookCart(UpdateView):
     def get_success_url(self):    
         return reverse_lazy('cart:list')
     
+    def form_valid(self, form):
+        #
+        book_pk = self.request.GET.get('book_pk')
+        book = Book.objects.get(pk=book_pk)
+        quantity = self.request.POST['quantity']
+        if int(quantity) <= book.quantity:
+            form.save()
+            return super(UpdateBookCart, self).form_valid(form)
+        else:
+            messages.error(self.request, f'Максимальное кол-во книг - { book.quantity }') 
+            return render(self.request, 'cart/add_cart.html', {'form': form})
+
     def get_object(self):
         book_pk = self.request.GET.get('book_pk')
         cart_pk = self.request.session.get('cart_pk')

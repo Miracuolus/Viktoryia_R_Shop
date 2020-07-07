@@ -59,4 +59,16 @@ def status_messages(value):
         return f'Предупреждение!'
     elif value == 'error':
         return f'Ошибка!'
-    
+
+@register.simple_tag
+def messages_tag(value):
+    if value == 'success':
+        return 'success'
+    elif value == 'debug':
+        return 'info'
+    elif value == 'info':
+        return 'info'
+    elif value == 'warning':
+        return 'warning'
+    elif value == 'error':
+        return 'danger'

@@ -2,8 +2,10 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from bookapp.models import Book
 from decimal import Decimal
+from django.core.exceptions import ValidationError
 
 # Create your models here.
+
 User = get_user_model()
 class Cart(models.Model):
     user = models.ForeignKey(
