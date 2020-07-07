@@ -104,7 +104,7 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
         book = BooktoCart.objects.all().filter(cart = cart[0])
         for b in book:
             if b.quantity > b.book.quantity:
-                BooktoCart.objects.filter(book = b.book.pk).update(quantity = b.book.quantity)
+                BooktoCart.objects.filter(cart = cart[0], book = b.book.pk).update(quantity = b.book.quantity)
                 price += b.book.price * b.book.quantity
             else:
                 price += b.book.price * b.quantity

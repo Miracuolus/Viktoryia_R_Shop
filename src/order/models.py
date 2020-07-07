@@ -82,7 +82,6 @@ class Order(models.Model):
         #ordering = ['status']
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
-        unique_together = [('cart','price'),]
     
     def __str__(self):
         return f'{self.user} {self.created}, status {self.status}'
