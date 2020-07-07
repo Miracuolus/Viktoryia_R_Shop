@@ -105,8 +105,6 @@ class ListCart(ListView):
 
 class AddBooktoCart(UpdateView):
     model = BooktoCart
-    #template_name = 'cart/add_cart.html'
-    #fields = ('quantity',)
     form_class = CartForm
     template_name = 'cart/list_cart.html'
 

@@ -40,7 +40,7 @@
                     <strong> {% sum_filter %}</strong>
                 </li>
             </ul>
-            <a href="{% url 'order:update' %}?price={% sum_order %}" title="Заказать"><button type="submit" class="btn btn-success btn-lg btn-block">Заказать</button></a>
+            <a href="{% url 'order:update' %}?price={% sum_order %}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Заказать</a>
         {% else %}
         <script>
             setTimeout(function(){location.href="{% url 'cart:list' %}"}, 700);
