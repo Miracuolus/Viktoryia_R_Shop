@@ -29,10 +29,18 @@
                         <h6>{% for author in obj.book.author.all %}
                             <small class="text-muted">{{ author.name }}{% if obj.book.author.all|length > 1 %};{% endif %}</small>
                             {% endfor %}</h6>
-                            <small class="text-muted">{{ obj.quantity }} х {{ obj.book.price }} руб.</small>
+                            {% if obj.book.quantity < obj.quantity %}
+                                <small class="text-muted">{{ obj.book.quantity }} х {{ obj.book.price }} руб.</small>
+                                <a href="{% url 'cart:update' %}?book_pk={{ obj.book.pk }}" title="Изменить количество"><button type="button" class="btn btn-sm btn-outline-secondary" align=left>Изменить количество</button></a>
+                    </div>
+                    <span class="text-muted">{% multiply obj.book.quantity obj.book.price %}</span>
+                            {% else %}
+                                <small class="text-muted">{{ obj.quantity }} х {{ obj.book.price }} руб.</small>
+                            
                                 <a href="{% url 'cart:update' %}?book_pk={{ obj.book.pk }}" title="Изменить количество"><button type="button" class="btn btn-sm btn-outline-secondary" align=left>Изменить количество</button></a>
                     </div>
                     <span class="text-muted">{% multiply obj.quantity obj.book.price %}</span>
+                    {% endif %}
                 </li>
                 {% endfor %}
                 <li class="list-group-item d-flex justify-content-between">

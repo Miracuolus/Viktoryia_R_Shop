@@ -29,7 +29,6 @@ class UpdateBookCart(UpdateView):
         return reverse_lazy('cart:list')
     
     def form_valid(self, form):
-        #
         book_pk = self.request.GET.get('book_pk')
         book = Book.objects.get(pk=book_pk)
         quantity = self.request.POST['quantity']

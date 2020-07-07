@@ -14,6 +14,7 @@ from django.core.paginator import Paginator
 from cart.models import Cart, BooktoCart
 from customers.models import Customer
 from decimal import Decimal
+from bookapp.models import Book
 from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
@@ -55,13 +56,20 @@ class UpdateOrder_continue_admin(SuccessMessageMixin, UpdateView):
     def get_success_message(self, *args, **kwargs):
         return 'Статус заказа изменен'
 
+
 class UpdateOrder(SuccessMessageMixin, UpdateView):
     model = Order
     template_name = 'order/order_update.html'
     form_class = OrderForm
     
+    
     def get_success_url(self):
         user = self.request.user
+        cart_pk = self.request.session.get('cart_pk')
+        cart = Cart.objects.filter(pk = cart_pk)
+        book = BooktoCart.objects.all().filter(cart = cart[0])
+        for b in book:
+            Book.objects.filter(pk = b.book.pk).update(quantity = (b.book.quantity - b.quantity))
         if Order.objects.filter(pk = self.object.pk, status = 'Открыт'):
             order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
         if user.is_authenticated:
@@ -85,9 +93,18 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
         return context
 
     def get_object(self):
-        price = self.request.GET.get('price')
+        #price = self.request.GET.get('price')
+        price = 0
         cart_pk = self.request.session.get('cart_pk')
         user = self.request.user
+        cart = Cart.objects.filter(pk = cart_pk)
+        book = BooktoCart.objects.all().filter(cart = cart[0])
+        for b in book:
+            if b.quantity > b.book.quantity:
+                BooktoCart.objects.filter(book = b.book.pk).update(quantity = b.book.quantity)
+                price += b.book.price * b.book.quantity
+            else:
+                price += b.book.price * b.quantity
         if user.is_authenticated:
             cart = Cart.objects.filter(pk = cart_pk, user=user)
             customer = Customer.objects.filter(user=user)
