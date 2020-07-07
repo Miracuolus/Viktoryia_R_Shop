@@ -63,7 +63,7 @@ class Order(models.Model):
     )
     status = models.CharField(
         verbose_name='Статус заказа',
-        choices=(('open', 'Открыт'),('in process', 'В обработке'),('delivery', 'Доставка'), ('cancel', 'Отменен'),('close', 'Закрыт')),
+        choices=(('Открыт', 'Открыт'),('В обработке', 'В обработке'),('Доставка', 'Доставка'), ('Отменен', 'Отменен'),('Закрыт', 'Закрыт')),
         max_length= 100,
         default = 'Открыт',
     )
@@ -79,7 +79,7 @@ class Order(models.Model):
     )
 
     class Meta: 
-        ordering = ['status']
+        #ordering = ['status']
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
     

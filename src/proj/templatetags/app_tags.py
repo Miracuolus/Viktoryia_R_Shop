@@ -71,3 +71,17 @@ def messages_tag(value):
         return 'warning'
     elif value == 'error':
         return 'danger'
+
+sum_book = 0
+@register.simple_tag
+def quantity_books(value):
+    global sum_book
+    sum_book += value
+    return ''
+
+@register.simple_tag
+def quantity_zero():
+    global sum_book
+    r = sum_book
+    sum_book = 0
+    return r
