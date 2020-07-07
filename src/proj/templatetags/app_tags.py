@@ -7,7 +7,9 @@ from decimal import Decimal
 
 
 
-if len(AppInfo.objects.all()) == 0:
+if AppInfo.objects.all().exists():
+    pass
+else:
     AppInfo.objects.create(pk=1, name='it-shop')
 
 @register.simple_tag
