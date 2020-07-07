@@ -111,10 +111,10 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
         if user.is_authenticated:
             cart = Cart.objects.filter(pk = cart_pk, user=user)
             customer = Customer.objects.filter(user=user)
-            try:
+            if self.model.objects.filter(cart = cart[0], user = user).exists():
                 obj = self.model.objects.get(cart = cart[0], user = user)
                 obj.price = price
-            except self.model.DoesNotExist:
+            else:
                 obj, created = self.model.objects.get_or_create(
                     cart = cart[0],
                     user = user,
