@@ -26,8 +26,8 @@ class UpdateOrder_continue(SuccessMessageMixin, UpdateView):
 
     def get_success_url(self):
         user = self.request.user
-        if Order.objects.filter(pk = self.object.pk, status = 'Открыт'):
-            order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
+        #if Order.objects.filter(pk = self.object.pk, status = 'Открыт'):
+        #    order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
         if user.is_authenticated:
             return reverse_lazy('order:detail', kwargs={'pk':self.object.pk})
         else:
@@ -111,18 +111,22 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
         if user.is_authenticated:
             cart = Cart.objects.filter(pk = cart_pk, user=user)
             customer = Customer.objects.filter(user=user)
-            obj, created = self.model.objects.get_or_create(
-                cart = cart[0],
-                user = user,
-                price = price,
-                defaults = {'code_phone': customer[0].code_phone,
-                            'phone': customer[0].phone,
-                            'country': customer[0].country,
-                            'city': customer[0].city,
-                            'index': customer[0].index,
-                            'address': customer[0].address_1,
-                }
-            )
+            try:
+                obj = self.model.objects.get(cart = cart[0], user = user)
+                obj.price = price
+            except self.model.DoesNotExist:
+                obj, created = self.model.objects.get_or_create(
+                    cart = cart[0],
+                    user = user,
+                    price = price,
+                    defaults = {'code_phone': customer[0].code_phone,
+                                'phone': customer[0].phone,
+                                'country': customer[0].country,
+                                'city': customer[0].city,
+                                'index': customer[0].index,
+                                'address': customer[0].address_1,
+                    }
+                )
         else:
             cart = Cart.objects.filter(pk = cart_pk)
             obj, created = self.model.objects.get_or_create(
