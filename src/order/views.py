@@ -161,6 +161,10 @@ class OrderList(LoginRequiredMixin, ListView):
     paginate_by = 6
     form_class = OrderForm
 
+    def get_queryset(self):
+        user = self.request.user
+        return self.model.objects.all().filter(user = user)
+
 
 class OrderListAdmin(LoginRequiredMixin, SuccessMessageMixin, ListView):
     template_name = 'order/order_list_admin.html'
