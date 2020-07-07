@@ -204,8 +204,11 @@
                         </tr>
                     </div>
                 </form>
-                <a href="{% url 'order:update_order' object.pk %}"><button type="button" class="btn btn-secondary btn-primary" {% if object.status == 'Открыт' %} {% else %} disabled{% endif %}>Редактировать заказ</button></a>
-                <a href="{% url 'order:delete' object.pk %}"><button type="button" class="btn btn-danger btn-primary" {% if object.status == 'Открыт' %} {% else %} disabled{% endif %}>Отменить заказ</button></a>
+                {% if user.is_staff or user.is_superuser %}
+                {% else %}
+                    <a href="{% url 'order:update_order' object.pk %}"><button type="button" class="btn btn-secondary btn-primary" {% if object.status == 'Открыт' %} {% else %} disabled{% endif %}>Редактировать заказ</button></a>
+                    <a href="{% url 'order:delete' object.pk %}"><button type="button" class="btn btn-danger btn-primary" {% if object.status == 'Открыт' %} {% else %} disabled{% endif %}>Отменить заказ</button></a>
+                {% endif %}
             </div>
         </div>
     </div>
