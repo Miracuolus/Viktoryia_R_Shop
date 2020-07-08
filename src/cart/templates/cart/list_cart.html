@@ -57,7 +57,7 @@
                     <strong> {% sum_filter %}</strong>
                 </li>
             </ul>
-            <a href="{% url 'order:update' %}?price={% sum_order %}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Заказать</a>
+            <a href="{% url 'order:update' %}?price={% sum_order %}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Оформить заказ</a>
         {% else %}
         <script>
             setTimeout(function(){location.href="{% url 'cart:list' %}"}, 700);
