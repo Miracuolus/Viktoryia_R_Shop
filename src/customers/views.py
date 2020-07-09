@@ -67,7 +67,7 @@ class CreateCustomer(LoginRequiredMixin, CreateView):
     model = Customer
     form_class = CustomerForm
     template_name = 'customer/create_customer.html'
-     
+
     def get_success_url(self):
         return reverse_lazy('customer:list')
 
@@ -88,7 +88,7 @@ class CustomerList(LoginRequiredMixin, ListView):
     paginate_by = 20
 
 
-class UpdateMainCustomerAdmin(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class UpdateMainCustomerAdmin(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = User
     template_name = 'customer/update_main_customer_admin.html'
     form_class = Form
@@ -111,6 +111,13 @@ class UpdateMainCustomerAdmin(LoginRequiredMixin, SuccessMessageMixin, UpdateVie
             defaults = {}
         )
         return obj
+    
+    def test_func(self):
+        obj = self.get_object()
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return obj
+        else:
+            return obj == self.request.user
     
 
 class UpdateMainCustomerUser(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
@@ -184,16 +191,23 @@ class UpdateCustomer(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
     def get_success_url(self):
         return reverse_lazy('customer:list')"""
 
-class DeleteCustomer(LoginRequiredMixin, DetailView):
+class DeleteCustomer(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = Customer
     template_name = 'customer/delete_customer.html'
     
     def get_success_url(self):
         return reverse_lazy('customer:done', kwargs={'pk':self.object.pk})
+    
+    def test_func(self):
+        obj = self.get_object()
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return obj
+        else:
+            return obj.user == self.request.user
 
 
 
-class DeleteCustomerDone(LoginRequiredMixin, UpdateView):
+class DeleteCustomerDone(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Customer
     #fields = ('is_active',)
     form_class = CustomerForm
@@ -209,6 +223,13 @@ class DeleteCustomerDone(LoginRequiredMixin, UpdateView):
         user.is_active = False
         user.save()
         return user
+    
+    def test_func(self):
+        obj = self.get_object()
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return obj
+        else:
+            return obj == self.request.user
 
 
 class DetailCustomer(LoginRequiredMixin, UserPassesTestMixin, DetailView):

@@ -3,6 +3,7 @@
 {% block title %}Добавление нового пользователя{% endblock title %}
 
 {% block body %}
+    {% if perms.customers_create_customer %}
     {% include "top_menu_admin.html" %}
     <div class="col-md-8 order-md-1">
         <br>
@@ -14,4 +15,9 @@
         </form>
         <br>
     </div>
+    {% else %}
+      <div class="col-md-8 order-md-1">
+        <br>
+        <h4 class="mb-3">Страница не существует</h4>
+    {% endif %}
 {% endblock body %}

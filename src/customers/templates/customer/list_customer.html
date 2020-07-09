@@ -3,6 +3,7 @@
 {% block title %}Список Пользователей{% endblock title %}
 
 {% block body %}
+{% if perms.customers_view_customer %}
     {% include "top_menu_admin.html" %}
     {% include "messages.html" %}
     <br>
@@ -58,4 +59,9 @@
         <br>
         {% include "pagination.html" %}
     </div>
+{% else %}
+      <div class="col-md-8 order-md-1">
+        <br>
+        <h4 class="mb-3">Страница не существует</h4>
+{% endif %}
 {% endblock body %}   
