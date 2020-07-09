@@ -9,7 +9,7 @@ from django.views.generic import (
                                     DetailView
                                 )
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model, authenticate, login
 from django.contrib.auth.views import (LoginView, 
                                        LogoutView, 
@@ -113,7 +113,7 @@ class UpdateMainCustomerAdmin(LoginRequiredMixin, SuccessMessageMixin, UpdateVie
         return obj
     
 
-class UpdateMainCustomerUser(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class UpdateMainCustomerUser(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = User
     template_name = 'customer/update_main_customer_user.html'
     fields = ('username', 'email', 'first_name', 'last_name')
@@ -136,9 +136,16 @@ class UpdateMainCustomerUser(LoginRequiredMixin, SuccessMessageMixin, UpdateView
             defaults = {}
         )
         return obj
+    
+    def test_func(self):
+        obj = self.get_object()
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return obj
+        else:
+            return obj == self.request.user
 
 
-class UpdateCustomer(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class UpdateCustomer(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = Customer
     fields = ('code_phone',
               'phone',
@@ -161,6 +168,14 @@ class UpdateCustomer(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
             return reverse_lazy('customer:list')
         else:
             return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
+    
+    def test_func(self):
+        obj = self.get_object()
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return obj
+        else:
+            return obj.user == self.request.user
+
     
 """class DeleteCustomer(LoginRequiredMixin, DeleteView):
     model = Customer
@@ -196,9 +211,16 @@ class DeleteCustomerDone(LoginRequiredMixin, UpdateView):
         return user
 
 
-class DetailCustomer(LoginRequiredMixin, DetailView):
+class DetailCustomer(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = Customer
     template_name = 'customer/detail_customer.html'
 
     def get_success_url(self):
         return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
+    
+    def test_func(self):
+        obj = self.get_object()
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return obj
+        else:
+            return obj.user == self.request.user
