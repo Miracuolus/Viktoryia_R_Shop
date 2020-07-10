@@ -128,3 +128,14 @@ class Book(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class Import_Book(models.Model):
+    file_books = models.FileField(
+        verbose_name='Каталог товаров',
+        upload_to='files',
+    )
+
+    class Meta: 
+        verbose_name = 'Каталог книг'
+        verbose_name_plural = 'Каталоги книг'
