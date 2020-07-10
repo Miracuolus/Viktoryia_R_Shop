@@ -105,7 +105,7 @@ class UpdateMainCustomerAdmin(LoginRequiredMixin, UserPassesTestMixin, SuccessMe
             return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
     
     def get_object(self):
-        user_pk = self.kwargs.get('user_pk')
+        user_pk = self.kwargs.get('pk')
         obj, created = User.objects.get_or_create(
             username = User.objects.get(pk=user_pk),
             defaults = {}
@@ -137,7 +137,7 @@ class UpdateMainCustomerUser(LoginRequiredMixin, UserPassesTestMixin, SuccessMes
             return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
     
     def get_object(self):
-        user_pk = self.kwargs.get('user_pk')
+        user_pk = self.kwargs.get('pk')
         obj, created = User.objects.get_or_create(
             username = User.objects.get(pk=user_pk),
             defaults = {}
@@ -218,7 +218,7 @@ class DeleteCustomerDone(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
 
     def get_object(self):
-        user_pk = self.kwargs.get('user_pk')
+        user_pk = self.kwargs.get('pk')
         user =  User.objects.get(pk=user_pk)
         user.is_active = False
         user.save()
