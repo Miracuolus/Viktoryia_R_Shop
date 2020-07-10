@@ -9,7 +9,7 @@ from django.views.generic import (TemplateView,
 )
 from django.urls import reverse_lazy, reverse
 import datetime
-from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 from cart.models import Cart, BooktoCart
 from customers.models import Customer
@@ -19,7 +19,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
 
 # Create your views here.
-class UpdateOrder_continue(SuccessMessageMixin, UpdateView):
+class UpdateOrder_continue(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
     model = Order
     template_name = 'order/order_update.html'
     form_class = OrderForm
@@ -37,11 +37,18 @@ class UpdateOrder_continue(SuccessMessageMixin, UpdateView):
 
     def get_success_message(self, *args, **kwargs):
         return 'Заказ оформлен'
+    
+    def test_func(self):
+        user = self.request.user
+        obj = self.get_object()
+        if obj.user == user:
+            if obj.status == 'Открыт':
+                return obj
 
 
 class UpdateOrder_continue_admin(SuccessMessageMixin, UpdateView):
     model = Order
-    template_name = 'order/order_update.html'
+    template_name = 'order/order_update_admin.html'
     fields = ('status',
               'code_phone',
               'phone',
@@ -141,7 +148,7 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
 
 
 
-class DetailOrder(LoginRequiredMixin, DetailView):
+class DetailOrder(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = Order
     template_name = 'order/order_detail.html'
     
@@ -156,6 +163,14 @@ class DetailOrder(LoginRequiredMixin, DetailView):
         books = BooktoCart.objects.all().filter(cart=cart)
         context['cart'] = books
         return context
+    
+    def test_func(self):
+        user = self.request.user
+        obj = self.get_object()
+        if obj.user == user:
+            return obj
+        elif user.is_superuser or user.is_staff:
+            return obj
 
 
 class OrderList(LoginRequiredMixin, ListView):

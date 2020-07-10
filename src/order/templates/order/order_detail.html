@@ -106,48 +106,20 @@
                                                     <tbody>
                                                         <tr class="">
                                                             <td>User</td>
-                                                            <td> 
-                                                            {% if user.is_staff or user.is_superuser %}
-                                                                {{ object.user.username }}
-                                                            {% else %}
-                                                                {{ user }}
-                                                            {% endif %}
-                                                            
-                                                            </td>
+                                                            <td>{{ object.user.username }}</td>
                                                         </tr>
-                                                {% if user.is_staff or user.is_superuser %}
                                                     {% if object.user.first_name %}
                                                         <tr class="">
                                                             <td>Имя</td>
                                                             <td>{{ object.user.first_name }}</td>
                                                         </tr>
                                                     {% endif %}
-                                                {% else %}
-                                                    {% if user.first_name %}
-                                                        <tr class="">
-                                                            <td>Имя</td>
-                                                            <td>{{ user.first_name }}</td>
-                                                        </tr>
-                                                    {% endif %}
-                                                {% endif %}
-                                                
-                                                {% if user.is_staff or user.is_superuser %}
                                                     {% if object.user.last_name %}
                                                         <tr class="">
                                                             <td>Фамилия</td>
                                                             <td>{{ object.user.last_name }}</td>
                                                         </tr>
                                                     {% endif %}
-                                                {% else %}
-                                                    {% if user.last_name %}
-                                                        <tr class="">
-                                                            <td>Фамилия</td>
-                                                            <td>{{ user.last_name }}</td>
-                                                        </tr>
-                                                    {% endif %}
-                                                {% endif %}
-
-                                                {% if user.is_staff or user.is_superuser %}
                                                     {% if object.user.email %}
                                                         <tr class="">
                                                             <td>Email</td>
@@ -156,16 +128,6 @@
                                                     </td>
                                                         </tr>
                                                     {% endif %}
-                                                {% else %}
-                                                    {% if user.email %}
-                                                        <tr class="">
-                                                            <td>Email</td>
-                                                            <td>
-                                                        <a href="#" title="Отправить письмо пользователю &laquo;{{ user }}&raquo;">{{ user.email }}</a>
-                                                    </td>
-                                                        </tr>
-                                                    {% endif %}
-                                                {% endif %}
                                                 {% if object.code_phone %}
                                                     {% if object.phone %}
                                                         <tr class="">
