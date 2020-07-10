@@ -11,6 +11,6 @@
             <div class="alert alert-danger" role="alert">
                 Вы уверены, что хотите удалить пользователя - {{ object }}"?
             </div>
-            <a href="{% url 'customer:done' object.pk %}" class="btn btn-danger" role="button" aria-pressed="true">Подтвердить</a>
+            <a href="{% url 'customer:done' object.user.pk %}" class="btn btn-danger" role="button" aria-pressed="true">Подтвердить</a>
     </div>
 {% endblock body %}   

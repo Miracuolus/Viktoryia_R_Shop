@@ -101,11 +101,11 @@
                                     <div class="card-header" id="headingOne">
                                         <h2 class="mb-0">
                                         {% if user.is_superuser or user.is_staff %}
-                                            <a href="{% url 'customer:updatemainadmin' object.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <a href="{% url 'customer:updatemainadmin' object.user.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                 Редактировать основные данные пользователя {{ object }}
                                             </button></a>
                                         {% else %}
-                                            <a href="{% url 'customer:updatemainuser' object.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <a href="{% url 'customer:updatemainuser' object.user.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                 Редактировать основные данные пользователя {{ object }}
                                             </button></a>
                                         {% endif %}

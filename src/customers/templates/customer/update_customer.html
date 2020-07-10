@@ -21,11 +21,11 @@
                             <div class="card-header" id="headingOne">
                                 <h2 class="mb-0">
                                 {% if user.is_staff or user.is_superuser %}
-                                    <a href="{% url 'customer:updatemainadmin' object.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <a href="{% url 'customer:updatemainadmin' object.user.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         Редактировать основные данные пользователя {{ object }}
                                     </button></a>
                                 {% else %}
-                                    <a href="{% url 'customer:updatemainuser' object.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <a href="{% url 'customer:updatemainuser' user.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         Редактировать основные данные пользователя {{ object }}
                                     </button></a>
                                 {% endif %}
@@ -40,9 +40,15 @@
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h2 class="mb-0">
-                                    <a href="{% url 'customer:detail' object.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                {% if user.is_superuser or user.is_staff %}
+                                <a href="{% url 'customer:list' %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Вернуться к списку пользователей
+                                    </button></a>
+                                {% else %}
+                                    <a href="{% url 'customer:detail' user.customer.pk %}"><button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         Вернуться к профилю {{ object }}
                                     </button></a>
+                                {% endif %}
                                 </h2>
                             </div>
                     </div>

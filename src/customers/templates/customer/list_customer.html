@@ -13,6 +13,7 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
+                <th>pk</th>
                 <th>Логин</th>
                 <th>Имя</th>
                 <th>Фамилия</th>
@@ -28,6 +29,7 @@
             <tbody>
                 {% for customer in object_list %}
                     <tr>
+                        <td>{{ customer.user.pk }}</td>
                         <td>{{ customer.user.username }}</td>
                         <td>{{ customer.user.first_name }}</td>
                         <td>{{ customer.user.last_name }}</td>
@@ -50,7 +52,7 @@
                             {% endif %}
                         </td>
                         <td><a href="{% url 'customer:detail' customer.pk %}" title="подробнее">Подробнее</a></td>
-                        <td><a href="{% url 'customer:updatemainadmin' customer.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
+                        <td><a href="{% url 'customer:updatemainadmin' customer.user.id %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
                         <td><a href="{% url 'customer:delete' customer.pk %}" title="удалить"><i style="color:#696969" class="fas fa-trash"></i></a></td>
                     </tr>
                 {% endfor %}
