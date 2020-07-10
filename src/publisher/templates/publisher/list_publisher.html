@@ -3,6 +3,7 @@
 {% block title %}Список Издательств{% endblock title %}
 
 {% block body %}
+{% if perms.publisher.view_publisher %}
     {% include "top_menu_admin.html" %}
     {% include "messages.html" %}
     <br>
@@ -35,4 +36,13 @@
         <br>
         {% include "pagination.html" %}
     </div>
+{% else %}
+     <div class="col-md-8 order-md-1">
+        <br>
+        <h4 class="mb-3">Страница не существует</h4>
+        <div class="i-popup__line">
+        <a id="loginFormRegisterLink" href="{% url 'main' %}" data-button-state="second">Вернуться на главную</a>
+        </div>
+    </div>
+{% endif %}
 {% endblock body %}   
