@@ -5,7 +5,7 @@ class AppInfo(models.Model):
     name = models.CharField(
         verbose_name='Название магазина',
         max_length= 200,
-        unique=True
+        unique=True,
     )
     image = models.ImageField(
         verbose_name='Логотип магазина',

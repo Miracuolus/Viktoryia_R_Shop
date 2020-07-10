@@ -17,6 +17,12 @@ class CustomerForm(forms.ModelForm):
         )
 
 class LogInForm(UserCreationForm):
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('Такой E-mail существует')
+        return email
+    
     error_messages = {
         'password_mismatch': "Введенные пароли не совпадают"
     }

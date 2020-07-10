@@ -47,7 +47,7 @@ class Customer(models.Model):
         null=True,
         blank=True,
     )
-    group = models.OneToOneField(
+    group = models.ForeignKey(
         Group,
         verbose_name='Группа',
         on_delete=models.PROTECT,
