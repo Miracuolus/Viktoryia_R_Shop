@@ -43,14 +43,16 @@ class LogIn(FormView):
     def form_valid(self, form):
         new_user = form.save()
         #group = new_user.groups.add(Group.objects.get(name='Customers'))
+        group = Group.objects.get(name='Customers')
         username = self.request.POST['username']
         password = self.request.POST['password2']
         email = self.request.POST['email']
         code_type = self.request.POST['code_type']
         phone = self.request.POST['phone']
-        #Customer.objects.create(user=new_user, code_phone=code_type, phone=phone, group=group)
-        Customer.objects.create(user=new_user, code_phone=code_type, phone=phone)
+        Customer.objects.create(user=new_user, code_phone=code_type, phone=phone, group=group)
+        #Customer.objects.create(user=new_user, code_phone=code_type, phone=phone) #
         new_user = authenticate(self.request,username=username,password=password)
+        print(1)
         if new_user is not None:
              if new_user.is_active:
                  login(self.request, new_user)
