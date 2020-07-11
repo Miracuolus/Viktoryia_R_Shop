@@ -17,13 +17,13 @@ class Book(models.Model):
         verbose_name='Изображение',
         upload_to='books', 
         height_field=None, 
-        width_field=None, 
+        width_field=None,
     )
     price = models.DecimalField(
         verbose_name='Цена',
         max_digits=6,
         decimal_places=2,
-        default=Decimal('0.00')
+        default=Decimal('0.00'),
        )
     author = models.ManyToManyField(
         Author,
@@ -83,12 +83,14 @@ class Book(models.Model):
     )
     short_description = models.TextField(
         verbose_name='Аннотация',
-        help_text='Поле может быть пустым'
+        help_text='Поле может быть пустым',
+        null=True,
+        blank=True, #
     )
     age_limit = models.CharField(
         verbose_name='Возрастные ограничения',
         max_length= 100,
-        default='0+'
+        default='0+',
     )
     publisher = models.ForeignKey(
         Publisher,
@@ -99,15 +101,17 @@ class Book(models.Model):
     )
     quantity = models.PositiveSmallIntegerField(
         verbose_name='В наличии',
+        default=0,
     )
     active = models.BooleanField(
         max_length=2,
         choices=((True, 'Да'),(False, 'Нет')),
-        default=False
+        default=False,
     )
     rating = models.PositiveSmallIntegerField(
         verbose_name='Рейтинг',
-        help_text='от 0 до 10'
+        help_text='от 0 до 10',
+        default=0,
     )
     created = models.DateTimeField(
         verbose_name='Создано',

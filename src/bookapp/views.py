@@ -1,5 +1,5 @@
-from . models import Book
-from . forms import BookForm
+from . models import Book, Import_Book
+from . forms import BookForm, ImportBookForm, ImportForm
 from django.views.generic import (
                                     TemplateView, 
                                     CreateView, 
@@ -13,6 +13,8 @@ import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 from django.core.paginator import Paginator
 from django.contrib.messages.views import SuccessMessageMixin
+import csv
+from django.views.generic.edit import FormView
 
 # Create your views here.
 class HomePage(TemplateView):
@@ -155,4 +157,24 @@ class ListSaleBook(ListView):
             return self.model.objects.all().filter(price__lte = 9.99).filter(active=True).order_by('price')
         else:
             return super().get_queryset()
+
+
+class ImportBooks(LoginRequiredMixin, SuccessMessageMixin, FormView):
+    form_class = ImportForm
+    template_name = 'bookapp/import_books.html'
+
+    def get_success_url(self):    
+        return reverse_lazy('book:list')
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Каталог книг был импортирован'
+
+    """def import_file(self):
+        with open(self, 'r') as f:
+            for line in f.readlines():"""
+    
+    def form_valid(self, form):
+        form.process_file()
+        return super().form_valid(form)
+
 

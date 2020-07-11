@@ -11,11 +11,13 @@ class Author(models.Model):
 
     date = models.DateField(
         verbose_name='Дата рождения',
-        help_text='ДД.ММ.ГГГГ'
+        help_text='ДД.ММ.ГГГГ',
+        null=True,
     )
     image = models.ImageField(
         verbose_name='Изображение',
         upload_to='authors',
+        null=True,
     )
     description = models.TextField(
         verbose_name='Биография',
