@@ -12,7 +12,7 @@ class Publisher(models.Model):
         upload_to='publishers', 
         height_field=None,
         width_field=None,
-        null=True,
+        default = 'authors/notfound_0.png',
     )
     description = models.TextField(
         verbose_name='Краткая информация об издательстве',
