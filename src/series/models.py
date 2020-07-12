@@ -10,6 +10,7 @@ class Series(models.Model):
     image = models.ImageField(
         verbose_name='Изображение',
         upload_to='series',
+        null=True,
     )
     description = models.TextField(
         verbose_name='Описание',

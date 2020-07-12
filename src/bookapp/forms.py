@@ -44,9 +44,9 @@ class ImportForm(forms.ModelForm):
     def process_file(self):
         data = io.TextIOWrapper(self.cleaned_data['file_books'].file)
         reader = csv.DictReader(data)
-        author_set = set()
-        genre_set = set()
         for b in reader:
+            author_set = set()
+            genre_set = set()
             authors = b['author'].split(', ')
             genres = b['genre'].split(', ')
             for a in range(0, len(authors)):

@@ -12,6 +12,7 @@ class Publisher(models.Model):
         upload_to='publishers', 
         height_field=None,
         width_field=None,
+        null=True,
     )
     description = models.TextField(
         verbose_name='Краткая информация об издательстве',
