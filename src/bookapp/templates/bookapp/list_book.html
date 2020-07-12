@@ -12,6 +12,7 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
+                    <th>pk</th>
                     <th>Название книги</th>
                     <th>Фото</th>
                     <th>Цена</th>
@@ -27,6 +28,7 @@
             <tbody>
                 {% for book in book_list %}
                     <tr>
+                        <td>{{ book.pk }}</td>
                         <td>{{ book.name }}</td>
                         <td><img src="{{ book.photo.url }}" alt="Изображение книги" height="120px" width="80px"></td>
                         <td>{{ book.price }}</td>

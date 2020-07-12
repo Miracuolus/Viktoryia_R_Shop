@@ -71,24 +71,43 @@ class ImportForm(forms.ModelForm):
                     name = b['publisher'],
                     defaults = {}
                     )
-            book, created = Book.objects.update_or_create(
-                name = b['name'],
-                photo = b['photo'],
-                price = float(b['price']),
-                series  = series,
-                year  = b['year'],
-                pages  = b['pages'],
-                bookbinding  = b['bookbinding'],
-                book_format  = b['book_format'],
-                isbn  = b['isbn'],
-                weight  = b['weight'],
-                description  = b['description'],
-                short_description  = b['short_description'],
-                age_limit  = b['age_limit'],
-                publisher  = publisher,
-                #quantity  = b['quantity'],
-                defaults = {}
-            )
+            if Book.objects.filter(pk=b['pk']).exists():
+                book = Book.objects.filter(pk=b['pk']).update(
+                    name = b['name'],
+                    photo = b['photo'],
+                    price = float(b['price']),
+                    series  = series,
+                    year  = b['year'],
+                    pages  = b['pages'],
+                    bookbinding  = b['bookbinding'],
+                    book_format  = b['book_format'],
+                    isbn  = b['isbn'],
+                    weight  = b['weight'],
+                    description  = b['description'],
+                    short_description  = b['short_description'],
+                    age_limit  = b['age_limit'],
+                    publisher  = publisher,
+                )
+            else:
+                book, created = Book.objects.update_or_create(
+                    pk = b['pk'],
+                    name = b['name'],
+                    photo = b['photo'],
+                    price = float(b['price']),
+                    series  = series,
+                    year  = b['year'],
+                    pages  = b['pages'],
+                    bookbinding  = b['bookbinding'],
+                    book_format  = b['book_format'],
+                    isbn  = b['isbn'],
+                    weight  = b['weight'],
+                    description  = b['description'],
+                    short_description  = b['short_description'],
+                    age_limit  = b['age_limit'],
+                    publisher  = publisher,
+                    #quantity  = b['quantity'],
+                    defaults = {}
+                )
             #Book.objects.filter(name=b['name']).update(quantity = book.quantity + int(b['quantity']))
             B = Book.objects.filter(name=b['name']).first()
             B.author.add(*author_set)
