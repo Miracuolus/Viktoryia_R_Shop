@@ -82,7 +82,7 @@ class ImportForm(forms.ModelForm):
                     bookbinding  = b['bookbinding'],
                     book_format  = b['book_format'],
                     isbn  = b['isbn'],
-                    weight  = b['weight'],
+                    #weight  = b['weight'],
                     description  = b['description'],
                     short_description  = b['short_description'],
                     age_limit  = b['age_limit'],
@@ -100,7 +100,7 @@ class ImportForm(forms.ModelForm):
                     bookbinding  = b['bookbinding'],
                     book_format  = b['book_format'],
                     isbn  = b['isbn'],
-                    weight  = b['weight'],
+                    #weight  = b['weight'],
                     description  = b['description'],
                     short_description  = b['short_description'],
                     age_limit  = b['age_limit'],
@@ -112,6 +112,8 @@ class ImportForm(forms.ModelForm):
             B = Book.objects.filter(name=b['name']).first()
             B.author.add(*author_set)
             B.genre.add(*genre_set)
+            if b['weight']:
+                B.weight = b['weight']
         return data
         
     class Meta:
