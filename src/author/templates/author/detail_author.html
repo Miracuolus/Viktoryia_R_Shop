@@ -17,10 +17,9 @@
                 <img src="{{ object.image.url }}" alt="Изображение автора" height="570px" width="430px">
                 <br>
                 <br>
-                <h4 class="mb-3">Написанные книги:</h4>
+                <h4 class="mb-3">Написанные книги, доступные для заказа:</h4>
                 {% for book in object.books.all %}
-                    <a>{{book}}</a>
-                    {{book}}
+                    <a class="nav-link" href="{% url 'book:detail' book.pk %}">{{book}}</a>
                 {% endfor %}
             </div>
         </div>
