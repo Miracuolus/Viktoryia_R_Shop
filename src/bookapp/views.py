@@ -15,10 +15,27 @@ from django.core.paginator import Paginator
 from django.contrib.messages.views import SuccessMessageMixin
 import csv
 from django.views.generic.edit import FormView
+import requests
 
 # Create your views here.
 class HomePage(TemplateView):
     template_name = 'bookapp/home_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        s = requests.get('https://www.nbrb.by/api/exrates/rates?periodicity=0')
+        result = s.json()
+        rate = {}
+        for d in result:
+            if d.get('Cur_Abbreviation') == 'USD':
+                rate['USD'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
+            elif d.get('Cur_Abbreviation') == 'EUR':
+                rate['EUR'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
+            elif d.get('Cur_Abbreviation') == 'RUB':
+                rate['RUB'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
+        
+        context = {'USD': rate.get('USD'), 'EUR': rate.get('EUR'), 'RUB': rate.get('RUB'), 'rate': rate}
+        return context
 
 class CreateBook(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Book
@@ -168,13 +185,28 @@ class ImportBooks(LoginRequiredMixin, SuccessMessageMixin, FormView):
     
     def get_success_message(self, *args, **kwargs):
         return f'Каталог книг был импортирован'
-
-    """def import_file(self):
-        with open(self, 'r') as f:
-            for line in f.readlines():"""
     
     def form_valid(self, form):
         form.process_file()
         return super().form_valid(form)
+
+
+class RatePage(TemplateView):
+    template_name = 'bookapp/home_page.html'
+
+    def get_context_data(self, **kwargs):
+        s = self.requests.get('https://www.nbrb.by/api/exrates/rates?periodicity=0')
+        result = s.json()
+        rate = {}
+        for d in result:
+            if d.get('Cur_Abbreviation') == 'USD':
+                rate['USD'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
+            elif d.get('Cur_Abbreviation') == 'EUR':
+                rate['EUR'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
+            elif d.get('Cur_Abbreviation') == 'RUB':
+                rate['RUB'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
+        context = super().get_context_data(**kwargs)
+        context = {'USD': rate.get('USD'), 'EUR': rate.get('EUR'), 'RUB': rate.get('RUB'), 'rate': rate}
+        return context
 
 

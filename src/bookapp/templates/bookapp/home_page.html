@@ -4,6 +4,10 @@
 {% load app_tags %}
 {% block title %}{% print_app_name %}{% endblock title %}
 {% block body %}
+<h3>Курсы валют:</h3>
+            {% for key, value in rate.items %}
+                Курс {{key}} - {{value|floatformat:3}}<br>
+            {% endfor %}
     {% include "top_menu_main_book.html" %}
     {% include "messages.html" %}
     {% include "carousel.html" %}
