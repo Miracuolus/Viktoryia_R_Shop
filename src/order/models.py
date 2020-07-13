@@ -15,10 +15,10 @@ class Order(models.Model):
         blank=True,
         verbose_name='Пользователь',
     )
-    cart = models.ForeignKey(
+    cart = models.OneToOneField(
         Cart,
         related_name='cart_in_order',
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         verbose_name='Корзина',
     )
     price = models.DecimalField(

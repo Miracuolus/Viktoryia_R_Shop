@@ -67,7 +67,8 @@ class UpdateBookCart(UpdateView):
 class DeleteBookCart(UpdateView):
     model = BooktoCart
     form_class = CartForm
-    template_name = 'cart/list_cart.html'
+    #template_name = 'cart/list_cart.html'
+    template_name = 'cart/delete_cart_message.html'
 
     def get_success_url(self):    
         return reverse('cart:list')
@@ -95,7 +96,7 @@ class DeleteBookCart(UpdateView):
         obj.delete()
         return obj
 
-class ListCart(ListView):
+"""class ListCart(ListView):
     model = BooktoCart
     form_class = CartForm
     template_name = 'cart/list_cart.html'
@@ -115,12 +116,32 @@ class ListCart(ListView):
 
 
     def get_success_url(self):    
+        return reverse_lazy('cart:list')"""
+
+class ListCart(DetailView):
+    model = Cart
+    #form_class = CartForm
+    template_name = 'cart/list_cart.html'
+
+    def get_object(self):
+        cart_pk = self.request.session.get('cart_pk')
+        user = self.request.user
+        if user.is_authenticated:
+            cart = Cart.objects.filter(pk=cart_pk, user=user)
+        else:
+            cart = Cart.objects.filter(pk=cart_pk)
+        if cart.exists():
+            return cart[0]
+
+
+    def get_success_url(self):    
         return reverse_lazy('cart:list')
 
 class AddBooktoCart(UpdateView):
     model = BooktoCart
     form_class = CartForm
-    template_name = 'cart/list_cart.html'
+    #template_name = 'cart/list_cart.html'
+    template_name = 'cart/add_cart_message.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

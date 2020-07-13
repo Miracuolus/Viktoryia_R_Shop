@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Добавление в корзину{% endblock title %}
+
+{% block body %}
+    {% include "top_menu_main_book.html" %}
+    <div class="container marketing">
+        <div class="alert alert-success" role="alert">
+            Книга "{{ object.book }}" успешно добавлена в корзину
+        </div>
+        <script>
+            setTimeout(function(){location.href="{% url 'book:list_all_book' %}"}, 500);
+        </script>
+    </div>
+{% endblock body %}   
