@@ -90,7 +90,7 @@ class ImportForm(forms.ModelForm):
                 )
             else:
                 book, created = Book.objects.update_or_create(
-                    pk = b['pk'],
+                    pk = b['\ufeffpk'],
                     name = b['name'],
                     photo = b['photo'],
                     price = float(b['price']),
