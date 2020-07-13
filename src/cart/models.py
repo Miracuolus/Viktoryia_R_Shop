@@ -17,6 +17,13 @@ class Cart(models.Model):
         verbose_name='Пользователь',
     )
 
+    @property
+    def price(self):
+        price = 0
+        for p in self.books.all():
+            price += p.price
+        return price
+
     class Meta: 
         verbose_name = 'Корзина'
         verbose_name_plural = 'Корзины'
@@ -53,10 +60,13 @@ class BooktoCart(models.Model):
         auto_now_add=False # автом ставить время добавления
     )
 
+    @property
+    def price(self):
+        return self.quantity * self.book.price
+
     class Meta: 
         ordering = ['cart']
         unique_together = [('cart','book'),]
     
     def __str__(self):
         return f'Book #{self.book.pk} in cart #{self.cart.pk}'
-

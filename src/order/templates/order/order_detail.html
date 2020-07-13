@@ -32,12 +32,12 @@
                                 </h6>
                                 <small class="text-muted">{{ obj.quantity }} х {{ obj.book.price }} руб.</small>
                     </div>
-                    <span class="text-muted">{% multiply obj.quantity obj.book.price %}</span>
+                    <span class="text-muted">{{ obj.price }}</span>
                         </li>
                     {% endfor %}
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Сумма (бел.руб)</span>
-                        <strong> {% sum_filter %}</strong>
+                        <strong>{{ object.price }}</strong>
                     </li>
                 </ul>
             </div>
