@@ -28,6 +28,7 @@ class Book(models.Model):
     author = models.ManyToManyField(
         Author,
         verbose_name='Автор',
+        related_name = 'books',
     )
     series = models.ForeignKey(
         Series,

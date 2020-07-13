@@ -10,6 +10,14 @@
           {% endif %}
           <h4 class="text-white">О магазине</h4>
           <p class="text-muted">Наша задача — предложить клиенту идеальный сервис и максимальный выбор: товаров, способов оплаты, вариантов доставки.</p>
+          <h4 class="text-white">Курсы валют:</h4>
+          <p class="text-muted">
+            <ul>
+                <li>{% rate 'USD' %}</li>
+                {% rate 'EUR' %}
+                {% rate 'RUB' %}
+            </ul>
+          </p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <ul class="list-unstyled">

@@ -15,6 +15,13 @@
             </div>
             <div class="col-md-5 order-md-1">
                 <img src="{{ object.image.url }}" alt="Изображение автора" height="570px" width="430px">
+                <br>
+                <br>
+                <h4 class="mb-3">Написанные книги:</h4>
+                {% for book in object.books.all %}
+                    <a>{{book}}</a>
+                    {{book}}
+                {% endfor %}
             </div>
         </div>
     </div><!-- /.container -->

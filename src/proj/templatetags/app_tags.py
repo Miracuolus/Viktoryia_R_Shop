@@ -4,6 +4,8 @@ register = template.Library()
 
 from appinfo.models import AppInfo
 from decimal import Decimal
+import requests
+from django.utils.safestring import mark_safe
 
 
 
@@ -87,3 +89,23 @@ def quantity_zero():
     r = sum_book
     sum_book = 0
     return r
+
+@register.simple_tag
+def rate_currency():
+    s = requests.get('https://www.nbrb.by/api/exrates/rates?periodicity=0')
+    result = s.json()
+    rate = {}
+    for d in result:
+        if d.get('Cur_Abbreviation') == 'USD':
+            rate['USD'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
+        elif d.get('Cur_Abbreviation') == 'EUR':
+            rate['EUR'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
+        elif d.get('Cur_Abbreviation') == 'RUB':
+            rate['RUB'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
+    return rate
+
+@register.simple_tag
+def rate(key):
+    rate = rate_currency()
+    value = round(rate.get(key), 2)
+    return f'{ key } - {value}'
