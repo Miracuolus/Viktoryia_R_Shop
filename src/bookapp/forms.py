@@ -71,8 +71,8 @@ class ImportForm(forms.ModelForm):
                     name = b['publisher'],
                     defaults = {}
                     )
-            if Book.objects.filter(pk=b['pk']).exists():
-                book = Book.objects.filter(pk=b['pk']).update(
+            if Book.objects.filter(pk=b['\ufeffpk']).exists():
+                book = Book.objects.filter(pk=b['\ufeffpk']).update(
                     name = b['name'],
                     photo = b['photo'],
                     price = float(b['price']),
