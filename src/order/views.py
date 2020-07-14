@@ -74,8 +74,12 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
     def get_success_url(self):
         user = self.request.user
         cart_pk = self.request.session.get('cart_pk')
-        cart = Cart.objects.filter(pk = cart_pk)
-        book = BooktoCart.objects.all().filter(cart = cart[0])
+        if cart_pk:
+            cart = Cart.objects.filter(pk = cart_pk)
+            cart = cart[0]
+        else:
+            cart = Cart.objects.filter(user = user, active = True)
+        book = BooktoCart.objects.all().filter(cart = cart)
         for b in book:
             bb = Book.objects.filter(pk = b.book.pk)
             bb.update(quantity = (b.book.quantity - b.quantity))
@@ -99,10 +103,15 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
         user = self.request.user
         cart_pk = self.request.session.get('cart_pk')
         if user.is_authenticated:
-            cart = Cart.objects.filter(pk = cart_pk, user=user)
+            if cart_pk:
+                cart = Cart.objects.filter(pk = cart_pk, user=user)
+                cart = cart[0]
+            else:
+                cart = Cart.objects.filter(user = user, active = True).last()
         else:
             cart = Cart.objects.filter(pk = cart_pk)
-        context['cart'] = BooktoCart.objects.all().filter(cart = cart[0])
+            cart = cart[0]
+        context['cart'] = BooktoCart.objects.all().filter(cart = cart)
         return context
 
     def get_object(self):
@@ -110,9 +119,52 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
         price = 0
         cart_pk = self.request.session.get('cart_pk')
         user = self.request.user
-        cart = Cart.objects.filter(pk = cart_pk)
-        book = BooktoCart.objects.all().filter(cart = cart[0])
+        if cart_pk:
+            cart = Cart.objects.filter(pk = cart_pk)
+            cart = cart[0]
+            book = BooktoCart.objects.all().filter(cart = cart)
+        else:
+            cart = Cart.objects.filter(user = user, active = True).last()
+            book = BooktoCart.objects.all().filter(cart = cart)
+        
         for b in book:
+            if b.quantity > b.book.quantity:
+                BooktoCart.objects.filter(cart = cart, book = b.book.pk).update(quantity = b.book.quantity)
+                price += b.book.price * b.book.quantity
+            else:
+                price += b.book.price * b.quantity
+        if user.is_authenticated:
+            #cart = Cart.objects.filter(pk = cart_pk, user=user)
+            customer = Customer.objects.filter(user=user)
+            if self.model.objects.filter(cart = cart, user = user).exists():
+                obj = self.model.objects.get(cart = cart, user = user)
+                obj.price = price
+            else:
+                obj, created = self.model.objects.get_or_create(
+                    cart = cart,
+                    user = user,
+                    price = price,
+                    defaults = {'code_phone': customer[0].code_phone,
+                                'phone': customer[0].phone,
+                                'country': customer[0].country,
+                                'city': customer[0].city,
+                                'index': customer[0].index,
+                                'address': customer[0].address_1,
+                    }
+                )
+        else:
+            #cart = Cart.objects.filter(pk = cart_pk)
+            obj, created = self.model.objects.get_or_create(
+                cart = cart,
+                price = price,
+                defaults = {}
+            )
+        if cart_pk:
+            cart = Cart.objects.filter(pk = cart_pk).update(active=False)
+        else:
+            cart = Cart.objects.filter(user = user, active = True).update(active=False)
+        return obj
+        """for b in book:
             if b.quantity > b.book.quantity:
                 BooktoCart.objects.filter(cart = cart[0], book = b.book.pk).update(quantity = b.book.quantity)
                 price += b.book.price * b.book.quantity
@@ -120,6 +172,7 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
                 price += b.book.price * b.quantity
         if user.is_authenticated:
             cart = Cart.objects.filter(pk = cart_pk, user=user)
+            cart.update(active=False) #
             customer = Customer.objects.filter(user=user)
             if self.model.objects.filter(cart = cart[0], user = user).exists():
                 obj = self.model.objects.get(cart = cart[0], user = user)
@@ -144,7 +197,7 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
                 price = price,
                 defaults = {}
             )
-        return obj
+        return obj"""
 
 
 

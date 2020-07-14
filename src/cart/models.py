@@ -17,6 +17,11 @@ class Cart(models.Model):
         verbose_name='Пользователь',
     )
 
+    active = models.BooleanField(
+        verbose_name='Активная корзина',
+        default=True,
+    )
+
     @property
     def price(self):
         price = 0
@@ -64,7 +69,9 @@ class BooktoCart(models.Model):
     def price(self):
         return self.quantity * self.book.price
 
-    class Meta: 
+    class Meta:
+        verbose_name = 'Состав корзины'
+        verbose_name_plural = 'Состав корзин'
         ordering = ['cart']
         unique_together = [('cart','book'),]
     

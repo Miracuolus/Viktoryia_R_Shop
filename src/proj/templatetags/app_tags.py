@@ -91,3 +91,14 @@ def rate(key):
     rate = rate_currency()
     value = round(rate.get(key), 2)
     return f'{ key } - {value}'
+
+@register.filter
+def quantity_cart(value):
+    count = 0
+    for book in value:
+        if book.quantity > book.book.quantity:
+            count += 1
+    if count == 0:
+        return True
+    else:
+        return False

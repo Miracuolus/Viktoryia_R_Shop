@@ -45,16 +45,21 @@ class UpdateBookCart(UpdateView):
         book = Book.objects.get(pk=book_pk)
         user = self.request.user
         if user.is_authenticated:
-            cart, created = Cart.objects.get_or_create(
-                pk = cart_pk,
-                user = user,
-                defaults = {}
-            )
+            if cart_pk:
+                cart, created = Cart.objects.get_or_create(
+                    pk = cart_pk,
+                    user = user,
+                    defaults = {}
+                )
+                cart = cart[0]
+            else:
+                cart = Cart.objects.filter(user = user, active=True).last()
         else:
             cart, created = Cart.objects.get_or_create(
                 pk = cart_pk,
                 defaults = {}
             )
+            cart = cart[0]
         if created:
             self.request.session['cart_pk'] = cart.pk
         obj, created = self.model.objects.get_or_create(
@@ -118,6 +123,12 @@ class DeleteBookCart(UpdateView):
     def get_success_url(self):    
         return reverse_lazy('cart:list')"""
 
+
+def del_book(cart):
+    for i in cart.books.all():
+        if i.book.quantity == 0 or i.quantity == 0:
+            i.delete()
+
 class ListCart(DetailView):
     model = Cart
     #form_class = CartForm
@@ -128,10 +139,20 @@ class ListCart(DetailView):
         user = self.request.user
         if user.is_authenticated:
             cart = Cart.objects.filter(pk=cart_pk, user=user)
+            if not cart.exists():
+                cart = Cart.objects.filter(user=user, active=True).last()
+                if cart:
+                    del_book(cart)
+                    return cart
+                else:
+                    return cart
+            del_book(cart[0])
+            return cart[0]
         else:
             cart = Cart.objects.filter(pk=cart_pk)
-        if cart.exists():
-            return cart[0]
+            if cart.exists():
+                del_book(cart[0])
+                return cart[0]
 
 
     def get_success_url(self):    
@@ -148,13 +169,15 @@ class AddBooktoCart(UpdateView):
         cart_pk = self.request.session.get('cart_pk')
         user = self.request.user
         if user.is_authenticated:
-            cart = Cart.objects.filter(pk=cart_pk, user=user)
+            if cart_pk:
+                cart = Cart.objects.filter(pk=cart_pk, user=user)
+            else:
+                cart = Cart.objects.filter(user=user, active=True).last()
         else:
             cart = Cart.objects.filter(pk=cart_pk)
-        if cart:
-            book_in_cart = self.model.objects.all().filter(cart=cart[0])
-            context['object_list'] = book_in_cart
-            return context
+        book_in_cart = self.model.objects.all().filter(cart=cart)
+        context['object_list'] = book_in_cart
+        return context
 
     def get_success_url(self):
         return reverse_lazy('cart:list')
@@ -170,6 +193,10 @@ class AddBooktoCart(UpdateView):
                 user = user,
                 defaults = {}
             )
+            if cart:
+                pass
+            else:
+                cart = Cart.objects.filter(user = user, active=True).last()
         else:
             cart, created = Cart.objects.get_or_create(
                 pk = cart_pk,

@@ -57,7 +57,7 @@
                     <strong>{{ object.price }}</strong>
                 </li>
             </ul>
-            <a href="{% url 'order:update' %}?price={{ object.price }}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Оформить заказ</a>
+            <a href="{% url 'order:update' %}?price={{ object.price }}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Перейти к оформлению заказа</a>
         {% else %}
         <p>Корзина пуста</p>
         {% endif %}
