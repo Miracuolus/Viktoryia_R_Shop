@@ -78,7 +78,7 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
             cart = Cart.objects.filter(pk = cart_pk)
             cart = cart[0]
         else:
-            cart = Cart.objects.filter(user = user, active = True)
+            cart = Cart.objects.filter(user = user).last()
         book = BooktoCart.objects.all().filter(cart = cart)
         for b in book:
             bb = Book.objects.filter(pk = b.book.pk)

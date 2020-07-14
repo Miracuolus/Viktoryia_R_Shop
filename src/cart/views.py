@@ -188,13 +188,14 @@ class AddBooktoCart(UpdateView):
         book = Book.objects.get(pk=book_pk)
         user = self.request.user
         if user.is_authenticated:
-            cart, created = Cart.objects.get_or_create(
-                pk = cart_pk,
-                user = user,
-                defaults = {}
-            )
-            if cart:
-                pass
+            if not Cart.objects.filter(user = user, active=True).exists():
+                cart, created = Cart.objects.get_or_create(
+                    pk = cart_pk,
+                    user = user,
+                    defaults = {}
+                )
+                if created:
+                    self.request.session['cart_pk'] = cart.pk
             else:
                 cart = Cart.objects.filter(user = user, active=True).last()
         else:
@@ -202,8 +203,10 @@ class AddBooktoCart(UpdateView):
                 pk = cart_pk,
                 defaults = {}
             )
-        if created:
-            self.request.session['cart_pk'] = cart.pk
+            if created:
+                self.request.session['cart_pk'] = cart.pk
+        #if created:
+        #    self.request.session['cart_pk'] = cart.pk
         obj, created = self.model.objects.get_or_create(
             cart = cart,
             book = book,
