@@ -51,7 +51,6 @@ class UpdateBookCart(UpdateView):
                     user = user,
                     defaults = {}
                 )
-                cart = cart[0]
             else:
                 cart = Cart.objects.filter(user = user, active=True).last()
         else:
@@ -59,7 +58,6 @@ class UpdateBookCart(UpdateView):
                 pk = cart_pk,
                 defaults = {}
             )
-            cart = cart[0]
         if created:
             self.request.session['cart_pk'] = cart.pk
         obj, created = self.model.objects.get_or_create(
