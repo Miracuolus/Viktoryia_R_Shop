@@ -5,11 +5,11 @@
 {% block body %}
     {% include "top_menu_main_book.html" %}
     <div class="container marketing">        <br>
-        <h4 class="mb-3" id="create-book">Комментировать заказ {{ object }}</h4>
+        <h4 class="mb-3" id="create-book">Комментировать заказ {{ object.pk }}</h4>
         <form class="needs-validation" novalidate action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
-            <a href="{% url 'order:create_comment' %}"><button type="submit" class="btn btn-success">Оставить комментарий</button></a>
+            <a href="{% url 'order:create_comment' object.pk %}"><button type="submit" class="btn btn-success">Оставить комментарий</button></a>
         </form>
         <br>
     </div>

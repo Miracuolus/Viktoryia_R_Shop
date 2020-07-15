@@ -79,6 +79,12 @@ class Order(models.Model):
         auto_now_add=False # автом ставить время добавления
     )
 
+    comment = models.ManyToManyField(
+        'Comment_Order',
+        verbose_name='Комментарии',
+        null=True,
+        blank=True,
+    )
     class Meta: 
         #ordering = ['status']
         verbose_name = 'Заказ'
@@ -89,16 +95,9 @@ class Order(models.Model):
 
 
 class Comment_Order(models.Model):
-    order = models.ForeignKey(
-        'Order',
-        verbose_name='Заказ',
-        on_delete=models.CASCADE,
-    )
     comment = models.TextField(
         verbose_name='Комментарий',
         max_length= 100,
-        null=True,
-        blank=True,
     )
     user = models.ForeignKey(
         User,
@@ -130,4 +129,4 @@ class Comment_Order(models.Model):
         verbose_name_plural = 'Комментарии к заказам'
     
     def __str__(self):
-        return f'Заказ №{self.order.pk}: {self.user} - {self.role_user }'
+        return f'{self.user} - {self.role_user}'
