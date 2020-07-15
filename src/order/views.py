@@ -28,8 +28,8 @@ class UpdateOrder_continue(SuccessMessageMixin, UserPassesTestMixin, UpdateView)
 
     def get_success_url(self):
         user = self.request.user
-        #if Order.objects.filter(pk = self.object.pk, status = 'Открыт'):
-        #    order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
+        if Order.objects.filter(pk = self.object.pk, status = 'Открыт'):
+            order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
         if user.is_authenticated:
             return reverse_lazy('order:detail', kwargs={'pk':self.object.pk})
         else:
@@ -290,14 +290,14 @@ class Create_Comment_Order(LoginRequiredMixin, UserPassesTestMixin, SuccessMessa
             if order.user == user:
                 return self
 
-class Update_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class Update_Comment_Order(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = Comment_Order
     fields = ('comment',)
     template_name = 'order/create_comment.html'
     
 
     def get_success_message(self, *args, **kwargs):
-        return f'Комментарий добавлен'
+        return f'Комментарий изменен'
     
     def get_success_url(self):
         pk = self.object.pk
@@ -310,3 +310,9 @@ class Update_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         user = self.request.user
         comments = Comment_Order.objects.get(pk=create_comment)
         return comments
+    
+    def test_func(self):
+        user = self.request.user
+        obj = self.get_object()
+        if obj.user == user or user.is_staff or user.is_superuser:
+            return obj
