@@ -17,6 +17,7 @@ from decimal import Decimal
 from bookapp.models import Book
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
+from datetime import datetime
 
 # Create your views here.
 class UpdateOrder_continue(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
@@ -259,7 +260,7 @@ class DeleteOrder(LoginRequiredMixin, UpdateView):
         return context
 
 
-class Create_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class Create_Comment_Order(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, CreateView):
     model = Comment_Order
     fields = ('comment',)
     template_name = 'order/create_comment.html'
@@ -279,3 +280,23 @@ class Create_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         order.comment.add(self.object.pk)
         return reverse_lazy('order:detail', kwargs={'pk':order_pk})
 
+class Update_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Comment_Order
+    fields = ('comment',)
+    template_name = 'order/create_comment.html'
+    
+
+    def get_success_message(self, *args, **kwargs):
+        return f'Комментарий добавлен'
+    
+    def get_success_url(self):
+        pk = self.object.pk
+        user = self.request.user
+        order = Order.objects.filter(comment = pk).first()
+        return reverse_lazy('order:detail', kwargs={'pk':order.pk})
+    
+    def get_object(self):
+        create_comment = self.request.GET.get('create_comment')
+        user = self.request.user
+        comments = Comment_Order.objects.get(pk=create_comment)
+        return comments

@@ -6,14 +6,8 @@ from order.views import (UpdateOrder,
                          UpdateOrder_continue,
                          OrderListAdmin,
                          UpdateOrder_continue_admin,
-                         Create_Comment_Order, 
-)
-from django.views.generic import (TemplateView, 
-                                  CreateView, 
-                                  UpdateView, 
-                                  ListView, 
-                                  DeleteView,
-                                  DetailView
+                         Create_Comment_Order,
+                         Update_Comment_Order,
 )
 
 app_name = 'order'
@@ -26,4 +20,5 @@ urlpatterns = [
     path('update_admin/<int:pk>', UpdateOrder_continue_admin.as_view(), name='update_admin'),
     path('delete/<int:pk>', DeleteOrder.as_view(), name='delete'),
     path('create_comment/', Create_Comment_Order.as_view(), name='create_comment'),
+    path('update_comment/', Update_Comment_Order.as_view(), name='update_comment'),
 ]

@@ -192,7 +192,9 @@
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td></td>
-                                                                        <td>{{c.created}}</td>
+                                                                        <td>{{c.updated}}</td>
+                                                                                                     <a href="{% url 'order:update_comment' %}?create_comment={{ c.pk }}"><button type="button" class="btn btn-info btn-secondary" {% if object.comment.user == user %} disabled{% endif %}>Редактировать комментарий</button></a>
+
                                                                 </tr>
                                                             {% endfor %}
                                                         </tbody>
@@ -203,7 +205,7 @@
                                     </div>
                                 </td>
                             </tr>
-                                <a href="{% url 'order:create_comment' %}?order_pk={{ object.pk }}"><button type="button" class="btn btn-info btn-secondary" {% if object.comment.user == user %} disabled{% endif %}>Добавить комментарий</button></a>
+                            <a href="{% url 'order:create_comment' %}?order_pk={{ object.pk }}"><button type="button" class="btn btn-info btn-secondary" {% if object.comment.user == user %} disabled{% endif %}>Добавить комментарий</button></a>
                     {% endif %}
                 {% else %}
                     {% if object.status == 'Открыт' %}
