@@ -18,5 +18,5 @@ urlpatterns = [
     path('update_order/<int:pk>', UpdateOrder_continue.as_view(), name='update_order'),
     path('update_admin/<int:pk>', UpdateOrder_continue_admin.as_view(), name='update_admin'),
     path('delete/<int:pk>', DeleteOrder.as_view(), name='delete'),
-    path('create_comment/<int:pk>', Create_Comment_Order.as_view(), name='create_comment'),
+    path('create_comment/', Create_Comment_Order.as_view(), name='create_comment'),
 ]

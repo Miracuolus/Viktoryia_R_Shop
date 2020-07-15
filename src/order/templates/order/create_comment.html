@@ -9,7 +9,7 @@
         <form class="needs-validation" novalidate action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
-            <a href="{% url 'order:create_comment' object.pk %}"><button type="submit" class="btn btn-success">Оставить комментарий</button></a>
+            <a href="{% url 'order:create_comment' %}"><button type="submit" class="btn btn-success">Оставить комментарий</button></a>
         </form>
         <br>
     </div>

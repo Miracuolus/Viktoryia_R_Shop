@@ -84,6 +84,7 @@ class Order(models.Model):
         verbose_name='Комментарии',
         null=True,
         blank=True,
+        related_name='comments',
     )
     class Meta: 
         #ordering = ['status']
@@ -95,6 +96,14 @@ class Order(models.Model):
 
 
 class Comment_Order(models.Model):
+    order = models.ForeignKey(
+        'Order',
+        on_delete=models.CASCADE,
+        verbose_name='Заказ',
+        related_name='order',
+        null=True,
+        blank=True,
+    )
     comment = models.TextField(
         verbose_name='Комментарий',
         max_length= 100,

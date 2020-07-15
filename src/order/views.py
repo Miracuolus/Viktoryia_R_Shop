@@ -268,4 +268,19 @@ class Create_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return f'Комментарий добавлен'
     
     def get_success_url(self):
-        return reverse_lazy('order:detail', kwargs={'pk':self.object.pk})
+        order_pk = self.request.GET.get('order_pk')
+        order = Order.objects.filter(pk=order_pk).first()
+        order.comment.add(self.object.pk)
+        return reverse_lazy('order:detail', kwargs={'pk':order_pk})
+
+    def get_object(self):
+        order_pk = self.request.GET.get('order_pk')
+        order = Order.objects.filter(pk=order_pk).first()
+        user = self.request.user
+        obj, created = Comment_Order.objects.get_or_create(
+            user=user,
+            order = order,
+            role_user = user.groups.all()[0],
+            defaults = {},
+        )
+        return obj
