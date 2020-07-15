@@ -8,6 +8,13 @@ from order.views import (UpdateOrder,
                          UpdateOrder_continue_admin,
                          Create_Comment_Order, 
 )
+from django.views.generic import (TemplateView, 
+                                  CreateView, 
+                                  UpdateView, 
+                                  ListView, 
+                                  DeleteView,
+                                  DetailView
+)
 
 app_name = 'order'
 

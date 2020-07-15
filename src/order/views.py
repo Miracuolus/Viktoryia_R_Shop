@@ -259,7 +259,7 @@ class DeleteOrder(LoginRequiredMixin, UpdateView):
         return context
 
 
-class Create_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class Create_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Comment_Order
     fields = ('comment',)
     template_name = 'order/create_comment.html'
@@ -268,19 +268,14 @@ class Create_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return f'Комментарий добавлен'
     
     def get_success_url(self):
+        pk = self.object.pk
+        user = self.request.user
         order_pk = self.request.GET.get('order_pk')
         order = Order.objects.filter(pk=order_pk).first()
+        if user.is_superuser:
+            Comment_Order.objects.filter(pk=pk).update(user=user, order=order)
+        else:
+            Comment_Order.objects.filter(pk=pk).update(user=user, order=order, role_user = user.groups.all()[0])
         order.comment.add(self.object.pk)
         return reverse_lazy('order:detail', kwargs={'pk':order_pk})
 
-    def get_object(self):
-        order_pk = self.request.GET.get('order_pk')
-        order = Order.objects.filter(pk=order_pk).first()
-        user = self.request.user
-        obj, created = Comment_Order.objects.get_or_create(
-            user=user,
-            order = order,
-            role_user = user.groups.all()[0],
-            defaults = {},
-        )
-        return obj

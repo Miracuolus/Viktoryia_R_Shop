@@ -172,6 +172,39 @@
                     </div>
                 </form>
                 {% if user.is_staff or user.is_superuser %}
+                    {% if object.comment %}
+                            <tr class="b-description__more">
+                                <td colspan="2">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="card">
+                                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <table>
+                                                        <tbody>
+                                                            {% for c in object.comment.all %}
+                                                                <tr class="">
+                                                                
+                                                                        <td>{{c.user}}:</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td>{{c.comment}}</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td>{{c.created}}</td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                                <a href="{% url 'order:create_comment' %}?order_pk={{ object.pk }}"><button type="button" class="btn btn-info btn-secondary" {% if object.comment.user == user %} disabled{% endif %}>Добавить комментарий</button></a>
+                    {% endif %}
                 {% else %}
                     {% if object.status == 'Открыт' %}
                         {% if object.cart.books.all|quantity_cart %}
@@ -195,15 +228,20 @@
                                                 <div class="card-body">
                                                     <table>
                                                         <tbody>
-                                                            <tr class="">
-                                                                {% for c in object.comment.all %}
-                                                                    <td>Комментарий:</td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td>{{c.comment}}</td>
-                                                                {% endfor %}
-                                                            </tr>
+                                                            {% for c in object.comment.all %}
+                                                                <tr class="">
+                                                                
+                                                                        <td>{{c.user}}:</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td>{{c.comment}}</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td>{{c.created}}</td>
+                                                                </tr>
+                                                            {% endfor %}
                                                         </tbody>
                                                     </table>
                                                 </div>

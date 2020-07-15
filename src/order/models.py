@@ -136,6 +136,7 @@ class Comment_Order(models.Model):
     class Meta: 
         verbose_name = 'Комментарий к заказу'
         verbose_name_plural = 'Комментарии к заказам'
+        unique_together = [('order','created'),]
     
-    def __str__(self):
-        return f'{self.user} - {self.role_user}'
+    """def __str__(self):
+        return f'Заказ №{self.order.pk}, {self.user} - {self.role_user} - {self.created}'"""
