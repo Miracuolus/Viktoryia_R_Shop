@@ -91,8 +91,8 @@ class Order(models.Model):
 class Comment_Order(models.Model):
     order = models.ForeignKey(
         'Order',
-        on_delete=models.PROTECT,
         verbose_name='Заказ',
+        on_delete=models.CASCADE,
     )
     comment = models.TextField(
         verbose_name='Комментарий',

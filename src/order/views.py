@@ -1,4 +1,4 @@
-from . models import Order
+from . models import Order, Comment_Order
 from . forms import OrderForm
 from django.views.generic import (TemplateView, 
                                   CreateView, 
@@ -257,3 +257,33 @@ class DeleteOrder(LoginRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         order = Order.objects.filter(pk = self.object.pk).update(status = 'Отменен')
         return context
+
+
+class Create_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Comment_Order
+    fields = ('text',)
+    template_name = 'order/create_comment.html'
+
+    def get_success_message(self, *args, **kwargs):
+        return f'Комментарий добавлен'
+    
+    def get_success_url(self):
+        order_pk = self.request.GET.get('order_pk')
+        print(order_pk)
+        print(self.object.pk)
+        user = self.request.user
+        #if Order.objects.filter(pk = self.object.pk, status = 'Открыт'):
+        #    order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
+        if user.is_authenticated:
+            return reverse_lazy('order:detail', kwargs={'pk':order_pk})
+        else:
+            self.request.session.flush()
+            return reverse_lazy('main')
+
+    """def test_func(self):
+        user = self.request.user
+        obj = self.get_object()
+        if obj.user == user:
+            return obj"""
+    
+    #B.author.add(*author_set)
