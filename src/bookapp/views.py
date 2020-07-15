@@ -25,9 +25,6 @@ class HomePage(TemplateView):
         
         return context
 
-   
-
-
 class CreateBook(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Book
     form_class = BookForm

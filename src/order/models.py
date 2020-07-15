@@ -130,4 +130,4 @@ class Comment_Order(models.Model):
         verbose_name_plural = 'Комментарии к заказам'
     
     def __str__(self):
-        return f'{self.order}: {self.user} - {self.role_user }'
+        return f'Заказ №{self.order.pk}: {self.user} - {self.role_user }'

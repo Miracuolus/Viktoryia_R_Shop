@@ -186,10 +186,11 @@
                         <a href="{% url 'order:update_order' object.pk %}"><button type="button" class="btn btn-secondary btn-primary" {% if object.cart.books.all|quantity_cart %} {% else %} disabled{% endif %}>Оформить/Редактировать заказ</button></a>
                         <a href="{% url 'order:delete' object.pk %}"><button type="button" class="btn btn-danger btn-primary" {% if object.cart.books.all|quantity_cart %} {% else %} disabled{% endif %}>Отменить заказ</button></a>
                     {% else %}
-                        <a href="{% url 'order:update_order' object.pk %}"><button type="button" class="btn btn-secondary btn-primary" {% if object.status == 'Открыт' %} {% else %} disabled{% endif %}>Оформить/Редактировать заказ</button></a>
-                        <a href="{% url 'order:delete' object.pk %}"><button type="button" class="btn btn-danger btn-primary" {% if object.status == 'Открыт' %} {% else %} disabled{% endif %}>Отменить заказ</button></a>
                         {% if object.status == 'Закрыт' %}
                             <a href="{% url 'order:create_comment' %}?order_pk={{ object.pk }}"><button type="button" class="btn btn-info btn-secondary" {% if object.comment.user == user %} disabled{% endif %}>Оставить комментарий</button></a>
+                        {% else %}
+                            <a href="{% url 'order:update_order' object.pk %}"><button type="button" class="btn btn-secondary btn-primary" {% if object.status == 'Открыт' %} {% else %} disabled{% endif %}>Оформить/Редактировать заказ</button></a>
+                            <a href="{% url 'order:delete' object.pk %}"><button type="button" class="btn btn-danger btn-primary" {% if object.status == 'Открыт' %} {% else %} disabled{% endif %}>Отменить заказ</button></a>
                         {% endif %}
                     {% endif %}
                 {% endif %}

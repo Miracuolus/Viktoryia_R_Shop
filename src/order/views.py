@@ -259,9 +259,9 @@ class DeleteOrder(LoginRequiredMixin, UpdateView):
         return context
 
 
-class Create_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class Create_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Comment_Order
-    fields = ('text',)
+    fields = ('comment',)
     template_name = 'order/create_comment.html'
 
     def get_success_message(self, *args, **kwargs):
@@ -269,21 +269,20 @@ class Create_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     
     def get_success_url(self):
         order_pk = self.request.GET.get('order_pk')
-        print(order_pk)
-        print(self.object.pk)
-        user = self.request.user
-        #if Order.objects.filter(pk = self.object.pk, status = 'Открыт'):
-        #    order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
-        if user.is_authenticated:
-            return reverse_lazy('order:detail', kwargs={'pk':order_pk})
-        else:
-            self.request.session.flush()
-            return reverse_lazy('main')
-
-    """def test_func(self):
-        user = self.request.user
-        obj = self.get_object()
-        if obj.user == user:
-            return obj"""
+        return reverse_lazy('order:detail', kwargs={'pk':order_pk})
     
-    #B.author.add(*author_set)
+    def get_object(self):
+        order_pk = self.request.GET.get('order_pk')
+        user = self.request.user
+        #print(self.object)
+        order = Order.objects.filter(pk=order_pk).first()
+        obj, created  = Comment_Order.objects.get_or_create(
+            #pk = self.object.pk,
+            order = order,
+            user = user,
+            role_user = user.groups.all(),
+            defaults = {}
+        )
+        return obj
+
+
