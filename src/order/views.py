@@ -279,6 +279,16 @@ class Create_Comment_Order(LoginRequiredMixin, UserPassesTestMixin, SuccessMessa
             Comment_Order.objects.filter(pk=pk).update(user=user, order=order, role_user = user.groups.all()[0])
         order.comment.add(self.object.pk)
         return reverse_lazy('order:detail', kwargs={'pk':order_pk})
+    
+    def test_func(self):
+        user = self.request.user
+        order_pk = self.request.GET.get('order_pk')
+        order = Order.objects.filter(pk=order_pk).first()
+        if user.is_superuser or user.is_staff:
+            return self
+        else:
+            if order.user == user:
+                return self
 
 class Update_Comment_Order(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Comment_Order
