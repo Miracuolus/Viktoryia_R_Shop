@@ -18,6 +18,7 @@ class Book(models.Model):
         upload_to='books', 
         height_field=None, 
         width_field=None,
+        default = 'books/incognito.png',
     )
     price = models.DecimalField(
         verbose_name='Цена',
