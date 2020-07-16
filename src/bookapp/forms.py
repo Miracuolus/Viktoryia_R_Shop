@@ -71,9 +71,7 @@ class ImportForm(forms.ModelForm):
                     name = b['publisher'],
                     defaults = {}
                     )
-            #if Book.objects.filter(pk=b['\ufeffpk']).exists():
             if Book.objects.filter(pk=b['pk']).exists():
-                #book = Book.objects.filter(pk=b['\ufeffpk']).update(
                 book = Book.objects.filter(pk=b['pk']).update(
                     name = b['name'],
                     photo = b['photo'],
@@ -92,7 +90,6 @@ class ImportForm(forms.ModelForm):
                 )
             else:
                 book, created = Book.objects.update_or_create(
-                    #pk = b['\ufeffpk'],
                     pk = b['pk'],
                     name = b['name'],
                     photo = b['photo'],
