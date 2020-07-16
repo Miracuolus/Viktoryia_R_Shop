@@ -1,7 +1,7 @@
 from django import template
 
 register = template.Library()
-"""
+
 from appinfo.models import AppInfo
 from decimal import Decimal
 import requests
@@ -22,7 +22,7 @@ def print_app_name():
 @register.simple_tag
 def print_app_year():
     info = AppInfo.objects.get(pk=1)
-    return info.year"""
+    return info.year
 
 @register.simple_tag
 def sum_order():
