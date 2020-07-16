@@ -130,6 +130,7 @@ class Book(models.Model):
         ]
         verbose_name = 'Книга'
         verbose_name_plural = 'Книги'
+        ordering = ['rating']
 
     def __str__(self):
         return f'{self.name}'
@@ -141,6 +142,15 @@ class Import_Book(models.Model):
         upload_to='files',
     )
 
+    created = models.DateTimeField(
+        verbose_name='Создано',
+        auto_now=False, # автом ставить тек время
+        auto_now_add=True, # автом ставить время добавления
+    )
+
     class Meta: 
         verbose_name = 'Каталог книг'
         verbose_name_plural = 'Каталоги книг'
+    
+    def __str__(self):
+        return f'{self.created}'
