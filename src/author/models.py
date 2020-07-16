@@ -33,3 +33,22 @@ class Author(models.Model):
     
     def __str__(self):
         return f'{self.name}'
+
+class Import_Author(models.Model):
+    file_author = models.FileField(
+        verbose_name='Каталог авторов',
+        upload_to='files',
+    )
+
+    created = models.DateTimeField(
+        verbose_name='Создано',
+        auto_now=False, # автом ставить тек время
+        auto_now_add=True, # автом ставить время добавления
+    )
+
+    class Meta: 
+        verbose_name = 'Каталог авторов'
+        verbose_name_plural = 'Каталоги авторов'
+    
+    def __str__(self):
+        return f'{self.created}'
