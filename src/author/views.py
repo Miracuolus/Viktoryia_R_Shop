@@ -1,5 +1,5 @@
 from . models import Author
-from . forms import AuthorForm
+from . forms import AuthorForm, ImportForm
 from django.views.generic import (  TemplateView, 
                                     CreateView, 
                                     UpdateView, 
@@ -10,6 +10,7 @@ from django.views.generic import (  TemplateView,
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic.edit import FormView
 
 
 # Create your views here.
@@ -60,3 +61,18 @@ class DetailAuthor(DetailView):
 
     def get_success_url(self):
         return reverse_lazy('author:detail', kwargs={'pk':self.object.pk})
+
+class ImportAuthors(LoginRequiredMixin, SuccessMessageMixin, FormView):
+    form_class = ImportForm
+    template_name = 'author/import_author.html'
+
+    def get_success_url(self):    
+        return reverse_lazy('book:list')
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Каталог авторов импортирован'
+    
+    def form_valid(self, form):
+        form.save()
+        form.process_file()
+        return super().form_valid(form)
