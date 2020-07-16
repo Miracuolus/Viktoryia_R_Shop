@@ -1,5 +1,7 @@
 from django import forms
 from . models import Author, Import_Author
+import io
+import csv
 
 class AuthorForm(forms.ModelForm):
     class Meta:
@@ -11,27 +13,25 @@ class AuthorForm(forms.ModelForm):
         )
 
 class ImportForm(forms.ModelForm):
-    file_books = forms.FileField(
+    file_authors = forms.FileField(
         label='Загрузка файла',
     )
 
     def process_file(self):
-        data = io.TextIOWrapper(self.cleaned_data['file_books'].file)
+        data = io.TextIOWrapper(self.cleaned_data['file_authors'].file)
         reader = csv.DictReader(data)
         for b in reader:
-            if Author.objects.filter(pk=b['pk']).exists():
-                author = Author.objects.filter(pk=b['pk']).update(
-                    name = b['name'],
+            if Author.objects.filter(name=b['name']).exists():
+                author = Author.objects.filter(name=b['name']).update(
                     date = b['date'],
-                    photo = b['photo'],
+                    image = b['photo'],
                     description  = b['description'],
                 )
             else:
                 author, created = Author.objects.update_or_create(
-                    pk = b['pk'],
                     name = b['name'],
                     date = b['date'],
-                    photo = b['photo'],
+                    image = b['photo'],
                     description  = b['description'],
                     defaults = {}
                 )
@@ -39,4 +39,4 @@ class ImportForm(forms.ModelForm):
         
     class Meta:
         model = Import_Author
-        fields = ('file_books', )
+        fields = ('file_authors', )

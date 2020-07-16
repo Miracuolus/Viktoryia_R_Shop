@@ -67,7 +67,7 @@ class ImportAuthors(LoginRequiredMixin, SuccessMessageMixin, FormView):
     template_name = 'author/import_author.html'
 
     def get_success_url(self):    
-        return reverse_lazy('book:list')
+        return reverse_lazy('author:list')
     
     def get_success_message(self, *args, **kwargs):
         return f'Каталог авторов импортирован'
