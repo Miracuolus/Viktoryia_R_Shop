@@ -26,8 +26,8 @@ SECRET_KEY = 's!wbm69+s+@bpb=%!u5%p0#95^=&pup_+xd=cv@6a2z1ww$(g2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['viktoryia.pythonanywhere.com']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['viktoryia.pythonanywhere.com']
+#ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -144,8 +144,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/home/Viktoryia/mysite/static' # куда перенести файлы
 
 MEDIA_URL = '/media/' # для пользователя
-#MEDIA_ROOT = '/home/Viktoryia/mysite/media' # для боевого сервера
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # для локальной разработки
+MEDIA_ROOT = '/home/Viktoryia/mysite/media' # для боевого сервера
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # для локальной разработки
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
