@@ -82,7 +82,6 @@ class Order(models.Model):
     comment = models.ManyToManyField(
         'Comment_Order',
         verbose_name='Комментарии',
-        null=True,
         blank=True,
         related_name='comments',
     )

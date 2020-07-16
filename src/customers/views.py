@@ -52,7 +52,6 @@ class LogIn(FormView):
         Customer.objects.create(user=new_user, code_phone=code_type, phone=phone, group=group)
         #Customer.objects.create(user=new_user, code_phone=code_type, phone=phone) #
         new_user = authenticate(self.request,username=username,password=password)
-        print(1)
         if new_user is not None:
              if new_user.is_active:
                  login(self.request, new_user)
