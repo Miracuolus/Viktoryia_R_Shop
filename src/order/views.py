@@ -125,10 +125,9 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
             cart = cart[0]
             book = BooktoCart.objects.all().filter(cart = cart)
         else:
-            cart = Cart.objects.filter(user = user, active = True).last()
-            print(cart)
+            print(1234567)
+            cart = Cart.objects.filter(user = user).last()
             book = BooktoCart.objects.all().filter(cart = cart)
-            print(book)
         
         for b in book:
             if b.quantity > b.book.quantity:
@@ -166,9 +165,6 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
             cart = Cart.objects.filter(pk = cart_pk).update(active=False)
         else:
             cart = Cart.objects.filter(user = user, active = True).update(active=False)
-            print(0)
-            print(cart)
-            print(0)
         return obj
         """for b in book:
             if b.quantity > b.book.quantity:
