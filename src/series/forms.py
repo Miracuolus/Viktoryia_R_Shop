@@ -22,13 +22,13 @@ class ImportForm(forms.ModelForm):
         for b in reader:
             if Series.objects.filter(name=b['name']).exists():
                 series = Series.objects.filter(name=b['name']).update(
-                    image = b['photo'],
+                    image = b['image'],
                     description  = b['description'],
                 )
             else:
                 series, created = Series.objects.update_or_create(
                     name = b['name'],
-                    image = b['photo'],
+                    image = b['image'],
                     description  = b['description'],
                     defaults = {}
                 )

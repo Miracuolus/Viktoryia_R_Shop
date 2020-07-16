@@ -23,13 +23,13 @@ class ImportForm(forms.ModelForm):
         for b in reader:
             if Publisher.objects.filter(name=b['name']).exists():
                 publisher = Publisher.objects.filter(name=b['name']).update(
-                    image = b['photo'],
+                    image = b['image'],
                     description  = b['description'],
                 )
             else:
                 publisher, created = Publisher.objects.update_or_create(
                     name = b['name'],
-                    image = b['photo'],
+                    image = b['image'],
                     description  = b['description'],
                     defaults = {}
                 )

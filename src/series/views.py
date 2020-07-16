@@ -1,5 +1,5 @@
 from . forms import SeriesForm, ImportForm
-from . models import Series
+from . models import Series, Import_Series
 from django.views.generic import (
                                     TemplateView, 
                                     CreateView, 
@@ -70,6 +70,8 @@ class ImportSeries(LoginRequiredMixin, SuccessMessageMixin, FormView):
         return f'Каталог серий импортирован'
     
     def form_valid(self, form):
-        form.save()
+        Import_Series.objects.create(file_series = self)
         form.process_file()
+        
+        #file_import.save()
         return super().form_valid(form)
