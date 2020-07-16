@@ -26,3 +26,22 @@ class Series(models.Model):
     
     def __str__(self):
         return f'{self.name}'
+
+class Import_Series(models.Model):
+    file_series = models.FileField(
+        verbose_name='Каталог серий',
+        upload_to='files',
+    )
+
+    created = models.DateTimeField(
+        verbose_name='Создано',
+        auto_now=False, # автом ставить тек время
+        auto_now_add=True, # автом ставить время добавления
+    )
+
+    class Meta: 
+        verbose_name = 'Каталог серий'
+        verbose_name_plural = 'Каталоги серий'
+    
+    def __str__(self):
+        return f'{self.created}'

@@ -1,5 +1,12 @@
 from django.urls import path, include
-from  . views import CreatePublisher, UpdatePublisher, PublisherList, DeletePublisher, DetailPublisher
+from  . views import (CreatePublisher, 
+                      UpdatePublisher, 
+                      PublisherList, 
+                      DeletePublisher, 
+                      DetailPublisher,
+                      ImportPublisher,
+)
+
 app_name = 'publisher'
 
 urlpatterns = [
@@ -8,4 +15,5 @@ urlpatterns = [
     path('delete/<int:pk>', DeletePublisher.as_view(), name='delete'),
     path('list/', PublisherList.as_view(), name='list'),
     path('detail/<int:pk>', DetailPublisher.as_view(), name='detail'),
+    path('import/', ImportPublisher.as_view(), name='import'),
 ]

@@ -1,4 +1,4 @@
-from . forms import SeriesForm
+from . forms import SeriesForm, ImportForm
 from . models import Series
 from django.views.generic import (
                                     TemplateView, 
@@ -57,3 +57,19 @@ class DetailSeries(DetailView):
 
     def get_success_url(self):
         return reverse_lazy('series:detail', kwargs={'pk':self.object.pk})
+
+
+class ImportSeries(LoginRequiredMixin, SuccessMessageMixin, FormView):
+    form_class = ImportForm
+    template_name = 'series/import_series.html'
+
+    def get_success_url(self):    
+        return reverse_lazy('series:list')
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Каталог серий импортирован'
+    
+    def form_valid(self, form):
+        form.save()
+        form.process_file()
+        return super().form_valid(form)

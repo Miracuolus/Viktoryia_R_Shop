@@ -1,4 +1,4 @@
-from . forms import GenreForm
+from . forms import GenreForm, ImportForm
 from . models import Genre
 from django.views.generic import (
                                     TemplateView, 
@@ -70,3 +70,19 @@ class DetailGenre(DetailView):
 
     def get_success_url(self):
         return reverse_lazy('genre:detail', kwargs={'pk':self.object.pk})
+
+
+class ImportGenre(LoginRequiredMixin, SuccessMessageMixin, FormView):
+    form_class = ImportForm
+    template_name = 'genre/import_genre.html'
+
+    def get_success_url(self):    
+        return reverse_lazy('genre:list')
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Каталог жанров импортирован'
+    
+    def form_valid(self, form):
+        form.save()
+        form.process_file()
+        return super().form_valid(form)

@@ -1,4 +1,4 @@
-from . forms import PublisherForm
+from . forms import PublisherForm, ImportForm
 from . models import Publisher
 from django.views.generic import (
                                     TemplateView, 
@@ -57,3 +57,19 @@ class DetailPublisher(DetailView):
 
     def get_success_url(self):
         return reverse_lazy('publisher:detail', kwargs={'pk':self.object.pk})
+
+
+class ImportPublisher(LoginRequiredMixin, SuccessMessageMixin, FormView):
+    form_class = ImportForm
+    template_name = 'publisher/import_publisher.html'
+
+    def get_success_url(self):    
+        return reverse_lazy('publisher:list')
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Каталог издательств импортирован'
+    
+    def form_valid(self, form):
+        form.save()
+        form.process_file()
+        return super().form_valid(form)

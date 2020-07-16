@@ -1,13 +1,13 @@
 {% extends 'base_admin.html' %}
 {% load crispy_forms_tags %}
-{% block title %}Импорт каталога авторов{% endblock title %}
+{% block title %}Импорт каталога издательств{% endblock title %}
 
 {% block body %}
-{% if perms.author.change_import_author %}
+{% if perms.publisher.change_import_publisher %}
     {% include "top_menu_admin.html" %}
     <div class="col-md-8 order-md-1">
         <br>
-        <h4 class="mb-3" id="create-book">Импорт каталога авторов</h4>
+        <h4 class="mb-3" id="create-book">Импорт каталога издательств</h4>
         <form class="needs-validation" novalidate action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}

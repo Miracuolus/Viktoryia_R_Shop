@@ -40,6 +40,8 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'genre:list' %}">Список жанров</a>
                                     <a class="dropdown-item" href="{% url 'genre:create' %}"><i class="fas fa-plus-circle"></i> жанра</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'genre:import' %}">Импорт жанров</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -47,6 +49,8 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'publisher:list' %}">Список издательств</a>
                                     <a class="dropdown-item" href="{% url 'publisher:create' %}"><i class="fas fa-plus-circle"></i> издательства</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'publisher:import' %}">Импорт издательств</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -54,6 +58,8 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                                     <a class="dropdown-item" href="{% url 'series:list' %}">Список серий</a>
                                     <a class="dropdown-item" href="{% url 'series:create' %}"><i class="fas fa-plus-circle"></i> серии</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'series:import' %}">Импорт серий</a>
                                 </div>
                             </li>
                         </ul>

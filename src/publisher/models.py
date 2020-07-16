@@ -28,3 +28,22 @@ class Publisher(models.Model):
     
     def __str__(self):
         return f'{self.name}'
+
+class Import_Publisher(models.Model):
+    file_publisher = models.FileField(
+        verbose_name='Каталог издательств',
+        upload_to='files',
+    )
+
+    created = models.DateTimeField(
+        verbose_name='Создано',
+        auto_now=False, # автом ставить тек время
+        auto_now_add=True, # автом ставить время добавления
+    )
+
+    class Meta: 
+        verbose_name = 'Каталог издательств'
+        verbose_name_plural = 'Каталоги издательств'
+    
+    def __str__(self):
+        return f'{self.created}'
