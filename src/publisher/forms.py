@@ -33,6 +33,7 @@ class ImportForm(forms.ModelForm):
                     description  = b['description'],
                     defaults = {}
                 )
+        self.save()
         return data
         
     class Meta:

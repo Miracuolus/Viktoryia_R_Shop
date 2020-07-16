@@ -70,8 +70,5 @@ class ImportSeries(LoginRequiredMixin, SuccessMessageMixin, FormView):
         return f'Каталог серий импортирован'
     
     def form_valid(self, form):
-        Import_Series.objects.create(file_series = self)
         form.process_file()
-        
-        #file_import.save()
         return super().form_valid(form)

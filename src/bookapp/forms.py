@@ -114,6 +114,7 @@ class ImportForm(forms.ModelForm):
             B.genre.add(*genre_set)
             if b['weight']:
                 B.weight = b['weight']
+        self.save()
         return data
         
     class Meta:

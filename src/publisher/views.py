@@ -70,6 +70,5 @@ class ImportPublisher(LoginRequiredMixin, SuccessMessageMixin, FormView):
         return f'Каталог издательств импортирован'
     
     def form_valid(self, form):
-        #form.save()
         form.process_file()
         return super().form_valid(form)
