@@ -10,8 +10,13 @@
         <h4 class="mb-3">Информация по жанру {{ object }}</h4>
         <div class="row featurette">
             <div class="col-md-7 order-md-2">
-                {{ object.name }}
                 {{ object.description }}
+            </div>
+            <div class="col-md-4 order-md-2 mb-4">
+                <h4 class="mb-3">Книги соответствующего жанра, доступные для заказа:</h4>
+                    {% for book in object.genrebooks.all %}
+                        <a class="nav-link" href="{% url 'book:detail' book.pk %}">{{book}}</a>
+                    {% endfor %}
             </div>
         </div>
     <!-- /END THE FEATURETTES -->

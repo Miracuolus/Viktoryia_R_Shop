@@ -41,6 +41,7 @@ class Book(models.Model):
     genre = models.ManyToManyField(
         Genre,
         verbose_name='Жанр книги',
+        related_name = 'genrebooks',
     )
     year = models.PositiveSmallIntegerField(
         verbose_name='Год издания',
