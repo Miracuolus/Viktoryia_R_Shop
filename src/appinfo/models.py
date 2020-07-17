@@ -44,3 +44,23 @@ class AppInfo(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+
+class Import_AppInfo(models.Model):
+    file_info = models.FileField(
+        verbose_name='Информация о приложении',
+        upload_to='files',
+    )
+
+    created = models.DateTimeField(
+        verbose_name='Создано',
+        auto_now=False, # автом ставить тек время
+        auto_now_add=True, # автом ставить время добавления
+    )
+
+    class Meta: 
+        verbose_name = 'Каталог информации а приложении'
+        verbose_name_plural = 'Каталоги информации а приложении'
+    
+    def __str__(self):
+        return f'{self.created}'
+

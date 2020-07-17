@@ -1,5 +1,5 @@
 from . models import AppInfo
-from . forms import AppInfoForm
+from . forms import AppInfoForm, ImportForm
 from django.views.generic import (  TemplateView, 
                                     UpdateView, 
                                     DetailView
@@ -7,6 +7,7 @@ from django.views.generic import (  TemplateView,
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
 from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic.edit import FormView
 
 
 class UpdateAppInfo(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -43,3 +44,17 @@ class DetailAppInfoDelivery(DetailView):
 
     def get_success_url(self):
         return reverse_lazy('appinfo:detail', kwargs={'pk':self.object.pk})
+
+class ImportAppInfo(LoginRequiredMixin, SuccessMessageMixin, FormView):
+    form_class = ImportForm
+    template_name = 'appinfo/import_info.html'
+
+    def get_success_url(self):    
+        return reverse_lazy('appinfo:detail', kwargs={'pk':1})
+    
+    def get_success_message(self, *args, **kwargs):
+        return f'Информация о магазине обновлена'
+    
+    def form_valid(self, form):
+        form.process_file()
+        return super().form_valid(form)
