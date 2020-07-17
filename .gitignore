@@ -2,5 +2,3 @@ env/
 __pycache__/
 db.sqlite3
 secrets.py
-proj/settings.py
-proj/urls.py
