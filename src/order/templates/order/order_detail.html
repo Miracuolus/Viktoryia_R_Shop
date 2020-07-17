@@ -196,6 +196,9 @@
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td><a href="{% url 'order:update_comment' %}?create_comment={{ c.pk }}" title="Редактировать"><button type="button" class="btn btn-outline-secondary" {% if c.user == user or user.is_superuser or user.is_staff %} {% else %} disabled{% endif %}><i class="fas fa-pencil-alt"></i></button></a></td>
+                                                                        {% if user.is_superuser or user.is_staff %}
+                                                                            <td><a href="{% url 'order:delete_comment' %}?create_comment={{ c.pk }}" title="Удалить"><button type="button" class="btn btn-outline-secondary"><i class="fas fa-times"></i></button></a></td>
+                                                                        {% endif %}
                                                                 </tr>
                                                             {% endfor %}
                                                         </tbody>

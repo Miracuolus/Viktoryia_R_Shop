@@ -324,3 +324,19 @@ class Update_Comment_Order(LoginRequiredMixin, UserPassesTestMixin, SuccessMessa
         obj = self.get_object()
         if obj.user == user or user.is_staff or user.is_superuser:
             return obj
+
+class Delete_Comment_Order(LoginRequiredMixin, DeleteView):
+    model = Comment_Order
+    template_name = 'order/delete_comment.html'
+    
+    def get_success_url(self):
+        pk = self.object.pk
+        user = self.request.user
+        order = Order.objects.filter(comment = pk).first()
+        return reverse_lazy('order:detail', kwargs={'pk':order.pk})
+    
+    def get_object(self):
+        create_comment = self.request.GET.get('create_comment')
+        user = self.request.user
+        comments = Comment_Order.objects.get(pk=create_comment)
+        return comments

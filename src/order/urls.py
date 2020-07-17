@@ -8,6 +8,7 @@ from order.views import (UpdateOrder,
                          UpdateOrder_continue_admin,
                          Create_Comment_Order,
                          Update_Comment_Order,
+                         Delete_Comment_Order,
 )
 
 app_name = 'order'
@@ -21,4 +22,5 @@ urlpatterns = [
     path('delete/<int:pk>', DeleteOrder.as_view(), name='delete'),
     path('create_comment/', Create_Comment_Order.as_view(), name='create_comment'),
     path('update_comment/', Update_Comment_Order.as_view(), name='update_comment'),
+    path('delete_comment/', Delete_Comment_Order.as_view(), name='delete_comment'),
 ]

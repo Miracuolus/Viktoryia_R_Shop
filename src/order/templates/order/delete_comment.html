@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Удаление комментария пользователя {{ object.user }}{% endblock title %}
+
+{% block body %}
+    {% if user.is_superuser or user.is_staff %}
+    {% include "top_menu_main_book.html" %}
+    <div class="container marketing">
+    <div class="col-md-8 order-md-1">
+        <br>
+        <h4 class="mb-3" id="#delete-book">Удаление комментария пользователя {{ object.user }}</h4>
+        <form method="post">{% csrf_token %}
+            <div class="alert alert-danger" role="alert">
+                {% for order in object.comments.all %}
+                    Вы уверены, что хотите удалить комментарий пользователя - {{ object.user}} от {{ object.created }} к заказу №{{ order.pk }} с текстом "{{ object.comment }}"?
+                {% endfor %}
+            </div>
+            <input type="submit" value="Подтвердить" class="btn btn-danger">
+        </form>
+    </div>
+    </div>
+    {% else %}
+    <div class="container marketing">
+        <div class="col-md-8 order-md-1">
+            <br>
+            <h4 class="mb-3">Страница не существует</h4>
+            <div class="i-popup__line">
+            <a id="loginFormRegisterLink" href="{% url 'main' %}" data-button-state="second">Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock body %}   
