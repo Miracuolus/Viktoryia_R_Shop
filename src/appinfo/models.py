@@ -58,8 +58,8 @@ class Import_AppInfo(models.Model):
     )
 
     class Meta: 
-        verbose_name = 'Каталог информации а приложении'
-        verbose_name_plural = 'Каталоги информации а приложении'
+        verbose_name = 'Каталог информации о приложении'
+        verbose_name_plural = 'Каталоги информации о приложении'
     
     def __str__(self):
         return f'{self.created}'
