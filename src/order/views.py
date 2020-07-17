@@ -125,7 +125,6 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
             cart = cart[0]
             book = BooktoCart.objects.all().filter(cart = cart)
         else:
-            print(1234567)
             cart = Cart.objects.filter(user = user).last()
             book = BooktoCart.objects.all().filter(cart = cart)
         
