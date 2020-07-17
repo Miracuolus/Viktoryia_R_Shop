@@ -89,7 +89,7 @@ def rate_currency():
 @register.simple_tag
 def rate(key):
     rate = rate_currency()
-    value = round(rate.get(key), 2)
+    value = round(rate.get(key), 4)
     return f'{ key } - {value}'
 
 @register.filter
