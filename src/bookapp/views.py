@@ -1,4 +1,4 @@
-from . models import Book, Import_Book
+from . models import Book, Import_Book, Comment_Book
 from . forms import BookForm, ImportBookForm, ImportForm
 from django.views.generic import (
                                     TemplateView, 
@@ -10,7 +10,7 @@ from django.views.generic import (
                                 )
 from django.urls import reverse_lazy
 import datetime
-from django.contrib.auth.mixins import LoginRequiredMixin # залогиненные пользователи
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 from django.contrib.messages.views import SuccessMessageMixin
 import csv
@@ -196,3 +196,26 @@ class RatePage(TemplateView):
         context = super().get_context_data(**kwargs)
         context = {'USD': rate.get('USD'), 'EUR': rate.get('EUR'), 'RUB': rate.get('RUB'), 'rate': rate}
         return context
+
+class Create_Comment_Book_Admin(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, CreateView): 
+    model = Comment_Book
+    fields = ('comment',)
+    template_name = 'order/create_comment_books.html'
+
+    def get_success_message(self, *args, **kwargs):
+        return f'Комментарий добавлен'
+    
+    def get_success_url(self):
+        pk = self.object.pk
+        user = self.request.user
+        book_pk = self.request.GET.get('book_pk')
+        book = Book.objects.filter(pk=book_pk).first()
+        c = Comment_Book.objects.filter(pk=pk)
+        c.update(user=user, book=book)
+        book.comment.add(self.object.pk)
+        return reverse_lazy('book:detail', kwargs={'pk':book_pk})
+    
+    def test_func(self):
+        user = self.request.user
+        if user.is_superuser or user.is_staff:
+            return self
