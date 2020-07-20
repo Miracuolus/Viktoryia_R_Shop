@@ -11,6 +11,8 @@ from bookapp.views import (CreateBook,
                            ListContextBook,
                            ImportBooks,
                            Create_Comment_Book_Admin,
+                           Update_Comment_Book,
+                           Delete_Comment_Book,
 )
 
 
@@ -28,5 +30,7 @@ urlpatterns = [
     path('list_all_book/', ListContextBook.as_view(), name='list_all_book'),
     path('import/', ImportBooks.as_view(), name='import'),
     path('create_comment/', Create_Comment_Book_Admin.as_view(), name='create_comment'),
+    path('update_comment/', Update_Comment_Book.as_view(), name='update_comment'),
+    path('delete_comment/', Delete_Comment_Book.as_view(), name='delete_comment'),
 ]
 

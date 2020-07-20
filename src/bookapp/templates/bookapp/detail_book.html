@@ -135,6 +135,12 @@
                         <strong class="d-block text-gray-dark">{{ c.user }} <small>- {{ c.created }}</small></strong> 
                         {{ c.comment }} 
                     </p>
+                    {% if user.is_staff or user.is_superuser %}
+                        <small class="d-block text-right mt-3">
+                            <a href="{% url 'book:update_comment' %}?book_pk={{ object.pk }}&create_comment={{ c.pk }}">Редактировать </a>
+                            <a href="{% url 'book:delete_comment' %}?book_pk={{ object.pk }}&create_comment={{ c.pk }}">Удалить</a>
+                        </small>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>

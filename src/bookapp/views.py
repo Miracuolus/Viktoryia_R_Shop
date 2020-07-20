@@ -219,3 +219,45 @@ class Create_Comment_Book_Admin(LoginRequiredMixin, UserPassesTestMixin, Success
         user = self.request.user
         if user.is_superuser or user.is_staff:
             return self
+
+
+class Update_Comment_Book(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+    model = Comment_Book
+    fields = ('comment',)
+    template_name = 'order/create_comment_books.html'
+    
+
+    def get_success_message(self, *args, **kwargs):
+        return f'Комментарий изменен'
+    
+    def get_success_url(self):
+        pk = self.object.pk
+        user = self.request.user
+        book_pk = self.request.GET.get('book_pk')
+        return reverse_lazy('book:detail', kwargs={'pk':book_pk})
+    
+    def get_object(self):
+        create_comment = self.request.GET.get('create_comment')
+        user = self.request.user
+        comments = Comment_Book.objects.get(pk=create_comment)
+        return comments
+    
+    def test_func(self):
+        user = self.request.user
+        if user.is_staff or user.is_superuser:
+            return self
+
+class Delete_Comment_Book(LoginRequiredMixin, DeleteView):
+    model = Comment_Book
+    template_name = 'bookapp/delete_comment.html'
+    
+    def get_success_url(self):
+        pk = self.object.pk
+        user = self.request.user
+        book_pk = self.request.GET.get('book_pk')
+        return reverse_lazy('book:detail', kwargs={'pk':book_pk})
+    
+    def get_object(self):
+        create_comment = self.request.GET.get('create_comment')
+        comments = Comment_Book.objects.get(pk=create_comment)
+        return comments
