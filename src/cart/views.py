@@ -59,7 +59,7 @@ class UpdateBookCart(UpdateView):
                 defaults = {}
             )
         #if created:
-            #self.request.session['cart_pk'] = cart.pk
+        self.request.session['cart_pk'] = cart.pk
         obj, created = self.model.objects.get_or_create(
             cart = cart,
             book = book,
