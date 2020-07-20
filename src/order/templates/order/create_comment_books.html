@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Комментировать книгу{% endblock title %}
+
+{% block body %}
+    {% include "top_menu_main_book.html" %}
+    <div class="container marketing">
+        <br>
+        <h4 class="mb-3" id="create-book">Оставьте свой комментарий к книге {{book_pk}}</h4>
+        <form class="needs-validation" novalidate action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-success">Сохранить/обновить комментарий</button>
+        </form>
+        <br>
+    </div>
+{% endblock body %}   

@@ -31,6 +31,13 @@
                                     {% endfor %}
                                 </h6>
                                 <small class="text-muted">{{ obj.quantity }} х {{ obj.book.price }} руб.</small>
+                                {% if user.is_staff or user.is_superuser %}
+                                    <a href="{% url 'order:create_commentbook' %}?book_pk={{ obj.book.pk }}&order_pk={{ object.pk }}"><button type="button" class="btn btn-outline-secondary">Оставить отзыв</button></a>
+                                {% else %}
+                                    {% if object.status == 'Закрыт' %}
+                                        <a href="{% url 'order:create_commentbook' %}?book_pk={{ obj.book.pk }}&order_pk={{ object.pk }}"><button type="button" class="btn btn-outline-secondary">Оставить отзыв</button></a>
+                                    {% endif %}
+                                {% endif %}
                     </div>
                     <span class="text-muted">{{ obj.price }}</span>
                         </li>

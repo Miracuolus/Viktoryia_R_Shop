@@ -14,7 +14,7 @@ from django.core.paginator import Paginator
 from cart.models import Cart, BooktoCart
 from customers.models import Customer
 from decimal import Decimal
-from bookapp.models import Book
+from bookapp.models import Book, Comment_Book
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
 from datetime import datetime
@@ -339,3 +339,42 @@ class Delete_Comment_Order(LoginRequiredMixin, DeleteView):
         user = self.request.user
         comments = Comment_Order.objects.get(pk=create_comment)
         return comments
+
+class Create_Comment_Book(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, CreateView): 
+    model = Comment_Book
+    fields = ('comment',)
+    template_name = 'order/create_comment_books.html'
+
+    def get_success_message(self, *args, **kwargs):
+        return f'Комментарий добавлен'
+    
+    def get_success_url(self):
+        pk = self.object.pk
+        user = self.request.user
+        book_pk = self.request.GET.get('book_pk')
+        book = Book.objects.filter(pk=book_pk).first()
+        c = Comment_Book.objects.filter(pk=pk)
+        if user.is_superuser or user.is_staff:
+            c.update(user=user, book=book)
+        else:
+            c.update(user=user, book=book, role_user = user.groups.all()[0])
+        book.comment.add(self.object.pk)
+        return reverse_lazy('book:detail', kwargs={'pk':book_pk})
+    
+    def test_func(self):
+        user = self.request.user
+        order_pk = self.request.GET.get('order_pk')
+        order = Order.objects.filter(pk=order_pk).first()
+        book_pk = self.request.GET.get('book_pk')
+        books_pk = set()
+        books = set()
+        for b in order.cart.books.all():
+            books_pk.add(b.book.pk)
+        if user.is_superuser or user.is_staff:
+            return self
+        else:
+            b = Comment_Book.objects.filter(user=user)
+            for i in b:
+                books.add(i.book.pk)
+            if order.user == user and (int(book_pk) in books_pk) and (int(book_pk) not in books):
+                return self

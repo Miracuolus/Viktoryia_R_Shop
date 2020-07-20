@@ -5,7 +5,10 @@ from series.models import Series
 from publisher.models import Publisher
 from decimal import Decimal
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.models import Group
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 # Create your models here.
 class Book(models.Model):
     name = models.CharField(
@@ -126,6 +129,12 @@ class Book(models.Model):
         auto_now=True, # автом ставить тек время
         auto_now_add=False # автом ставить время добавления
     )
+    comment = models.ManyToManyField(
+        'Comment_Book',
+        verbose_name='Комментарии',
+        blank=True,
+        related_name='comments',
+    )
     class Meta: 
         permissions=[('view_active_book', 'Can view active books'),
                      ('view_admin_db', 'Can view admin db'),
@@ -156,3 +165,49 @@ class Import_Book(models.Model):
     
     def __str__(self):
         return f'{self.created}'
+
+
+class Comment_Book(models.Model):
+    book = models.ForeignKey(
+        'Book',
+        on_delete=models.CASCADE,
+        verbose_name='Книга',
+        null=True,
+        blank=True,
+    )
+    comment = models.TextField(
+        verbose_name='Комментарий',
+        max_length= 100,
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        verbose_name='Пользователь',
+    )
+    role_user = models.ForeignKey(
+        Group,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        verbose_name='Группа',
+    )
+    created = models.DateTimeField(
+        verbose_name='Создано',
+        auto_now=False, # автом ставить тек время
+        auto_now_add=True, # автом ставить время добавления
+    )
+    updated = models.DateTimeField(
+        verbose_name='Изменено',
+        auto_now=True, # автом ставить тек время
+        auto_now_add=False # автом ставить время добавления
+    )
+
+    class Meta: 
+        verbose_name = 'Комментарий к книге'
+        verbose_name_plural = 'Комментарии к книгам'
+        #unique_together = [('user','book'),]
+    
+    def __str__(self):
+        return f'Книга {self.book}: {self.user} - {self.role_user} - {self.created}'

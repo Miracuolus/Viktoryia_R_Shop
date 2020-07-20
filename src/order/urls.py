@@ -9,6 +9,7 @@ from order.views import (UpdateOrder,
                          Create_Comment_Order,
                          Update_Comment_Order,
                          Delete_Comment_Order,
+                         Create_Comment_Book,
 )
 
 app_name = 'order'
@@ -23,4 +24,5 @@ urlpatterns = [
     path('create_comment/', Create_Comment_Order.as_view(), name='create_comment'),
     path('update_comment/', Update_Comment_Order.as_view(), name='update_comment'),
     path('delete_comment/', Delete_Comment_Order.as_view(), name='delete_comment'),
+    path('create_commentbook/', Create_Comment_Book.as_view(), name='create_commentbook'),
 ]

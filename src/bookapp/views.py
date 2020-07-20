@@ -196,5 +196,3 @@ class RatePage(TemplateView):
         context = super().get_context_data(**kwargs)
         context = {'USD': rate.get('USD'), 'EUR': rate.get('EUR'), 'RUB': rate.get('RUB'), 'rate': rate}
         return context
-
-
