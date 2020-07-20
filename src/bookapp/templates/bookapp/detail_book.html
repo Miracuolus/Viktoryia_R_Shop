@@ -20,6 +20,11 @@
                 {% else %}
                     <p class="lead">{{ object.short_description }}</p>
                 {% endif %}
+                <h2>Рейтинг</h2>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <br>
                 <a href="{% url 'cart:add' %}?book_pk={{ book.pk }}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Добавить в корзину</a>
                 {% if user.is_staff or user.is_superuser %}
                     <a href="{% url 'book:create_comment' %}?book_pk={{ object.pk }}" type="button" class="btn btn-outline-secondary btn-lg btn-block">Оставить отзыв</a>
