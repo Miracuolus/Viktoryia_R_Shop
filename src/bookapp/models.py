@@ -119,8 +119,9 @@ class Book(models.Model):
         max_digits=6,
         decimal_places=1,
         help_text='от 0 до 10',
-        default=Decimal('0.00'),
-       )
+        null=True,
+        blank=True,
+    )
     created = models.DateTimeField(
         verbose_name='Создано',
         auto_now=False, # автом ставить тек время
@@ -144,7 +145,7 @@ class Book(models.Model):
         ]
         verbose_name = 'Книга'
         verbose_name_plural = 'Книги'
-        ordering = ['rating']
+        ordering = ['pk']
 
     def __str__(self):
         return f'{self.name}'
@@ -180,13 +181,15 @@ class Comment_Book(models.Model):
     )
     rating = models.CharField(
         verbose_name='Оценка',
-        choices=(('0', '0'),('1', '1'),('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')),
+        choices=(('10', '10'), ('9', '9'), ('8', '8'), ('7', '7'), ('6', '6'), ('5', '5'), ('4', '4'), ('3', '3'), ('2', '2'), ('1', '1'), ('0', '0')),
         max_length= 100,
-        default = '0',
+        null=True,
     )
     comment = models.TextField(
         verbose_name='Комментарий',
         max_length= 100,
+        null=True,
+        blank=True,
     )
     user = models.ForeignKey(
         User,
@@ -217,6 +220,7 @@ class Comment_Book(models.Model):
         verbose_name = 'Комментарий к книге'
         verbose_name_plural = 'Комментарии к книгам'
         #unique_together = [('user','book'),]
+        ordering = ['book']
     
     def __str__(self):
-        return f'Книга {self.book}: {self.user} - {self.role_user} - {self.created}'
+        return f'Книга {self.book} - оценка {self.rating}: {self.user} - {self.role_user} - {self.created}'

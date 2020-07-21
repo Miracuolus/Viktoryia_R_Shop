@@ -18,6 +18,7 @@ from bookapp.models import Book, Comment_Book
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
 from datetime import datetime
+from common import functions
 
 # Create your views here.
 class UpdateOrder_continue(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
@@ -343,7 +344,7 @@ class Delete_Comment_Order(LoginRequiredMixin, DeleteView):
 
 class Create_Comment_Book_Admin(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, CreateView): 
     model = Comment_Book
-    fields = ('rating', 'comment')
+    fields = ('comment', )
     template_name = 'order/create_comment_books.html'
 
     def get_success_message(self, *args, **kwargs):
@@ -400,6 +401,7 @@ class Create_Comment_Book(LoginRequiredMixin, UserPassesTestMixin, SuccessMessag
         else:
             c.update(user=user, book=book, role_user = user.groups.all()[0])
         book.comment.add(self.object.pk)
+        functions.rating_from_comment(book.comment, book.pk)
         return reverse_lazy('book:detail', kwargs={'pk':book_pk})
     
     def get_object(self):
