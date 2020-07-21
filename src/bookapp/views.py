@@ -15,6 +15,24 @@ from django.core.paginator import Paginator
 from django.contrib.messages.views import SuccessMessageMixin
 import csv
 from django.views.generic.edit import FormView
+from decimal import Decimal
+
+
+def rating_from_comment(value, book):
+    count = 0
+    r = []
+    print(0)
+    for c in value.all():
+        count += 1
+        r.append(c.rating)
+    sum_rating = 0
+    for i in r:
+        sum_rating += int(i)
+    rating  = sum_rating/count
+    print(rating)
+    Book.objects.filter(pk=book).update(rating=Decimal(rating))
+    return Decimal(rating)
+
 
 # Create your views here.
 class HomePage(TemplateView):
@@ -199,7 +217,7 @@ class RatePage(TemplateView):
 
 class Create_Comment_Book_Admin(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, CreateView): 
     model = Comment_Book
-    fields = ('comment',)
+    fields = ('rating', 'comment')
     template_name = 'order/create_comment_books.html'
 
     def get_success_message(self, *args, **kwargs):
@@ -213,6 +231,7 @@ class Create_Comment_Book_Admin(LoginRequiredMixin, UserPassesTestMixin, Success
         c = Comment_Book.objects.filter(pk=pk)
         c.update(user=user, book=book)
         book.comment.add(self.object.pk)
+        rating_from_comment(book.comment, book.pk)
         return reverse_lazy('book:detail', kwargs={'pk':book_pk})
     
     def test_func(self):
@@ -223,7 +242,7 @@ class Create_Comment_Book_Admin(LoginRequiredMixin, UserPassesTestMixin, Success
 
 class Update_Comment_Book(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = Comment_Book
-    fields = ('comment',)
+    fields = ('rating', 'comment')
     template_name = 'order/create_comment_books.html'
     
 

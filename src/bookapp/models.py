@@ -114,11 +114,13 @@ class Book(models.Model):
         choices=((True, 'Да'),(False, 'Нет')),
         default=False,
     )
-    rating = models.PositiveSmallIntegerField(
+    rating = models.DecimalField(
         verbose_name='Рейтинг',
+        max_digits=6,
+        decimal_places=1,
         help_text='от 0 до 10',
-        default=0,
-    )
+        default=Decimal('0.00'),
+       )
     created = models.DateTimeField(
         verbose_name='Создано',
         auto_now=False, # автом ставить тек время
@@ -135,6 +137,7 @@ class Book(models.Model):
         blank=True,
         related_name='comments',
     )
+
     class Meta: 
         permissions=[('view_active_book', 'Can view active books'),
                      ('view_admin_db', 'Can view admin db'),
@@ -174,6 +177,12 @@ class Comment_Book(models.Model):
         verbose_name='Книга',
         null=True,
         blank=True,
+    )
+    rating = models.CharField(
+        verbose_name='Оценка',
+        choices=(('0', '0'),('1', '1'),('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')),
+        max_length= 100,
+        default = '0',
     )
     comment = models.TextField(
         verbose_name='Комментарий',

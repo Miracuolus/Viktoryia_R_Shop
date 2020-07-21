@@ -86,7 +86,7 @@ class Order(models.Model):
         related_name='comments',
     )
     class Meta: 
-        #ordering = ['status']
+        ordering = ['pk']
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
     

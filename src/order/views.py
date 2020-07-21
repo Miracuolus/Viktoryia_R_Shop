@@ -343,7 +343,7 @@ class Delete_Comment_Order(LoginRequiredMixin, DeleteView):
 
 class Create_Comment_Book_Admin(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, CreateView): 
     model = Comment_Book
-    fields = ('comment',)
+    fields = ('rating', 'comment')
     template_name = 'order/create_comment_books.html'
 
     def get_success_message(self, *args, **kwargs):
@@ -383,7 +383,7 @@ class Create_Comment_Book_Admin(LoginRequiredMixin, UserPassesTestMixin, Success
 
 class Create_Comment_Book(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView): 
     model = Comment_Book
-    fields = ('comment',)
+    fields = ('rating', 'comment')
     template_name = 'order/create_comment_books.html'
 
     def get_success_message(self, *args, **kwargs):
