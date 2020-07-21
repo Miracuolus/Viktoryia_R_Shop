@@ -102,3 +102,15 @@ def quantity_cart(value):
         return True
     else:
         return False
+
+@register.simple_tag
+def stars(value):
+    temp = ''
+    for i in range(0, 5):
+        if value >= 1:
+            temp += f'<i class="fas fa-star"></i>'
+        elif value >= 0.5:
+            temp += f'<i class="fas fa-star-half-alt"></i>'
+        value = value - 1
+    return mark_safe(temp)
+        

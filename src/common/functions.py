@@ -13,3 +13,4 @@ def rating_from_comment(value, book):
                 sum_rating += int(i)
             rating  = sum_rating/count
             Book.objects.filter(pk=book).update(rating=Decimal(rating))
+

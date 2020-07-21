@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load app_tags %}
 {% block title %}Информация по книге {{ object }}{% endblock title %}
 
 {% block body %}
@@ -12,20 +12,18 @@
         <h4 class="mb-3">{{ object.price }} руб.</span></h4>
         <div class="row featurette">
             <div class="col-md-7 order-md-2">
+                <font color="#FFD700" face="Arial">
+                    {% stars object.rating %}
+                </font>
+
                 {% for author in object.author.all %}
-                    <h2>Автор: <a href="{% url 'author:detail' author.pk %}">{{ author.name }}</a></h2>
+                    <h4>Автор: <a href="{% url 'author:detail' author.pk %}">{{ author.name }}</a></h4>
                 {% endfor %}
                 {% if object.description %}
                     <p class="lead">{{ object.description }}</p>
                 {% else %}
                     <p class="lead">{{ object.short_description }}</p>
                 {% endif %}
-                <h2>Рейтинг</h2>
-                <i class="fas fa-star"></i>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <br>
                 <a href="{% url 'cart:add' %}?book_pk={{ book.pk }}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Добавить в корзину</a>
                 {% if user.is_staff or user.is_superuser %}
                     <a href="{% url 'book:create_comment' %}?book_pk={{ object.pk }}" type="button" class="btn btn-outline-secondary btn-lg btn-block">Оставить отзыв</a>
