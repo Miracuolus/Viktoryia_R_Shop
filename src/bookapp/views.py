@@ -140,7 +140,7 @@ class ListPopularBook(ListView):
     def get_queryset(self):
         user = self.request.user
         if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
-            return self.model.objects.all().filter(rating__gte=9).filter(active=True).order_by('rating')
+            return self.model.objects.all().filter(rating__gte=4).filter(active=True).order_by('rating')
         else:
             return super().get_queryset()
 

@@ -118,7 +118,7 @@ class Book(models.Model):
         verbose_name='Рейтинг',
         max_digits=6,
         decimal_places=1,
-        help_text='от 0 до 10',
+        help_text='от 0 до 5',
         null=True,
         blank=True,
     )
@@ -181,7 +181,7 @@ class Comment_Book(models.Model):
     )
     rating = models.CharField(
         verbose_name='Оценка',
-        choices=(('10', '10'), ('9', '9'), ('8', '8'), ('7', '7'), ('6', '6'), ('5', '5'), ('4', '4'), ('3', '3'), ('2', '2'), ('1', '1'), ('0', '0')),
+        choices=(('5', '5'), ('4', '4'), ('3', '3'), ('2', '2'), ('1', '1'), ('0', '0')),
         max_length= 100,
         null=True,
     )
