@@ -2,10 +2,11 @@ from django import template
 
 register = template.Library()
 
-from appinfo.models import AppInfo
+from appinfo.models import AppInfo, Rate_Currency
 from decimal import Decimal
 import requests
 from django.utils.safestring import mark_safe
+import datetime
 
 
 
@@ -79,18 +80,34 @@ def rate_currency():
     rate = {}
     for d in result:
         if d.get('Cur_Abbreviation') == 'USD':
-            rate['USD'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
+            rate['USD'] = round(d.get('Cur_OfficialRate') * d.get('Cur_Scale'), 4)
         elif d.get('Cur_Abbreviation') == 'EUR':
-            rate['EUR'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
+            rate['EUR'] = round(d.get('Cur_OfficialRate') * d.get('Cur_Scale'), 4)
         elif d.get('Cur_Abbreviation') == 'RUB':
-            rate['RUB'] = d.get('Cur_OfficialRate') * d.get('Cur_Scale')
+            rate['RUB'] = round(d.get('Cur_OfficialRate') * d.get('Cur_Scale'), 4)
+    Rate_Currency.objects.create(USD = rate['USD'], EUR = rate['EUR'], RUB = rate['RUB'])
+
+@register.simple_tag
+def rate():
+    rate = Rate_Currency.objects.filter(created=datetime.date.today())
+    if not rate.exists():
+        rate_currency()
     return rate
 
 @register.simple_tag
-def rate(key):
-    rate = rate_currency()
-    value = round(rate.get(key), 4)
-    return f'{ key } - {value}'
+def rate_usd():
+    rate_usd = rate()
+    return rate_usd[0].USD
+
+@register.simple_tag
+def rate_eur():
+    rate_eur = rate()
+    return rate_eur[0].EUR
+
+@register.simple_tag
+def rate_rub():
+    rate_rub = rate()
+    return rate_rub[0].RUB
 
 @register.filter
 def quantity_cart(value):

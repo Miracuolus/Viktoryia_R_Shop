@@ -1,4 +1,5 @@
 from django.db import models
+from decimal import Decimal
 
 # Create your models here.
 class AppInfo(models.Model):
@@ -64,3 +65,35 @@ class Import_AppInfo(models.Model):
     def __str__(self):
         return f'{self.created}'
 
+class Rate_Currency(models.Model):
+    USD = models.DecimalField(
+        verbose_name='USD',
+        max_digits=7,
+        decimal_places=4,
+        default=Decimal('0.00'),
+    )
+    EUR = models.DecimalField(
+        verbose_name='EUR',
+        max_digits=7,
+        decimal_places=4,
+        default=Decimal('0.00'),
+    )
+    RUB = models.DecimalField(
+        verbose_name='RUB',
+        max_digits=7,
+        decimal_places=4,
+        default=Decimal('0.00'),
+    )
+    created = models.DateField(
+        verbose_name='Создано',
+        unique=True,
+        auto_now=False, # автом ставить тек время
+        auto_now_add=True, # автом ставить время добавления
+    )
+
+    class Meta: 
+        verbose_name = 'Каталог курсов валют'
+        verbose_name_plural = 'Каталоги курсов валют'
+    
+    def __str__(self):
+        return f'{self.created}'
