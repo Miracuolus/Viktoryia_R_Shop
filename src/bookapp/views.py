@@ -17,6 +17,10 @@ import csv
 from django.views.generic.edit import FormView
 from common import functions
 from django.db.models import Q
+from author.models import Author
+from genre.models import Genre
+from publisher.models import Publisher
+from series.models import Series
 
 
 # Create your views here.
@@ -273,6 +277,8 @@ class Search(TemplateView):
         context = super().get_context_data(**kwargs)
         q = self.request.GET.get('search')
         t = Q(name__icontains=q) | Q(genre__name__icontains = q) | Q(series__name__icontains = q) | Q(publisher__name__icontains = q) | Q(author__name__icontains = q)
-        context['result1'] = Book.objects.filter(t).distinct()
+        context['result_books'] = Book.objects.filter(t).distinct()
+        context['result_authors'] = Author.objects.filter(Q(name__icontains=q)).distinct()
+        context['result_genres'] = Genre.objects.filter(Q(name__icontains=q)).distinct()
         context['q'] = q
         return context

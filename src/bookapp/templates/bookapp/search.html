@@ -8,26 +8,69 @@
     <br>
         <div class="container marketing">
             <div class="row">
-                {% if result1 %}
-                <div class="my-3 p-3 bg-white rounded shadow-sm">
-                    <h6 class="border-bottom border-gray pb-2 mb-0">Результат поиска книг по запросу "{{q}}"</h6>
-                    {% for obj in result1 %}
+                {% if result_books %}
+                    <div class="my-3 p-3 bg-white rounded shadow-sm">
+                        <h6 class="border-bottom border-gray pb-2 mb-0">Результат поиска книг по запросу "{{q}}"</h6>
+                        {% for obj in result_books %}
                             <div class="media text-muted pt-3">
                                 {% if obj.photo %}
-                                    <img src="{{ obj.photo.url }}" alt="Изображение книги" height="38" width="25">
+                                    <img src="{{ obj.photo.url }}" alt="Изображение книги" height="38" width="25" class="bd-placeholder-img mr-2 rounded">
                                 {% else %}
                                     <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
                                 {% endif %}
                                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                                     <strong class="d-block text-gray-dark"><a href="{% url 'book:detail' obj.pk %}">{{ obj.name }}</a></strong>
-                                        {{ obj.description }}
+                                        {{ obj.short_description }}
                                 </p>
                             </div>
-                    {% endfor %}
+                        {% endfor %}
                     </div>
                     <br>
-                </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                {% if result_authors %}
+                    <div class="my-3 p-3 bg-white rounded shadow-sm">
+                        <h6 class="border-bottom border-gray pb-2 mb-0">Результат поиска авторов по запросу "{{q}}"</h6>
+                        {% for obj in result_authors %}
+                            <div class="media text-muted pt-3">
+                                {% if obj.image %}
+                                    <img src="{{ obj.image.url }}" height="32" width="25" class="bd-placeholder-img mr-2 rounded">
+                                {% else %}
+                                    <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                                {% endif %}
+                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                    <strong class="d-block text-gray-dark"><a href="{% url 'author:detail' obj.pk %}">{{ obj.name }}</a></strong>
+                                        {{ obj.date }}
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <br>
+                {% endif %}
+            </div>
+            <div class="row">
+                {% if result_genres %}
+                    <div class="my-3 p-3 bg-white rounded shadow-sm">
+                        <h6 class="border-bottom border-gray pb-2 mb-0">Результат поиска жанров по запросу "{{q}}"</h6>
+                        {% for obj in result_genres %}
+                            <div class="media text-muted pt-3">
+                                {% if obj.image %}
+                                    <img src="{{ obj.image.url }}" height="32" width="25">
+                                {% else %}
+                                    <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                                {% endif %}
+                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                    <strong class="d-block text-gray-dark"><a href="{% url 'genre:detail' obj.pk %}">{{ obj.name }}</a></strong>
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <br>
+                {% endif %}
+            </div>
                 {% include "pagination.html" %}
+                {% if true %}
                 {% else %}
                     <p>В данный момент книги отсутсвуют</p>
                 {% endif %}
