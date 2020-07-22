@@ -21,6 +21,9 @@ from author.models import Author
 from genre.models import Genre
 from publisher.models import Publisher
 from series.models import Series
+from django.contrib.auth import get_user_model
+from customers.models import Customer
+User = get_user_model()
 
 
 # Create your views here.
@@ -282,5 +285,6 @@ class Search(TemplateView):
         context['result_genres'] = Genre.objects.filter(Q(name__icontains=q)).distinct()
         context['result_publishers'] = Publisher.objects.filter(Q(name__icontains=q)).distinct()
         context['result_series'] = Series.objects.filter(Q(name__icontains=q)).distinct()
+        context['result_users'] = Customer.objects.filter(Q(user__username__icontains=q) | Q(user__first_name__icontains=q) | Q(user__last_name__icontains=q)).distinct()
         context['q'] = q
         return context
