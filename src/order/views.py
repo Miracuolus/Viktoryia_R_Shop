@@ -89,7 +89,7 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
                 Book.objects.filter(pk = b.book.pk).update(active = False)
         if Order.objects.filter(pk = self.object.pk, status = 'Открыт'):
             order = Order.objects.filter(pk = self.object.pk).update(status = 'В обработке')
-            send_mail(f'Заказ №{self.object.pk}', f'Сформирован новый заказ от пользователя {user}', 'from@gmail.com',
+            send_mail(f'Заказ №{self.object.pk}', f'Сформирован новый заказ пользователем {user}', 'from@gmail.com',
                 ['to@gmail.com'], fail_silently=False)
         if user.is_authenticated:
             return reverse_lazy('order:detail', kwargs={'pk':self.object.pk})

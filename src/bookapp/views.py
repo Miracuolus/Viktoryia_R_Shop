@@ -263,3 +263,13 @@ class Delete_Comment_Book(LoginRequiredMixin, DeleteView):
         create_comment = self.request.GET.get('create_comment')
         comments = Comment_Book.objects.get(pk=create_comment)
         return comments
+
+
+class Search(TemplateView):
+    template_name = 'bookapp/search.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        q = self.request.GET.get('search')
+        context['result1'] = Book.objects.filter(name__icontains=q) 
+        return context

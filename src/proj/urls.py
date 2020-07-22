@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from bookapp.views import HomePage
+from bookapp.views import HomePage, Search
 from order.views import OrderListAdmin
 from customers.views import SignIn, LogIn, LogOut
 from django.contrib.auth import views as auth_views
@@ -25,6 +25,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls, name ='admin'), # БД
     path('main/', HomePage.as_view(), name='main'), # home page
+    path('search/', Search.as_view(), name='search'), # search
     path('book/', include('bookapp.urls', namespace='book')), # book app
     path('author/', include('author.urls', namespace='author')), # author app
     path('series/', include('series.urls', namespace='series')), # series app
