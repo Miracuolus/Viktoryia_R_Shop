@@ -280,5 +280,7 @@ class Search(TemplateView):
         context['result_books'] = Book.objects.filter(t).distinct()
         context['result_authors'] = Author.objects.filter(Q(name__icontains=q)).distinct()
         context['result_genres'] = Genre.objects.filter(Q(name__icontains=q)).distinct()
+        context['result_publishers'] = Publisher.objects.filter(Q(name__icontains=q)).distinct()
+        context['result_series'] = Series.objects.filter(Q(name__icontains=q)).distinct()
         context['q'] = q
         return context
