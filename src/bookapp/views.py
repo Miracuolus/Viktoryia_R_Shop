@@ -16,6 +16,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 import csv
 from django.views.generic.edit import FormView
 from common import functions
+from django.db.models import Q
 
 
 # Create your views here.
@@ -271,5 +272,7 @@ class Search(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         q = self.request.GET.get('search')
-        context['result1'] = Book.objects.filter(name__icontains=q) 
+        t = Q(name__icontains=q) | Q(genre__name__icontains = q) | Q(series__name__icontains = q) | Q(publisher__name__icontains = q) | Q(author__name__icontains = q)
+        context['result1'] = Book.objects.filter(t).distinct()
+        context['q'] = q
         return context

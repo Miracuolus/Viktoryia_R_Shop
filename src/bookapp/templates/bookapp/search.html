@@ -9,28 +9,22 @@
         <div class="container marketing">
             <div class="row">
                 {% if result1 %}
-                        {% for book in result1 %}
-                            <div class="col-md-4">
-                                <div class="card mb-4 shadow-sm">
-                                    <img src="{{ book.photo.url }}" alt="Изображение книги" height="525px" width="350px"> 
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ book.name }}</h5>
-                                        {% for author in book.author.all %}
-                                            <h6><small>{{ author.name }}</small></h6>
-                                        {% endfor %}
-                                        <p class="card-text">{{ book.short_description }}</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <a href="{% url 'cart:add' %}?book_pk={{ book.pk }}" title="Добавить товар в корзину"><button type="button" class="btn btn-sm btn-outline-secondary">В корзину</button></a>
-                                                
-                                                <a href="{% url 'book:detail' book.pk %}" title="Подробнее"><button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button></a>
-                                            </div>
-                                            <big class="text-muted">{{ book.price }}</big>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="my-3 p-3 bg-white rounded shadow-sm">
+                    <h6 class="border-bottom border-gray pb-2 mb-0">Результат поиска книг по запросу "{{q}}"</h6>
+                    {% for obj in result1 %}
+                            <div class="media text-muted pt-3">
+                                {% if obj.photo %}
+                                    <img src="{{ obj.photo.url }}" alt="Изображение книги" height="38" width="25">
+                                {% else %}
+                                    <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                                {% endif %}
+                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                    <strong class="d-block text-gray-dark"><a href="{% url 'book:detail' obj.pk %}">{{ obj.name }}</a></strong>
+                                        {{ obj.description }}
+                                </p>
                             </div>
-                        {% endfor %}
+                    {% endfor %}
+                    </div>
                     <br>
                 </div>
                 {% include "pagination.html" %}
