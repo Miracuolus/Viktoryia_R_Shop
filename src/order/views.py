@@ -127,8 +127,9 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
             cart = cart[0]
             book = BooktoCart.objects.all().filter(cart = cart)
         else:
-            cart = Cart.objects.filter(user = user).last()
-            book = BooktoCart.objects.all().filter(cart = cart)
+            if user.is_authenticated: #
+                cart = Cart.objects.filter(user = user).last()
+                book = BooktoCart.objects.all().filter(cart = cart)
         
         for b in book:
             if b.quantity > b.book.quantity:
