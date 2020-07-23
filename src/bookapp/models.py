@@ -237,4 +237,4 @@ class Comment_Book(models.Model):
         ordering = ['book']
     
     def __str__(self):
-        return f'Книга {self.book} - оценка {self.rating}: {self.user} - {self.role_user} - {self.created}'
+        return f'Книга {self.book}'
