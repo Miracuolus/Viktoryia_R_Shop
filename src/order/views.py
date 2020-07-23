@@ -113,6 +113,7 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
         else:
             cart = Cart.objects.filter(pk = cart_pk)
             cart = cart[0]
+            self.request.session.flush()
         context['cart'] = BooktoCart.objects.all().filter(cart = cart)
         return context
 
@@ -126,15 +127,17 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
             cart = cart[0]
             book = BooktoCart.objects.all().filter(cart = cart)
         else:
-            cart = Cart.objects.filter(user = user).last()
-            book = BooktoCart.objects.all().filter(cart = cart)
+            if user.is_authenticated: #
+                cart = Cart.objects.filter(user = user).last()
+                book = BooktoCart.objects.all().filter(cart = cart)
         
-        for b in book:
-            if b.quantity > b.book.quantity:
-                BooktoCart.objects.filter(cart = cart, book = b.book.pk).update(quantity = b.book.quantity)
-                price += b.book.price * b.book.quantity
-            else:
-                price += b.book.price * b.quantity
+        if book:
+            for b in book:
+                if b.quantity > b.book.quantity:
+                    BooktoCart.objects.filter(cart = cart, book = b.book.pk).update(quantity = b.book.quantity)
+                    price += b.book.price * b.book.quantity
+                else:
+                    price += b.book.price * b.quantity
         if user.is_authenticated:
             #cart = Cart.objects.filter(pk = cart_pk, user=user)
             customer = Customer.objects.filter(user=user)
@@ -163,7 +166,6 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
             )
         if cart_pk:
             cart = Cart.objects.filter(pk = cart_pk).update(active=False)
-            self.request.session.flush()
         else:
             cart = Cart.objects.filter(user = user, active = True).update(active=False)
         return obj
