@@ -12,7 +12,6 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th>id</th>
                     <th>Имя автора</th>
                     <th>Дата рождения</th>
                     <th>Изображение</th>
@@ -24,7 +23,6 @@
             <tbody>
                 {% for a in object_list %}
                     <tr>
-                        <td>{{ a.pk }}</td>
                         <td>{{ a.name }}</td>
                         <td>{{ a.date }}</td>
                         <td><img src="{{ a.image.url }}" alt="Изображение автора" height="133px" width="100px"></td>

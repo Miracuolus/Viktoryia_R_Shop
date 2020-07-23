@@ -28,7 +28,7 @@ class Book(models.Model):
         max_digits=6,
         decimal_places=2,
         default=Decimal('0.00'),
-       )
+    )
     author = models.ManyToManyField(
         Author,
         verbose_name='Автор',
@@ -145,7 +145,7 @@ class Book(models.Model):
         ]
         verbose_name = 'Книга'
         verbose_name_plural = 'Книги'
-        ordering = ['pk']
+        ordering = ['name']
 
     def __str__(self):
         return f'{self.name}'

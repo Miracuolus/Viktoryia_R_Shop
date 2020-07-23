@@ -12,7 +12,6 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th>id</th>
                     <th>Имя жанра</th>
                     <th><i class="fas fa-info-circle"></i></th>
                     <th><i class="fas fa-user-edit"></i></th>
@@ -22,7 +21,6 @@
             <tbody>
                 {% for genre in genre_list %}
                     <tr>
-                        <td>{{ genre.pk }}</td>
                         <td>{{ genre.name }}</td>
                         <td><a href="{% url 'genre:detail' genre.pk %}" title="подробнее">Подробнее</a></td>
                         <td><a href="{% url 'genre:update' genre.pk %}" title="редактировать"><i style="color:#696969" class="fas fa-edit"></i></a></td>
