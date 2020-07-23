@@ -280,7 +280,7 @@ class Create_Comment_Order(LoginRequiredMixin, UserPassesTestMixin, SuccessMessa
             c.update(user=user, order=order)
         else:
             c.update(user=user, order=order, role_user = user.groups.all()[0])
-            send_mail(f'Комментарий к заказу №{order_pk}', f'Сформирован новый комментарий к заказу от пользователя {user} с текстом "{c[0].comment}"', 'from@gmail.com',
+            send_mail(f'Комментарий к заказу №{order_pk}', f'Сформирован новый комментарий к заказу №{order_pk} от пользователя {user} с текстом "{c[0].comment}"', 'from@gmail.com',
                 ['to@gmail.com'], fail_silently=False)
         order.comment.add(self.object.pk)
         return reverse_lazy('order:detail', kwargs={'pk':order_pk})
@@ -310,7 +310,7 @@ class Update_Comment_Order(LoginRequiredMixin, UserPassesTestMixin, SuccessMessa
         order = Order.objects.filter(comment = pk).first()
         c = Comment_Order.objects.filter(pk=pk)
         if not (user.is_superuser or user.is_staff):
-            send_mail(f'Комментарий к заказу №{order.pk} изменен', f'Комментарий к заказу от пользователя {user} с текстом "{c[0].comment}"', 'from@gmail.com',
+            send_mail(f'Комментарий к заказу №{order.pk} изменен', f'Комментарий к заказу №{order_pk} от пользователя {user} с текстом "{c[0].comment}"', 'from@gmail.com',
                 ['to@gmail.com'], fail_silently=False)
         return reverse_lazy('order:detail', kwargs={'pk':order.pk})
     
