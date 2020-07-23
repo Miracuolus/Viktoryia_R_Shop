@@ -57,7 +57,7 @@
                     <strong>{% sum_filter %}</strong>
                 </li>
             </ul>
-            <a href="{% url 'order:update' %}?price={% sum_filter %}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Перейти к оформлению заказа</a>
+            <a href="{% url 'order:update' %}?price={% sum_order %}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Перейти к оформлению заказа</a>
         {% else %}
         <p>Корзина пуста</p>
         {% endif %}
