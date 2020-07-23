@@ -91,7 +91,7 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
     
     def __str__(self):
-        return f'{self.user} {self.created}, status {self.status}'
+        return f'Заказ №{self.pk }: {self.status}'
 
 
 class Comment_Order(models.Model):
