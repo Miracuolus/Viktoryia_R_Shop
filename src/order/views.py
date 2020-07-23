@@ -156,6 +156,7 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
                 )
         else:
             #cart = Cart.objects.filter(pk = cart_pk)
+            self.request.session.flush()
             obj, created = self.model.objects.get_or_create(
                 cart = cart,
                 price = price,
