@@ -126,9 +126,8 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
             cart = cart[0]
             book = BooktoCart.objects.all().filter(cart = cart)
         else:
-            if user.is_authenticated: #
-                cart = Cart.objects.filter(user = user).last()
-                book = BooktoCart.objects.all().filter(cart = cart)
+            cart = Cart.objects.filter(user = user).last()
+            book = BooktoCart.objects.all().filter(cart = cart)
         
         for b in book:
             if b.quantity > b.book.quantity:
@@ -156,17 +155,20 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
                     }
                 )
         else:
+            if self.model.objects.filter(cart = cart).exists():
+                self.model.objects.filter(cart = cart).update(price = price)
+                obj = self.model.objects.get(cart = cart)
             #cart = Cart.objects.filter(pk = cart_pk)
-            obj, created = self.model.objects.get_or_create(
-                cart = cart,
-                price = price,
-                defaults = {}
-            )
+            else:
+                obj, created = self.model.objects.get_or_create(
+                    cart = cart,
+                    price = price,
+                    defaults = {}
+                )
         if cart_pk:
             cart = Cart.objects.filter(pk = cart_pk).update(active=False)
         else:
             cart = Cart.objects.filter(user = user, active = True).update(active=False)
-        print('0')
         return obj
         """for b in book:
             if b.quantity > b.book.quantity:
