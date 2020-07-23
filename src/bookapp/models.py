@@ -139,6 +139,20 @@ class Book(models.Model):
         related_name='comments',
     )
 
+    def display_genre(self):
+        """
+        Creates a string for the Genre. This is required to display genre in Admin.
+        """
+        return ', '.join([ genre.name for genre in self.genre.all() ])
+    display_genre.short_description = 'Жанры'
+
+    def display_author(self):
+        """
+        Creates a string for the Author. This is required to display author in Admin.
+        """
+        return ', '.join([ author.name for author in self.author.all() ])
+    display_author.short_description = 'Авторы'
+
     class Meta: 
         permissions=[('view_active_book', 'Can view active books'),
                      ('view_admin_db', 'Can view admin db'),
