@@ -7,6 +7,7 @@ from . models import Cart, BooktoCart
 class Cart_Admin(admin.ModelAdmin):
     list_display = ('pk', 'user', 'active')
     search_fields = ('pk', 'user__username')
+    list_filter = ('active', )
 admin.site.register(Cart, Cart_Admin)
 
 

@@ -6,6 +6,8 @@ from .models import Order, Comment_Order
 class Order_Admin(admin.ModelAdmin):
     list_display = ('pk', 'user', 'price', 'status')
     search_fields = ('pk', 'user__username', 'price', 'status')
+    list_filter = ('status', )
+
 admin.site.register(Order, Order_Admin)
 
 
