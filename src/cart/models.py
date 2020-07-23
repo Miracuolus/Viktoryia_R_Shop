@@ -73,7 +73,7 @@ class BooktoCart(models.Model):
         verbose_name = 'Состав корзины'
         verbose_name_plural = 'Состав корзин'
         ordering = ['cart']
-        unique_together = [('cart','book'),]
+        #unique_together = [('cart','book'),]
     
     def __str__(self):
         return f'Book #{self.book.pk} in cart #{self.cart.pk}'
