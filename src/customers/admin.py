@@ -4,4 +4,5 @@ from . models import Customer
 
 class Customer_Admin(admin.ModelAdmin):
     list_display = ('user', 'group')
+    search_fields = ('user__username', )
 admin.site.register(Customer, Customer_Admin)
