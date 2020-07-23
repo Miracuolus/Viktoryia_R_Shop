@@ -19,6 +19,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
 from datetime import datetime
 from common import functions
+from django.contrib import messages
 
 # Create your views here.
 class UpdateOrder_continue(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
@@ -74,6 +75,9 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
     
     
     def get_success_url(self):
+        if Order.objects.filter(pk = self.object.pk, price = 0).exists():
+            Order.objects.filter(pk = self.object.pk, price = 0).delete()
+            return reverse_lazy('book:list_all_book')
         user = self.request.user
         cart_pk = self.request.session.get('cart_pk')
         if cart_pk:
@@ -98,7 +102,10 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
             return reverse_lazy('main')
 
     def get_success_message(self, *args, **kwargs):
-        return 'Заказ оформлен'
+        if Order.objects.filter(pk = self.object.pk).exists():
+            return 'Заказ оформлен'
+        else:
+            return messages.error(self.request, f'Заказ не оформлен, так как книги закончились на складе')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

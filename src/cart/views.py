@@ -36,7 +36,7 @@ class UpdateBookCart(UpdateView):
             form.save()
             return super(UpdateBookCart, self).form_valid(form)
         else:
-            messages.error(self.request, f'Максимальное кол-во книг - { book.quantity }') 
+            messages.error(self.request, f'Максимальное кол-во книг - { book.quantity }')
             return render(self.request, 'cart/add_cart.html', {'form': form})
 
     def get_object(self):
