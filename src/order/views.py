@@ -113,6 +113,7 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
         else:
             cart = Cart.objects.filter(pk = cart_pk)
             cart = cart[0]
+            self.request.session.flush()
         context['cart'] = BooktoCart.objects.all().filter(cart = cart)
         return context
 
@@ -156,7 +157,6 @@ class UpdateOrder(SuccessMessageMixin, UpdateView):
                 )
         else:
             #cart = Cart.objects.filter(pk = cart_pk)
-            self.request.session.flush()
             obj, created = self.model.objects.get_or_create(
                 cart = cart,
                 price = price,
