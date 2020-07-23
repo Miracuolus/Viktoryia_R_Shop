@@ -42,22 +42,22 @@
                                 <small class="text-muted">{{ obj.book.quantity }} х {{ obj.book.price }} руб.</small>
                                 <a href="{% url 'cart:update' %}?book_pk={{ obj.book.pk }}" title="Изменить количество"><button type="button" class="btn btn-sm btn-outline-secondary" align=left>Изменить количество</button></a>
                     </div>
-                    <span class="text-muted">{{obj.price}}</span>
+                    <span class="text-muted">{% multiply obj.book.quantity obj.book.price %}</span>
                             {% else %}
                                 <small class="text-muted">{{ obj.quantity }} х {{ obj.book.price }} руб.</small>
                             
                                 <a href="{% url 'cart:update' %}?book_pk={{ obj.book.pk }}" title="Изменить количество"><button type="button" class="btn btn-sm btn-outline-secondary" align=left>Изменить количество</button></a>
                     </div>
-                    <span class="text-muted">{{obj.price}}</span>
+                    <span class="text-muted">{% multiply obj.quantity obj.book.price %}</span>
                     {% endif %}
                 </li>
                 {% endfor %}
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Сумма (бел.руб)</span>
-                    <strong>{{ object.price }}</strong>
+                    <strong>{% sum_filter %}</strong>
                 </li>
             </ul>
-            <a href="{% url 'order:update' %}?price={{ object.price }}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Перейти к оформлению заказа</a>
+            <a href="{% url 'order:update' %}?price={% sum_filter %}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Перейти к оформлению заказа</a>
         {% else %}
         <p>Корзина пуста</p>
         {% endif %}

@@ -131,3 +131,22 @@ def stars(value):
             html += f'<i class="fas fa-star-half-alt"></i>'
         temp = temp - 1
     return mark_safe(f'<font color="#FFD700" face="Arial">{html}</font>')
+
+
+sum_price = 0
+sum_price_order = 0
+@register.simple_tag
+def multiply(value1, value2):
+    global sum_price
+    sum_price += value1*value2
+    return value1 * value2
+
+
+@register.simple_tag
+def sum_filter():
+    global sum_price
+    global sum_price_order
+    sum_price_order = sum_price
+    price = sum_price
+    sum_price = 0
+    return price
