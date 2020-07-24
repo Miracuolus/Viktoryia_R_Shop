@@ -121,6 +121,7 @@ class Book(models.Model):
         help_text='от 0 до 5',
         null=True,
         blank=True,
+        default=0,
     )
     created = models.DateTimeField(
         verbose_name='Создано',
