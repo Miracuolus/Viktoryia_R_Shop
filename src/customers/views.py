@@ -135,7 +135,8 @@ class UpdateMainCustomerUser(LoginRequiredMixin, UserPassesTestMixin, SuccessMes
         if user.is_superuser or user.is_staff:
             return reverse_lazy('customer:list')
         else:
-            return reverse_lazy('customer:detail', kwargs={'pk':self.object.pk})
+            c = Customer.objects.get(user=user)
+            return reverse_lazy('customer:detail', kwargs={'pk':c.pk}) ###
     
     def get_object(self):
         user_pk = self.kwargs.get('user_pk')
