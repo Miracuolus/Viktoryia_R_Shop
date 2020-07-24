@@ -14,6 +14,7 @@ class AppInfoForm(forms.ModelForm):
                   'delivery',
         )
 
+
 class ImportForm(forms.ModelForm):
     file_appinfo = forms.FileField(
         label='Загрузка файла',
@@ -24,7 +25,7 @@ class ImportForm(forms.ModelForm):
         reader = csv.DictReader(data)
         for b in reader:
             if AppInfo.objects.filter(pk=b['pk']).exists():
-                app = AppInfo.objects.filter(name=b['name']).update(
+                app = AppInfo.objects.filter(pk=b['pk']).update(
                     name=b['name'],
                     image = b['image'],
                     year = b['year'],
