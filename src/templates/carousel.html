@@ -1,4 +1,5 @@
 {% load static %}
+{% load app_tags %}
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -8,24 +9,33 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
-            <img src="{% static 'img/favicons/books-table.jpg' %}" alt="">
-            <!--<div class="container">
-                
-                <div class="carousel-caption text-left">
-                    <h1 style="color:#383838">Переход к Книгам</h1>
-                    <p style="color:#383838">Создание/редактирование книг</p>
-                    <p><a class="btn btn-lg btn-primary" href="{% url 'book:list' %}" target=_blank role="button">Переход</a></p>
+            <img src="{% static 'img/favicons/knigi-biblioteka-mnogo.jpg' %}" alt="">
+            <div class="container">
+                <div class="carousel-caption text-center">
+                    <h1 style="color:#383838">Новинки</h1>
+                    <p><a class="btn btn-outline-dark" href="{% url 'book:list_new' %}" target=_blank role="button">Переход</a></p>
                 </div>
-                
-            </div>-->
+            </div>
         </div>
         <div class="carousel-item">
             <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
             <img src="{% static 'img/favicons/58690.jpg' %}" alt="">
+            <div class="container">
+                <div class="carousel-caption text-right">
+                    <h1 style="color:#383838">Бестселлеры</h1>
+                    <p><a class="btn btn-outline-dark" href="{% url 'book:list_popular' %}" target=_blank role="button">Переход</a></p>
+                </div>
+            </div>
         </div>
         <div class="carousel-item">
             <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
-            <img src="{% static 'img/favicons/knigi-biblioteka-mnogo.jpg' %}" alt="">
+            <img src="{% static 'img/favicons/books-table.jpg' %}" alt="">
+            <div class="container">
+                <div class="carousel-caption text-left">
+                    <h1 style="color:#383838">Скидки</h1>
+                    <p><a class="btn btn-outline-dark" href="{% url 'book:list_sale' %}" target=_blank role="button">Переход</a></p>
+                </div>
+            </div>
         </div>
     </div>
     <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
