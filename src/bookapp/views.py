@@ -127,7 +127,7 @@ class ListNewBook(ListView):
     def get_queryset(self):
         user = self.request.user
         if user.has_perm('bookapp.view_active_book') or user.is_anonymous:
-            return self.model.objects.all().filter(active=True).order_by('created')
+            return self.model.objects.all().filter(active=True).order_by('-created')
         else:
             return super().get_queryset()
 
