@@ -12,7 +12,7 @@
         <h4 class="mb-3">{{ object.price }} руб.</span></h4>
         <div class="row featurette">
             <div class="col-md-7 order-md-2">
-                {% stars object.rating %}
+                {% stars object.rating %} <small>{{object.rating}}</small>
                 {% for author in object.author.all %}
                     <h4>Автор: <a href="{% url 'author:detail' author.pk %}">{{ author.name }}</a></h4>
                 {% endfor %}
@@ -22,9 +22,6 @@
                     <p class="lead">{{ object.short_description }}</p>
                 {% endif %}
                 <a href="{% url 'cart:add' %}?book_pk={{ book.pk }}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Добавить в корзину</a>
-                {% if user.is_staff or user.is_superuser %}
-                    <a href="{% url 'book:create_comment' %}?book_pk={{ object.pk }}" type="button" class="btn btn-outline-secondary btn-lg btn-block">Оставить отзыв</a>
-                {% endif %}
 
             </div>
             <div class="col-md-5 order-md-1">
@@ -127,6 +124,9 @@
                 </td>
             </tr>
         </div>
+        {% if user.is_staff or user.is_superuser %}
+            <a href="{% url 'book:create_comment' %}?book_pk={{ object.pk }}" type="button" class="btn btn-outline-secondary btn-lg btn-block">Оставить отзыв</a>
+        {% endif %}
         <div class="my-3 p-3 bg-white rounded shadow-sm">
             <h6 class="border-bottom border-gray pb-2 mb-0">Отзывы</h6>
             {% for c in object.comment.all %}
