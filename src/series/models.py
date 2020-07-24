@@ -16,7 +16,8 @@ class Series(models.Model):
         verbose_name='Описание',
         null=True,
         blank=True,
-        help_text='Поле может быть пустым'
+        help_text='Поле может быть пустым',
+        default = '',
     )
 
     class Meta: 

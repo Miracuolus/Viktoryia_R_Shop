@@ -18,7 +18,8 @@ class Publisher(models.Model):
         verbose_name='Краткая информация об издательстве',
         null=True,
         blank=True,
-        help_text='Поле может быть пустым'
+        help_text='Поле может быть пустым',
+        default = '',
     )
 
     class Meta: 

@@ -12,7 +12,8 @@ class Genre(models.Model):
         verbose_name='Описание жанра',
         null=True, # БД позволяет хранить поле пустым
         blank=True, # сигнал Djange, что поле мб пустым
-        help_text='Поле может быть пустым'
+        help_text='Поле может быть пустым',
+        default = '',
     )
 
     class Meta: 

@@ -23,7 +23,8 @@ class Author(models.Model):
         verbose_name='Биография',
         null=True,
         blank=True,
-        help_text='Поле может быть пустым'
+        help_text='Поле может быть пустым',
+        default = '',
     )
 
     class Meta: 
