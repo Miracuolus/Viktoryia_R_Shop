@@ -6,6 +6,12 @@ from  . views import (CreateSeries,
                       DetailSeries,
                       ImportSeries,
 )
+from .apiviews import SeriesViewSets
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register('series', SeriesViewSets)
 
 app_name = 'series'
 
@@ -16,4 +22,5 @@ urlpatterns = [
     path('list/', SeriesList.as_view(), name='list'),
     path('detail/<int:pk>', DetailSeries.as_view(), name='detail'),
     path('import/', ImportSeries.as_view(), name='import'),
+    path('api/', include(router.urls)),
 ]
