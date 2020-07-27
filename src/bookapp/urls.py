@@ -15,6 +15,11 @@ from bookapp.views import (CreateBook,
                            Delete_Comment_Book,
 )
 from .apiviews import BookViewSets
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register('book', BookViewSets)
 
 
 app_name = 'book'
@@ -33,6 +38,6 @@ urlpatterns = [
     path('create_comment/', Create_Comment_Book_Admin.as_view(), name='create_comment'),
     path('update_comment/', Update_Comment_Book.as_view(), name='update_comment'),
     path('delete_comment/', Delete_Comment_Book.as_view(), name='delete_comment'),
-    path('api/', BookViewSets.as_view({'get': 'list'}), name='api'),
+    path('api/', include(router.urls)),
 ]
 
