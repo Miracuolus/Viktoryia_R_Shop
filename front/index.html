@@ -9,19 +9,21 @@
 </head>
 <body>
     <div id="app">
-        {{ message }}
+        <h1>{{ message }}</h1>
+        {{ books }}
     </div>
 </body>
 <script>
     var app = new Vue({
         el: '#app',
         data: {
-            message: 'Hello Vue!'
-        }
+            message: 'Hello Vue!',
+            books: [ ]
+        },
         mounted: function () {
             axios.get('http://127.0.0.1:8000/book/api/book/')
             .then((res) => {
-                console.log(res.data)
+                this.books = res.data;
             })
         }
     })
