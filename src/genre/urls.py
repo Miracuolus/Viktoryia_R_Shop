@@ -6,6 +6,12 @@ from  . views import (CreateGenre,
                       DetailGenre,
                       ImportGenre
 )
+from .apiviews import GenreViewSets
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register('genre', GenreViewSets)
 
 app_name = 'genre'
 
@@ -16,4 +22,5 @@ urlpatterns = [
     path('list/', GenreList.as_view(), name='list'),
     path('detail/<int:pk>', DetailGenre.as_view(), name='detail'),
     path('import/', ImportGenre.as_view(), name='import'),
+    path('api/', include(router.urls)),
 ]
