@@ -14,6 +14,7 @@ from bookapp.views import (CreateBook,
                            Update_Comment_Book,
                            Delete_Comment_Book,
 )
+from .apiviews import BookViewSets
 
 
 app_name = 'book'
@@ -32,5 +33,6 @@ urlpatterns = [
     path('create_comment/', Create_Comment_Book_Admin.as_view(), name='create_comment'),
     path('update_comment/', Update_Comment_Book.as_view(), name='update_comment'),
     path('delete_comment/', Delete_Comment_Book.as_view(), name='delete_comment'),
+    path('api/', BookViewSets.as_view({'get': 'list'}), name='api'),
 ]
 
