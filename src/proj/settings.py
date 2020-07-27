@@ -27,8 +27,8 @@ SECRET_KEY = 's!wbm69+s+@bpb=%!u5%p0#95^=&pup_+xd=cv@6a2z1ww$(g2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['viktoryia.pythonanywhere.com']
-#ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['viktoryia.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -57,12 +57,15 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'proj.urls'
 TEMPLATES = [
@@ -147,8 +150,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/home/Viktoryia/mysite/static' # куда перенести файлы
 
 MEDIA_URL = '/media/' # для пользователя
-MEDIA_ROOT = '/home/Viktoryia/mysite/media' # для боевого сервера
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # для локальной разработки
+#MEDIA_ROOT = '/home/Viktoryia/mysite/media' # для боевого сервера
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # для локальной разработки
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
