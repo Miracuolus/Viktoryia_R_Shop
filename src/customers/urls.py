@@ -10,6 +10,12 @@ from  . views import (CustomerList,
                       ChangePasswordDoneCustomer,
                       DeleteCustomerDone,
 )
+from .apiviews import CustomerViewSets
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register('customer', CustomerViewSets)
 
 app_name = 'customer'
 
@@ -24,5 +30,5 @@ urlpatterns = [
     path('list/', CustomerList.as_view(), name='list'),
     path('change_password_view/', ChangePasswordViewCustomer.as_view(), name='change_password_view'),
     path('change_password_done/', ChangePasswordDoneCustomer.as_view(), name='password_change_done'),
-    
+    path('api/', include(router.urls)),
 ]
