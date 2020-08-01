@@ -11,8 +11,15 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'email', 'first_name', 'last_name', 'is_active', 'password')
 
 
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ('pk', 'name')
+
+
 class CustomerSerializer(serializers.ModelSerializer):
     user = UserSerializer()
+    group = GroupSerializer()
     class Meta:
         model = Customer
         fields = ('pk',
