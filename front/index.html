@@ -10,7 +10,48 @@
 <body>
     <div id="app">
         <h1>{{ message }}</h1>
-        {{ books }}
+        <table border='1'>
+            <tr>
+                <td>pk</td>
+                <td>name</td>
+                <td>price</td>
+                <td>author</td>
+                <td>series</td>
+                <td>genre</td>
+                <td>year</td>
+                <td>pages</td>
+                <td>bookbinding</td>
+                <td>book_format</td>
+                <td>isbn</td>
+                <td>weight</td>
+                <td>age_limit</td>
+                <td>publisher</td>
+                <td>quantity</td>
+                <td>active</td>
+                <td>rating</td>
+                <td></td>
+            </tr>
+            <tr v-for='(book, index) in books'>
+                <td>{{book.pk}}</td>
+                <td>{{book.name}}</td>
+                <td>{{book.price}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.series.name}}</td>
+                <td>{{book.genre}}</td>
+                <td>{{book.year}}</td>
+                <td>{{book.pages}}</td>
+                <td>{{book.bookbinding}}</td>
+                <td>{{book.book_format}}</td>
+                <td>{{book.isbn}}</td>
+                <td>{{book.weight}}</td>
+                <td>{{book.age_limit}}</td>
+                <td>{{book.publisher}}</td>
+                <td>{{book.quantity}}</td>
+                <td>{{book.active}}</td>
+                <td>{{book.rating}}</td>
+                <td><button v-on:click="del(book.pk, index)">Delete</button></td>
+            </tr>
+        </table>
     </div>
 </body>
 <script>
@@ -19,6 +60,14 @@
         data: {
             message: 'Hello Vue!',
             books: [ ]
+        },
+        methods: {
+            del(pk) {
+                axios.delete('http://127.0.0.1:8000/book/api/book/${pk}/')
+                .then((res) => {
+                    this.books.splice(index, 1);
+                })
+            }
         },
         mounted: function () {
             axios.get('http://127.0.0.1:8000/book/api/book/')

@@ -5,6 +5,12 @@ from  . views import (UpdateAppInfo,
                       DetailAppInfoDelivery,
                       ImportAppInfo,
 )
+from .apiviews import AppInfoViewSets
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register('appinfo', AppInfoViewSets)
 
 
 app_name = 'appinfo'
@@ -15,4 +21,5 @@ urlpatterns = [
     path('detail_payment/<int:pk>', DetailAppInfoPayment.as_view(), name='payment'),
     path('detail_delivery/<int:pk>', DetailAppInfoDelivery.as_view(), name='delivery'),
     path('import/', ImportAppInfo.as_view(), name='import'),
+    path('api/', include(router.urls)),
 ]

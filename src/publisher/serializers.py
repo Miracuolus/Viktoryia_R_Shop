@@ -1,0 +1,12 @@
+from rest_framework import serializers
+from . models import Publisher
+
+
+class PublisherSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Publisher
+        fields = ('pk',
+                  'name',
+                  'image',
+                  'description',
+        )

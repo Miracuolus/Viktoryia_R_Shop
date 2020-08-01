@@ -6,6 +6,12 @@ from  . views import (CreatePublisher,
                       DetailPublisher,
                       ImportPublisher,
 )
+from .apiviews import PublisherViewSets
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register('publisher', PublisherViewSets)
 
 app_name = 'publisher'
 
@@ -16,4 +22,5 @@ urlpatterns = [
     path('list/', PublisherList.as_view(), name='list'),
     path('detail/<int:pk>', DetailPublisher.as_view(), name='detail'),
     path('import/', ImportPublisher.as_view(), name='import'),
+    path('api/', include(router.urls)),
 ]
