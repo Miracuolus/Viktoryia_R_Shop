@@ -12,6 +12,13 @@ from order.views import (UpdateOrder,
                          Create_Comment_Book,
                          Create_Comment_Book_Admin,
 )
+from .apiviews import OrderViewSets
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register('order', OrderViewSets)
+
 
 app_name = 'order'
 
@@ -27,4 +34,5 @@ urlpatterns = [
     path('delete_comment/', Delete_Comment_Order.as_view(), name='delete_comment'),
     path('create_commentbook/', Create_Comment_Book.as_view(), name='create_commentbook'),
     path('create_commentbook_admin/', Create_Comment_Book_Admin.as_view(), name='create_commentbook_admin'),
+    path('api/', include(router.urls)),
 ]
