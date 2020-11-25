@@ -1,4 +1,5 @@
 env/
+media/
 __pycache__/
 db.sqlite3
 secrets.py
